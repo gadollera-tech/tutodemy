@@ -1,13 +1,8 @@
-# TutoDemy MVP
-A starter website for tutoring, academic help, learning resources, and college entrance exam preparation.
+# TutoDemy Learning PH — Static MVP
+Open `index.html`.
 
-## Run
-Open `index.html` in a browser.
+Pages: Home, Tutoring, Exam Prep, Resources, and About.
 
-## Next ideas
-- Add dedicated pages for UPCAT, DOST-SEI, and other CETs
-- Add tutor profiles and booking
-- Add search and filtering
-- Add reviewer downloads
-- Add quiz/question-bank functionality
-- Connect a backend/database later
+Before launch: connect forms to a backend, add official contact details, publish verified resources, define tutor policies/rates, and test all answer keys.
+
+Brand palette: navy `#0b0a6d`, periwinkle `#718bd8`, gold `#f5a51c`, cream `#fef9f3`.
