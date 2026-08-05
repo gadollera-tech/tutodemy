@@ -1,0 +1,17 @@
+TUTODEMY ACCOUNT SETUP
+======================
+
+The login, signup, learner profile, and cloud-sync code are included.
+They will show "Set up login" until Supabase is connected.
+
+1. Create a Supabase project.
+2. Run docs/SUPABASE-SCHEMA.sql in the Supabase SQL Editor.
+3. Copy the Project URL and public publishable/anon key.
+4. Paste them into js/config.js.
+5. Add your deployed profile.html and auth.html?mode=reset URLs to Supabase Auth redirect URLs.
+6. Upload the complete folder to GitHub Pages.
+
+Full instructions:
+docs/SUPABASE-SETUP-GUIDE.md
+
+NEVER paste a service_role key into js/config.js or GitHub.

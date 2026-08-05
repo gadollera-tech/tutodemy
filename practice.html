@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Randomized timed practice and mock exam engine.">
+  <meta name="theme-color" content="#11156f">
+  <title>Practice Set | TutoDemy Learning PH</title>
+  <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-client.js"></script>
+  <script defer src="js/auth-core.js"></script>
+  <script defer src="js/cloud-sync.js"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js"></script><script defer src="data/question-bank.js"></script><script defer src="js/practice.js"></script>
+</head>
+<body data-page="exams">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div id="site-header"></div>
+  <main id="main-content">
+<section class="practice-page">
+  <div class="container practice-builder" id="builder-view">
+    <div class="builder-copy">
+      <span class="eyebrow">PRACTICE SET BUILDER</span><h1>Create a new attempt.</h1><p>The engine samples without duplicates, shuffles questions and choices, and saves the active session to this browser.</p>
+      <div class="resume-card" id="resume-card" hidden><b>You have an unfinished attempt.</b><span id="resume-description"></span><div><button class="button" id="resume-session">Resume</button><button class="button button-outline" id="discard-session">Discard</button></div></div>
+    </div>
+    <form class="builder-form" id="builder-form">
+      <label>Question bank<select id="build-category" required></select></label>
+      <label>Domain<select id="build-domain"><option value="all">All domains</option></select></label>
+      <label>Mode<select id="build-mode"><option value="practice">Practice Mode</option><option value="timed">Timed Practice</option><option value="mock">Mock Exam</option></select></label>
+      <label>Number of questions<select id="build-count"><option value="20">20 — Quick Drill</option><option value="50">50 — Topic Practice</option><option value="100">100 — Subject Practice</option><option value="200">200 — Full Practice</option><option value="custom">Custom</option></select></label>
+      <label id="custom-count-label" hidden>Custom count<input id="build-custom-count" type="number" min="1" max="220" value="30"></label>
+      <label>Difficulty<select id="build-difficulty"><option value="all">Mixed difficulty</option><option value="Easy">Easy only</option><option value="Moderate">Moderate only</option><option value="Difficult">Difficult only</option></select></label>
+      <label>Time limit<select id="build-time"><option value="auto">Automatic recommendation</option><option value="0">No timer</option><option value="30">30 minutes</option><option value="60">60 minutes</option><option value="90">90 minutes</option><option value="120">120 minutes</option><option value="180">180 minutes</option></select></label>
+      <label class="check-label"><input id="shuffle-choices" type="checkbox" checked><span>Shuffle answer choices</span></label>
+      <div class="availability-note" id="availability-note"></div>
+      <button class="button full" type="submit">Generate randomized set</button>
+    </form>
+  </div>
+
+  <div class="exam-shell" id="exam-view" hidden>
+    <header class="exam-toolbar">
+      <div><small id="exam-mode-label">Practice</small><b id="exam-title">Practice Set</b></div>
+      <div class="exam-toolbar-actions"><button id="exam-exit" type="button">Exit</button><span class="timer" id="timer">No timer</span><button id="exam-submit" type="button">Submit</button></div>
+    </header>
+    <div class="exam-body">
+      <aside class="question-navigator">
+        <div class="navigator-summary"><b id="exam-progress-label">Question 1 of 20</b><span id="answered-label">0 answered</span></div>
+        <div class="navigator-grid" id="navigator-grid"></div>
+        <div class="navigator-legend"><span><i class="current"></i>Current</span><span><i class="answered"></i>Answered</span><span><i class="flagged"></i>Flagged</span></div>
+      </aside>
+      <section class="question-stage">
+        <div class="question-meta"><span id="question-domain"></span><span id="question-difficulty"></span></div>
+        <div id="passage-box" class="passage-box" hidden></div>
+        <div id="stimulus-box" class="stimulus-box" hidden></div>
+        <h2 id="question-stem"></h2>
+        <div class="answer-list" id="answer-list"></div>
+        <div class="feedback-box" id="feedback-box" hidden></div>
+        <div class="question-controls">
+          <button class="button button-outline" id="previous-question" type="button">← Previous</button>
+          <button class="flag-button" id="flag-question" type="button">☆ Flag for review</button>
+          <button class="button" id="check-or-next" type="button">Check answer</button>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="container results-view" id="results-view" hidden>
+    <div class="results-hero">
+      <span class="eyebrow light">ATTEMPT COMPLETE</span><h1 id="result-score">0 / 0</h1><p id="result-summary"></p>
+      <div class="button-row"><button class="button button-light" id="review-results" type="button">Review answers</button><button class="button button-ghost" id="retry-incorrect" type="button">Retry incorrect</button><button class="button button-ghost" id="new-attempt" type="button">New attempt</button></div>
+    </div>
+    <div class="result-metrics">
+      <article><small>ACCURACY</small><b id="result-accuracy"></b></article>
+      <article><small>TIME USED</small><b id="result-time"></b></article>
+      <article><small>AVERAGE / QUESTION</small><b id="result-average-time"></b></article>
+      <article><small>FLAGGED</small><b id="result-flagged"></b></article>
+    </div>
+    <div class="result-layout">
+      <section class="panel"><span class="eyebrow">BY DOMAIN</span><h2>Performance breakdown</h2><div id="result-domains" class="performance-list"></div></section>
+      <section class="panel"><span class="eyebrow">NEXT STEP</span><h2>Suggested review</h2><div id="remediation-list" class="remediation-list"></div></section>
+    </div>
+    <div class="review-list" id="review-list" hidden></div>
+  </div>
+</section>
+</main>
+  <div id="site-footer"></div>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

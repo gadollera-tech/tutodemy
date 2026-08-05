@@ -1,0 +1,9 @@
+{
+  "name": "TutoDemy Learning PH",
+  "short_name": "TutoDemy",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#fffaf3",
+  "theme_color": "#11156f",
+  "icons": []
+}

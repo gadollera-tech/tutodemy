@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Log in or create a TutoDemy learner account.">
+  <meta name="theme-color" content="#11156f">
+  <title>Log In or Sign Up | TutoDemy Learning PH</title>
+  <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-client.js"></script>
+  <script defer src="js/auth-core.js"></script>
+  <script defer src="js/cloud-sync.js"></script>
+  <script defer src="data/taxonomy.js"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/auth-page.js"></script>
+</head>
+<body data-page="account">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div id="site-header"></div>
+  <main id="main-content">
+    <section class="auth-page">
+      <div class="container auth-layout">
+        <div class="auth-intro">
+          <span class="eyebrow light">LEARNER ACCOUNT</span>
+          <h1>Save progress beyond one browser.</h1>
+          <p>After Supabase is connected, learners can create an account, maintain a profile, resume an unfinished exam, and sync attempt history and saved reviewers across devices.</p>
+          <div class="auth-benefits">
+            <span>✓ Email and password account</span>
+            <span>✓ Optional Google login</span>
+            <span>✓ Learner profile</span>
+            <span>✓ Cloud-synced progress</span>
+            <span>✓ Local fallback when offline</span>
+          </div>
+          <div class="auth-privacy-note"><b>Collect only what is needed.</b><p>The starter profile does not ask for birth date, home address, phone number, or other unnecessary sensitive information.</p></div>
+        </div>
+
+        <div class="auth-card">
+          <div class="auth-setup" id="auth-setup" hidden>
+            <span>⚙</span><h2>Account backend is ready but not connected.</h2>
+            <p>Create a Supabase project, run the included SQL file, then paste the public Project URL and publishable/anon key into <code>js/config.js</code>.</p>
+            <a class="button" href="docs/SUPABASE-SETUP-GUIDE.md">Open setup guide</a>
+          </div>
+
+          <div id="auth-forms">
+            <div class="auth-tabs" role="tablist">
+              <button class="active" type="button" data-auth-tab="signin">Log in</button>
+              <button type="button" data-auth-tab="signup">Create account</button>
+            </div>
+
+            <div class="auth-panel active" id="signin-panel">
+              <span class="eyebrow">WELCOME BACK</span><h2>Continue your progress.</h2>
+              <form id="signin-form">
+                <label>Email<input type="email" name="email" autocomplete="email" required></label>
+                <label>Password<input type="password" name="password" autocomplete="current-password" minlength="8" required></label>
+                <button class="button full" type="submit">Log in</button>
+              </form>
+              <button class="link-button" type="button" id="show-forgot">Forgot password?</button>
+            </div>
+
+            <div class="auth-panel" id="signup-panel">
+              <span class="eyebrow">NEW LEARNER</span><h2>Create your profile.</h2>
+              <form id="signup-form">
+                <label>Full name<input name="full_name" autocomplete="name" maxlength="100" required></label>
+                <label>Email<input type="email" name="email" autocomplete="email" required></label>
+                <label>Password<input type="password" name="password" autocomplete="new-password" minlength="8" required></label>
+                <label>Student level<select name="student_level"><option value="">Prefer not to say yet</option><option>Elementary</option><option>Junior High</option><option>Senior High</option><option>College</option><option>CET Applicant</option></select></label>
+                <label>Target exam<select name="target_exam"><option value="">General academic support</option><option>UPCAT</option><option>Other CET</option><option>DOST-SEI Scholarship Exam</option><option>School subjects</option></select></label>
+                <label class="consent-label"><input type="checkbox" required><span>I agree to create an account and have read the <a href="privacy.html" target="_blank" rel="noopener">prototype privacy notice</a>.</span></label>
+                <button class="button full" type="submit">Create account</button>
+              </form>
+            </div>
+
+            <div class="auth-panel" id="forgot-panel">
+              <span class="eyebrow">PASSWORD RESET</span><h2>Send a recovery link.</h2>
+              <form id="forgot-form">
+                <label>Email<input type="email" name="email" autocomplete="email" required></label>
+                <button class="button full" type="submit">Send recovery email</button>
+              </form>
+              <button class="link-button" type="button" id="back-signin">← Back to login</button>
+            </div>
+
+            <div class="auth-panel" id="reset-panel">
+              <span class="eyebrow">CHOOSE A NEW PASSWORD</span><h2>Reset your password.</h2>
+              <form id="reset-form">
+                <label>New password<input type="password" name="password" autocomplete="new-password" minlength="8" required></label>
+                <label>Confirm password<input type="password" name="confirm_password" autocomplete="new-password" minlength="8" required></label>
+                <button class="button full" type="submit">Update password</button>
+              </form>
+            </div>
+
+            <div class="auth-divider"><span>or</span></div>
+            <button class="google-button" id="google-login" type="button"><b>G</b><span>Continue with Google</span></button>
+            <p class="auth-helper" id="google-helper">Google login appears after it is enabled in Supabase and <code>js/config.js</code>.</p>
+            <p class="form-status auth-status" id="auth-status" aria-live="polite"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

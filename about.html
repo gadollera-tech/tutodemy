@@ -1,22 +1,53 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="The story and learning principles behind TutoDemy Learning PH."><meta name="theme-color" content="#0b0a6d"><title>About | TutoDemy Learning PH</title><link rel="icon" href="assets/images/tutodemy-owl.png"><link rel="stylesheet" href="css/style.css"><script defer src="js/main.js"></script></head><body>
-<a class="skip-link" href="#main-content">Skip to content</a>
-<div class="announcement">TutoDemy Learning PH • Tutoring, reviewers, and entrance-exam preparation</div>
-<header class="site-header"><div class="container nav-wrap">
-<a class="brand-lockup" href="index.html"><img src="assets/images/tutodemy-owl.png" alt=""><span><strong>TutoDemy</strong><small>LEARNING PH</small></span></a>
-<button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
-<nav class="main-nav"><a href="index.html" class="">Home</a><a href="tutoring.html" class="">Tutoring</a><a href="exams.html" class="">Exam Prep</a><a href="resources.html" class="">Resources</a><a href="about.html" class="active">About</a></nav><a class="button button-small nav-cta" href="tutoring.html#inquiry">Request tutoring</a>
-</div></header><main id="main-content">
-<section class="page-hero"><div class="container about-grid"><div><span class="eyebrow">THE STORY</span><h1>A tutoring practice growing into an academic support platform.</h1><p>TutoDemy Learning PH is built from firsthand tutoring experience and a long-term goal: make quality explanations, practice materials, and review support easier to access.</p></div><img src="assets/images/tutodemy-logo.png" alt="TutoDemy Learning PH logo"></div></section>
-<section class="section"><div class="container story-grid"><div class="year"><b>2021</b><span>The tutoring journey began</span></div><div><span class="eyebrow">WHY TUTODEMY EXISTS</span><h2>Students usually need more than answers.</h2><p>They need someone to find the point of confusion, explain it without judgment, provide the right practice, and help them see progress.</p><p>TutoDemy brings together tutor matching, organized reviewers, entrance-exam preparation, and independent study tools.</p></div></div></section>
-<section class="section cream" id="principles"><div class="container"><div class="section-heading centered"><span class="eyebrow">LEARNING PRINCIPLES</span><h2>What every TutoDemy resource should do.</h2></div><div class="principles">
-<article><span>01</span><h3>Begin with clarity</h3><p>Define the goal, prerequisite knowledge, and expected output.</p></article><article><span>02</span><h3>Teach the “why”</h3><p>Explain reasoning so students can transfer learning.</p></article><article><span>03</span><h3>Practice deliberately</h3><p>Use questions that reveal thinking and provide feedback.</p></article><article><span>04</span><h3>Respect the learner</h3><p>Use patient language, realistic pacing, and helpful feedback.</p></article><article><span>05</span><h3>Verify before publishing</h3><p>Check solutions, answer keys, units, diagrams, and references.</p></article><article><span>06</span><h3>Improve continuously</h3><p>Use learner questions and performance to refine materials.</p></article>
-</div></div></section>
-<section class="section"><div class="container split"><div><span class="eyebrow">A GROWING EDUCATION NETWORK</span><h2>Built to welcome tutors, teachers, and subject specialists.</h2><p>The architecture is ready for future tutor profiles, contributor pages, content-review roles, and subject teams.</p></div><div class="role-grid"><article><div>LT</div><h3>Lead tutor</h3><p>Coordinates tutoring, learning plans, and student-centered content.</p></article><article><div>STEM</div><h3>STEM specialists</h3><p>Support math, physics, chemistry, biology, and reasoning.</p></article><article><div>ED</div><h3>Educator contributors</h3><p>Develop, review, and improve materials for different levels.</p></article></div></div></section>
-<section class="section collaborate" id="collaborate"><div class="container inquiry-grid"><div><span class="eyebrow light">COLLABORATE</span><h2>Help build useful learning resources.</h2><p>Contributors may support lesson writing, question development, answer-key review, proofreading, design, or tutoring.</p></div><form class="form demo-form"><label>Name<input required placeholder="Full name"></label><label>Area<select required><option value="">Choose one</option><option>Tutoring</option><option>Reviewer writing</option><option>Question-bank development</option><option>Content verification</option><option>Design / web development</option></select></label><label>Short introduction<textarea rows="4" required></textarea></label><button class="button button-gold">Submit demo interest form</button></form></div></section>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="About the TutoDemy Learning PH project.">
+  <meta name="theme-color" content="#11156f">
+  <title>About | TutoDemy Learning PH</title>
+  <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-client.js"></script>
+  <script defer src="js/auth-core.js"></script>
+  <script defer src="js/cloud-sync.js"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js"></script>
+</head>
+<body data-page="about">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div id="site-header"></div>
+  <main id="main-content">
+<section class="page-hero about-hero">
+  <div class="container page-hero-grid">
+    <div><span class="eyebrow">ABOUT TUTODEMY</span><h1>A tutoring and academic-help platform being built step by step.</h1><p>The project combines years of tutoring experience, educator networks, exam-preparation resources, and a practical goal: make guided learning easier to access and organize.</p></div>
+    <img src="assets/images/tutodemy-logo.png" alt="TutoDemy Learning PH logo">
+  </div>
+</section>
+<section class="section">
+  <div class="container vision-grid">
+    <div class="vision-mark"><img src="assets/images/owl-mark.png" alt=""></div>
+    <div><span class="eyebrow">THE VISION</span><h2>From practice bank to learning community.</h2><p>TutoDemy is designed as more than a static reviewer website. The long-term platform can connect students, parents, tutors, original resources, practice analytics, and eventually secure subscriptions.</p><p>The current build deliberately starts with a reliable static foundation that can be published on GitHub Pages.</p></div>
+  </div>
+</section>
+<section class="section section-cream">
+  <div class="container">
+    <div class="section-heading centered"><span class="eyebrow">WHAT IS ALREADY WORKING</span><h2>Front-end features available now.</h2></div>
+    <div class="roadmap-grid">
+      <article><span>NOW</span><h3>Practice engine</h3><p>880-question bank, randomized sets, timer, navigator, scoring, explanations, and history.</p></article>
+      <article><span>NOW</span><h3>Reviewer library</h3><p>Searchable starter modules with domain-linked practice.</p></article>
+      <article><span>NOW</span><h3>Tutor directory</h3><p>Placeholder faces, profiles, filters, profile pages, and inquiry form.</p></article>
+      <article><span>READY TO CONNECT</span><h3>Accounts and cloud data</h3><p>Email/password login, optional Google login, learner profiles, RLS-protected tables, and cloud progress code are included; add the Supabase project credentials to activate them.</p></article>
+      <article><span>LATER</span><h3>Payments and subscriptions</h3><p>Checkout, recurring billing, server-side access, invoices, and cancellations.</p></article>
+      <article><span>LATER</span><h3>Tutor scheduling</h3><p>Availability, session booking, reminders, notes, and safeguarding workflows.</p></article>
+    </div>
+  </div>
+</section>
+<section class="section disclaimer">
+  <div class="container"><span>!</span><div><h2>Prototype and review notice</h2><p>The questions and reviewer notes are original prototype content but still require independent human review before a public educational launch. The website is not affiliated with UP, UPCAT, DOST-SEI, or any testing organization.</p></div></div>
+</section>
 </main>
-<footer class="site-footer"><div class="container footer-grid">
-<div><a class="footer-brand" href="index.html"><img src="assets/images/tutodemy-owl.png" alt=""><span><strong>TutoDemy</strong><small>Learning PH</small></span></a><p>Friendly, structured academic support for school, scholarships, and college entrance exams.</p></div>
-<div><h3>Explore</h3><a href="tutoring.html">Tutoring</a><a href="exams.html">Exam prep</a><a href="resources.html">Resources</a></div>
-<div><h3>Project</h3><a href="about.html">Our story</a><a href="about.html#principles">Principles</a><a href="about.html#collaborate">Collaborate</a></div>
-<div><h3>Early access</h3><p>Join the list for new reviewers and mock-test releases.</p><form class="mini-form demo-form"><input type="email" aria-label="Email address" placeholder="Email address" required><button>→</button></form></div>
-</div><div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Static MVP • Demo forms do not transmit data.</span></div></footer><div class="toast" role="status"></div></body></html>
+  <div id="site-footer"></div>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

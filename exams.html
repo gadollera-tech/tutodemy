@@ -1,24 +1,59 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Structured preparation for UPCAT, DOST-SEI, and other CETs."><meta name="theme-color" content="#0b0a6d"><title>Exam Prep | TutoDemy Learning PH</title><link rel="icon" href="assets/images/tutodemy-owl.png"><link rel="stylesheet" href="css/style.css"><script defer src="js/main.js"></script></head><body>
-<a class="skip-link" href="#main-content">Skip to content</a>
-<div class="announcement">TutoDemy Learning PH • Tutoring, reviewers, and entrance-exam preparation</div>
-<header class="site-header"><div class="container nav-wrap">
-<a class="brand-lockup" href="index.html"><img src="assets/images/tutodemy-owl.png" alt=""><span><strong>TutoDemy</strong><small>LEARNING PH</small></span></a>
-<button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
-<nav class="main-nav"><a href="index.html" class="">Home</a><a href="tutoring.html" class="">Tutoring</a><a href="exams.html" class="active">Exam Prep</a><a href="resources.html" class="">Resources</a><a href="about.html" class="">About</a></nav><a class="button button-small nav-cta" href="tutoring.html#inquiry">Request tutoring</a>
-</div></header><main id="main-content">
-<section class="page-hero exam-hero"><div class="container"><span class="eyebrow light">COLLEGE ENTRANCE AND SCHOLARSHIP EXAM PREP</span><h1>Review with a plan—not with panic.</h1><p>Balance content mastery, timed practice, error analysis, and healthy pacing.</p><a class="button button-light" href="#planner">Generate a starter roadmap</a></div></section>
-<section class="section"><div class="container"><div class="section-heading centered"><span class="eyebrow">PREPARATION TRACKS</span><h2>Pick the exam goal, then train the skills behind it.</h2><p>Exact coverage can change, so compare your plan with the latest official announcement.</p></div><div class="track-grid three">
-<article class="upcat"><span>UP</span><h3>UPCAT preparation</h3><p>Strengthen academic foundations, reading speed, problem solving, and test stamina.</p><div><b>Focus areas</b><small>Language • Reading • Science • Mathematics</small></div></article>
-<article class="dost"><span>DOST</span><h3>DOST-SEI preparation</h3><p>Build quantitative, scientific, verbal, and spatial or mechanical reasoning skills.</p><div><b>Focus areas</b><small>Science • Mathematics • Reasoning • Language</small></div></article>
-<article class="cets"><span>CET</span><h3>Other college entrance tests</h3><p>Create a flexible foundation that can adapt to school-specific formats and time limits.</p><div><b>Focus areas</b><small>Core subjects • Speed • Strategy • Mock exams</small></div></article>
-</div></div></section>
-<section class="section cream"><div class="container split"><div><span class="eyebrow">THE REVIEW CYCLE</span><h2>Five phases that make preparation manageable.</h2><ol class="steps"><li><span>1</span><div><h3>Diagnose</h3><p>Take a baseline test and identify topic, speed, and accuracy gaps.</p></div></li><li><span>2</span><div><h3>Rebuild</h3><p>Strengthen foundations before difficult drills.</p></div></li><li><span>3</span><div><h3>Drill</h3><p>Practice by topic with immediate error review.</p></div></li><li><span>4</span><div><h3>Simulate</h3><p>Use timed sets and realistic mock exams.</p></div></li><li><span>5</span><div><h3>Refine</h3><p>Prioritize recurring weak areas before test day.</p></div></li></ol></div><div class="skill-map"><h3>Transferable skills</h3><div><span>Quantitative fluency</span><i style="--level:88%"></i></div><div><span>Reading comprehension</span><i style="--level:82%"></i></div><div><span>Scientific reasoning</span><i style="--level:86%"></i></div><div><span>Time management</span><i style="--level:76%"></i></div><div><span>Error analysis</span><i style="--level:90%"></i></div><small>Illustrative bars—not student scores.</small></div></div></section>
-<section class="section" id="planner"><div class="container planner"><div class="planner-intro"><span class="eyebrow">INTERACTIVE STARTER TOOL</span><h2>Generate a review roadmap.</h2><p>Select an exam and preparation length.</p><label>Exam goal<select id="exam-select"><option>UPCAT</option><option>DOST-SEI</option><option>Other CET</option></select></label><label>Weeks available<select id="weeks-select"><option value="4">4 weeks</option><option value="8">8 weeks</option><option value="12" selected>12 weeks</option><option value="16">16 weeks</option></select></label><button class="button" id="generate-plan">Generate plan</button></div><div class="planner-result" id="planner-result"><div class="empty"><span>✦</span><p>Your roadmap will appear here.</p></div></div></div></section>
-<section class="section navy-section"><div class="container content-grid"><div><span class="eyebrow light">CONTENT FOUNDATION</span><h2>What the resource library will cover.</h2></div><div class="content-table"><div><b>Mathematics</b><span>Number sense, algebra, geometry, statistics, word problems</span></div><div><b>Science</b><span>Biology, chemistry, physics, earth and environmental science</span></div><div><b>Language</b><span>Grammar, vocabulary, usage, sentence logic</span></div><div><b>Reading</b><span>Main idea, inference, tone, evidence, data-rich passages</span></div><div><b>Reasoning</b><span>Patterns, logic, spatial thinking, data interpretation</span></div><div><b>Strategy</b><span>Pacing, guessing, error logs, mock-test review</span></div></div></div></section>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="UPCAT and CET randomized practice hub.">
+  <meta name="theme-color" content="#11156f">
+  <title>Practice Hub | TutoDemy Learning PH</title>
+  <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-client.js"></script>
+  <script defer src="js/auth-core.js"></script>
+  <script defer src="js/cloud-sync.js"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js"></script><script defer src="data/question-bank.js"></script><script defer src="js/exams.js"></script>
+</head>
+<body data-page="exams">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div id="site-header"></div>
+  <main id="main-content">
+<section class="page-hero exams-hero">
+  <div class="container page-hero-grid">
+    <div><span class="eyebrow light">UPCAT & GENERAL CET PRACTICE</span><h1>Build the exact set you need today.</h1><p>Choose a subject, domain, item count, difficulty, mode, and time limit. New attempts use a different randomized selection.</p><div class="button-row"><a class="button button-light" href="practice.html">Create a set</a><a class="button button-ghost" href="dashboard.html">View progress</a></div></div>
+    <div class="exam-count-card"><small>TOTAL PROTOTYPE BANK</small><b>880</b><span>Original questions</span><div><i></i><i></i><i></i><i></i></div></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section-heading centered"><span class="eyebrow">AVAILABLE SET SIZES</span><h2>Quick drills to full 200-item practice.</h2></div>
+    <div class="set-size-grid">
+      <article><b>20</b><h3>Quick Drill</h3><p>Fast skill check or warm-up.</p></article>
+      <article><b>50</b><h3>Topic Practice</h3><p>Focused domain practice.</p></article>
+      <article><b>100</b><h3>Subject Practice</h3><p>Broader stamina-building set.</p></article>
+      <article class="featured"><b>200</b><h3>Full Practice</h3><p>Large randomized subject or mixed set.</p></article>
+      <article><b>Custom</b><h3>Your Choice</h3><p>Set any count up to the available pool.</p></article>
+    </div>
+  </div>
+</section>
+<section class="section section-cream">
+  <div class="container">
+    <div class="section-heading"><span class="eyebrow">SUBJECT DIRECTORY</span><h2>Choose a bank or a focused subset.</h2></div>
+    <div class="exam-subject-grid" id="exam-subject-grid"></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container mode-grid">
+    <article><span>01</span><h3>Practice Mode</h3><p>Optional timer, immediate feedback, explanations after checking, and flexible navigation.</p></article>
+    <article><span>02</span><h3>Timed Practice</h3><p>Countdown timer, no immediate answer reveal, and results after submission.</p></article>
+    <article><span>03</span><h3>Mock Exam</h3><p>Strict timer, flag-for-review navigator, auto-submit, and detailed performance report.</p></article>
+  </div>
+</section>
+<section class="section premium-exam-note">
+  <div class="container"><span>PRO</span><div><h2>Free preview has 60 questions per bank.</h2><p>Activate the local Pro preview to access all 220 questions in each subject and create 100- or 200-item subject sets. This is only a demonstration, not secure access control.</p></div><a class="button button-light" href="pricing.html">Open Premium preview</a></div>
+</section>
 </main>
-<footer class="site-footer"><div class="container footer-grid">
-<div><a class="footer-brand" href="index.html"><img src="assets/images/tutodemy-owl.png" alt=""><span><strong>TutoDemy</strong><small>Learning PH</small></span></a><p>Friendly, structured academic support for school, scholarships, and college entrance exams.</p></div>
-<div><h3>Explore</h3><a href="tutoring.html">Tutoring</a><a href="exams.html">Exam prep</a><a href="resources.html">Resources</a></div>
-<div><h3>Project</h3><a href="about.html">Our story</a><a href="about.html#principles">Principles</a><a href="about.html#collaborate">Collaborate</a></div>
-<div><h3>Early access</h3><p>Join the list for new reviewers and mock-test releases.</p><form class="mini-form demo-form"><input type="email" aria-label="Email address" placeholder="Email address" required><button>→</button></form></div>
-</div><div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Static MVP • Demo forms do not transmit data.</span></div></footer><div class="toast" role="status"></div></body></html>
+  <div id="site-footer"></div>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

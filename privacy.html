@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Prototype privacy notice for TutoDemy learner accounts.">
+  <meta name="theme-color" content="#11156f">
+  <title>Privacy Notice | TutoDemy Learning PH</title>
+  <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-client.js"></script>
+  <script defer src="js/auth-core.js"></script>
+  <script defer src="js/cloud-sync.js"></script>
+  <script defer src="data/taxonomy.js"></script>
+  <script defer src="js/main.js"></script>
+</head>
+<body data-page="privacy">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div id="site-header"></div>
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container"><span class="eyebrow">PROTOTYPE PRIVACY NOTICE</span><h1>Learner data should remain minimal, transparent, and protected.</h1><p>This starter notice describes the data handled by the supplied account integration. It should receive legal and operational review before a public launch.</p></div>
+    </section>
+    <section class="section">
+      <div class="container reader-layout">
+        <aside class="reader-sidebar"><span class="eyebrow">SECTIONS</span><a href="#collected">Data collected</a><a href="#purpose">Why it is used</a><a href="#storage">Where it is stored</a><a href="#choices">Learner choices</a><div class="reader-warning"><b>Not legal advice</b><p>Adapt this notice to the actual organization, vendors, retention policy, and Philippine legal requirements before launch.</p></div></aside>
+        <article class="reader-content privacy-content">
+          <section id="collected"><span class="eyebrow">DATA COLLECTED</span><h2>Account and learning information</h2><p>The starter account may store email address, full name, optional student level, target exam, optional school, optional avatar URL, completed attempt data, saved reviewers, one active exam session, and tutor inquiry details submitted by the learner.</p><p>The starter profile does not request birth date, home address, government ID, medical information, or payment information.</p></section>
+          <section id="purpose"><span class="eyebrow">PURPOSE</span><h2>Why the information is used</h2><p>The information supports account access, learner profile display, cross-device progress, exam resumption, dashboard analytics, saved reviewers, and tutor inquiry records. It should not be repurposed for advertising or unrelated profiling without clear notice and consent.</p></section>
+          <section id="storage"><span class="eyebrow">STORAGE</span><h2>Local browser and Supabase</h2><p>A local browser copy is used for resilience. When the Supabase integration is configured and the learner is logged in, selected data is also stored in the project's Supabase database. Row Level Security policies in the included schema restrict each authenticated learner to their own rows.</p><p>On a shared computer, learners should log out after use. Clearing browser data removes the local copy but does not automatically remove cloud records.</p></section>
+          <section id="choices"><span class="eyebrow">LEARNER CHOICES</span><h2>Access, export, correction, and deletion</h2><p>The profile page allows learners to edit profile fields and export their local data. A public launch should also provide a verified support channel for account deletion, cloud-data deletion, correction requests, and questions about retention.</p></section>
+        </article>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

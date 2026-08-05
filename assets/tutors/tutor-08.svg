@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 360" role="img" aria-label="Placeholder portrait for Tutor Placeholder 08">
+    <rect width="320" height="360" rx="32" fill="#f7f4ee"/>
+    <circle cx="160" cy="150" r="112" fill="#5260b8" opacity=".20"/>
+    <path d="M83 311c17-67 57-94 77-94s60 27 77 94" fill="#f3a51b"/>
+    <ellipse cx="160" cy="142" rx="68" ry="78" fill="#d99a74"/>
+    <path d="M94 142c0-72 38-104 70-104 54 0 78 46 65 104-17-30-44-45-81-43-18 1-36 12-54 43z" fill="#181b54"/>
+    <circle cx="135" cy="146" r="6" fill="#27272d"/><circle cx="185" cy="146" r="6" fill="#27272d"/>
+    <path d="M138 181c15 12 31 12 45 0" fill="none" stroke="#a45f55" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="160" cy="306" r="33" fill="#fff" opacity=".94"/>
+    <text x="160" y="316" text-anchor="middle" font-family="Arial,sans-serif" font-size="25" font-weight="700" fill="#181b54">GA</text>
+    </svg>

@@ -1,28 +1,56 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Search reviewers, worksheets, and study tools."><meta name="theme-color" content="#0b0a6d"><title>Resources | TutoDemy Learning PH</title><link rel="icon" href="assets/images/tutodemy-owl.png"><link rel="stylesheet" href="css/style.css"><script defer src="js/main.js"></script></head><body>
-<a class="skip-link" href="#main-content">Skip to content</a>
-<div class="announcement">TutoDemy Learning PH • Tutoring, reviewers, and entrance-exam preparation</div>
-<header class="site-header"><div class="container nav-wrap">
-<a class="brand-lockup" href="index.html"><img src="assets/images/tutodemy-owl.png" alt=""><span><strong>TutoDemy</strong><small>LEARNING PH</small></span></a>
-<button class="menu-toggle" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
-<nav class="main-nav"><a href="index.html" class="">Home</a><a href="tutoring.html" class="">Tutoring</a><a href="exams.html" class="">Exam Prep</a><a href="resources.html" class="active">Resources</a><a href="about.html" class="">About</a></nav><a class="button button-small nav-cta" href="tutoring.html#inquiry">Request tutoring</a>
-</div></header><main id="main-content">
-<section class="page-hero"><div class="container page-grid"><div><span class="eyebrow">RESOURCE LIBRARY</span><h1>Find a reviewer, worksheet, or study tool.</h1><p>Search and filter future materials by subject and purpose.</p></div><div class="search-art"><span>⌕</span><b>Search • Filter • Study</b></div></div></section>
-<section class="section"><div class="container"><div class="library-toolbar"><label class="search-box"><span>⌕</span><input id="resource-search" type="search" placeholder="Search resources..."></label><div class="filters"><button class="active" data-filter="all">All</button><button data-filter="math">Math</button><button data-filter="science">Science</button><button data-filter="language">Language</button><button data-filter="exam">Exam prep</button><button data-filter="study">Study tools</button></div></div><div class="library-meta"><span id="resource-count">9 resources</span><span>Prototype content cards</span></div><div class="library-grid" id="resource-grid">
-<article data-category="math exam" data-title="Algebra Essentials Reviewer"><div class="thumb math">x²</div><small>Math • Reviewer</small><h3>Algebra Essentials</h3><p>Expressions, equations, inequalities, functions, and common CET patterns.</p><button class="resource-open" data-resource="Algebra Essentials">Preview resource</button></article>
-<article data-category="science exam" data-title="Integrated Science Quick Review"><div class="thumb science">⚛</div><small>Science • Quick review</small><h3>Integrated Science</h3><p>A compact concept map across biology, chemistry, physics, and earth science.</p><button class="resource-open" data-resource="Integrated Science">Preview resource</button></article>
-<article data-category="language exam" data-title="Reading Comprehension Drill Set"><div class="thumb language">Aa</div><small>Language • Practice</small><h3>Reading Comprehension Drills</h3><p>Questions on main idea, inference, tone, and evidence.</p><button class="resource-open" data-resource="Reading Comprehension Drills">Preview resource</button></article>
-<article data-category="exam study" data-title="12 Week CET Study Planner"><div class="thumb exam">12</div><small>Exam prep • Planner</small><h3>12-Week CET Planner</h3><p>Weekly goals for diagnosis, review, practice, and mock exams.</p><button class="resource-open" data-resource="12-Week CET Planner">Preview resource</button></article>
-<article data-category="math" data-title="Geometry Formula and Reasoning Sheet"><div class="thumb math">△</div><small>Math • Reference</small><h3>Geometry Reasoning Sheet</h3><p>Relationships, diagrams, formulas, and common traps.</p><button class="resource-open" data-resource="Geometry Reasoning Sheet">Preview resource</button></article>
-<article data-category="science" data-title="Physics Problem Solving Framework"><div class="thumb science">F</div><small>Physics • Guide</small><h3>Physics Problem-Solving Framework</h3><p>A repeatable process for diagrams, knowns, equations, and units.</p><button class="resource-open" data-resource="Physics Problem-Solving Framework">Preview resource</button></article>
-<article data-category="study" data-title="Error Log Template"><div class="thumb study">✓</div><small>Study tool • Template</small><h3>Practice Error Log</h3><p>Track why an answer was wrong and prevent repeated mistakes.</p><button class="resource-open" data-resource="Practice Error Log">Preview resource</button></article>
-<article data-category="language" data-title="Vocabulary Context Clues Guide"><div class="thumb language">abc</div><small>Language • Guide</small><h3>Context Clues Guide</h3><p>Infer meaning from definition, contrast, example, tone, and structure.</p><button class="resource-open" data-resource="Context Clues Guide">Preview resource</button></article>
-<article data-category="study exam" data-title="Mock Test Reflection Sheet"><div class="thumb exam">%</div><small>Exam prep • Reflection</small><h3>Mock-Test Reflection Sheet</h3><p>Review accuracy, pacing, confidence, and next priorities.</p><button class="resource-open" data-resource="Mock-Test Reflection Sheet">Preview resource</button></article>
-</div><div class="no-results" id="no-results" hidden><h3>No matching resource yet.</h3><p>Try a broader search or another category.</p></div></div></section>
-<dialog id="resource-dialog"><button class="dialog-close">×</button><span class="eyebrow">RESOURCE PREVIEW</span><h2 id="dialog-title">Resource</h2><p>This card is ready to connect to a real reviewer page, PDF, quiz, or worksheet.</p><div class="button-row"><button class="button demo-download">Demo download</button><a class="button button-outline" href="about.html#collaborate">Contribute content</a></div></dialog>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="TutoDemy content, copyright, and source policy.">
+  <meta name="theme-color" content="#11156f">
+  <title>Source Policy | TutoDemy Learning PH</title>
+  <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-client.js"></script>
+  <script defer src="js/auth-core.js"></script>
+  <script defer src="js/cloud-sync.js"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js"></script>
+</head>
+<body data-page="resources">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div id="site-header"></div>
+  <main id="main-content">
+<section class="page-hero resources-hero">
+  <div class="container page-hero-grid"><div><span class="eyebrow light">CONTENT & SOURCE POLICY</span><h1>Keep private references separate from public learning materials.</h1><p>The uploaded modules, commercial reviewers, compiled question banks, and abstract-reasoning practice test were used to map skills and formats. They are not included in the public website package.</p></div><div class="source-lock">🔒<b>Internal references</b><span>Not redistributed</span></div></div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="section-heading"><span class="eyebrow">PUBLIC CONTENT INCLUDED</span><h2>What is safe to publish from this build.</h2></div>
+    <div class="policy-grid">
+      <article><span>✓</span><h3>Original questions</h3><p>New stems, values, distractors, explanations, and visual patterns.</p></article>
+      <article><span>✓</span><h3>Original reading passages</h3><p>English and Filipino passages written for this prototype.</p></article>
+      <article><span>✓</span><h3>Original reviewer summaries</h3><p>Framework-based notes using new wording.</p></article>
+      <article><span>✓</span><h3>Original SVG figures</h3><p>Generated diagrams and reasoning shapes, not copied figures.</p></article>
+    </div>
+  </div>
+</section>
+<section class="section section-cream">
+  <div class="container source-table-wrap">
+    <span class="eyebrow">INTERNAL SOURCE REGISTER</span><h2>Reference groups used during development</h2>
+    <div class="source-table">
+      <div><b>Mathematics</b><span>Compiled UPCAT Mathematics, Math Modules 1–4, Math Readings 1–4</span><i>Internal only</i></div>
+      <div><b>Language & Reading</b><span>English Modules 1–4, English Readings 1–4, compiled Language and Reading bank</span><i>Internal only</i></div>
+      <div><b>Science</b><span>Science Modules 1–4, Science Readings 1–4, compiled Science bank</span><i>Internal only</i></div>
+      <div><b>Reasoning</b><span>Abstract-reasoning practice test used only to map visual formats</span><i>Internal only</i></div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container quality-workflow">
+    <div><span class="eyebrow">QUESTION WORKFLOW</span><h2>Draft → solve → check → review → publish.</h2></div>
+    <ol><li><b>Write</b><span>Create a genuinely new item.</span></li><li><b>Verify</b><span>Solve independently and check every choice.</span></li><li><b>Compare</b><span>Check similarity with protected sources.</span></li><li><b>Review</b><span>Have a qualified teacher or subject reviewer assess it.</span></li><li><b>Publish</b><span>Record version and correction history.</span></li></ol>
+  </div>
+</section>
 </main>
-<footer class="site-footer"><div class="container footer-grid">
-<div><a class="footer-brand" href="index.html"><img src="assets/images/tutodemy-owl.png" alt=""><span><strong>TutoDemy</strong><small>Learning PH</small></span></a><p>Friendly, structured academic support for school, scholarships, and college entrance exams.</p></div>
-<div><h3>Explore</h3><a href="tutoring.html">Tutoring</a><a href="exams.html">Exam prep</a><a href="resources.html">Resources</a></div>
-<div><h3>Project</h3><a href="about.html">Our story</a><a href="about.html#principles">Principles</a><a href="about.html#collaborate">Collaborate</a></div>
-<div><h3>Early access</h3><p>Join the list for new reviewers and mock-test releases.</p><form class="mini-form demo-form"><input type="email" aria-label="Email address" placeholder="Email address" required><button>→</button></form></div>
-</div><div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Static MVP • Demo forms do not transmit data.</span></div></footer><div class="toast" role="status"></div></body></html>
+  <div id="site-footer"></div>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
