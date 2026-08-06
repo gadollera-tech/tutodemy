@@ -40,9 +40,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     try {
       if (!api?.isReady?.()) {
         alert.hidden = false;
-        alert.innerHTML = `<b>Tutor Marketplace setup required.</b><span>${esc(api?.getSchemaMessage?.() || "Run the included Supabase marketplace upgrade.")}</span>`;
-        grid.innerHTML = `<div class="empty-state"><h3>The tutor directory will open after the Supabase marketplace schema is installed.</h3><p>Run <code>docs/TUTOR-MARKETPLACE-UPGRADE.sql</code>, then approve the first tutor application in the Admin Console.</p></div>`;
-        count.textContent = "Directory not connected yet";
+        alert.innerHTML = `<b>The tutor directory is temporarily unavailable.</b><span>Please try again later.</span>`;
+        grid.innerHTML = `<div class="empty-state"><h3>Tutor profiles cannot be loaded right now.</h3><p>Please return later or use TutoDemy's official contact channel for assistance.</p></div>`;
+        count.textContent = "Unable to load tutors";
         return;
       }
       alert.hidden = true;

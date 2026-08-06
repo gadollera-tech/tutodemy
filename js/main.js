@@ -24,8 +24,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         <a href="tutoring.html" class="${active === "tutoring" ? "active" : ""}">Find a Tutor</a>
         <a href="tutor-onboarding.html" class="${active === "tutor-onboarding" ? "active" : ""}">Become a Tutor</a>
         <a href="bookings.html" class="${active === "bookings" ? "active" : ""}">My Bookings</a>
-        <a href="tutor-dashboard.html" class="${active === "tutor-dashboard" ? "active" : ""}">Tutor Dashboard</a>
-        <a href="tutor-terms.html" class="${active === "tutor-terms" ? "active" : ""}">Commission Policy</a>
+        <a href="tutor-dashboard.html" class="tutor-only ${active === "tutor-dashboard" ? "active" : ""}" hidden>Tutor Dashboard</a>
+        <a href="tutor-terms.html" class="${active === "tutor-terms" ? "active" : ""}">Tutor Guidelines</a>
         <a href="admin.html" class="admin-only ${active === "admin" ? "active" : ""}" hidden>Admin Console</a>
       </div>
     </div>`;
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     practiceDropdown,
     `<a href="reviewers.html" class="${active === "reviewers" ? "active" : ""}">Reviewers</a>`,
     tutorDropdown,
-    `<a href="pricing.html" class="${active === "pricing" ? "active" : ""}">Premium</a>`,
+    `<a href="pricing.html" class="${active === "pricing" ? "active" : ""}">Access</a>`,
     `<a href="resources.html" class="${active === "resources" ? "active" : ""}">Source Policy</a>`,
     `<a href="about.html" class="${active === "about" ? "active" : ""}">About</a>`
   ].join("");
@@ -44,14 +44,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   const header = document.querySelector("#site-header");
   if (header) {
     header.innerHTML = `
-      <div class="site-note">Reviewed original learning materials • Verified tutor profiles require admin approval • Booking payments are manually confirmed until a payment gateway is connected.</div>
+      <div class="site-note">Reviewed original learning materials • Tutor profiles require admin approval • Booking payments are confirmed through TutoDemy.</div>
       <header class="site-header">
         <div class="container nav-wrap">
           <a class="brand" href="index.html" aria-label="TutoDemy home"><img src="assets/images/wordmark.png" alt="TutoDemy Learning PH"></a>
           <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
           <nav class="main-nav" aria-label="Primary navigation">${links}</nav>
           <div class="nav-actions">
-            <button class="plan-chip" type="button" id="plan-chip"><i></i><span data-plan-label>Free</span></button>
+            <a class="plan-chip" id="plan-chip" href="pricing.html"><i></i><span>Access</span></a>
             <a class="auth-chip" id="auth-chip" href="auth.html"><span class="auth-avatar">?</span><span class="auth-label">Log in</span></a>
           </div>
         </div>
@@ -69,9 +69,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="footer-badges"><span>Reviewed content</span><span>Supabase accounts</span><span>Approved tutors only</span></div>
           </div>
           <div><h3>Practice</h3><a href="exams.html">CET exam hub</a><a href="practice.html">CET set builder</a><a href="dost-sei.html">DOST-SEI preparation</a><a href="dashboard.html">Dashboard</a></div>
-          <div><h3>Tutoring</h3><a href="tutoring.html">Find a tutor</a><a href="tutor-onboarding.html">Become a tutor</a><a href="bookings.html">My bookings</a><a href="tutor-terms.html">Commission policy</a></div>
+          <div><h3>Tutoring</h3><a href="tutoring.html">Find a tutor</a><a href="tutor-onboarding.html">Become a tutor</a><a href="bookings.html">My bookings</a><a href="tutor-terms.html">Tutor guidelines</a></div>
           <div><h3>Account</h3><a href="auth.html">Log in or sign up</a><a href="profile.html">My profile</a><a href="privacy.html">Privacy notice</a><a href="terms.html">Terms of use</a></div>
-          <div><h3>Project</h3><a href="reviewers.html">Reviewers</a><a href="resources.html">Source policy</a><a href="pricing.html">Premium</a><a href="about.html">About</a></div>
+          <div><h3>Project</h3><a href="reviewers.html">Reviewers</a><a href="resources.html">Source policy</a><a href="pricing.html">Access</a><a href="about.html">About</a></div>
         </div>
         <div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Study smarter. Grow with guidance.</span></div>
       </footer>`;
@@ -131,16 +131,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         localStorage.removeItem(this.scopedKey(key));
       }
     },
-    getPlan() { return localStorage.getItem("tutodemyPlan") || "free"; },
-    setPlan(plan) {
-      localStorage.setItem("tutodemyPlan", plan === "pro" ? "pro" : "free");
+    getPlan() { return "pro"; },
+    setPlan() {
+      localStorage.removeItem("tutodemyPlan");
       this.applyPlan();
-      window.dispatchEvent(new CustomEvent("tutodemy-plan-change", { detail: { plan: this.getPlan() } }));
+      window.dispatchEvent(new CustomEvent("tutodemy-plan-change", { detail: { plan: "pro" } }));
     },
     applyPlan() {
-      const plan = this.getPlan();
-      document.body.classList.toggle("plan-pro", plan === "pro");
-      document.querySelectorAll("[data-plan-label]").forEach(el => el.textContent = plan === "pro" ? "Full Preview" : "Free");
+      document.body.classList.add("plan-pro");
+      document.querySelectorAll("[data-plan-label]").forEach(el => el.textContent = "Open access");
     },
     toast(message) {
       const toast = document.querySelector(".toast");
@@ -221,8 +220,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  async function refreshTutorLinks() {
+    let isTutor = false;
+    try {
+      const account = await window.TutoMarketplace?.getMyAccountProfile?.();
+      isTutor = account?.role === "tutor";
+    } catch {}
+    document.querySelectorAll(".tutor-only").forEach(link => {
+      link.hidden = !isTutor;
+    });
+  }
+
   window.Tuto.applyPlan();
-  document.querySelector("#plan-chip")?.addEventListener("click", () => location.href = "pricing.html");
   document.querySelectorAll("[data-year]").forEach(el => el.textContent = new Date().getFullYear());
 
   await window.TutoAuth?.ready;
@@ -230,7 +239,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (window.TutoMarketplace) {
     await window.TutoMarketplace.ready;
     refreshAdminLinks();
+    await refreshTutorLinks();
   }
-  window.addEventListener("tutodemy-auth-change", refreshAuthChip);
+  window.addEventListener("tutodemy-auth-change", async () => { refreshAuthChip(); await refreshTutorLinks(); });
   window.addEventListener("tutodemy-admin-change", refreshAdminLinks);
 });

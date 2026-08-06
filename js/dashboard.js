@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   const accountDescription=document.querySelector("#dashboard-account-description");
   const accountLink=document.querySelector("#dashboard-account-link");
   if(!window.TutoAuth?.isConfigured?.()){
-    accountTitle.textContent="Cloud accounts are ready but not configured";
-    accountDescription.textContent="Follow the included Supabase setup guide to activate login and cross-device progress.";
-    accountLink.href="docs/SUPABASE-SETUP-GUIDE.md";accountLink.textContent="Setup guide";
+    accountTitle.textContent="Account sync is temporarily unavailable";
+    accountDescription.textContent="Your local learning progress remains available on this device.";
+    accountLink.href="auth.html";accountLink.textContent="Account";
   }else if(window.TutoAuth.getUser()){
     accountTitle.textContent="Progress is linked to your learner account";
     accountDescription.textContent=window.TutoCloud?.getStatus?.().lastError?"Local copy saved; cloud sync needs attention.":"Your account can synchronize attempts, saved reviewers, and active exams.";

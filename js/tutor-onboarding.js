@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function load() {
     if (!api?.isReady?.()) {
       alert.hidden = false;
-      alert.innerHTML = `<b>Tutor Marketplace database setup is required.</b><span>Run <code>docs/TUTOR-MARKETPLACE-UPGRADE.sql</code> in Supabase before using this application.</span>`;
+      alert.innerHTML = `<b>Tutor applications are temporarily unavailable.</b><span>Please try again later or use TutoDemy's official contact channel for assistance.</span>`;
       form.querySelectorAll("input,select,textarea,button").forEach(x => x.disabled = true);
       showProfileStatus(null);
       return;

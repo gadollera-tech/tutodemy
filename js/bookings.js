@@ -25,10 +25,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tutorName = tutor?.display_name || "Tutor profile";
     const canCancel = ["requested","accepted"].includes(b.status) && b.payment_status === "unpaid";
     const canReview = b.status === "completed" && !reviewed.has(b.id);
-    const commission = b.status === "completed" ? `<div><dt>Platform commission</dt><dd>${b.commission_rate}%</dd></div><div><dt>Tutor net</dt><dd>${money(b.tutor_net_amount)}</dd></div>` : "";
     return `<article class="booking-item" data-id="${b.id}">
       <div class="booking-item-head"><div><span class="status-pill status-${b.status}">${esc(statusText(b.status))}</span><h2>${esc(tutorName)}</h2><p>${esc(b.subject)} • ${esc(b.mode)}</p></div><a href="tutor-profile.html?id=${encodeURIComponent(b.tutor_id)}">View tutor</a></div>
-      <dl class="booking-details"><div><dt>Schedule</dt><dd>${new Date(b.requested_start).toLocaleString()}</dd></div><div><dt>Duration</dt><dd>${b.duration_minutes} minutes</dd></div><div><dt>Session amount</dt><dd>${money(b.gross_amount)}</dd></div><div><dt>Payment</dt><dd>${esc(b.payment_status)}</dd></div>${commission}</dl>
+      <dl class="booking-details"><div><dt>Schedule</dt><dd>${new Date(b.requested_start).toLocaleString()}</dd></div><div><dt>Duration</dt><dd>${b.duration_minutes} minutes</dd></div><div><dt>Session amount</dt><dd>${money(b.gross_amount)}</dd></div><div><dt>Payment</dt><dd>${esc(b.payment_status)}</dd></div></dl>
       ${b.learning_goal ? `<p class="booking-goal"><b>Learning goal:</b> ${esc(b.learning_goal)}</p>` : ""}
       ${b.tutor_response_note ? `<p class="booking-note-inline"><b>Tutor note:</b> ${esc(b.tutor_response_note)}</p>` : ""}
       <div class="booking-actions">${canCancel?`<button class="button button-outline cancel-booking" type="button">Cancel request</button>`:""}${canReview?`<button class="button review-booking" type="button">Leave verified review</button>`:""}</div>
@@ -58,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function load() {
     try {
-      if (!api.isReady()) throw new Error("Run the Tutor Marketplace Supabase upgrade before using bookings.");
+      if (!api.isReady()) throw new Error("Bookings are temporarily unavailable. Please try again later.");
       [bookings] = await Promise.all([api.getMyBookings("learner")]);
       const [tutors,reviews] = await Promise.all([api.publicTutors({acceptingOnly:false}),api.getMyReviews()]);
       tutorMap = new Map(tutors.map(t=>[t.user_id,t]));

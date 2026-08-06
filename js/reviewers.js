@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", async ()=>{
 
   function render(){
     const term=search.value.toLowerCase().trim();
-    const plan=window.Tuto.getPlan();
     const saved=window.Tuto.getSavedReviewers();
     const items=window.TUTODEMY_REVIEWERS.filter(r=>{
       const matches=active==="all"||r.category===active;
@@ -18,12 +17,10 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     });
     count.textContent=`${items.length} reviewer${items.length===1?"":"s"}`;
     grid.innerHTML=items.map(r=>{
-      const locked=r.access==="Premium"&&plan!=="pro";
       return `<article class="reviewer-card">
-        <div class="reviewer-code">${r.domain}</div><small>${r.access} · ${r.category}</small>
+        <div class="reviewer-code">${r.domain}</div><small>${r.category}</small>
         <h3>${r.title}</h3><p>${r.summary}</p>
         <div class="reviewer-actions"><a class="small-button" href="reviewer.html?id=${r.id}">Open reviewer</a><button class="bookmark" data-save="${r.id}" aria-label="Save reviewer">${saved.includes(r.id)?"★":"☆"}</button></div>
-        ${locked?`<div class="reviewer-lock"><div><span>🔒</span><p><b>Premium preview reviewer</b></p><a href="pricing.html">Activate preview →</a></div></div>`:""}
       </article>`;
     }).join("")||`<div class="empty-state">No reviewer matches the current search.</div>`;
     grid.querySelectorAll("[data-save]").forEach(btn=>btn.addEventListener("click",()=>{

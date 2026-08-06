@@ -46,8 +46,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if(!window.TutoAuth?.getUser?.()){location.replace("auth.html");return;}
   try{
-    if(!api.isReady())throw new Error("Run the Tutor Marketplace Supabase upgrade before opening the Admin Console.");
-    if(!await api.checkAdmin())throw new Error("This account is not listed in public.admin_users. Add your authenticated user ID using the SQL instruction in docs/TUTOR-MARKETPLACE-UPGRADE.sql.");
+    if(!api.isReady())throw new Error("The Admin Console is temporarily unavailable.");
+    if(!await api.checkAdmin())throw new Error("Administrator access is required for this account.");
     content.hidden=false;alert.hidden=true;await loadAll();
   }catch(error){alert.hidden=false;alert.textContent=error.message||"Admin Console could not be opened.";}
 

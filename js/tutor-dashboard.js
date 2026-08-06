@@ -5,13 +5,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!window.TutoAuth?.getUser?.()) { location.replace("auth.html"); return; }
   const alert = document.querySelector("#dashboard-alert");
   const bookingList = document.querySelector("#tutor-booking-list");
-  let profile = null, bookings = [], ledger = [], filter = "action";
+  let profile = null, bookings = [], ledger = [], feePolicy = [], filter = "action";
   const esc = v => window.Tuto.escape(v);
   const money = v => window.Tuto.money(v);
   const labels = {requested:"New request",accepted:"Accepted — awaiting payment",paid:"Payment confirmed",session_delivered:"Waiting for admin completion",completed:"Completed",declined:"Declined",cancelled:"Cancelled",refunded:"Refunded",disputed:"Under review"};
 
+  function revealPrivateCompensation() {
+    document.querySelector("#private-tutor-metrics").hidden = false;
+    document.querySelector("#private-compensation-panel").hidden = false;
+    document.querySelector("#private-ledger-section").hidden = false;
+    document.querySelector("#private-tier-rules").innerHTML = feePolicy.map(row => `<div><b>${esc(row.tier_label)} — ${Number(row.rate)}%</b><span>${esc(row.description)}</span></div>`).join("") || `<div><b>Your current platform fee is shown above.</b><span>Additional tier details are temporarily unavailable.</span></div>`;
+  }
+
   function updateMetrics() {
     if (!profile) return;
+    revealPrivateCompensation();
     const estimate = api.estimateCommission(profile, Number(document.querySelector("#commission-gross").value||0));
     document.querySelector("#metric-tier").textContent = estimate.tier;
     document.querySelector("#metric-rate").textContent = `${estimate.rate}% platform commission`;
@@ -64,10 +72,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function load() {
     try {
-      if(!api.isReady()) throw new Error("Run the Tutor Marketplace Supabase upgrade before using the tutor dashboard.");
+      if(!api.isReady()) throw new Error("The tutor dashboard is temporarily unavailable. Please try again later.");
       profile=await api.getMyTutorProfile();
-      if(!profile){profileStatus();document.querySelector("#metric-tier").textContent="Not started";bookingList.innerHTML=`<div class="empty-state"><h3>Create your tutor profile first.</h3><a class="button" href="tutor-onboarding.html">Start application</a></div>`;return;}
-      [bookings,ledger]=await Promise.all([api.getMyBookings("tutor"),api.getMyLedger()]);
+      if(!profile){profileStatus();bookingList.innerHTML=`<div class="empty-state"><h3>Create your tutor profile first.</h3><p>Your private fee schedule and earnings tools will appear after your tutor profile is created.</p><a class="button" href="tutor-onboarding.html">Start application</a></div>`;return;}
+      [bookings,ledger,feePolicy]=await Promise.all([api.getMyBookings("tutor"),api.getMyLedger(),api.getMyTutorFeePolicy()]);
       alert.hidden=true;profileStatus();updateMetrics();renderBookings();renderLedger();
       const toggle=document.querySelector("#toggle-bookings");
       toggle.hidden=profile.status!=="approved";

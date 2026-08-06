@@ -3,9 +3,8 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   await window.TutoCloud?.ready;
   const id=new URLSearchParams(location.search).get("id")||"math-m1";
   const r=window.TUTODEMY_REVIEWERS.find(x=>x.id===id)||window.TUTODEMY_REVIEWERS[0];
-  if(r.access==="Premium"&&window.Tuto.getPlan()!=="pro"){ location.replace("pricing.html"); return; }
   document.title=`${r.title} | TutoDemy Learning PH`;
-  document.querySelector("#reader-meta").textContent=`${r.access} · ${r.category}`;
+  document.querySelector("#reader-meta").textContent=r.category;
   document.querySelector("#reader-title").textContent=r.title;
   document.querySelector("#reader-summary").textContent=r.summary;
   document.querySelector("#reader-badge").textContent=r.domain;

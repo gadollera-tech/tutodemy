@@ -32,8 +32,8 @@
     const message = error?.message || String(error || "Unknown error");
     if (/relation .* does not exist|schema cache|could not find the table/i.test(message)) {
       state.schemaReady = false;
-      state.schemaError = "The Tutor Marketplace database upgrade has not been run yet.";
-      return new Error(`${state.schemaError} Run docs/TUTOR-MARKETPLACE-UPGRADE.sql in Supabase.`);
+      state.schemaError = "The tutoring service is temporarily unavailable.";
+      return new Error(state.schemaError);
     }
     return error instanceof Error ? error : new Error(message);
   }
@@ -263,9 +263,9 @@
   }
 
   async function getMyBookings(role = "learner") {
-    const current = requireUser();
-    const column = role === "tutor" ? "tutor_id" : "learner_id";
-    const { data, error } = await client().from("bookings").select("*").eq(column, current.id).order("requested_start", { ascending: false });
+    requireUser();
+    const functionName = role === "tutor" ? "get_my_tutor_bookings" : "get_my_learner_bookings";
+    const { data, error } = await client().rpc(functionName);
     if (error) throw friendlyError(error);
     return data || [];
   }
@@ -346,7 +346,7 @@
 
   async function adminBookings() {
     if (!await checkAdmin()) throw new Error("Administrator access required.");
-    const { data, error } = await client().from("bookings").select("*").order("created_at", { ascending: false }).limit(300);
+    const { data, error } = await client().rpc("admin_list_bookings");
     if (error) throw friendlyError(error);
     return data || [];
   }
@@ -367,21 +367,22 @@
     return data;
   }
 
+  async function getMyTutorFeePolicy() {
+    requireUser();
+    const { data, error } = await client().rpc("get_my_tutor_fee_policy");
+    if (error) throw friendlyError(error);
+    return data || [];
+  }
+
   function estimateCommission(profile, gross) {
-    const completed = Number(profile?.completed_sessions || 0);
-    const average = Number(profile?.average_rating || 0);
-    const reviews = Number(profile?.review_count || 0);
-    const cancellation = Number(profile?.cancellation_rate || 0);
-    const good = profile?.account_standing === "good";
-    let rate = 15;
-    let tier = "Regular Tutor";
-    if (profile?.founding_eligible && completed < 20) {
-      rate = 10; tier = "Founding Tutor";
-    } else if (completed >= 100 && average >= 4.5 && good) {
-      rate = 12; tier = "High-Volume Tutor";
-    } else if (completed >= 50 && average >= 4.8 && reviews >= 20 && cancellation <= 5 && good) {
-      rate = 12; tier = "Top-Rated Tutor";
-    }
+    const rate = Number(profile?.current_commission_rate || 0);
+    const tierLabels = {
+      founding: "Founding Tutor",
+      regular: "Regular Tutor",
+      high_volume: "High-Volume Tutor",
+      top_rated: "Top-Rated Tutor"
+    };
+    const tier = tierLabels[profile?.commission_tier] || "Tutor";
     const amount = Number(gross || 0);
     return {
       tier, rate,
@@ -426,6 +427,7 @@
     adminBookings,
     adminConfirmPayment,
     adminCompleteBooking,
+    getMyTutorFeePolicy,
     estimateCommission,
     cleanArray
   };

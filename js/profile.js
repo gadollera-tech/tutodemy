@@ -18,15 +18,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   };
 
   if (!configured) {
-    document.querySelector("#account-heading").textContent = "Account setup is not connected";
-    document.querySelector("#account-email").textContent = "Add the Supabase values to js/config.js first.";
-    cloudBadge.textContent = "Not configured";
+    document.querySelector("#account-heading").textContent = "Account service is temporarily unavailable";
+    document.querySelector("#account-email").textContent = "Please try again later.";
+    cloudBadge.textContent = "Unavailable";
     syncHeading.textContent = "Cloud sync unavailable";
-    syncDescription.innerHTML = `The account pages and database schema are included. Follow <a href="docs/SUPABASE-SETUP-GUIDE.md">the setup guide</a> to activate them.`;
+    syncDescription.textContent = "Your local learning progress remains available on this device.";
     syncNow.disabled = true;
     setFormDisabled(true);
-    document.querySelector("#logout-button").textContent = "Open setup guide";
-    document.querySelector("#logout-button").addEventListener("click", () => location.href = "docs/SUPABASE-SETUP-GUIDE.md");
+    document.querySelector("#logout-button").textContent = "Return to home";
+    document.querySelector("#logout-button").addEventListener("click", () => location.href = "index.html");
     refreshStats();
     return;
   }

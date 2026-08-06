@@ -50,14 +50,12 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     return countEl.value==="custom"?Math.max(1,Math.min(220,Number(customCount.value)||20)):Number(countEl.value);
   }
 
-  function poolFor(config, ignorePlan=false){
-    const plan=window.Tuto.getPlan();
+  function poolFor(config){
     return questions.filter(q=>{
       const categoryMatch=config.category==="Mixed"||q.category===config.category;
       const domainMatch=config.category==="Mixed"||config.domain==="all"||q.domain===config.domain;
       const difficultyMatch=config.difficulty==="all"||q.difficulty===config.difficulty;
-      const accessMatch=ignorePlan||plan==="pro"||q.access==="Free";
-      return categoryMatch&&domainMatch&&difficultyMatch&&accessMatch;
+      return categoryMatch&&domainMatch&&difficultyMatch;
     });
   }
 
@@ -65,11 +63,9 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     customLabel.hidden=countEl.value!=="custom";
     const config={category:categoryEl.value,domain:domainEl.value,difficulty:difficultyEl.value};
     const available=poolFor(config).length;
-    const plan=window.Tuto.getPlan();
     const request=requestedCount();
-    let message=`${available} questions are available for the current filters on the ${plan==="pro"?"Pro preview":"Free"} plan.`;
-    if(plan!=="pro"&&request>50) message+=` Free preview sets are limited to 50 items; activate Pro preview for 100- and 200-item sets.`;
-    else if(request>available) message+=` The generated set will be capped at ${available}.`;
+    let message=`${available} questions are available for the current filters.`;
+    if(request>available) message+=` The generated set will be capped at ${available}.`;
     availability.textContent=message;
   }
 
@@ -129,12 +125,6 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   }
 
   function createSession(config, fixedIds=null){
-    const plan=window.Tuto.getPlan();
-    if(plan!=="pro"&&config.count>50){
-      window.Tuto.toast("Activate the Pro preview for sets above 50 items.");
-      location.href="pricing.html";
-      return null;
-    }
     let pool=fixedIds?fixedIds.map(id=>byId[id]).filter(Boolean):poolFor(config);
     if(!pool.length){ window.Tuto.toast("No questions match those filters."); return null; }
     const actual=Math.min(config.count,pool.length);
@@ -214,7 +204,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   function renderQuestion(){
     const q=currentQuestion(),item=session.items[session.current];
     document.querySelector("#question-domain").textContent=`${q.category} · ${q.domain} · ${q.topic}`;
-    document.querySelector("#question-difficulty").textContent=`${q.difficulty} · ${q.access}`;
+    document.querySelector("#question-difficulty").textContent=q.difficulty;
     document.querySelector("#question-stem").textContent=q.stem;
 
     const passageBox=document.querySelector("#passage-box");
