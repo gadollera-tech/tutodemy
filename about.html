@@ -5,14 +5,24 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="About the TutoDemy Learning PH project.">
   <meta name="theme-color" content="#11156f">
+  <link rel="canonical" href="https://tutodemy.net/about.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="About | TutoDemy Learning PH">
+  <meta property="og:description" content="About the TutoDemy Learning PH project.">
+  <meta property="og:url" content="https://tutodemy.net/about.html">
+  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
   <title>About | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="css/style.css">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js"></script>
+  <script defer src="js/cloud-sync.js"></script>
+  <script defer src="js/marketplace-api.js"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js"></script>
 </head>
 <body data-page="about">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -20,26 +30,26 @@
   <main id="main-content">
 <section class="page-hero about-hero">
   <div class="container page-hero-grid">
-    <div><span class="eyebrow">ABOUT TUTODEMY</span><h1>A tutoring and academic-help platform being built step by step.</h1><p>The project combines years of tutoring experience, educator networks, exam-preparation resources, and a practical goal: make guided learning easier to access and organize.</p></div>
+    <div><span class="eyebrow">ABOUT TUTODEMY</span><h1>A learning and tutor marketplace built for Filipino students.</h1><p>The project combines years of tutoring experience, educator networks, exam-preparation resources, and a practical goal: make guided learning easier to access and organize.</p></div>
     <img src="assets/images/tutodemy-logo.png" alt="TutoDemy Learning PH logo">
   </div>
 </section>
 <section class="section">
   <div class="container vision-grid">
     <div class="vision-mark"><img src="assets/images/owl-mark.png" alt=""></div>
-    <div><span class="eyebrow">THE VISION</span><h2>From practice bank to learning community.</h2><p>TutoDemy is designed as more than a static reviewer website. The long-term platform can connect students, parents, tutors, original resources, practice analytics, and eventually secure subscriptions.</p><p>The current build deliberately starts with a reliable static foundation that can be published on GitHub Pages.</p></div>
+    <div><span class="eyebrow">THE VISION</span><h2>From practice bank to learning community.</h2><p>TutoDemy is designed as more than a static reviewer website. The long-term platform can connect students, parents, tutors, original resources, practice analytics, and eventually secure subscriptions.</p><p>The current release combines a GitHub Pages front end with Supabase authentication, database policies, file storage, and admin-approved tutor workflows.</p></div>
   </div>
 </section>
 <section class="section section-cream">
   <div class="container">
-    <div class="section-heading centered"><span class="eyebrow">WHAT IS ALREADY WORKING</span><h2>Front-end features available now.</h2></div>
+    <div class="section-heading centered"><span class="eyebrow">WHAT IS ALREADY WORKING</span><h2>Learning and marketplace features included now.</h2></div>
     <div class="roadmap-grid">
-      <article><span>NOW</span><h3>Practice engine</h3><p>880-question bank, randomized sets, timer, navigator, scoring, explanations, and history.</p></article>
+      <article><span>NOW</span><h3>Practice engine</h3><p>2,580-question combined CET and DOST-SEI-style bank, randomized sets, timers, navigation, scoring, explanations, and attempt history.</p></article>
       <article><span>NOW</span><h3>Reviewer library</h3><p>Searchable starter modules with domain-linked practice.</p></article>
-      <article><span>NOW</span><h3>Tutor directory</h3><p>Placeholder faces, profiles, filters, profile pages, and inquiry form.</p></article>
-      <article><span>READY TO CONNECT</span><h3>Accounts and cloud data</h3><p>Email/password login, optional Google login, learner profiles, RLS-protected tables, and cloud progress code are included; add the Supabase project credentials to activate them.</p></article>
-      <article><span>LATER</span><h3>Payments and subscriptions</h3><p>Checkout, recurring billing, server-side access, invoices, and cancellations.</p></article>
-      <article><span>LATER</span><h3>Tutor scheduling</h3><p>Availability, session booking, reminders, notes, and safeguarding workflows.</p></article>
+      <article><span>NOW</span><h3>Tutor directory</h3><p>Role-based tutor onboarding, private verification uploads, admin approval, public profiles, schedule requests, and verified reviews.</p></article>
+      <article><span>READY TO CONNECT</span><h3>Accounts and cloud data</h3><p>Email/password login, optional Google login, learner/parent and tutor roles, RLS-protected tables, cloud progress, and Storage policies.</p></article>
+      <article><span>MANUAL AT LAUNCH</span><h3>Tutoring payments</h3><p>Accepted-booking payments are manually confirmed by an administrator before delivery and commission completion.</p></article>
+      <article><span>NEXT PHASE</span><h3>Automated marketplace payments</h3><p>Compliant checkout, split payouts, refunds, invoices, notifications, and dispute automation.</p></article>
     </div>
   </div>
 </section>

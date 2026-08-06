@@ -1,90 +1,75 @@
-# Backend and Form Integration Roadmap
+# Backend and Marketplace Roadmap
 
-## Phase 1 — Static GitHub Pages
+## Current release — Supabase marketplace foundation
 
-Working now:
+Included in this package:
 
-- Question randomization
-- Timer
-- Scoring
-- Local attempt history
-- Local Premium preview
-- Tutor directory
-- Local inquiry demonstration
+- email/password authentication
+- optional Google sign-in configuration
+- learner/parent and tutor account roles
+- tutor onboarding and private verification-document storage
+- administrator approval and suspension workflow
+- public approved-tutor directory
+- tutor schedules, modes, locations, rates, and profiles
+- booking requests and tutor responses
+- manual payment confirmation by an administrator
+- session-delivery confirmation
+- booking completion and commission ledger
+- verified reviews after completed bookings
+- tutor tier calculation for 10%, 15%, and 12% commission rates
+- Row Level Security policies and controlled database functions
 
-## Phase 2 — Google Forms or Apps Script
+## Launch payment workflow
 
-Suitable for:
+Payment collection and tutor payouts are manual in this release. The website records payment confirmation, booking completion, platform commission, and tutor net earnings only after the administrator verifies the transaction.
 
-- Tutor inquiries
-- Tutor applications
-- Resource requests
-- Error reports
-- Mailing-list registration
+Do not present this release as automated checkout or automated payout.
 
-### Easiest method
+## Next release — automated marketplace payments
 
-Embed a Google Form using its iframe code.
+A secure automated payment release should include:
 
-### Custom branded method
+1. server-created checkout session or payment intent
+2. signed payment-provider webhook verification
+3. idempotent payment-status updates
+4. refund and dispute records
+5. marketplace/platform fee calculation on the server
+6. tutor payout or connected-account workflow
+7. reconciliation and audit logs
+8. retry and failure handling
+9. tax and invoicing requirements
 
-Send the custom HTML form to a Google Apps Script web app and store responses in Google Sheets.
+Browser-only JavaScript must not decide whether a payment succeeded.
 
-Never collect sensitive information that is unnecessary for matching or communication.
+## Additional recommended releases
 
-## Phase 2.5 — Supabase account layer included in this package
+### Operations and safeguarding
 
-Ready to activate after project setup:
+- tutor verification checklist and expiry tracking
+- complaint and incident workflow
+- learner safeguarding rules
+- no-show, late-cancellation, and refund policies
+- moderation and account appeals
 
-- Email/password authentication
-- Optional Google OAuth
-- Learner profiles
-- Saved progress and cross-device attempt history
-- Saved reviewers
-- Active exam synchronization
-- Tutor inquiry records
-- Row Level Security policies
+### Administration
 
-See `SUPABASE-SETUP-GUIDE.md` and `SUPABASE-SCHEMA.sql`.
+- internal reports and exports
+- payment reconciliation dashboard
+- tutor-document review history
+- account deletion and retention tooling
+- content and booking audit trails
 
-## Phase 3 — Expanded application backend
+### Learning system
 
-Still recommended later:
+- DOST-SEI cross-device attempt synchronization
+- secure Premium entitlements
+- reviewer content management
+- accessibility audit and learner accommodations
 
-- Private file uploads
-- Secure Premium entitlements
-- Tutor availability and bookings
-- Admin content workflow
-- Account deletion and data-retention tooling
-- Parent, tutor, and administrator roles
+### Scaling
 
-Possible platforms:
-
-- Supabase
-- Firebase
-- A custom server and database
-
-## Phase 4 — Payments
-
-A real paywall requires:
-
-1. authenticated user
-2. checkout session
-3. signed payment webhook
-4. subscription record
-5. server-side authorization
-6. protected data delivery
-
-The local Premium switch is not secure.
-
-## Phase 5 — Tutor scheduling
-
-Add:
-
-- verified tutor roster
-- available time blocks
-- booking requests
-- confirmation and cancellation
-- payment policy
-- learner safeguarding
-- session notes and assignments
+- server-side search and pagination for large tutor directories
+- email and in-app notifications
+- calendar integration
+- rate limiting and abuse monitoring
+- backup, recovery, and incident-response procedures

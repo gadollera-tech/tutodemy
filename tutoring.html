@@ -3,58 +3,80 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Tutor directory and inquiry form prototype.">
+  <meta name="description" content="Find admin-approved tutors by subject, location, schedule, and teaching mode.">
   <meta name="theme-color" content="#11156f">
-  <title>Tutor Connect | TutoDemy Learning PH</title>
+  <link rel="canonical" href="https://tutodemy.net/tutoring.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Find a Tutor | TutoDemy Learning PH">
+  <meta property="og:description" content="Find admin-approved tutors by subject, location, schedule, and teaching mode.">
+  <meta property="og:url" content="https://tutodemy.net/tutoring.html">
+  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Find a Tutor | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="css/style.css">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js"></script><script defer src="data/tutors.js"></script><script defer src="js/tutors.js"></script>
+  <script defer src="js/cloud-sync.js"></script>
+  <script defer src="js/marketplace-api.js"></script>
+  <script defer src="data/taxonomy.js"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/tutors.js"></script>
 </head>
 <body data-page="tutoring">
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div id="site-header"></div>
   <main id="main-content">
-<section class="page-hero tutoring-hero">
-  <div class="container page-hero-grid">
-    <div><span class="eyebrow light">TUTOR CONNECT</span><h1>Find a tutor who fits the learner.</h1><p>Browse placeholder profiles by subject, level, and learning mode. Replace names, photos, credentials, schedules, and rates after verification.</p><div class="button-row"><a class="button button-light" href="#directory">Browse tutors</a><a class="button button-ghost" href="#inquiry">Send an inquiry</a></div></div>
-    <div class="tutor-collage"><img src="assets/tutors/tutor-01.svg" alt=""><img src="assets/tutors/tutor-03.svg" alt=""><img src="assets/tutors/tutor-05.svg" alt=""></div>
-  </div>
-</section>
-<section class="section" id="directory">
-  <div class="container">
-    <div class="section-heading"><span class="eyebrow">TUTOR DIRECTORY</span><h2>Placeholder faces and profiles are ready.</h2><p>All current profiles are clearly labelled placeholders and should not be presented as real people.</p></div>
-    <div class="tutor-toolbar">
-      <label>Subject<select id="tutor-subject"><option value="all">All subjects</option></select></label>
-      <label>Student level<select id="tutor-level"><option value="all">All levels</option></select></label>
-      <label>Mode<select id="tutor-mode"><option value="all">Online or in-person</option><option value="Online">Online</option><option value="In-person">In-person</option></select></label>
-    </div>
-    <div class="tutor-grid" id="tutor-grid"></div>
-  </div>
-</section>
-<section class="section section-cream" id="inquiry">
-  <div class="container inquiry-layout">
-    <div><span class="eyebrow">FIND MY TUTOR</span><h2>Tell us what support the learner needs.</h2><p>This form currently stores a demo inquiry in the browser. Add a Google Form embed or Apps Script endpoint later through <code>js/config.js</code>.</p><div class="inquiry-points"><span>✓ Subject and level matching</span><span>✓ Preferred learning mode</span><span>✓ Schedule and learning concern</span><span>✓ No payment collected</span></div></div>
-    <form class="inquiry-form" id="tutor-inquiry-form">
-      <label>Student or parent name<input name="name" required></label>
-      <label>Email or contact method<input name="contact" required></label>
-      <label>Student level<select name="level" required><option value="">Select level</option><option>Elementary</option><option>Junior High</option><option>Senior High</option><option>College</option><option>CET Applicant</option></select></label>
-      <label>Subject<select name="subject" required><option value="">Select subject</option><option>Mathematics</option><option>Physics</option><option>Biology & Science</option><option>Chemistry</option><option>English & Reading</option><option>Filipino & Language</option><option>Abstract Reasoning</option><option>General Academic Support</option></select></label>
-      <label>Preferred mode<select name="mode"><option>Online</option><option>In-person, subject to location</option><option>Either</option></select></label>
-      <label>Preferred schedule<input name="schedule" placeholder="Example: Weekdays after 6 PM"></label>
-      <label class="full">Learning concern<textarea name="message" rows="5" required></textarea></label>
-      <button class="button full" type="submit">Submit demo inquiry</button>
-      <p class="form-status" id="inquiry-status"></p>
-    </form>
-  </div>
-</section>
-<section class="section tutor-join">
-  <div class="container tutor-join-grid"><div><span class="eyebrow light">FOR FUTURE TUTORS</span><h2>Build a verified contributor and tutor roster.</h2><p>Create an application form later for credentials, subject coverage, teaching demonstration, references, identity verification, rates, and safeguarding requirements.</p></div><a class="button button-light" href="resources.html">Read the platform standards</a></div>
-</section>
-</main>
+    <section class="page-hero tutoring-hero">
+      <div class="container page-hero-grid">
+        <div>
+          <span class="eyebrow light">TUTODEMY TUTOR MARKETPLACE</span>
+          <h1>Find a tutor who fits the learner.</h1>
+          <p>Browse only admin-approved tutor profiles. Compare subjects, learning levels, location, teaching mode, availability, ratings, and rates before sending a booking request.</p>
+          <div class="button-row"><a class="button button-light" href="#directory">Browse tutors</a><a class="button button-ghost" href="tutor-onboarding.html">Become a tutor</a></div>
+        </div>
+        <div class="marketplace-hero-card">
+          <span>HOW IT WORKS</span>
+          <ol><li>Choose an approved tutor.</li><li>Request a schedule.</li><li>The tutor accepts or declines.</li><li>Admin confirms payment.</li><li>Complete the session and leave a verified review.</li></ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="directory">
+      <div class="container">
+        <div class="section-heading"><span class="eyebrow">APPROVED TUTOR DIRECTORY</span><h2>Search by the support you need.</h2><p>Profiles appear here only after TutoDemy admin approval. Identity and verification documents are never displayed publicly.</p></div>
+        <div class="marketplace-alert" id="marketplace-alert" hidden></div>
+        <div class="tutor-toolbar tutor-toolbar-expanded">
+          <label>Search<input id="tutor-search" type="search" placeholder="Name, subject, exam, or location"></label>
+          <label>Subject<select id="tutor-subject"><option value="">All subjects</option></select></label>
+          <label>Mode<select id="tutor-mode"><option value="">Online or in-person</option><option>Online</option><option>In-person</option></select></label>
+          <label>Province<input id="tutor-province" placeholder="Example: Leyte"></label>
+          <button class="button" id="tutor-filter" type="button">Apply filters</button>
+        </div>
+        <div class="directory-summary"><span id="tutor-count">Loading approved tutors…</span><a href="tutor-terms.html">View booking and commission policy</a></div>
+        <div class="tutor-grid marketplace-tutor-grid" id="tutor-grid" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section section-cream">
+      <div class="container three-step-grid">
+        <article><span>01</span><h3>Choose with confidence</h3><p>Review specializations, location, learning modes, verified ratings, and current rate.</p></article>
+        <article><span>02</span><h3>Request, do not instantly pay</h3><p>The tutor first confirms the proposed schedule. Payment is manually verified by TutoDemy while automated checkout is not yet connected.</p></article>
+        <article><span>03</span><h3>Keep the booking on-platform</h3><p>Only completed, paid bookings count toward tutor milestones and commission tiers.</p></article>
+      </div>
+    </section>
+
+    <section class="section tutor-join">
+      <div class="container tutor-join-grid">
+        <div><span class="eyebrow light">TEACH WITH TUTODEMY</span><h2>Create a tutor profile and submit it for approval.</h2><p>Founding Tutors receive a 10% commission rate for their first 20 completed sessions. The regular rate is 15%, while qualified high-volume and top-rated tutors may receive 12%.</p></div>
+        <div class="button-row"><a class="button button-light" href="tutor-onboarding.html">Start tutor application</a><a class="button button-ghost" href="tutor-terms.html">Read the policy</a></div>
+      </div>
+    </section>
+  </main>
   <div id="site-footer"></div>
   <div class="toast" role="status" aria-live="polite"></div>
 </body>

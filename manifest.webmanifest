@@ -1,9 +1,22 @@
 {
   "name": "TutoDemy Learning PH",
   "short_name": "TutoDemy",
-  "start_url": "index.html",
+  "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#fffaf3",
   "theme_color": "#11156f",
-  "icons": []
+  "description": "Practice hubs, reviewed learning materials, and an admin-approved tutor marketplace for Filipino learners.",
+  "icons": [
+    {
+      "src": "assets/images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }

@@ -5,14 +5,24 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="TutoDemy Learning PH tutoring, CET practice, reviewer, and tutor-connect website.">
   <meta name="theme-color" content="#11156f">
+  <link rel="canonical" href="https://tutodemy.net/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Home | TutoDemy Learning PH">
+  <meta property="og:description" content="TutoDemy Learning PH tutoring, CET practice, reviewer, and tutor-connect website.">
+  <meta property="og:url" content="https://tutodemy.net/">
+  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Home | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="css/style.css">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js"></script><script defer src="data/question-bank.js"></script><script defer src="data/tutors.js"></script><script defer src="js/home.js"></script>
+  <script defer src="js/cloud-sync.js"></script>
+  <script defer src="js/marketplace-api.js"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js"></script><script defer src="data/question-bank.js"></script><script defer src="js/home.js"></script>
 </head>
 <body data-page="home">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -32,14 +42,14 @@
         <span>2,580 original reviewed questions</span>
         <span>20–200 item sets</span>
         <span>Timer and mock modes</span>
-        <span>Free + Premium preview</span><span>Optional learner accounts</span>
+        <span>Free practice + Premium roadmap</span><span>Optional learner accounts</span>
       </div>
     </div>
     <div class="hero-visual">
       <div class="owl-glow"></div>
       <img class="hero-owl" src="assets/images/owl-mark.png" alt="TutoDemy owl mascot wearing a graduation cap">
       <div class="floating-card card-one"><b>200-item mock</b><small>Randomized each attempt</small></div>
-      <div class="floating-card card-two"><b>Find your tutor</b><small>Placeholder directory ready</small></div>
+      <div class="floating-card card-two"><b>Find your tutor</b><small>Admin-approved profiles only</small></div>
     </div>
   </div>
 </section>
@@ -89,7 +99,7 @@
       </a>
       <a href="tutoring.html" class="path-card tutors">
         <span class="path-icon">☺</span><small>GUIDED SUPPORT</small><h3>Tutor Connect</h3>
-        <p>Filter placeholder tutor profiles by subject, level, and learning mode, then send an inquiry.</p><b>Meet the tutor team →</b>
+        <p>Browse approved tutor profiles by subject, location, rate, level, and learning mode, then request a schedule.</p><b>Meet the tutor team →</b>
       </a>
     </div>
   </div>
@@ -138,10 +148,10 @@
 <section class="section section-cream">
   <div class="container tutor-teaser">
     <div>
-      <span class="eyebrow">TUTOR CONNECT</span>
-      <h2>Put a real face and teaching profile beside the learning tools.</h2>
-      <p>The current directory uses placeholder names, portraits, subjects, availability, and rates. Replace them later with verified tutor information.</p>
-      <a class="button" href="tutoring.html">Explore tutor profiles</a>
+      <span class="eyebrow">TUTOR MARKETPLACE</span>
+      <h2>Choose from tutors approved by TutoDemy administration.</h2>
+      <p>Tutors create their own accounts, submit public teaching profiles and private verification files, and appear in the directory only after approval.</p>
+      <div class="button-row"><a class="button" href="tutoring.html">Find a tutor</a><a class="button button-outline" href="tutor-onboarding.html">Become a tutor</a></div>
     </div>
     <div class="mini-tutor-grid" id="home-tutors"></div>
   </div>
@@ -151,10 +161,10 @@
   <div class="container founder-note-grid">
     <img src="assets/images/tutodemy-logo.png" alt="TutoDemy Learning PH logo">
     <div>
-      <span class="eyebrow light">PROJECT STATUS</span>
-      <h2>A polished static prototype ready for GitHub Pages.</h2>
-      <p>The CET and DOST-SEI practice engines, timer, randomization, scoring, reviewer library, tutor directory, login pages, learner profiles, and cloud-sync code are included. Connect the supplied Supabase schema and public project credentials to activate cross-device progress. Secure subscriptions, payments, and live form delivery remain later backend phases.</p>
-      <a class="button button-light" href="about.html">Read the roadmap</a>
+      <span class="eyebrow light">PUBLISHABLE PLATFORM FOUNDATION</span>
+      <h2>Practice, reviewers, accounts, and an approval-based tutor marketplace.</h2>
+      <p>The complete site includes reviewed learning materials, account roles, tutor onboarding, private verification uploads, approved public profiles, booking requests, manual payment confirmation, verified reviews, commission tiers, tutor earnings records, and an RLS-protected admin console. Automated checkout and payouts remain disabled until a compliant payment provider is connected.</p>
+      <a class="button button-light" href="about.html">See how TutoDemy works</a>
     </div>
   </div>
 </section>

@@ -1,0 +1,6 @@
+tutodemy.net
+
+After Namecheap DNS and GitHub Pages Custom Domain are working, rename this file to exactly:
+CNAME
+
+Do not rename it before the DNS records are ready, because GitHub Pages may begin redirecting the site to the custom domain.

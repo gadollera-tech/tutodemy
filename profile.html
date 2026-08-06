@@ -5,14 +5,24 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="TutoDemy learner profile and cloud sync settings.">
   <meta name="theme-color" content="#11156f">
+  <meta name="robots" content="noindex,nofollow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Learner Profile | TutoDemy Learning PH">
+  <meta property="og:description" content="TutoDemy learner profile and cloud sync settings.">
+  <meta property="og:url" content="https://tutodemy.net/profile.html">
+  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Learner Profile | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="css/style.css">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
+  <script defer src="js/marketplace-api.js"></script>
   <script defer src="data/taxonomy.js"></script>
   <script defer src="js/main.js"></script>
   <script defer src="js/profile.js"></script>
@@ -24,7 +34,7 @@
     <section class="profile-account-hero">
       <div class="container profile-account-heading">
         <div class="account-avatar" id="account-avatar">U</div>
-        <div><span class="eyebrow light">LEARNER PROFILE</span><h1 id="account-heading">My TutoDemy account</h1><p id="account-email">Loading account…</p></div>
+        <div><span class="eyebrow light">ACCOUNT PROFILE</span><h1 id="account-heading">My TutoDemy account</h1><p id="account-email">Loading account…</p></div>
         <button class="button button-ghost" id="logout-button" type="button">Log out</button>
       </div>
     </section>
@@ -36,7 +46,7 @@
           <form class="account-profile-form" id="profile-form">
             <label>Full name<input name="full_name" maxlength="100" required></label>
             <label>Student level<select name="student_level"><option value="">Not specified</option><option>Elementary</option><option>Junior High</option><option>Senior High</option><option>College</option><option>CET Applicant</option></select></label>
-            <label>Target exam<select name="target_exam"><option value="">General academic support</option><option>UPCAT</option><option>Other CET</option><option>DOST-SEI Scholarship Exam</option><option>School subjects</option></select></label>
+            <label>Target exam<select name="target_exam"><option value="">General academic support</option><option>UPCAT</option><option>DCAT</option><option>Other CET</option><option>DOST-SEI Scholarship Exam</option><option>School subjects</option></select></label>
             <label>School or learning institution<input name="school" maxlength="150" placeholder="Optional"></label>
             <label class="full">Avatar image URL<input type="url" name="avatar_url" placeholder="Optional public image URL"></label>
             <button class="button full" type="submit">Save profile</button>
@@ -45,6 +55,10 @@
         </section>
 
         <aside class="account-sidebar">
+          <section class="panel account-role-panel">
+            <span class="eyebrow">ACCOUNT PATH</span><h2 id="account-role-heading">Learner / Parent</h2><p id="account-role-description">Book tutors and save learning progress.</p>
+            <div class="role-action-list" id="account-role-actions"><a class="button full" href="bookings.html">My tutor bookings</a><a class="button button-outline full" href="tutor-onboarding.html">Apply as a tutor</a></div>
+          </section>
           <section class="panel sync-panel">
             <span class="eyebrow">CLOUD SYNC</span><h2 id="sync-heading">Checking connection…</h2><p id="sync-description">Local data remains available while the account service is loading.</p>
             <div class="sync-facts"><span><b id="sync-attempts">0</b> attempts</span><span><b id="sync-reviewers">0</b> saved reviewers</span><span><b id="sync-active">No</b> active exam</span></div>

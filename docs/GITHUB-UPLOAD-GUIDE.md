@@ -1,99 +1,157 @@
-# Uploading the Website to GitHub Pages
+# GitHub Pages Upload and Domain Guide
 
-## Do not upload the old batch ZIP files individually
+## 1. Upload the correct folder contents
 
-Use only this final consolidated website folder.
+Extract the final ZIP, open the extracted website folder, and upload **everything inside it** to the GitHub repository root.
 
-## Option A — Replace the contents of the existing TutoDemy repository
+Do not upload:
 
-1. Download and extract the final ZIP.
-2. Open the extracted `TutoDemy-Final-Website` folder.
-3. In the existing TutoDemy GitHub repository, remove the old website files that are being replaced.
-4. Upload all files and folders from inside `TutoDemy-Final-Website`.
-5. Commit the changes.
-6. Open **Settings → Pages**.
-7. Under **Build and deployment**, select:
-   - Source: `Deploy from a branch`
-   - Branch: `main`
-   - Folder: `/ (root)`
-8. Save and wait for deployment.
+- the ZIP file itself
+- an extra outer folder containing the website
+- private source PDFs
+- tutor identity documents
+- secret or service-role keys
 
-The repository root must contain:
+The repository's main page should immediately show files and folders such as:
 
 ```text
 index.html
-dashboard.html
-exams.html
-practice.html
-reviewers.html
-reviewer.html
-tutoring.html
-tutor-profile.html
-pricing.html
-resources.html
-about.html
 auth.html
 profile.html
-privacy.html
-assets/
+tutoring.html
+tutor-onboarding.html
+tutor-profile.html
+bookings.html
+tutor-dashboard.html
+admin.html
 css/
-data/
 js/
+data/
+assets/
 docs/
+dost-sei/
 ```
 
-## Important
+## 2. Configure GitHub Pages
 
-Do not upload the private reference PDFs into the public repository.
-
-GitHub Pages repositories and their files are publicly accessible.
-
-## Updating tutor profiles
-
-Edit:
+Open:
 
 ```text
-data/tutors.js
+Repository → Settings → Pages
 ```
 
-Replace placeholder names, portraits, subjects, levels, bios, experience, availability, and rates only after verification.
-
-Place real tutor photos inside:
+Use:
 
 ```text
-assets/tutors/
+Source: Deploy from a branch
+Branch: main
+Folder: / (root)
 ```
 
-## Connecting the inquiry form
+Wait for the `pages build and deployment` workflow to receive a green check in the **Actions** tab.
 
-Edit:
+## 3. Verify the default Pages address first
+
+Before connecting the custom domain, confirm that the site and its CSS/JavaScript work at the GitHub Pages address.
+
+Test pages including:
+
+- homepage
+- login/signup
+- practice hubs
+- tutor directory
+- tutor onboarding
+- admin console
+
+## 4. Connect `tutodemy.net`
+
+In Namecheap:
 
 ```text
-js/config.js
+Domain List → tutodemy.net → Manage → Advanced DNS
 ```
 
-You may later add:
+For the root domain, use GitHub Pages' current apex A records. For `www`, use a CNAME pointing to the GitHub account Pages hostname, such as:
 
-- Google Form embed URL
-- Google Apps Script endpoint
-- Public contact email
-- Facebook page URL
+```text
+YOUR-GITHUB-USERNAME.github.io
+```
 
-The current form intentionally stores demo data only in the browser.
+Do not include `https://` or the repository path in the CNAME value.
 
-## Custom domain
+After the DNS records are saved, open:
 
-After GitHub Pages is working, add a domain through **Settings → Pages → Custom domain**. DNS records depend on the domain provider.
+```text
+GitHub repository → Settings → Pages → Custom domain
+```
 
-## Activating learner accounts
+Enter:
 
-Uploading to GitHub Pages publishes the account-ready front end, but login will remain in setup mode until Supabase is connected.
+```text
+tutodemy.net
+```
 
-After deployment:
+GitHub normally creates or updates the repository `CNAME` file. This package includes `CNAME-READY.txt` as a safe prepared copy; rename it to `CNAME` only when the DNS connection is ready.
 
-1. Run `docs/SUPABASE-SCHEMA.sql` in a Supabase project.
-2. Paste the public Project URL and publishable/anon key into `js/config.js`.
-3. Add the GitHub Pages `profile.html` and password-reset URLs to Supabase Auth redirect URLs.
-4. Optionally enable Google OAuth.
+Enable **Enforce HTTPS** after GitHub finishes issuing the certificate.
 
-See `docs/SUPABASE-SETUP-GUIDE.md` for the full procedure.
+## 5. Update authentication URLs
+
+After the custom domain works, set the Supabase Authentication Site URL to:
+
+```text
+https://tutodemy.net
+```
+
+Allow the required redirect destinations, including:
+
+```text
+https://tutodemy.net/
+https://tutodemy.net/profile.html
+https://tutodemy.net/auth.html
+https://tutodemy.net/auth.html?mode=reset
+https://tutodemy.net/tutor-onboarding.html
+https://tutodemy.net/tutor-dashboard.html
+https://tutodemy.net/bookings.html
+```
+
+Retain the old GitHub Pages URLs during testing, then remove unused addresses later.
+
+## 6. Install the Supabase database
+
+Fresh installation:
+
+```text
+docs/SUPABASE-COMPLETE-INSTALL.sql
+```
+
+Existing original account schema:
+
+```text
+docs/TUTOR-MARKETPLACE-UPGRADE.sql
+```
+
+Then add the first administrator to `admin_users` through the Supabase SQL Editor. Never implement administrator access using a password embedded in browser JavaScript.
+
+## 7. Test using separate accounts
+
+Use at least:
+
+- one learner/parent account
+- one tutor account
+- one administrator account
+
+Complete the whole flow before accepting real users:
+
+```text
+tutor registration
+→ application submission
+→ administrator review
+→ public listing
+→ learner booking request
+→ tutor acceptance
+→ administrator payment confirmation
+→ tutor delivery confirmation
+→ administrator completion
+→ learner review
+```

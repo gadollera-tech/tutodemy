@@ -1,41 +1,12 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Prototype privacy notice for TutoDemy learner accounts.">
-  <meta name="theme-color" content="#11156f">
-  <title>Privacy Notice | TutoDemy Learning PH</title>
-  <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css">
-  <script defer src="js/config.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="js/supabase-client.js"></script>
-  <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script>
-  <script defer src="data/taxonomy.js"></script>
-  <script defer src="js/main.js"></script>
-</head>
-<body data-page="privacy">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div id="site-header"></div>
-  <main id="main-content">
-    <section class="page-hero">
-      <div class="container"><span class="eyebrow">PROTOTYPE PRIVACY NOTICE</span><h1>Learner data should remain minimal, transparent, and protected.</h1><p>This starter notice describes the data handled by the supplied account integration. It should receive legal and operational review before a public launch.</p></div>
-    </section>
-    <section class="section">
-      <div class="container reader-layout">
-        <aside class="reader-sidebar"><span class="eyebrow">SECTIONS</span><a href="#collected">Data collected</a><a href="#purpose">Why it is used</a><a href="#storage">Where it is stored</a><a href="#choices">Learner choices</a><div class="reader-warning"><b>Not legal advice</b><p>Adapt this notice to the actual organization, vendors, retention policy, and Philippine legal requirements before launch.</p></div></aside>
-        <article class="reader-content privacy-content">
-          <section id="collected"><span class="eyebrow">DATA COLLECTED</span><h2>Account and learning information</h2><p>The starter account may store email address, full name, optional student level, target exam, optional school, optional avatar URL, completed attempt data, saved reviewers, one active exam session, and tutor inquiry details submitted by the learner.</p><p>The starter profile does not request birth date, home address, government ID, medical information, or payment information.</p></section>
-          <section id="purpose"><span class="eyebrow">PURPOSE</span><h2>Why the information is used</h2><p>The information supports account access, learner profile display, cross-device progress, exam resumption, dashboard analytics, saved reviewers, and tutor inquiry records. It should not be repurposed for advertising or unrelated profiling without clear notice and consent.</p></section>
-          <section id="storage"><span class="eyebrow">STORAGE</span><h2>Local browser and Supabase</h2><p>A local browser copy is used for resilience. When the Supabase integration is configured and the learner is logged in, selected data is also stored in the project's Supabase database. Row Level Security policies in the included schema restrict each authenticated learner to their own rows.</p><p>On a shared computer, learners should log out after use. Clearing browser data removes the local copy but does not automatically remove cloud records.</p></section>
-          <section id="choices"><span class="eyebrow">LEARNER CHOICES</span><h2>Access, export, correction, and deletion</h2><p>The profile page allows learners to edit profile fields and export their local data. A public launch should also provide a verified support channel for account deletion, cloud-data deletion, correction requests, and questions about retention.</p></section>
-        </article>
-      </div>
-    </section>
-  </main>
-  <div id="site-footer"></div>
-  <div class="toast" role="status" aria-live="polite"></div>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Privacy notice for TutoDemy learner, parent, tutor, and administrator accounts."><meta name="theme-color" content="#11156f">
+  <link rel="canonical" href="https://tutodemy.net/privacy.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Privacy Notice | TutoDemy Learning PH">
+  <meta property="og:description" content="Privacy notice for TutoDemy learner, parent, tutor, and administrator accounts.">
+  <meta property="og:url" content="https://tutodemy.net/privacy.html">
+  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
+  <meta name="twitter:card" content="summary_large_image"><title>Privacy Notice | TutoDemy Learning PH</title><link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="css/style.css"><script defer src="js/config.js"></script><script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="js/supabase-client.js"></script><script defer src="js/auth-core.js"></script><script defer src="js/cloud-sync.js"></script><script defer src="js/marketplace-api.js"></script><script defer src="js/main.js"></script></head>
+<body data-page="privacy"><a class="skip-link" href="#main-content">Skip to content</a><div id="site-header"></div><main id="main-content"><section class="page-hero"><div class="container"><span class="eyebrow">PRIVACY NOTICE</span><h1>Collect only what the learning and tutoring service needs.</h1><p>This notice describes the supplied TutoDemy data model. Update the support contact, legal entity, retention periods, and operational procedures before accepting live paid bookings.</p></div></section><section class="section"><div class="container reader-layout"><aside class="reader-sidebar"><span class="eyebrow">SECTIONS</span><a href="#learner-data">Learner and parent data</a><a href="#tutor-data">Tutor data</a><a href="#bookings">Bookings and payments</a><a href="#storage">Storage and access</a><a href="#rights">User choices</a><div class="reader-warning"><b>Private verification files</b><p>Government IDs and credential documents must never be placed in a public GitHub repository or public Storage bucket.</p></div></aside><article class="reader-content privacy-content"><section id="learner-data"><span class="eyebrow">LEARNER AND PARENT DATA</span><h2>Account and learning information</h2><p>The service may store email, full name, optional student level, target exam, school, avatar URL, practice attempts, saved reviewers, active exam sessions, tutor booking requests, learning goals, reviews, and support inquiries.</p></section><section id="tutor-data"><span class="eyebrow">TUTOR DATA</span><h2>Public profile and private verification</h2><p>Approved public tutor profiles may show display name, photo, biography, subjects, exam specializations, learner levels, teaching modes, general location, availability, education, credentials summary, experience, rate, ratings, and completed-session statistics.</p><p>Contact email, identification files, education documents, references, admin notes, payment references, and verification status are restricted to the tutor and authorized administrators through database and Storage access policies.</p></section><section id="bookings"><span class="eyebrow">BOOKINGS AND PAYMENT RECORDS</span><h2>Scheduling, status, and commission data</h2><p>Booking records may include the learner and tutor account IDs, proposed schedule, subject, learning goal, mode, general meeting details, rate snapshot, amount, payment-confirmation reference, status history, commission rate, platform commission, tutor net amount, and verified review.</p><p>The supplied website does not store card numbers or automatically process money. Do not place full bank-account credentials, wallet PINs, passwords, or unnecessary home-address details in booking notes.</p></section><section id="storage"><span class="eyebrow">STORAGE AND ACCESS</span><h2>Local browser, Supabase database, and Storage</h2><p>Learning progress may be retained in browser storage for resilience and synchronized to Supabase when the user is logged in. Row Level Security limits database access by user role and booking relationship. Tutor profile photos use a public avatar bucket; private verification files use a separate non-public bucket.</p></section><section id="rights"><span class="eyebrow">USER CHOICES</span><h2>Access, correction, export, and deletion</h2><p>Users may edit account and tutor-profile information allowed by their role. Learners can export local learning data. A public launch must provide a verified support channel for cloud-data access, correction, account deletion, tutor-record questions, review disputes, and retention requests.</p></section></article></div></section></main><div id="site-footer"></div><div class="toast" role="status" aria-live="polite"></div></body></html>

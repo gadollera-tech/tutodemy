@@ -57,7 +57,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       student_level: profile?.student_level || fallback.student_level || "",
       target_exam: profile?.target_exam || fallback.target_exam || "",
       school: profile?.school || "",
-      avatar_url: profile?.avatar_url || fallback.avatar_url || ""
+      avatar_url: profile?.avatar_url || fallback.avatar_url || "",
+      role: profile?.role || fallback.role || "learner"
     };
 
     Object.entries(values).forEach(([name, value]) => {
@@ -68,6 +69,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.querySelector("#account-heading").textContent = values.full_name ? `Hi, ${values.full_name.split(" ")[0]}!` : "My TutoDemy account";
     document.querySelector("#account-email").textContent = user.email || "Authenticated learner";
     document.querySelector("#account-avatar").textContent = initials(values.full_name);
+    const tutorRole = values.role === "tutor";
+    document.querySelector("#account-role-heading").textContent = tutorRole ? "Tutor account" : "Learner / Parent account";
+    document.querySelector("#account-role-description").textContent = tutorRole ? "Manage your tutor application, bookings, commission tier, and earnings." : "Book approved tutors and save learning progress.";
+    document.querySelector("#account-role-actions").innerHTML = tutorRole
+      ? `<a class="button full" href="tutor-dashboard.html">Open tutor dashboard</a><a class="button button-outline full" href="tutor-onboarding.html">Edit tutor profile</a><a class="button button-outline full" href="bookings.html">Bookings as learner</a>`
+      : `<a class="button full" href="bookings.html">My tutor bookings</a><a class="button button-outline full" href="tutor-onboarding.html">Apply as a tutor</a>`;
     cloudBadge.textContent = "Cloud connected";
     cloudBadge.classList.add("connected");
   }
@@ -149,7 +156,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       attempts: window.Tuto.storage.get("tutodemyHistory", []),
       savedReviewers: window.Tuto.getSavedReviewers(),
       activeSession: window.Tuto.storage.get("tutodemyActiveSession", null),
-      tutorInquiries: window.Tuto.storage.get("tutodemyTutorInquiries", [])
+      tutorInquiries: window.Tuto.storage.get("tutodemyTutorInquiries", []),
+      accountRole: document.querySelector("#account-role-heading")?.textContent || ""
     };
     const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);

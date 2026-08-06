@@ -1,31 +1,66 @@
+document.addEventListener("DOMContentLoaded", async () => {
+  await window.TutoMarketplace?.ready;
+  const api = window.TutoMarketplace;
+  const grid = document.querySelector("#tutor-grid");
+  const count = document.querySelector("#tutor-count");
+  const alert = document.querySelector("#marketplace-alert");
+  const search = document.querySelector("#tutor-search");
+  const subject = document.querySelector("#tutor-subject");
+  const mode = document.querySelector("#tutor-mode");
+  const province = document.querySelector("#tutor-province");
 
-document.addEventListener("DOMContentLoaded", async ()=>{
-  await window.TutoCloud?.ready;
-  const tutors=window.TUTODEMY_TUTORS;
-  const subject=document.querySelector("#tutor-subject"),level=document.querySelector("#tutor-level"),mode=document.querySelector("#tutor-mode"),grid=document.querySelector("#tutor-grid");
-  [...new Set(tutors.map(t=>t.subject))].sort().forEach(x=>subject.insertAdjacentHTML("beforeend",`<option>${x}</option>`));
-  [...new Set(tutors.flatMap(t=>t.levels))].sort().forEach(x=>level.insertAdjacentHTML("beforeend",`<option>${x}</option>`));
-  function render(){
-    const items=tutors.filter(t=>(subject.value==="all"||t.subject===subject.value)&&(level.value==="all"||t.levels.includes(level.value))&&(mode.value==="all"||t.mode.includes(mode.value)));
-    grid.innerHTML=items.map(t=>`<article class="tutor-card"><img src="${t.photo}" alt="${t.name} placeholder portrait"><div><small>${t.verified?"Verified":"Placeholder profile"}</small><h3>${t.name}</h3><p>${t.subject}</p><div class="tutor-tags"><span>${t.mode}</span>${t.levels.slice(0,2).map(x=>`<span>${x}</span>`).join("")}</div><a href="tutor-profile.html?id=${t.id}">View profile</a></div></article>`).join("")||`<div class="empty-state">No placeholder tutor matches the current filters.</div>`;
+  const commonSubjects = ["Mathematics","Physics","Chemistry","Biology","Science","English","Filipino","Reading Comprehension","Abstract Reasoning","UPCAT","DCAT","DOST-SEI","General Academic Support"];
+  commonSubjects.forEach(item => subject.insertAdjacentHTML("beforeend", `<option>${item}</option>`));
+
+  const esc = value => window.Tuto?.escape?.(value) || String(value || "");
+  const money = value => window.Tuto?.money?.(value) || `₱${Number(value || 0).toFixed(2)}`;
+
+  function card(tutor) {
+    const photo = api.publicAvatarUrl(tutor.profile_photo_path);
+    const rating = Number(tutor.average_rating || 0);
+    const location = [tutor.city, tutor.province].filter(Boolean).join(", ") || "Location available on request";
+    const modes = (tutor.teaching_modes || []).join(" • ");
+    const subjects = (tutor.subjects || []).slice(0, 4);
+    return `<article class="tutor-card marketplace-card">
+      <div class="tutor-photo-wrap"><img src="${esc(photo)}" alt="${esc(tutor.display_name)} profile photo"><span class="verified-badge">✓ Admin approved</span></div>
+      <div class="tutor-card-body">
+        <div class="tutor-rating"><b>${rating ? rating.toFixed(1) : "New"}</b><span>${rating ? "★" : "No reviews yet"} ${tutor.review_count ? `(${tutor.review_count})` : ""}</span></div>
+        <h3>${esc(tutor.display_name)}</h3>
+        <p class="tutor-headline">${esc(tutor.headline || "Academic tutor")}</p>
+        <div class="tutor-tags">${subjects.map(x => `<span>${esc(x)}</span>`).join("")}</div>
+        <dl class="tutor-facts"><div><dt>Mode</dt><dd>${esc(modes || "Contact tutor")}</dd></div><div><dt>Location</dt><dd>${esc(location)}</dd></div><div><dt>Rate</dt><dd>${money(tutor.hourly_rate)}/hour</dd></div></dl>
+        <a class="button full" href="tutor-profile.html?id=${encodeURIComponent(tutor.user_id)}">View tutor and request schedule</a>
+      </div>
+    </article>`;
   }
-  [subject,level,mode].forEach(el=>el.addEventListener("change",render));render();
 
-  const form=document.querySelector("#tutor-inquiry-form"),status=document.querySelector("#inquiry-status");
-  form.addEventListener("submit",e=>{
-    e.preventDefault();
-    const data=Object.fromEntries(new FormData(form).entries());
-    data.id=`inq-${Date.now()}`;data.submittedAt=new Date().toISOString();data.status="Demo only";
-    const inquiries=window.Tuto.storage.get("tutodemyTutorInquiries",[]);
-    inquiries.unshift(data);window.Tuto.storage.set("tutodemyTutorInquiries",inquiries.slice(0,30));
-    window.TutoCloud?.saveTutorInquiry?.(data).catch(error=>console.error("Tutor inquiry sync failed:",error));
-    if(window.TutoCloud?.isAvailable?.()){
-      status.textContent="Thank you! The inquiry was saved locally and queued for your TutoDemy account cloud record. It has not been emailed to a tutor yet.";
-    } else if(window.TUTODEMY_CONFIG.googleAppsScriptEndpoint){
-      status.textContent="The demo inquiry was saved locally. A live endpoint is configured, but submission is intentionally disabled in this static prototype.";
-    } else {
-      status.textContent="Thank you! The inquiry was saved on this device as a demonstration. Log in after account setup to sync it to the learner account.";
+  async function render() {
+    grid.innerHTML = `<div class="loading-state">Loading approved tutors…</div>`;
+    count.textContent = "Loading approved tutors…";
+    try {
+      if (!api?.isReady?.()) {
+        alert.hidden = false;
+        alert.innerHTML = `<b>Tutor Marketplace setup required.</b><span>${esc(api?.getSchemaMessage?.() || "Run the included Supabase marketplace upgrade.")}</span>`;
+        grid.innerHTML = `<div class="empty-state"><h3>The tutor directory will open after the Supabase marketplace schema is installed.</h3><p>Run <code>docs/TUTOR-MARKETPLACE-UPGRADE.sql</code>, then approve the first tutor application in the Admin Console.</p></div>`;
+        count.textContent = "Directory not connected yet";
+        return;
+      }
+      alert.hidden = true;
+      const tutors = await api.publicTutors({ subject: subject.value, mode: mode.value, province: province.value.trim() });
+      const term = search.value.trim().toLowerCase();
+      const filtered = term ? tutors.filter(t => [t.display_name,t.headline,t.city,t.province,...(t.subjects||[]),...(t.exam_specializations||[])].join(" ").toLowerCase().includes(term)) : tutors;
+      count.textContent = `${filtered.length} approved tutor${filtered.length === 1 ? "" : "s"} found`;
+      grid.innerHTML = filtered.map(card).join("") || `<div class="empty-state"><h3>No approved tutors match these filters yet.</h3><p>Try a broader subject, mode, or location search.</p></div>`;
+    } catch (error) {
+      alert.hidden = false;
+      alert.textContent = error.message || "The tutor directory could not be loaded.";
+      grid.innerHTML = "";
+      count.textContent = "Unable to load tutors";
     }
-    form.reset();window.Tuto.toast("Demo tutor inquiry saved locally.");
-  });
+  }
+
+  document.querySelector("#tutor-filter")?.addEventListener("click", render);
+  search?.addEventListener("input", () => clearTimeout(window.__tutorSearch) || (window.__tutorSearch = setTimeout(render, 250)));
+  [subject,mode].forEach(field => field?.addEventListener("change", render));
+  await render();
 });

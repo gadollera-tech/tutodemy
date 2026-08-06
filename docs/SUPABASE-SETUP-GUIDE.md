@@ -1,139 +1,144 @@
-# Activate TutoDemy Accounts and Cloud Progress
+# Supabase Setup Guide — TutoDemy Learning PH
 
-The website already contains the login, signup, profile, and cloud-sync code. It remains in local-only mode until a Supabase project is connected.
+This website uses a plain HTML/JavaScript front end with Supabase Auth, Database, Storage, and Row Level Security.
 
-## 1. Create a Supabase project
+## 1. Run the complete installer
 
-Create a new project in Supabase. Keep the database password private.
-
-## 2. Create the tables and security policies
-
-Open the Supabase SQL Editor and run:
+In Supabase:
 
 ```text
-docs/SUPABASE-SCHEMA.sql
+SQL Editor → New query
 ```
 
-This creates:
+Open and run:
 
 ```text
-profiles
-exam_attempts
-active_sessions
-saved_reviewers
-tutor_inquiries
+docs/SUPABASE-COMPLETE-INSTALL.sql
 ```
 
-It also enables Row Level Security so authenticated learners can access only rows associated with their own user ID.
+This installs:
 
-## 3. Add the public browser credentials
+- learner/parent and tutor account roles
+- cloud learning progress tables
+- tutor applications and public profiles
+- private tutor verification documents
+- availability schedules
+- booking requests
+- verified reviews
+- tutor commission ledger
+- admin-only approval and booking functions
+- public avatar and private document Storage buckets
+- Row Level Security policies
 
-In the Supabase project dashboard, copy:
+A successful run may show `Success. No rows returned`.
 
-- Project URL
-- Publishable key or legacy anon key
-
-Edit:
+If the original learner schema was already installed, you may run only:
 
 ```text
-js/config.js
+docs/TUTOR-MARKETPLACE-UPGRADE.sql
 ```
 
-Fill in:
+## 2. Create the administrator account
+
+1. Register a normal account through `auth.html`.
+2. Confirm its email and log in once.
+3. In the SQL Editor, run this after replacing the email:
+
+```sql
+insert into public.admin_users (user_id, note)
+select id, 'Primary TutoDemy administrator'
+from auth.users
+where email = 'YOUR_ADMIN_EMAIL@example.com'
+on conflict (user_id) do nothing;
+```
+
+Do not create a browser-visible admin password. Admin access is checked through the authenticated user ID and database policies.
+
+## 3. Browser configuration
+
+The supplied `js/config.js` already follows this structure:
 
 ```js
-supabaseUrl: "https://YOUR-PROJECT.supabase.co",
-supabaseAnonKey: "YOUR-PUBLIC-PUBLISHABLE-OR-ANON-KEY",
+window.TUTODEMY_CONFIG = {
+  siteName: "TutoDemy Learning PH",
+  supabaseUrl: "https://PROJECT_REF.supabase.co",
+  supabaseAnonKey: "sb_publishable_...",
+  googleOAuthEnabled: false,
+  publicEmail: "",
+  premiumPaymentsConnected: false,
+  aiConnected: false
+};
 ```
 
-The public browser key is designed to be used in the front end when Row Level Security is correctly configured.
+Only the **Project URL** and **publishable key** belong in browser code.
 
-**Never place a service_role key in GitHub or browser code.**
+Never place these in GitHub:
 
-## 4. Configure email authentication
+- `service_role` key
+- `sb_secret_...` key
+- database password
+- payment-provider secret keys
 
-In Supabase Authentication settings:
+## 4. Authentication URLs for tutodemy.net
 
-1. Enable email/password signups.
-2. Decide whether email confirmation is required.
-3. Add the deployed website URLs to the allowed redirect URLs.
-
-For GitHub Pages, add URLs in this form:
+In Supabase:
 
 ```text
-https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/profile.html
-https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/auth.html?mode=reset
+Authentication → URL Configuration
 ```
 
-Also add your custom domain versions later, if applicable.
+Site URL:
 
-## 5. Optional Google login
+```text
+https://tutodemy.net
+```
 
-In Supabase Authentication Providers:
+Allowed redirect URLs:
 
-1. Enable Google.
-2. Add the Google OAuth Client ID and Client Secret.
-3. Follow the callback URL shown by Supabase when configuring the Google Cloud OAuth client.
-4. Add your site redirect URLs in Supabase.
-5. Change this in `js/config.js`:
+```text
+https://tutodemy.net/**
+https://www.tutodemy.net/**
+```
+
+Keep the old GitHub Pages address temporarily while testing.
+
+## 5. Email and optional Google login
+
+Email/password:
+
+```text
+Authentication → Providers → Email
+```
+
+Enable signups and decide whether email confirmation is required.
+
+For Google, configure the provider and set in `js/config.js`:
 
 ```js
-googleOAuthEnabled: true,
+googleOAuthEnabled: true
 ```
 
-## 6. Test locally
+Use the Supabase callback URI shown by the Google provider page.
 
-Run:
+## 6. Test the tutor workflow
 
-```bash
-python -m http.server 8000
-```
+1. Create a tutor account.
+2. Save a tutor draft.
+3. Upload a profile photo and private document.
+4. Submit the application.
+5. Log in with the admin account.
+6. Open `admin.html`.
+7. Review and approve the tutor.
+8. Confirm the profile appears on `tutoring.html`.
+9. Create a learner booking request.
+10. Accept it from `tutor-dashboard.html`.
+11. Confirm payment in `admin.html`.
+12. Mark the session delivered from the tutor dashboard.
+13. Complete it in the admin console.
+14. Verify the commission ledger and learner review flow.
 
-Open:
+## 7. Current payment limitation
 
-```text
-http://localhost:8000/auth.html
-```
+The website does not automatically collect, split, or pay funds. The admin console records manual payment confirmation and calculates commission only after a paid session is delivered.
 
-Add these local redirect URLs in Supabase during testing:
-
-```text
-http://localhost:8000/profile.html
-http://localhost:8000/auth.html?mode=reset
-```
-
-## 7. Test the complete flow
-
-1. Create an account.
-2. Confirm the email if confirmation is enabled.
-3. Log in.
-4. Edit and save the learner profile.
-5. Complete a practice set.
-6. Save a reviewer.
-7. Start an exam without finishing it.
-8. Log in on another browser or device.
-9. Confirm the history, saved reviewer, and active exam appear.
-
-## What is synchronized
-
-- Learner profile
-- Completed attempt summaries and detailed result payloads
-- Saved reviewers
-- One active unfinished exam
-- Tutor inquiry submissions made while logged in
-
-## Local fallback
-
-The website continues saving a local browser copy. After a learner first logs in, anonymous local progress on that browser is moved into that learner's account-scoped local storage and uploaded to the cloud.
-
-On shared computers, learners should log out after use.
-
-## Not included yet
-
-- Admin dashboard
-- Secure paid subscriptions
-- Parent-linked accounts
-- Teacher or tutor roles
-- Account deletion workflow
-- Avatar file upload to Supabase Storage
-- Email marketing consent
+Connect a compliant marketplace payment provider before enabling automatic checkout or tutor payouts.

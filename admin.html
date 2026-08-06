@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="TutoDemy administrator console for tutor approval and booking completion.">
+  <meta name="theme-color" content="#11156f">
+  <meta name="robots" content="noindex,nofollow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Admin Console | TutoDemy Learning PH">
+  <meta property="og:description" content="TutoDemy administrator console for tutor approval and booking completion.">
+  <meta property="og:url" content="https://tutodemy.net/admin.html">
+  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Admin Console | TutoDemy Learning PH</title>
+  <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-client.js"></script>
+  <script defer src="js/auth-core.js"></script>
+  <script defer src="js/cloud-sync.js"></script>
+  <script defer src="js/marketplace-api.js"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/admin.js"></script>
+</head>
+<body data-page="admin">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div id="site-header"></div>
+  <main id="main-content">
+    <section class="page-hero admin-hero">
+      <div class="container page-hero-grid">
+        <div><span class="eyebrow light">SECURE ADMIN CONSOLE</span><h1>Approve tutors and close completed bookings.</h1><p>Admin access is enforced through Supabase Row Level Security and checked database functions—not by a browser-only password.</p></div>
+        <div class="admin-security-card"><b>Administrator setup</b><p>Create your normal account first, then add its user ID to <code>public.admin_users</code> using the SQL instruction in the marketplace upgrade file.</p></div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="marketplace-alert" id="admin-alert" hidden></div>
+        <div id="admin-content" hidden>
+          <div class="admin-tabs"><button class="active" data-admin-tab="tutors">Tutor applications</button><button data-admin-tab="bookings">Bookings and payments</button></div>
+          <section id="admin-tutors-panel" class="admin-panel active"><div class="section-heading"><span class="eyebrow">TUTOR REVIEW</span><h2>Applications and public-profile status</h2></div><div class="admin-list" id="admin-tutor-list"></div></section>
+          <section id="admin-bookings-panel" class="admin-panel"><div class="section-heading"><span class="eyebrow">BOOKING OPERATIONS</span><h2>Manual payment confirmation and completion</h2><p>Automatic payment collection and payout are not connected. Confirm only transactions verified through your actual operational process.</p></div><div class="admin-list" id="admin-booking-list"></div></section>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
