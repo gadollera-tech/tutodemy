@@ -15,3 +15,9 @@ Full instructions:
 docs/SUPABASE-SETUP-GUIDE.md
 
 NEVER paste a service_role key into js/config.js or GitHub.
+
+
+UPDATED COMPLETE WEBSITE:
+- DOST-SEI landing page: dost-sei.html
+- Complete practice builder: dost-sei/qbank-preview.html
+- DOST attempts currently save locally in the browser.

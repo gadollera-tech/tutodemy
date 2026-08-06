@@ -1,8 +1,6 @@
-# TutoDemy Learning PH — Consolidated Static Website
+# TutoDemy Learning PH — Complete Website with DOST-SEI Final Bank
 
-Open `index.html` to view the website. Use a local HTTP server when testing signup, login, OAuth, or password-reset redirects.
-
-For the most reliable local test:
+Open `index.html` to view the full website. For authentication, password-reset links, and reliable local testing, use an HTTP server:
 
 ```bash
 python -m http.server 8000
@@ -14,63 +12,70 @@ Then open:
 http://localhost:8000
 ```
 
-## Included
+## Included in the whole website
 
-- Branded responsive homepage
-- Local learner dashboard
-- UPCAT / General CET practice hub
-- 880-question prototype bank:
-  - 220 Mathematics
-  - 220 Language & Reading
-  - 220 Science
-  - 220 Reasoning
-- 20, 50, 100, 200, and custom item sets
+- Responsive TutoDemy homepage and navigation
+- Email/password account pages and learner profiles
+- Supabase-ready cloud synchronization for the standard CET practice engine
+- UPCAT / General CET practice hub with **880 original prototype questions**
+- Complete DOST-SEI-style preparation module with **1,700 original prototype questions**
+- **2,580 total original prototype questions** across the two practice systems
 - Practice, Timed Practice, and Mock Exam modes
-- Random question and answer-choice ordering
-- Countdown timer, warnings, and automatic submission
-- Question navigator and flag-for-review
-- Results by domain, time used, and accuracy
-- Retry-incorrect workflow
+- Dedicated strict 200-item DOST-SEI training mock
+- Original reading passages, tables, graphs, spatial figures, and mechanical diagrams
 - Reviewer library
-- Tutor directory with placeholder faces and names
-- Tutor profile pages
-- Tutor inquiry form demonstration
-- Free / Pro local preview
+- Tutor directory and inquiry demonstration
+- Free / Premium prototype labels
 - Source and copyright policy
-- GitHub Pages deployment guide
+- GitHub Pages and Supabase setup documentation
 
-## Accounts and cloud progress
+## DOST-SEI final subject totals
 
-The website now includes ready-to-connect Supabase integration for:
+- Verbal Reasoning: 200
+- Non-Verbal Reasoning: 250
+- English: 200
+- Biology: 150
+- Chemistry: 150
+- Physics: 150
+- Earth Science: 100
+- Mathematics: 300
+- Mechanical-Technical: 200
+- **Total: 1,700**
 
-- Email/password signup and login
-- Optional Google OAuth
-- Learner profiles
-- Cloud-synced attempt history
-- Saved reviewers
-- One unfinished active exam
-- Tutor inquiry records
-- Account-scoped local storage and JSON data export
+Open `dost-sei.html` from the main website, or launch `dost-sei/qbank-preview.html` directly.
 
-Run `docs/SUPABASE-SCHEMA.sql`, then add the public Project URL and publishable/anon key to `js/config.js`. Full instructions are in `docs/SUPABASE-SETUP-GUIDE.md`.
+## Supabase configuration
 
-When Supabase is not configured or the learner is logged out, the site continues using browser `localStorage`.
+`js/config.js` already contains the public project URL and public publishable key supplied for the TutoDemy Supabase project.
 
-## Remaining prototype limitations
+You still need to:
 
-The following are not connected yet:
+1. Run `docs/SUPABASE-SCHEMA.sql` in the Supabase SQL Editor.
+2. Configure the correct GitHub Pages Site URL and redirect URLs in Supabase Authentication.
+3. Keep Email confirmation enabled if confirmation is required.
 
-- Secure Premium access
+Never place a database password, `service_role`, or `sb_secret_...` key in the website.
+
+## Current synchronization scope
+
+Cloud synchronization currently covers the standard CET attempt history, one active CET session, saved reviewers, learner profiles, and tutor inquiries.
+
+The dedicated DOST-SEI module currently stores its active attempt and recent history in browser `localStorage`. DOST cross-device cloud synchronization remains a later integration step.
+
+## Prototype limitations
+
+The following are not implemented as secure production services:
+
+- Secure paid Premium entitlement
 - Payment processing
 - Real tutor scheduling
-- Admin dashboard
-- Automated content publishing
+- Admin content dashboard
+- Automated publishing
 - AI integration
-- Self-service account deletion
-- Parent, tutor, and administrator roles
+- DOST attempt cloud synchronization
 
-## Important content notice
+## Content notice
 
-The uploaded commercial modules, compiled question banks, readings, books, and abstract-reasoning test are not included in this website package.
+Uploaded commercial modules, official-style primers, compiled question banks, books, and review files are not included in this website package.
 
-The public bank contains original prototype questions, original passages, and original visual patterns. All educational content is marked for human review before public launch.
+The public package contains original prototype questions and visuals. All educational items remain marked for qualified human review before public release.

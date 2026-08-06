@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     ["index.html","Home","home"],
     ["dashboard.html","Dashboard","dashboard"],
     ["exams.html","Practice Hub","exams"],
+    ["dost-sei.html","DOST-SEI","dost"],
     ["reviewers.html","Reviewers","reviewers"],
     ["tutoring.html","Tutor Connect","tutoring"],
     ["pricing.html","Premium","pricing"],
@@ -35,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <p>A tutoring, academic-support, and entrance-exam preparation platform for Filipino learners.</p>
           <div class="footer-badges"><span>Original questions</span><span>Optional cloud sync</span><span>Human review required</span></div>
         </div>
-        <div><h3>Practice</h3><a href="exams.html">Exam hub</a><a href="practice.html">Set builder</a><a href="dashboard.html">Dashboard</a></div>
+        <div><h3>Practice</h3><a href="exams.html">CET exam hub</a><a href="practice.html">CET set builder</a><a href="dost-sei.html">DOST-SEI preparation</a><a href="dashboard.html">Dashboard</a></div>
         <div><h3>Account</h3><a href="auth.html">Log in or sign up</a><a href="profile.html">Learner profile</a><a href="docs/SUPABASE-SETUP-GUIDE.md">Account setup guide</a><a href="privacy.html">Privacy notice</a></div>
         <div><h3>Learn</h3><a href="reviewers.html">Reviewers</a><a href="tutoring.html">Tutor Connect</a><a href="resources.html">Source policy</a></div>
         <div><h3>Project</h3><a href="pricing.html">Premium preview</a><a href="about.html">About</a><a href="docs/GITHUB-UPLOAD-GUIDE.md">GitHub guide</a></div>

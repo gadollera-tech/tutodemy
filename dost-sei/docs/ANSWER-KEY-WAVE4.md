@@ -1,0 +1,530 @@
+# DOST-SEI Wave 4 Answer Key
+
+> Original TutoDemy prototype content. Qualified human review is still required.
+
+## Verbal Reasoning
+
+- **DOST-W4-001 — A**: A thermometer measures temperature; a barometer measures pressure.
+- **DOST-W4-002 — B**: A blueprint guides construction of a building; a score guides performance of a symphony.
+- **DOST-W4-003 — C**: A seed can develop into a plant; an egg can develop into a bird.
+- **DOST-W4-004 — D**: A filter blocks impurities; a checkpoint blocks unauthorized access.
+- **DOST-W4-005 — A**: An archive stores records; a herbarium stores preserved plant specimens.
+- **DOST-W4-006 — B**: A compass indicates direction; a calendar indicates date.
+- **DOST-W4-007 — C**: A vaccine develops immunity; practice develops skill.
+- **DOST-W4-008 — D**: Erosion wears away rock; corrosion degrades metal.
+- **DOST-W4-009 — A**: N→L, O→M, T→R, and E→C, so NOTE becomes LMRC.
+- **DOST-W4-010 — B**: PLANT reversed is TNALP; changing the first T to U gives UNALP.
+- **DOST-W4-011 — C**: C stays C, A→B, B stays B, L→M, and E stays E, producing CBBME.
+- **DOST-W4-012 — D**: 19=S, 15=O, 12=L, 1=A, and 18=R.
+- **DOST-W4-013 — A**: Moving the final D to the front gives DCLOU.
+- **DOST-W4-014 — B**: A→E and E→I, while T and P remain unchanged: TEPI.
+- **DOST-W4-015 — C**: D=4 and A=1, so the value is 5.
+- **DOST-W4-016 — D**: MA→AM, RK→KR, and ET→TE, producing AMKRTE.
+- **DOST-W4-017 — A**: The stated class condition applies to Lamp K.
+- **DOST-W4-018 — B**: Every member of Batch A satisfies the stated limit condition.
+- **DOST-W4-019 — C**: The contrapositive of the stated conditional is valid.
+- **DOST-W4-020 — D**: Keeping records is necessary for accreditation, but the premise does not say it is sufficient.
+- **DOST-W4-021 — A**: The coastal communities with elevated tanks are within the group having gravity-fed emergency water.
+- **DOST-W4-022 — B**: Within the trial, the two categories do not overlap.
+- **DOST-W4-023 — C**: By contraposition, failure to meet the required condition rules out reaching the final.
+- **DOST-W4-024 — D**: The low-cost sensors that were highly precise belong to the stable group.
+- **DOST-W4-025 — A**: An obstructed door contradicts the defining condition of every emergency exit.
+- **DOST-W4-026 — B**: The applicants who are officers received certificates.
+- **DOST-W4-027 — C**: The order is Eli, Faye, Gio, Hana.
+- **DOST-W4-028 — D**: The order is S > R > Q > P.
+- **DOST-W4-029 — A**: Moving east and then north places C northeast of A.
+- **DOST-W4-030 — B**: The order is Kara, Jessa, Lino, Mico.
+- **DOST-W4-031 — C**: The order is Z > Y > X > W.
+- **DOST-W4-032 — D**: The order is D, B, A, C.
+- **DOST-W4-033 — A**: K lies between H and J.
+- **DOST-W4-034 — B**: The vertical displacements cancel, leaving P east of N.
+- **DOST-W4-035 — C**: The order is A > B > C > D.
+- **DOST-W4-036 — D**: O > N > L > M.
+- **DOST-W4-037 — A**: A comparable control group directly tests the reminder effect.
+- **DOST-W4-038 — B**: Random assignment and before-after comparison best isolate the program.
+- **DOST-W4-039 — C**: Other household differences could confound the association.
+- **DOST-W4-040 — D**: The intervention can change behavior only if parking availability is a relevant barrier.
+- **DOST-W4-041 — A**: The limited evidence supports a qualified conclusion.
+- **DOST-W4-042 — B**: The evidence directly documents the problem the signal addresses.
+- **DOST-W4-043 — C**: Random assignment and controlled conditions reduce confounding.
+- **DOST-W4-044 — D**: Equitable access requires alternatives to the online channel.
+- **DOST-W4-045 — A**: The matched energy comparison directly supports the claim.
+- **DOST-W4-046 — B**: Completers may differ systematically from those who dropped out.
+- **DOST-W4-047 — C**: The project retained its benefit while addressing a discovered limitation.
+- **DOST-W4-048 — D**: The values agreed with one another but not with the accepted value.
+- **DOST-W4-049 — A**: The pilot matches the observed pattern of demand.
+- **DOST-W4-050 — B**: A changing external factor prevents a simple one-cause conclusion.
+- **DOST-W4-051 — C**: The final design optimizes more than speed.
+- **DOST-W4-052 — D**: Different mounting conditions could create artificial differences.
+- **DOST-W4-053 — A**: Supplier composition could explain the observed variation.
+- **DOST-W4-054 — B**: A fair comparison requires equal loads.
+- **DOST-W4-055 — C**: Flooding can reflect both topography and infrastructure.
+
+## Non-Verbal Reasoning
+
+- **DOST-W4-056 — D**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
+- **DOST-W4-057 — A**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
+- **DOST-W4-058 — B**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
+- **DOST-W4-059 — C**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
+- **DOST-W4-060 — D**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
+- **DOST-W4-061 — A**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
+- **DOST-W4-062 — B**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
+- **DOST-W4-063 — C**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
+- **DOST-W4-064 — D**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
+- **DOST-W4-065 — A**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
+- **DOST-W4-066 — B**: Each step adds one side, rotates the figure, alternates shading, and advances the marker.
+- **DOST-W4-067 — C**: Each step adds one side, rotates the figure, alternates shading, and advances the marker.
+- **DOST-W4-068 — D**: Each step adds one side, rotates the figure, alternates shading, and advances the marker.
+- **DOST-W4-069 — A**: Each step adds one side, rotates the figure, alternates shading, and advances the marker.
+- **DOST-W4-070 — B**: Each step adds one side, rotates the figure, alternates shading, and advances the marker.
+- **DOST-W4-071 — C**: The same side-count, line-count, rotation, and fill progression occurs across rows and down columns.
+- **DOST-W4-072 — D**: The same side-count, line-count, rotation, and fill progression occurs across rows and down columns.
+- **DOST-W4-073 — A**: The same side-count, line-count, rotation, and fill progression occurs across rows and down columns.
+- **DOST-W4-074 — B**: The same side-count, line-count, rotation, and fill progression occurs across rows and down columns.
+- **DOST-W4-075 — C**: The same side-count, line-count, rotation, and fill progression occurs across rows and down columns.
+- **DOST-W4-076 — D**: Three options preserve the same marker-to-body relationship under rotation; one changes it.
+- **DOST-W4-077 — A**: Three options preserve the same marker-to-body relationship under rotation; one changes it.
+- **DOST-W4-078 — B**: Three options preserve the same marker-to-body relationship under rotation; one changes it.
+- **DOST-W4-079 — C**: Three options preserve the same marker-to-body relationship under rotation; one changes it.
+- **DOST-W4-080 — D**: Three options preserve the same marker-to-body relationship under rotation; one changes it.
+- **DOST-W4-081 — A**: Three options preserve the same marker-to-body relationship under rotation; one changes it.
+- **DOST-W4-082 — B**: Three options preserve the same marker-to-body relationship under rotation; one changes it.
+- **DOST-W4-083 — C**: Three options preserve the same marker-to-body relationship under rotation; one changes it.
+- **DOST-W4-084 — D**: Each unfolded crease reflects every existing hole across that fold line.
+- **DOST-W4-085 — A**: Each unfolded crease reflects every existing hole across that fold line.
+- **DOST-W4-086 — B**: Each unfolded crease reflects every existing hole across that fold line.
+- **DOST-W4-087 — C**: Each unfolded crease reflects every existing hole across that fold line.
+- **DOST-W4-088 — D**: Each unfolded crease reflects every existing hole across that fold line.
+- **DOST-W4-089 — A**: Each unfolded crease reflects every existing hole across that fold line.
+- **DOST-W4-090 — B**: Each unfolded crease reflects every existing hole across that fold line.
+- **DOST-W4-091 — C**: Each unfolded crease reflects every existing hole across that fold line.
+- **DOST-W4-092 — D**: Folding the valid net places face G opposite face I.
+- **DOST-W4-093 — A**: Folding the valid net places face G opposite face J.
+- **DOST-W4-094 — B**: Folding the valid net places face H opposite face K.
+- **DOST-W4-095 — C**: Folding the valid net places face I opposite face L.
+- **DOST-W4-096 — D**: A proper cube rotation cyclically permutes the visible faces without reversing their order.
+- **DOST-W4-097 — A**: A proper cube rotation cyclically permutes the visible faces without reversing their order.
+- **DOST-W4-098 — B**: A proper cube rotation cyclically permutes the visible faces without reversing their order.
+- **DOST-W4-099 — C**: A proper cube rotation cyclically permutes the visible faces without reversing their order.
+- **DOST-W4-100 — D**: The column heights add to 11.
+- **DOST-W4-101 — A**: The column heights add to 12.
+- **DOST-W4-102 — B**: The column heights add to 16.
+- **DOST-W4-103 — C**: The column heights add to 13.
+- **DOST-W4-104 — D**: The column heights add to 12.
+- **DOST-W4-105 — A**: The column heights add to 12.
+- **DOST-W4-106 — B**: The column heights add to 12.
+- **DOST-W4-107 — C**: The column heights add to 18.
+- **DOST-W4-108 — D**: The boundaries and total areas allow the pieces to form a larger parallelogram.
+- **DOST-W4-109 — A**: The boundaries and total areas allow the pieces to form a square.
+- **DOST-W4-110 — B**: The boundaries and total areas allow the pieces to form a semicircle.
+- **DOST-W4-111 — C**: The boundaries and total areas allow the pieces to form a larger trapezoid.
+- **DOST-W4-112 — D**: The boundaries and total areas allow the pieces to form a larger rectangle.
+- **DOST-W4-113 — A**: The boundaries and total areas allow the pieces to form a cube net.
+- **DOST-W4-114 — B**: The route terminates at (4, 3).
+- **DOST-W4-115 — C**: The route terminates at (1, 2).
+- **DOST-W4-116 — D**: The route terminates at (5, 2).
+- **DOST-W4-117 — A**: The route terminates at (3, 3).
+- **DOST-W4-118 — B**: The route terminates at (3, 3).
+- **DOST-W4-119 — C**: The route terminates at (3, 3).
+- **DOST-W4-120 — D**: The correct option preserves all line segments, junctions, directions, and endpoints despite extra surrounding lines.
+- **DOST-W4-121 — A**: The correct option preserves all line segments, junctions, directions, and endpoints despite extra surrounding lines.
+- **DOST-W4-122 — B**: The correct option preserves all line segments, junctions, directions, and endpoints despite extra surrounding lines.
+- **DOST-W4-123 — C**: The correct option preserves all line segments, junctions, directions, and endpoints despite extra surrounding lines.
+- **DOST-W4-124 — D**: The correct option preserves all line segments, junctions, directions, and endpoints despite extra surrounding lines.
+- **DOST-W4-125 — A**: The correct option preserves all line segments, junctions, directions, and endpoints despite extra surrounding lines.
+
+## English
+
+- **DOST-W4-126 — B**: The subject is the singular noun 'set,' so the verb should be 'was inspected.'
+- **DOST-W4-127 — C**: With either...or, the verb agrees with the nearer plural subject 'volunteers,' so 'are responsible' is needed.
+- **DOST-W4-128 — D**: The series should be parallel: measuring, recording, and sending.
+- **DOST-W4-129 — A**: The perfect future uses 'will have finished.'
+- **DOST-W4-130 — B**: The phrase is redundant; use 'the reason the schedule changed' or 'why the schedule changed.'
+- **DOST-W4-131 — C**: The introductory phrase should modify the team, not the conclusion.
+- **DOST-W4-132 — D**: The subject 'Each' is singular, so 'was labeled' is correct.
+- **DOST-W4-133 — A**: Use the simple present in the if-clause: 'If the backup battery charges.'
+- **DOST-W4-134 — B**: The method is itself a process, so the phrase should be 'than any other process.'
+- **DOST-W4-135 — C**: After 'recommended that,' formal English uses the base form: 'be revised.'
+- **DOST-W4-136 — D**: Ambiguous means unclear or capable of multiple interpretations.
+- **DOST-W4-137 — A**: Negligible describes something so small that it can be ignored.
+- **DOST-W4-138 — B**: A robust method performs reliably despite reasonable variation.
+- **DOST-W4-139 — C**: Explicit means directly stated; implicit means suggested rather than stated.
+- **DOST-W4-140 — D**: An anomalous result differs from what is expected.
+- **DOST-W4-141 — A**: Coherent ideas fit together logically.
+- **DOST-W4-142 — B**: Feasible means capable of being done successfully.
+- **DOST-W4-143 — C**: A conservative estimate avoids exaggerating the result.
+- **DOST-W4-144 — D**: Intermittent events stop and start rather than continuing.
+- **DOST-W4-145 — A**: Independent data substantiated the conclusion by supporting it.
+- **DOST-W4-146 — B**: The original states a necessary condition, not a sufficient one.
+- **DOST-W4-147 — C**: The revision removes redundancy while preserving the cause.
+- **DOST-W4-148 — D**: 'May have resulted' and 'could have been caused' express the same uncertainty.
+- **DOST-W4-149 — A**: The relationship is contrast.
+- **DOST-W4-150 — B**: 'Collaborated' already implies working together, and 'shared' is unnecessary.
+- **DOST-W4-151 — C**: The contrapositive of 'if not calibrated, then not trustworthy' is valid.
+- **DOST-W4-152 — D**: All three items use the same base verb form.
+- **DOST-W4-153 — A**: Naming Luis identifies the person at the laboratory.
+- **DOST-W4-154 — B**: The second sentence contrasts success in strength with a weight limitation.
+- **DOST-W4-155 — C**: 'Few' means a small number, not zero.
+- **DOST-W4-156 — D**: The topic is divided into categories and illustrated.
+- **DOST-W4-157 — A**: The paragraph traces a chain of causes and effects.
+- **DOST-W4-158 — B**: The sentence restates the recommendation and its purpose.
+- **DOST-W4-159 — C**: It presents ordered procedural steps.
+- **DOST-W4-160 — D**: Matched travel-time data directly test congestion.
+- **DOST-W4-161 — A**: The gardening detail is unrelated.
+- **DOST-W4-162 — B**: It presents a problem, explains a cause, and offers a solution.
+- **DOST-W4-163 — C**: The same criteria are applied to two alternatives.
+- **DOST-W4-164 — D**: It states a clear controlling idea with several supportable strategies.
+- **DOST-W4-165 — A**: The paragraph moves from a broad pattern to a meaningful exception.
+- **DOST-W4-166 — B**: Standardized placement reduced the extreme difference.
+- **DOST-W4-167 — C**: Placement increased heating at the sensor location.
+- **DOST-W4-168 — D**: The passage says a smaller site difference remained.
+- **DOST-W4-169 — A**: Training and upkeep reduced damage and injuries.
+- **DOST-W4-170 — B**: The program accepted a small slowdown for better outcomes.
+- **DOST-W4-171 — C**: The final sentence explicitly links success to access, guidance, and upkeep.
+- **DOST-W4-172 — D**: The temperature difference appeared in sunny afternoons, not at night.
+- **DOST-W4-173 — A**: Wider adoption requires information beyond temperature.
+- **DOST-W4-174 — B**: They avoided overgeneralizing.
+- **DOST-W4-175 — C**: The passage lists these conditions.
+- **DOST-W4-176 — D**: The conclusion is conditional rather than absolute.
+- **DOST-W4-177 — A**: The passage identifies low reuse and resource-intensive handling as limiting factors.
+- **DOST-W4-178 — B**: The direct climb created practical and environmental problems.
+- **DOST-W4-179 — C**: Several criteria mattered more than distance alone.
+- **DOST-W4-180 — D**: The selected route reduced construction and erosion challenges.
+
+## Biology
+
+- **DOST-W4-181 — A**: A transport protein assists passive movement down the concentration gradient.
+- **DOST-W4-182 — B**: The Golgi apparatus processes and sorts proteins into vesicles.
+- **DOST-W4-183 — C**: Volume and metabolic demand grow faster than membrane surface area.
+- **DOST-W4-184 — D**: Spindle microtubules attach to chromosomes and separate chromatids.
+- **DOST-W4-185 — A**: A hypertonic solution draws water out of the cell by osmosis.
+- **DOST-W4-186 — B**: The greatest product amount, 18 mg, occurred at 40°C.
+- **DOST-W4-187 — C**: High temperature can disrupt the bonds maintaining enzyme structure.
+- **DOST-W4-188 — D**: The enzymes of glycolysis operate in the cytosol.
+- **DOST-W4-189 — A**: Cells couple ATP breakdown to energy-requiring processes.
+- **DOST-W4-190 — B**: Most enzymes and antibodies are proteins.
+- **DOST-W4-191 — C**: RNA polymerase reads a DNA template strand.
+- **DOST-W4-192 — D**: Because of genetic-code redundancy, some substitutions do not alter amino acid sequence.
+- **DOST-W4-193 — A**: The genotypes are AA, Aa, Aa, and aa.
+- **DOST-W4-194 — B**: Crossing over is less likely to occur between nearby loci.
+- **DOST-W4-195 — C**: Epigenetic marks can influence whether genes are active.
+- **DOST-W4-196 — D**: A sudden population reduction can cause random genetic drift.
+- **DOST-W4-197 — A**: Both extremes are favored over the intermediate phenotype.
+- **DOST-W4-198 — B**: Homologous structures retain an inherited underlying pattern.
+- **DOST-W4-199 — C**: The model assumes large size, random mating, and no selection, migration, or mutation.
+- **DOST-W4-200 — D**: Diversification into distinct niches is adaptive radiation.
+- **DOST-W4-201 — A**: Growth slows and the population stabilizes near 275–278.
+- **DOST-W4-202 — B**: The population levels near 275–278 individuals.
+- **DOST-W4-203 — C**: NPP is the producer energy available for growth and consumers after respiration.
+- **DOST-W4-204 — D**: Substantial niche overlap creates competition when the resource is limiting.
+- **DOST-W4-205 — A**: Native vegetation can reduce erosion and increase infiltration.
+- **DOST-W4-206 — B**: The right ventricle pumps deoxygenated blood toward the lungs.
+- **DOST-W4-207 — C**: More water is reabsorbed from the filtrate when ADH is high.
+- **DOST-W4-208 — D**: Memory lymphocytes respond rapidly to a familiar antigen.
+- **DOST-W4-209 — A**: Pepsin functions in the acidic stomach environment.
+- **DOST-W4-210 — B**: Glucagon promotes glycogen breakdown and glucose release.
+- **DOST-W4-211 — C**: Evaporation from leaves creates tension transmitted through cohesive water columns.
+- **DOST-W4-212 — D**: Reduced guard-cell turgor closes the pore and reduces water loss.
+- **DOST-W4-213 — A**: Many flowering and dormancy responses depend on photoperiod.
+- **DOST-W4-214 — B**: One sperm fertilizes the egg; another contributes to endosperm formation.
+- **DOST-W4-215 — C**: Nitrogen is a component of proteins and nucleic acids.
+- **DOST-W4-216 — D**: Random assignment reduces systematic group differences.
+- **DOST-W4-217 — A**: Sunlight differs with treatment and can affect growth independently.
+- **DOST-W4-218 — B**: Error bars display uncertainty but do not alone provide a universal significance rule.
+- **DOST-W4-219 — C**: The tank, not each organism, may be the independent experimental unit.
+- **DOST-W4-220 — D**: Daily hormonal rhythms could otherwise confound group comparisons.
+
+## Chemistry
+
+- **DOST-W4-221 — A**: Neutrons=mass number−atomic number=37−17=20.
+- **DOST-W4-222 — B**: A 3+ charge results from losing three electrons.
+- **DOST-W4-223 — C**: An orbital can contain two electrons with opposite spins.
+- **DOST-W4-224 — D**: Greater effective nuclear attraction pulls valence electrons closer.
+- **DOST-W4-225 — A**: One liter equals 1,000 mL, so 2.5 L=2,500 mL.
+- **DOST-W4-226 — B**: Chlorine has seven valence electrons and gains one to complete an octet.
+- **DOST-W4-227 — C**: Four electron regions maximize separation in a tetrahedral arrangement.
+- **DOST-W4-228 — D**: Molecular polarity depends on vector addition of bond dipoles.
+- **DOST-W4-229 — A**: Temporary electron fluctuations occur in all particles.
+- **DOST-W4-230 — B**: Stronger intermolecular attractions require more energy to separate molecules.
+- **DOST-W4-231 — C**: Two Al³⁺ ions and three O²⁻ ions give total charges +6 and −6.
+- **DOST-W4-232 — D**: Three oxide ions total −6, so two iron ions total +6 and each is Fe³⁺.
+- **DOST-W4-233 — A**: Aqueous HCl is hydrochloric acid.
+- **DOST-W4-234 — B**: The prefix penta- indicates five chlorine atoms.
+- **DOST-W4-235 — C**: The hydrate contains five waters of crystallization per CuSO4 unit.
+- **DOST-W4-236 — D**: The products contain four oxygen atoms, requiring 2 O2.
+- **DOST-W4-237 — A**: 6 mol H2×(2 mol NH3/3 mol H2)=4 mol NH3.
+- **DOST-W4-238 — B**: Moles=mass/molar mass=44/44=1.
+- **DOST-W4-239 — C**: The reactants combine 1:1, so the smaller amount, Cl2, is limiting.
+- **DOST-W4-240 — D**: Oxygen contributes 16 of 18 g/mol: 16/18×100≈88.9%.
+- **DOST-W4-241 — A**: M=0.75/1.5=0.50 M.
+- **DOST-W4-242 — B**: M1V1=M2V2, so V2=3.0×50/0.75=200 mL.
+- **DOST-W4-243 — C**: A three-unit pH difference corresponds to 10³=1,000 times.
+- **DOST-W4-244 — D**: Acid strength concerns extent of ionization, not amount present.
+- **DOST-W4-245 — A**: Mean=(24.8+25.1+25.0)/3=24.97 mL≈25.0 mL.
+- **DOST-W4-246 — B**: Volume is proportional to amount of gas under these conditions.
+- **DOST-W4-247 — C**: V2=V1T2/T1=2.0×450/300=3.0 L.
+- **DOST-W4-248 — D**: Heat release means the system loses enthalpy, so ΔH is negative.
+- **DOST-W4-249 — A**: Bond formation lowers potential energy and releases energy.
+- **DOST-W4-250 — B**: ΔT=Q/(mc)=1600/(200×2)=4°C.
+- **DOST-W4-251 — C**: Microscopic reactions continue at equal rates, keeping concentrations constant.
+- **DOST-W4-252 — D**: The table shows a rise from 50 to 68.
+- **DOST-W4-253 — A**: Removing product creates a stress relieved by more forward reaction.
+- **DOST-W4-254 — B**: A first-order dependence gives rate∝[A].
+- **DOST-W4-255 — C**: The alternative pathway has a lower barrier but the same endpoints.
+- **DOST-W4-256 — D**: Different partitioning causes different travel distances.
+- **DOST-W4-257 — A**: Eye-level reading of the lower meniscus reduces parallax error.
+- **DOST-W4-258 — B**: The values differ by only 0.3 mL across trials.
+- **DOST-W4-259 — C**: A fixed offset remains after averaging.
+- **DOST-W4-260 — D**: Unexpected boiling or splashing could project material from the opening.
+
+## Physics
+
+- **DOST-W4-261 — A**: Displacement includes both magnitude and direction.
+- **DOST-W4-262 — B**: Position changes from 0 m to 10 m in 2 s, giving 5 m/s.
+- **DOST-W4-263 — C**: Position is constant from 2 to 5 s, so velocity is zero.
+- **DOST-W4-264 — D**: a=(16−4)/6=2 m/s².
+- **DOST-W4-265 — A**: The vertical component momentarily becomes zero while horizontal motion continues.
+- **DOST-W4-266 — B**: a=F/m=20/5=4 m/s².
+- **DOST-W4-267 — C**: A normal force acts perpendicular to the contact surface.
+- **DOST-W4-268 — D**: The forces act on different objects and are equal and opposite.
+- **DOST-W4-269 — A**: ac=v²/r=36/2=18 m/s².
+- **DOST-W4-270 — B**: Static friction adjusts as needed until its limiting value is reached.
+- **DOST-W4-271 — C**: K=½mv²=0.5×2×9=9 J.
+- **DOST-W4-272 — D**: P=W/t=1200/30=40 W.
+- **DOST-W4-273 — A**: p=mv=4×5=20 kg·m/s.
+- **DOST-W4-274 — B**: Internal forces cancel in pairs, leaving little net external impulse.
+- **DOST-W4-275 — C**: τ=rF=0.4×10=4 N·m.
+- **DOST-W4-276 — D**: For floating equilibrium, buoyant force equals weight.
+- **DOST-W4-277 — A**: P=F/A=50/0.01=5,000 Pa.
+- **DOST-W4-278 — B**: No net heat flows once temperatures are equal.
+- **DOST-W4-279 — C**: Mobile electrons and lattice vibrations transport energy.
+- **DOST-W4-280 — D**: Expansion force acting through distance transfers energy as work.
+- **DOST-W4-281 — A**: v=fλ=4×3=12 m/s.
+- **DOST-W4-282 — B**: Wave energy spreads over an expanding spherical area.
+- **DOST-W4-283 — C**: An object outside the focal length of a converging lens forms a real inverted image.
+- **DOST-W4-284 — D**: The angle of reflection equals the angle of incidence, both measured from the normal.
+- **DOST-W4-285 — A**: Waves spread strongly when aperture size is similar to wavelength.
+- **DOST-W4-286 — B**: Series resistances add: 3+6=9 Ω.
+- **DOST-W4-287 — C**: I=V/R=18/9=2 A.
+- **DOST-W4-288 — D**: V=IR=2×6=12 V.
+- **DOST-W4-289 — A**: Voltage is joules per coulomb.
+- **DOST-W4-290 — B**: The magnetic force direction follows the cross-product rule.
+- **DOST-W4-291 — C**: T=2π√(m/k), so greater mass increases period.
+- **DOST-W4-292 — D**: T∝1/√g, so weaker gravity increases period.
+- **DOST-W4-293 — A**: Large numbers follow stable exponential-decay statistics.
+- **DOST-W4-294 — B**: Mass contributes to the total energy of a system.
+- **DOST-W4-295 — C**: The energy difference can be released as a photon.
+- **DOST-W4-296 — D**: From F=ma, slope ΔF/Δa=m.
+- **DOST-W4-297 — A**: The instrument has a systematic zero error.
+- **DOST-W4-298 — B**: The same start-stop uncertainty is spread over a longer total interval.
+- **DOST-W4-299 — C**: A trend line summarizes the relationship without following noise.
+- **DOST-W4-300 — D**: 0.5/20.0×100=2.5%.
+
+## Earth Science
+
+- **DOST-W4-301 — A**: Melting produces magma, and cooling solidifies it into igneous rock.
+- **DOST-W4-302 — B**: Cross-cutting relationships place the fault after the layers formed.
+- **DOST-W4-303 — C**: Tensional stress pulls the crust apart and lowers the hanging wall.
+- **DOST-W4-304 — D**: Cleavage follows repeated structural weaknesses in the crystal.
+- **DOST-W4-305 — A**: Known half-lives relate isotope ratios to elapsed time.
+- **DOST-W4-306 — B**: Denser cold air lifts warm air along a steep boundary.
+- **DOST-W4-307 — C**: At the dew point, air becomes saturated and condensation begins.
+- **DOST-W4-308 — D**: A stronger pressure-gradient force accelerates air more strongly.
+- **DOST-W4-309 — A**: Ocean-atmosphere coupling in the Pacific influences global weather patterns.
+- **DOST-W4-310 — B**: High-albedo surfaces reflect more shortwave solar energy.
+- **DOST-W4-311 — C**: Watershed routing creates a delay between rainfall and peak discharge.
+- **DOST-W4-312 — D**: The maximum listed stream level is 2.4 m at Hour 4.
+- **DOST-W4-313 — A**: Recharge occurs when water penetrates downward to an aquifer.
+- **DOST-W4-314 — B**: Faster outer-bank flow promotes erosion, while slower inner flow deposits sediment.
+- **DOST-W4-315 — C**: Filtration reduces particles but may not remove or kill every pathogen.
+- **DOST-W4-316 — D**: Kepler's third law links larger orbital size with longer period.
+- **DOST-W4-317 — A**: Earth's shadow falls on the Moon.
+- **DOST-W4-318 — B**: Core hydrogen fusion powers main-sequence stars.
+- **DOST-W4-319 — C**: The Milky Way has spiral structure with a central bar.
+- **DOST-W4-320 — D**: It is remnant radiation from the early universe.
+- **DOST-W4-321 — A**: Saturation can reduce effective friction and add weight.
+- **DOST-W4-322 — B**: Rain or melted snow can mobilize ash and debris downslope.
+- **DOST-W4-323 — C**: Limited preparedness and resources increase consequences.
+- **DOST-W4-324 — D**: The goal is to reduce waste and retain material value.
+- **DOST-W4-325 — A**: Mangrove roots can damp waves and stabilize shorelines.
+
+## Mathematics
+
+- **DOST-W4-326 — B**: The decrease is 84, and 84/560=0.15=15%.
+- **DOST-W4-327 — C**: There are 12 parts; each part is ₱3,000, so 5 parts equal ₱15,000.
+- **DOST-W4-328 — D**: One cubic meter equals 1,000 L, so 3.6 m³=3,600 L.
+- **DOST-W4-329 — A**: Cancel 7 with 14 and 27 with 9: (1/2)(3)=3/2.
+- **DOST-W4-330 — B**: 2000×0.80×0.90=1440.
+- **DOST-W4-331 — C**: Multiply coefficients and add exponents: 30×10²=3×10³.
+- **DOST-W4-332 — D**: The constant is 18/6=3, so y=3(11)=33.
+- **DOST-W4-333 — A**: Worker-days=12×18=216; 216/27=8 days.
+- **DOST-W4-334 — B**: 14²=196, so √195 is just below 14.
+- **DOST-W4-335 — C**: 7 cm×50=350 cm=3.5 m.
+- **DOST-W4-336 — D**: 12x−15−6x−14=6x−29.
+- **DOST-W4-337 — A**: The greatest common factor is 5ab.
+- **DOST-W4-338 — B**: Numbers 7 and −5 multiply to −35 and add to 2.
+- **DOST-W4-339 — C**: a³+b³=(a+b)(a²−ab+b²).
+- **DOST-W4-340 — D**: Square the coefficient and double each exponent.
+- **DOST-W4-341 — A**: Factor as (x−5)(x+5), then cancel x−5.
+- **DOST-W4-342 — B**: 72=36×2 and √m²=m.
+- **DOST-W4-343 — C**: Multiply by the reciprocal: 5/6×9/10=45/60=3/4.
+- **DOST-W4-344 — D**: 2(−1)³−(−1)²+4=−2−1+4=1.
+- **DOST-W4-345 — A**: x²+6x−4x−24=x²+2x−24.
+- **DOST-W4-346 — B**: 5x=35, so x=7.
+- **DOST-W4-347 — C**: 3x−6=2x+5, so x=11.
+- **DOST-W4-348 — D**: Subtract the second equation from the first: 4y=12, y=3; then x=4.
+- **DOST-W4-349 — A**: Let n and p be prices. Solving 2n+p=110 and n+2p=100 gives n=40.
+- **DOST-W4-350 — B**: Subtract 1 and divide by 2: −4≤2x<8, so −2≤x<4.
+- **DOST-W4-351 — C**: 2x−3=7 gives x=5; 2x−3=−7 gives x=−2.
+- **DOST-W4-352 — D**: (x+5)(x−2)=0.
+- **DOST-W4-353 — A**: Square both sides: x+1=16, so x=15.
+- **DOST-W4-354 — B**: Time is the reciprocal of the rate: 6 hours.
+- **DOST-W4-355 — C**: (2,3) has x≥0 and 2+3=5≤6.
+- **DOST-W4-356 — D**: f(−3)=4−2(−3)=10.
+- **DOST-W4-357 — A**: g(2)=5 and f(5)=25−1=24.
+- **DOST-W4-358 — B**: Swap x and y and solve: y=3x+4.
+- **DOST-W4-359 — C**: The denominator is zero at x=±3.
+- **DOST-W4-360 — D**: The squared term is at least zero, so the minimum is 5.
+- **DOST-W4-361 — A**: Slope-intercept form is y=mx+b with m=3 and b=−2.
+- **DOST-W4-362 — B**: Perpendicular slopes are negative reciprocals.
+- **DOST-W4-363 — C**: 800/2³=800/8=100.
+- **DOST-W4-364 — D**: Because 1≥1, use x+5=6.
+- **DOST-W4-365 — A**: Each input in the second relation has exactly one output.
+- **DOST-W4-366 — B**: An exterior angle equals the sum of the two remote interior angles: 48+67=115°.
+- **DOST-W4-367 — C**: Scale factor=15/9=5/3; 12×5/3=20.
+- **DOST-W4-368 — D**: C=2πr=14π.
+- **DOST-W4-369 — A**: 120/360×π(6²)=1/3×36π=12π.
+- **DOST-W4-370 — B**: V=1/3πr²h=1/3×π×9×8=24π.
+- **DOST-W4-371 — C**: Surface area=4πr²=4π(16)=64π.
+- **DOST-W4-372 — D**: Average coordinates: ((−4+8)/2,(6−2)/2)=(2,2).
+- **DOST-W4-373 — A**: The converse of the alternate-interior-angle theorem establishes parallelism.
+- **DOST-W4-374 — B**: Sum=(8−2)180=1080; divide by 8 gives 135°.
+- **DOST-W4-375 — C**: Full volume=9 m³; two-thirds is 6 m³.
+- **DOST-W4-376 — D**: sinθ=opposite/hypotenuse=12/13.
+- **DOST-W4-377 — A**: cosθ=adjacent/hypotenuse=8/17.
+- **DOST-W4-378 — B**: tan45°=h/10=1, so h=10 m.
+- **DOST-W4-379 — C**: The standard exact value is 1/2.
+- **DOST-W4-380 — D**: c²=36+64−2(6)(8)(1/2)=100−48=52.
+- **DOST-W4-381 — A**: 9/sin30=b/sin90; 9/0.5=18.
+- **DOST-W4-382 — B**: The Pythagorean identity equals 1.
+- **DOST-W4-383 — C**: √(9²+12²)=√225=15 km.
+- **DOST-W4-384 — D**: sin60°=√3/2.
+- **DOST-W4-385 — A**: h=30 tan30°=30/√3=10√3 m.
+- **DOST-W4-386 — B**: a18=4+17(5)=89.
+- **DOST-W4-387 — C**: a15=2+14(3)=44; S=15(2+44)/2=345.
+- **DOST-W4-388 — D**: a8=3×2⁷=384.
+- **DOST-W4-389 — A**: The sum is 80.
+- **DOST-W4-390 — B**: Each term is twice the previous plus 2: 54×2+2=110.
+- **DOST-W4-391 — C**: The next difference is 12, so 29+12=41.
+- **DOST-W4-392 — D**: The pattern alternates ×3, −2; 46×3=138.
+- **DOST-W4-393 — A**: Each term after the second is the sum of the previous two: 12+19=31.
+- **DOST-W4-394 — B**: For n=1, 4(1)+3=7 and the common difference is 4.
+- **DOST-W4-395 — C**: Exponential growth eventually exceeds polynomial and root growth.
+- **DOST-W4-396 — D**: Total must be 60; known total is 40, so x=20.
+- **DOST-W4-397 — A**: Ordered values are 3,4,7,9,12,15; median=(7+9)/2=8.
+- **DOST-W4-398 — B**: Variance is zero only when all values are identical.
+- **DOST-W4-399 — C**: The favorable numbers are 3,6,9: 3 out of 10.
+- **DOST-W4-400 — D**: The complement is 1−0.35=0.65.
+- **DOST-W4-401 — A**: Not blue means the ball must be red.
+- **DOST-W4-402 — B**: 6C3=20.
+- **DOST-W4-403 — C**: 4P3=4×3×2=24.
+- **DOST-W4-404 — D**: 20(0.25)=₱5.
+- **DOST-W4-405 — A**: Correlation alone does not isolate cause.
+- **DOST-W4-406 — B**: I=Prt=12000×0.04×3=1440.
+- **DOST-W4-407 — C**: 5000(1.2)²=5000(1.44)=7200.
+- **DOST-W4-408 — D**: Rate=1/8+1/12=5/24 tank/h; time=24/5 h=4.8 h=4 h 48 min.
+- **DOST-W4-409 — A**: 0.6x+1.2=0.3(x+8); 0.3x=1.2, so x=4.
+- **DOST-W4-410 — B**: Relative speed=20 km/h; lead=20×3=60 km.
+- **DOST-W4-411 — C**: Let Leo=x and Mia=2x. Then x+6+2x+6=42, so 3x=30 and x=10.
+- **DOST-W4-412 — D**: For fixed perimeter, the square gives maximum area.
+- **DOST-W4-413 — A**: 1500×0.90×1.12=1512.
+- **DOST-W4-414 — B**: Total parts=10; five parts receive half the profit=₱25,000.
+- **DOST-W4-415 — C**: Total distance=80; total time=2+1=3 h; average=80/3≈26.7 km/h.
+- **DOST-W4-416 — D**: 1200+1500+1080+1760=5540.
+- **DOST-W4-417 — A**: 1200/40=30.
+- **DOST-W4-418 — B**: A=30, B=30, C=36, and D=32 passengers per trip.
+- **DOST-W4-419 — C**: Route D averages 1760/55=32 passengers/trip; 66×32=2112.
+- **DOST-W4-420 — D**: Ordered counts are 1080,1200,1500,1760; median=(1200+1500)/2=1350.
+- **DOST-W4-421 — A**: 24+21+27+30=102 m³.
+- **DOST-W4-422 — B**: 720/24=₱30 per m³.
+- **DOST-W4-423 — C**: Increase=3; 3/27×100≈11.1%.
+- **DOST-W4-424 — D**: Rates are 30,31,31,32 pesos per m³; August is highest.
+- **DOST-W4-425 — A**: August lists the largest use, 30 m³, and the largest bill, ₱960.
+
+## Mechanical-Technical
+
+- **DOST-W4-426 — B**: There are three external gear contacts, and each reverses direction.
+- **DOST-W4-427 — C**: A smaller driven gear turns faster than a larger driver.
+- **DOST-W4-428 — D**: An idler transmits motion and reverses direction but does not alter the overall driver-to-final ratio.
+- **DOST-W4-429 — A**: IMA=3.0/0.75=4.
+- **DOST-W4-430 — B**: Four supporting segments share the load.
+- **DOST-W4-431 — C**: IMA=length/height=5/1=5.
+- **DOST-W4-432 — D**: Fine threads trade more rotation for greater force advantage and control.
+- **DOST-W4-433 — A**: A smaller wedge angle increases ideal mechanical advantage.
+- **DOST-W4-434 — B**: IMA=30/5=6.
+- **DOST-W4-435 — C**: 675/900×100=75%.
+- **DOST-W4-436 — D**: 24×2.5=F×1.5, so F=40 N.
+- **DOST-W4-437 — A**: τ=rFsinθ is greatest when θ=90°.
+- **DOST-W4-438 — B**: Lowering the center of mass makes tipping less likely.
+- **DOST-W4-439 — C**: Zero net force prevents translation, but a nonzero torque causes angular acceleration.
+- **DOST-W4-440 — D**: The centroid of a uniform distribution is its midpoint.
+- **DOST-W4-441 — A**: Symmetry and vertical equilibrium divide the load equally.
+- **DOST-W4-442 — B**: Beyond the base edge, weight creates a tipping moment.
+- **DOST-W4-443 — C**: The pair forms a couple that produces rotation without translation.
+- **DOST-W4-444 — D**: Torque uses perpendicular distance to the line of action.
+- **DOST-W4-445 — A**: An uncrossed belt preserves rotation direction.
+- **DOST-W4-446 — B**: Positive tooth engagement prevents relative slipping.
+- **DOST-W4-447 — C**: The gear teeth convert rotary motion into translation.
+- **DOST-W4-448 — D**: A constant-radius cam segment holds the follower position.
+- **DOST-W4-449 — A**: The crank pin moves from one extreme to the opposite, spanning about two radii.
+- **DOST-W4-450 — B**: Rotational inertia buffers short-term energy variation.
+- **DOST-W4-451 — C**: Outer and inner wheels travel different distances during a turn.
+- **DOST-W4-452 — D**: The mechanism locks in one direction and overruns in the other.
+- **DOST-W4-453 — A**: Area ratio=72/12=6, so output force=120×6=720 N.
+- **DOST-W4-454 — B**: Volume conservation: 12×18=72d, so d=3 cm.
+- **DOST-W4-455 — C**: P=F/A=120/12=10 N/cm².
+- **DOST-W4-456 — D**: A1v1=A2v2, so v2=6×1.5/2=4.5 m/s.
+- **DOST-W4-457 — A**: Greater elevation difference increases hydrostatic head.
+- **DOST-W4-458 — B**: Bubble collapse creates localized shock and erosion.
+- **DOST-W4-459 — C**: The valve closes automatically against backflow.
+- **DOST-W4-460 — D**: It diverts or releases fluid to prevent dangerous overpressure.
+- **DOST-W4-461 — A**: A slower momentum change produces a smaller pressure surge.
+- **DOST-W4-462 — B**: Low thermal conductivity slows energy transfer along the handle.
+- **DOST-W4-463 — C**: High specific heat means greater energy is needed for the same temperature rise.
+- **DOST-W4-464 — D**: The joints allow the structure to lengthen and shorten safely.
+- **DOST-W4-465 — A**: One layer expands more, forcing the bonded strip to curve.
+- **DOST-W4-466 — B**: Opposite flow directions preserve a driving temperature difference.
+- **DOST-W4-467 — C**: A low-emissivity surface reflects infrared radiation.
+- **DOST-W4-468 — D**: Repeated cyclic loading can initiate and grow cracks.
+- **DOST-W4-469 — A**: Toughness combines strength and deformation capacity before fracture.
+- **DOST-W4-470 — B**: The standard cycle is intake, compression, power, and exhaust.
+- **DOST-W4-471 — C**: Downward piston motion draws the fresh charge through the intake valve.
+- **DOST-W4-472 — D**: Closing both valves traps and compresses the charge.
+- **DOST-W4-473 — A**: Expanding combustion gases push the piston and turn the crankshaft.
+- **DOST-W4-474 — B**: Higher compression raises temperature and can trigger premature ignition.
+- **DOST-W4-475 — C**: The oil film reduces friction and direct contact.
+- **DOST-W4-476 — D**: Coolant releases heat through the radiator surfaces to airflow.
+- **DOST-W4-477 — A**: The turbine drives a compressor that raises intake-air density.
+- **DOST-W4-478 — B**: Parallel branches connect across the same two supply nodes, so each has 12 V.
+- **DOST-W4-479 — C**: I=V/R=12/6=2 A.
+- **DOST-W4-480 — D**: The branch currents are 2 A and 3 A, so total current is 5 A.
+- **DOST-W4-481 — A**: The fuse must tolerate normal operation yet open before wiring overheats.
+- **DOST-W4-482 — B**: P=VI=230×5=1,150 W.
+- **DOST-W4-483 — C**: The electromagnet actuates the switching contacts.
+- **DOST-W4-484 — D**: Stall current is often much higher than normal running current.
+- **DOST-W4-485 — A**: Vs/Vp=Ns/Np=50/200=1/4, so Vs=60 V.
+- **DOST-W4-486 — B**: Faraday's law links changing magnetic flux with induced emf.
+- **DOST-W4-487 — C**: A micrometer provides fine resolution for small diameters.
+- **DOST-W4-488 — D**: It controls the applied turning moment on a fastener.
+- **DOST-W4-489 — A**: The smaller hole centers the larger cutting tool.
+- **DOST-W4-490 — B**: A rectangle can rack, while a triangle with fixed sides is geometrically stable.
+- **DOST-W4-491 — C**: Material farther from the neutral axis increases second moment of area.
+- **DOST-W4-492 — D**: Safety factor=capacity/working load=12/4=3.
+- **DOST-W4-493 — A**: Zinc protects physically and preferentially corrodes if the coating is damaged.
+- **DOST-W4-494 — B**: Alternative load paths can prevent immediate collapse after one element fails.
+- **DOST-W4-495 — C**: The connected discharge line leads from Tank A through the pump and valve to Tank B.
+- **DOST-W4-496 — D**: The blocked discharge prevents normal flow and can overload the pump.
+- **DOST-W4-497 — A**: A bypass diverts some flow around a component or restriction.
+- **DOST-W4-498 — B**: The actuator physically changes the process in response to a controller.
+- **DOST-W4-499 — C**: Normal motor rotation with no delivered flow points to the fluid side of the pump.
+- **DOST-W4-500 — D**: Stopping inflow prevents overflow.
