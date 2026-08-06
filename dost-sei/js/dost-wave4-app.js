@@ -133,7 +133,7 @@ function availablePool(){
   const selectedBank = getSelectedBank();
   const subject = $("#subject").value;
   const difficulty = $("#difficulty").value;
-  const access = $("#access").value;
+  const access = "All";
   return selectedBank.filter(q =>
     (subject === "All" || subjectOf(q) === subject) &&
     (difficulty === "All" || q.difficulty === difficulty) &&
@@ -154,7 +154,7 @@ function updateAvailability(){
 
 function toggleBuilderFields(){
   const mock = $("#mode").value === "mock";
-  ["subject","count","customCount","difficulty","access","minutes"].forEach(id => {
+  ["subject","count","customCount","difficulty","minutes"].forEach(id => {
     $("#" + id).disabled = mock;
   });
   updateAvailability();
@@ -281,8 +281,7 @@ function renderQuestion(){
     `Wave ${waveOf(q)}`,
     subjectOf(q),
     q.domain,
-    q.difficulty,
-    q.access
+    q.difficulty
   ].map(value => `<span>${esc(value)}</span>`).join("");
 
   $("#qstem").textContent = q.stem;
@@ -695,7 +694,7 @@ $("#flagBtn").addEventListener("click", toggleFlag);
 $("#submitBtn").addEventListener("click", () => finishAttempt(false));
 $("#submitSectionBtn").addEventListener("click", () => submitSection(false));
 
-["bank","subject","difficulty","access"].forEach(id => {
+["bank","subject","difficulty"].forEach(id => {
   $("#" + id).addEventListener("change", updateAvailability);
 });
 $("#mode").addEventListener("change", toggleBuilderFields);
