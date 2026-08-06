@@ -1,2 +1,0 @@
-PRIVATE SUPABASE SETUP FILES
-Do not upload this folder or its SQL file to GitHub Pages.
