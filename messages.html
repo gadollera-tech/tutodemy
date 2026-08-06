@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Private booking messages between TutoDemy learners, tutors, and authorized administrators.">
+  <meta name="theme-color" content="#11156f">
+  <meta name="robots" content="noindex,nofollow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Booking Messages | TutoDemy Learning PH">
+  <meta property="og:description" content="Private booking messages for tutoring coordination.">
+  <meta property="og:url" content="https://tutodemy.net/messages.html">
+  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Booking Messages | TutoDemy Learning PH</title>
+  <link rel="icon" href="assets/images/owl-mark.png">
+  <link rel="apple-touch-icon" href="assets/images/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="css/style.css">
+  <script defer src="js/config.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="js/supabase-client.js"></script>
+  <script defer src="js/auth-core.js"></script>
+  <script defer src="js/cloud-sync.js"></script>
+  <script defer src="js/marketplace-api.js"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/messages.js"></script>
+</head>
+<body data-page="messages">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div id="site-header"></div>
+  <main id="main-content">
+    <section class="page-hero messages-hero">
+      <div class="container page-hero-grid">
+        <div>
+          <span class="eyebrow light">PRIVATE BOOKING MESSAGES</span>
+          <h1>Coordinate tutoring sessions without exposing personal contact details.</h1>
+          <p>Messaging opens after a tutor accepts a booking. Use the conversation for schedules, lesson preparation, and private Google Meet or Zoom links.</p>
+        </div>
+        <div class="message-safety-card">
+          <b>Keep communication safe</b>
+          <p>Do not send passwords, wallet PINs, card numbers, complete banking details, or unnecessary home-address information. Report concerning messages to TutoDemy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section message-page-section">
+      <div class="container">
+        <div class="marketplace-alert" id="messages-alert" hidden></div>
+        <div class="message-layout" id="message-app" hidden>
+          <aside class="thread-sidebar" aria-label="Booking conversations">
+            <div class="thread-sidebar-head">
+              <div><span class="eyebrow">CONVERSATIONS</span><h2>My messages</h2></div>
+              <button class="icon-button" id="refresh-threads" type="button" aria-label="Refresh conversations">↻</button>
+            </div>
+            <div class="thread-list" id="thread-list"></div>
+          </aside>
+
+          <section class="conversation-shell" aria-live="polite">
+            <div class="conversation-empty" id="conversation-empty">
+              <img src="assets/images/owl-mark.png" alt="" aria-hidden="true">
+              <h2>Select a booking conversation</h2>
+              <p>Accepted and active bookings will appear on the left.</p>
+            </div>
+
+            <div class="conversation-panel" id="conversation-panel" hidden>
+              <header class="conversation-head">
+                <div>
+                  <span class="status-pill" id="conversation-status">BOOKING</span>
+                  <h2 id="conversation-name">Booking conversation</h2>
+                  <p id="conversation-meta"></p>
+                </div>
+                <button class="button button-outline" id="report-conversation" type="button">Report conversation</button>
+              </header>
+
+              <div class="conversation-notice">
+                <b>Official coordination thread</b>
+                <span>Keep booking decisions and meeting links here so both parties have a clear record.</span>
+              </div>
+
+              <div class="message-stream" id="message-stream" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+              <form class="message-composer" id="message-form">
+                <label for="message-body">Message</label>
+                <textarea id="message-body" rows="3" maxlength="2000" placeholder="Confirm the schedule, ask about lesson materials, or share a private meeting link." required></textarea>
+                <div class="message-composer-foot">
+                  <small><span id="message-count">0</span>/2000 characters</small>
+                  <button class="button" id="send-message" type="submit">Send message</button>
+                </div>
+                <p class="message-closed-note" id="message-closed-note" hidden>This conversation is read-only because the booking is not currently eligible for messaging.</p>
+              </form>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
