@@ -1,93 +1,210 @@
 document.addEventListener("DOMContentLoaded", async () => {
   await window.TutoAuth?.ready;
   await window.TutoMarketplace?.ready;
-  const api = window.TutoMarketplace;
-  if (!window.TutoAuth?.getUser?.()) { location.replace("auth.html"); return; }
-  const alert = document.querySelector("#dashboard-alert");
-  const bookingList = document.querySelector("#tutor-booking-list");
-  let profile = null, bookings = [], ledger = [], feePolicy = [], filter = "action";
-  const esc = v => window.Tuto.escape(v);
-  const money = v => window.Tuto.money(v);
-  const labels = {requested:"New request",accepted:"Accepted — awaiting payment",paid:"Payment confirmed",session_delivered:"Waiting for admin completion",completed:"Completed",declined:"Declined",cancelled:"Cancelled",refunded:"Refunded",disputed:"Under review"};
 
-  function revealPrivateCompensation() {
+  const api = window.TutoMarketplace;
+  if (!window.TutoAuth?.getUser?.()) {
+    location.replace("auth.html");
+    return;
+  }
+
+  const alertBox = document.querySelector("#dashboard-alert");
+  const bookingList = document.querySelector("#tutor-booking-list");
+  let profile = null;
+  let bookings = [];
+  let ledger = [];
+  let payouts = [];
+  let feePolicy = [];
+  let filter = "action";
+
+  const esc = value => window.Tuto.escape(value);
+  const money = value => window.Tuto.money(value);
+  const labels = {
+    requested: "New request",
+    accepted: "Accepted — awaiting payment",
+    paid: "Payment confirmed",
+    session_delivered: "Waiting for admin completion",
+    completed: "Completed",
+    declined: "Declined",
+    cancelled: "Cancelled",
+    refunded: "Refunded",
+    disputed: "Under review"
+  };
+
+  function maskMobile(value) {
+    const digits = String(value || "").replace(/\D/g, "");
+    if (digits.length !== 11) return digits || "Not provided";
+    return `${digits.slice(0, 4)} ••• ${digits.slice(-4)}`;
+  }
+
+  function revealPrivateSections() {
     document.querySelector("#private-tutor-metrics").hidden = false;
     document.querySelector("#private-compensation-panel").hidden = false;
+    document.querySelector("#private-payout-section").hidden = false;
     document.querySelector("#private-ledger-section").hidden = false;
     document.querySelector("#private-tier-rules").innerHTML = feePolicy.map(row => `<div><b>${esc(row.tier_label)} — ${Number(row.rate)}%</b><span>${esc(row.description)}</span></div>`).join("") || `<div><b>Your current platform fee is shown above.</b><span>Additional tier details are temporarily unavailable.</span></div>`;
   }
 
   function updateMetrics() {
     if (!profile) return;
-    revealPrivateCompensation();
-    const estimate = api.estimateCommission(profile, Number(document.querySelector("#commission-gross").value||0));
+    revealPrivateSections();
+
+    const estimate = api.estimateCommission(profile, Number(document.querySelector("#commission-gross").value || 0));
+    const totalRecorded = ledger.reduce((sum, row) => sum + Number(row.tutor_net_amount || 0), 0);
+    const pendingPayout = ledger.filter(row => row.payout_status !== "paid").reduce((sum, row) => sum + Number(row.tutor_net_amount || 0), 0);
+    const totalPaidOut = payouts.filter(row => row.status === "paid").reduce((sum, row) => sum + Number(row.amount || 0), 0);
+
     document.querySelector("#metric-tier").textContent = estimate.tier;
     document.querySelector("#metric-rate").textContent = `${estimate.rate}% platform commission`;
     document.querySelector("#metric-completed").textContent = profile.completed_sessions || 0;
-    const remaining = profile.founding_eligible && profile.completed_sessions < 20 ? 20-profile.completed_sessions : Math.max(0,50-profile.completed_sessions);
-    document.querySelector("#metric-progress").textContent = profile.founding_eligible && profile.completed_sessions < 20 ? `${remaining} founding-rate sessions remaining` : `${remaining} sessions to the first top-rated volume threshold`;
+    const remaining = profile.founding_eligible && profile.completed_sessions < 20
+      ? 20 - profile.completed_sessions
+      : Math.max(0, 50 - profile.completed_sessions);
+    document.querySelector("#metric-progress").textContent = profile.founding_eligible && profile.completed_sessions < 20
+      ? `${remaining} founding-rate sessions remaining`
+      : `${remaining} sessions to the first top-rated volume threshold`;
     document.querySelector("#metric-rating").textContent = profile.average_rating ? `${Number(profile.average_rating).toFixed(1)} ★` : "New";
-    document.querySelector("#metric-reviews").textContent = `${profile.review_count||0} verified review${profile.review_count===1?"":"s"}`;
-    document.querySelector("#metric-earnings").textContent = money(ledger.reduce((sum,row)=>sum+Number(row.tutor_net_amount||0),0));
+    document.querySelector("#metric-reviews").textContent = `${profile.review_count || 0} verified review${profile.review_count === 1 ? "" : "s"}`;
+    document.querySelector("#metric-earnings").textContent = money(totalRecorded);
+    document.querySelector("#metric-pending-payout").textContent = money(pendingPayout);
+    document.querySelector("#metric-paid-out").textContent = money(totalPaidOut);
     document.querySelector("#commission-fee").textContent = money(estimate.commission);
     document.querySelector("#commission-net").textContent = money(estimate.net);
-    document.querySelector("#commission-description").textContent = `${estimate.tier}: ${estimate.rate}% commission. The final rate is snapshotted only when an admin completes a paid, delivered booking.`;
+    document.querySelector("#commission-description").textContent = `${estimate.tier}: ${estimate.rate}% commission. The final rate is recorded only when an administrator completes a paid, delivered booking.`;
+
+    const payoutReady = Boolean(profile.payout_account_name && profile.payout_account_number);
+    document.querySelector("#private-payout-account").innerHTML = payoutReady
+      ? `<div><span>Method</span><b>${esc(profile.payout_method || "GCash")}</b></div><div><span>Registered name</span><b>${esc(profile.payout_account_name)}</b></div><div><span>Mobile number</span><b>${esc(maskMobile(profile.payout_account_number))}</b></div><div><span>QR code</span><b>${profile.payout_qr_path ? "Private QR uploaded" : "Not uploaded"}</b></div>`
+      : `<div class="payment-panel-error"><b>Payout details incomplete.</b><span>Add your registered GCash name and mobile number before your tutor application can be submitted.</span></div>`;
   }
 
   function profileStatus() {
-    const label = {draft:"Draft",pending:"Pending admin review",approved:"Approved and public",rejected:"Needs revision",suspended:"Suspended"}[profile?.status] || "No tutor profile";
+    const label = {
+      draft: "Draft",
+      pending: "Pending admin review",
+      approved: "Approved and public",
+      rejected: "Needs revision",
+      suspended: "Suspended"
+    }[profile?.status] || "No tutor profile";
     document.querySelector("#dash-profile-status").textContent = label;
-    document.querySelector("#dash-profile-message").textContent = profile?.status === "approved" ? (profile.is_accepting_bookings?"Your profile is accepting requests.":"Your approved profile is not accepting new requests.") : profile?.rejection_reason || "Complete and submit your tutor application.";
+    document.querySelector("#dash-profile-message").textContent = profile?.status === "approved"
+      ? (profile.is_accepting_bookings ? "Your profile is accepting requests." : "Your approved profile is not accepting new requests.")
+      : profile?.rejection_reason || "Complete and submit your tutor application.";
   }
 
   function currentBookings() {
-    if (filter === "action") return bookings.filter(b=>b.status==="requested"||b.status==="paid");
-    if (filter === "upcoming") return bookings.filter(b=>["accepted","paid","session_delivered"].includes(b.status));
-    if (filter === "completed") return bookings.filter(b=>b.status==="completed");
+    if (filter === "action") return bookings.filter(booking => booking.status === "requested" || booking.status === "paid");
+    if (filter === "upcoming") return bookings.filter(booking => ["accepted", "paid", "session_delivered"].includes(booking.status));
+    if (filter === "completed") return bookings.filter(booking => booking.status === "completed");
     return bookings;
   }
 
-  function card(b) {
-    const canRespond=b.status==="requested", canDeliver=b.status==="paid", canMessage=["accepted","paid","session_delivered","completed","disputed"].includes(b.status);
-    return `<article class="booking-item" data-id="${b.id}"><div class="booking-item-head"><div><span class="status-pill status-${b.status}">${esc(labels[b.status]||b.status)}</span><h2>${esc(b.learner_name_snapshot||"Learner booking")}</h2><p>${esc(b.subject)} • ${esc(b.mode)}</p></div><b>${money(b.gross_amount)}</b></div><dl class="booking-details"><div><dt>Schedule</dt><dd>${new Date(b.requested_start).toLocaleString()}</dd></div><div><dt>Duration</dt><dd>${b.duration_minutes} minutes</dd></div><div><dt>Payment</dt><dd>${esc(b.payment_status)}</dd></div>${b.status==="completed"?`<div><dt>Your net</dt><dd>${money(b.tutor_net_amount)}</dd></div><div><dt>Commission</dt><dd>${b.commission_rate}%</dd></div>`:""}</dl>${b.learning_goal?`<p class="booking-goal"><b>Learning goal:</b> ${esc(b.learning_goal)}</p>`:""}<div class="booking-actions">${canMessage?`<a class="button" href="messages.html?booking=${encodeURIComponent(b.id)}">Open messages</a>`:""}${canRespond?`<button class="button accept-booking" type="button">Accept</button><button class="button button-outline decline-booking" type="button">Decline</button>`:""}${canDeliver?`<button class="button deliver-booking" type="button">Mark session delivered</button>`:""}</div></article>`;
+  function bookingCard(booking) {
+    const canRespond = booking.status === "requested";
+    const canDeliver = booking.status === "paid";
+    const canMessage = ["accepted", "paid", "session_delivered", "completed", "disputed"].includes(booking.status);
+
+    return `<article class="booking-item" data-id="${esc(booking.id)}">
+      <div class="booking-item-head"><div><span class="status-pill status-${esc(booking.status)}">${esc(labels[booking.status] || booking.status)}</span><h2>${esc(booking.learner_name_snapshot || "Learner booking")}</h2><p>${esc(booking.subject)} • ${esc(booking.mode)}</p></div><b>${money(booking.gross_amount)}</b></div>
+      <dl class="booking-details"><div><dt>Schedule</dt><dd>${new Date(booking.requested_start).toLocaleString()}</dd></div><div><dt>Duration</dt><dd>${booking.duration_minutes} minutes</dd></div><div><dt>Payment</dt><dd>${esc(booking.payment_status)}</dd></div>${booking.status === "completed" ? `<div><dt>Your net</dt><dd>${money(booking.tutor_net_amount)}</dd></div><div><dt>Commission</dt><dd>${booking.commission_rate}%</dd></div>` : ""}</dl>
+      ${booking.learning_goal ? `<p class="booking-goal"><b>Learning goal:</b> ${esc(booking.learning_goal)}</p>` : ""}
+      <div class="booking-actions">${canMessage ? `<a class="button" href="messages.html?booking=${encodeURIComponent(booking.id)}">Open messages</a>` : ""}${canRespond ? `<button class="button accept-booking" type="button">Accept</button><button class="button button-outline decline-booking" type="button">Decline</button>` : ""}${canDeliver ? `<button class="button deliver-booking" type="button">Mark session delivered</button>` : ""}</div>
+    </article>`;
   }
 
   function renderBookings() {
-    const rows=currentBookings();
-    bookingList.innerHTML=rows.map(card).join("")||`<div class="empty-state"><h3>No bookings in this category.</h3></div>`;
-    bookingList.querySelectorAll(".accept-booking,.decline-booking").forEach(btn=>btn.addEventListener("click",async()=>{
-      const accept=btn.classList.contains("accept-booking");
-      const note=prompt(accept?"Optional note for the learner:":"Reason for declining (recommended):","")||"";
-      try{btn.disabled=true;await api.tutorRespond(btn.closest(".booking-item").dataset.id,accept,note);await load();}catch(error){alert.hidden=false;alert.textContent=error.message;btn.disabled=false;}
+    const rows = currentBookings();
+    bookingList.innerHTML = rows.map(bookingCard).join("") || `<div class="empty-state"><h3>No bookings in this category.</h3></div>`;
+
+    bookingList.querySelectorAll(".accept-booking,.decline-booking").forEach(button => button.addEventListener("click", async () => {
+      const accept = button.classList.contains("accept-booking");
+      const note = prompt(accept ? "Optional note for the learner:" : "Reason for declining (recommended):", "") || "";
+      try {
+        button.disabled = true;
+        await api.tutorRespond(button.closest(".booking-item").dataset.id, accept, note);
+        await load();
+      } catch (error) {
+        alertBox.hidden = false;
+        alertBox.textContent = error.message;
+        button.disabled = false;
+      }
     }));
-    bookingList.querySelectorAll(".deliver-booking").forEach(btn=>btn.addEventListener("click",async()=>{
-      if(!confirm("Confirm that the paid tutoring session was delivered?"))return;
-      try{btn.disabled=true;await api.markDelivered(btn.closest(".booking-item").dataset.id);await load();}catch(error){alert.hidden=false;alert.textContent=error.message;btn.disabled=false;}
+
+    bookingList.querySelectorAll(".deliver-booking").forEach(button => button.addEventListener("click", async () => {
+      if (!confirm("Confirm that the paid tutoring session was delivered?")) return;
+      try {
+        button.disabled = true;
+        await api.markDelivered(button.closest(".booking-item").dataset.id);
+        await load();
+      } catch (error) {
+        alertBox.hidden = false;
+        alertBox.textContent = error.message;
+        button.disabled = false;
+      }
     }));
   }
 
   function renderLedger() {
-    document.querySelector("#commission-ledger").innerHTML = ledger.length ? `<div class="ledger-row ledger-head"><span>Date</span><span>Gross</span><span>Tier</span><span>Rate</span><span>Commission</span><span>Tutor net</span></div>${ledger.map(row=>`<div class="ledger-row"><span>${new Date(row.created_at).toLocaleDateString()}</span><span>${money(row.gross_amount)}</span><span>${esc(row.commission_tier)}</span><span>${row.commission_rate}%</span><span>${money(row.commission_amount)}</span><span><b>${money(row.tutor_net_amount)}</b></span></div>`).join("")}` : `<div class="empty-state"><p>No completed commission records yet.</p></div>`;
+    document.querySelector("#commission-ledger").innerHTML = ledger.length
+      ? `<div class="ledger-row ledger-head"><span>Date</span><span>Gross</span><span>Tier</span><span>Commission</span><span>Tutor net</span><span>Payout</span></div>${ledger.map(row => `<div class="ledger-row"><span>${new Date(row.created_at).toLocaleDateString()}</span><span>${money(row.gross_amount)}</span><span>${esc(row.commission_tier)}</span><span>${money(row.commission_amount)}</span><span><b>${money(row.tutor_net_amount)}</b></span><span class="status-pill status-${row.payout_status === "paid" ? "paid" : "pending"}">${esc(row.payout_status || "pending")}</span></div>`).join("")}`
+      : `<div class="empty-state"><p>No completed earnings records yet.</p></div>`;
+
+    document.querySelector("#payout-history").innerHTML = payouts.length
+      ? `<div class="ledger-row ledger-head"><span>Paid date</span><span>Coverage</span><span>Sessions</span><span>Amount</span><span>Method</span><span>Reference</span></div>${payouts.map(row => `<div class="ledger-row"><span>${new Date(row.paid_at).toLocaleDateString()}</span><span>${new Date(`${row.period_start}T00:00:00`).toLocaleDateString()}–${new Date(`${row.period_end}T00:00:00`).toLocaleDateString()}</span><span>${row.session_count}</span><span><b>${money(row.amount)}</b></span><span>${esc(row.payout_method)}</span><span>${esc(row.payout_reference)}</span></div>`).join("")}`
+      : `<div class="empty-state"><p>No weekly payout records yet.</p></div>`;
   }
 
   async function load() {
     try {
-      if(!api.isReady()) throw new Error("The tutor dashboard is temporarily unavailable. Please try again later.");
-      profile=await api.getMyTutorProfile();
-      if(!profile){profileStatus();bookingList.innerHTML=`<div class="empty-state"><h3>Create your tutor profile first.</h3><p>Your private fee schedule and earnings tools will appear after your tutor profile is created.</p><a class="button" href="tutor-onboarding.html">Start application</a></div>`;return;}
-      [bookings,ledger,feePolicy]=await Promise.all([api.getMyBookings("tutor"),api.getMyLedger(),api.getMyTutorFeePolicy()]);
-      alert.hidden=true;profileStatus();updateMetrics();renderBookings();renderLedger();
-      const toggle=document.querySelector("#toggle-bookings");
-      toggle.hidden=profile.status!=="approved";
-      toggle.textContent=profile.is_accepting_bookings?"Pause new bookings":"Accept new bookings";
-    }catch(error){alert.hidden=false;alert.textContent=error.message||"Tutor dashboard could not be loaded.";}
+      if (!api.isReady()) throw new Error("The tutor dashboard is temporarily unavailable. Please try again later.");
+      profile = await api.getMyTutorProfile();
+      if (!profile) {
+        profileStatus();
+        bookingList.innerHTML = `<div class="empty-state"><h3>Create your tutor profile first.</h3><p>Your private fee schedule, payout destination, and earnings tools will appear after your tutor profile is created.</p><a class="button" href="tutor-onboarding.html">Start application</a></div>`;
+        return;
+      }
+
+      [bookings, ledger, feePolicy, payouts] = await Promise.all([
+        api.getMyBookings("tutor"),
+        api.getMyLedger(),
+        api.getMyTutorFeePolicy(),
+        api.getMyPayouts()
+      ]);
+
+      alertBox.hidden = true;
+      profileStatus();
+      updateMetrics();
+      renderBookings();
+      renderLedger();
+
+      const toggle = document.querySelector("#toggle-bookings");
+      toggle.hidden = profile.status !== "approved";
+      toggle.textContent = profile.is_accepting_bookings ? "Pause new bookings" : "Accept new bookings";
+    } catch (error) {
+      alertBox.hidden = false;
+      alertBox.textContent = error.message || "Tutor dashboard could not be loaded.";
+    }
   }
 
-
-  document.querySelector("#toggle-bookings").addEventListener("click",async()=>{
-    try{const next=!profile.is_accepting_bookings;profile=await api.setAcceptingBookings(next);profileStatus();document.querySelector("#toggle-bookings").textContent=next?"Pause new bookings":"Accept new bookings";window.Tuto.toast(next?"New booking requests enabled.":"New booking requests paused.");}catch(error){alert.hidden=false;alert.textContent=error.message;}
+  document.querySelector("#toggle-bookings").addEventListener("click", async () => {
+    try {
+      const next = !profile.is_accepting_bookings;
+      profile = await api.setAcceptingBookings(next);
+      profileStatus();
+      document.querySelector("#toggle-bookings").textContent = next ? "Pause new bookings" : "Accept new bookings";
+      window.Tuto.toast(next ? "New booking requests enabled." : "New booking requests paused.");
+    } catch (error) {
+      alertBox.hidden = false;
+      alertBox.textContent = error.message;
+    }
   });
-  document.querySelector("#commission-gross").addEventListener("input",updateMetrics);
-  document.querySelectorAll("[data-tutor-filter]").forEach(button=>button.addEventListener("click",()=>{document.querySelectorAll("[data-tutor-filter]").forEach(x=>x.classList.toggle("active",x===button));filter=button.dataset.tutorFilter;renderBookings();}));
+
+  document.querySelector("#commission-gross").addEventListener("input", updateMetrics);
+  document.querySelectorAll("[data-tutor-filter]").forEach(button => button.addEventListener("click", () => {
+    document.querySelectorAll("[data-tutor-filter]").forEach(item => item.classList.toggle("active", item === button));
+    filter = button.dataset.tutorFilter;
+    renderBookings();
+  }));
+
   await load();
 });
