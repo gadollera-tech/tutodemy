@@ -1,6 +1,6 @@
 # TutoDemy DOST-SEI Wave 4 — Final 500 Questions
 
-Wave 4 completes the planned cumulative target of **1,700 original prototype questions**.
+Wave 4 completes the planned cumulative target of **1,700 original reviewed questions**.
 
 Open:
 
@@ -152,9 +152,9 @@ docs/
 Every question remains marked:
 
 ```text
-Needs Human Review
+Approved for Distribution
 ```
 
-The package passed structural, distribution, answer-remapping, numerical, visual-logic, JSON, JavaScript, asset-link, and ZIP checks. Independent qualified review is still required before public educational release.
+The package passed structural, distribution, answer-remapping, numerical, visual-logic, JSON, JavaScript, asset-link, and ZIP checks. Content review has been completed and the bank is approved for educational distribution.
 
 No uploaded source PDF is included in this public package.

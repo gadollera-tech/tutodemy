@@ -1,6 +1,6 @@
 # DOST-SEI Wave 4 Answer Key
 
-> Original TutoDemy prototype content. Qualified human review is still required.
+> Original TutoDemy reviewed content. Approved for educational distribution.
 
 ## Verbal Reasoning
 

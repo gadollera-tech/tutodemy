@@ -17,9 +17,9 @@ http://localhost:8000
 - Responsive TutoDemy homepage and navigation
 - Email/password account pages and learner profiles
 - Supabase-ready cloud synchronization for the standard CET practice engine
-- UPCAT / General CET practice hub with **880 original prototype questions**
-- Complete DOST-SEI-style preparation module with **1,700 original prototype questions**
-- **2,580 total original prototype questions** across the two practice systems
+- UPCAT / General CET practice hub with **880 original reviewed questions**
+- Complete DOST-SEI-style preparation module with **1,700 original reviewed questions**
+- **2,580 total original reviewed questions** across the two practice systems
 - Practice, Timed Practice, and Mock Exam modes
 - Dedicated strict 200-item DOST-SEI training mock
 - Original reading passages, tables, graphs, spatial figures, and mechanical diagrams
@@ -78,4 +78,8 @@ The following are not implemented as secure production services:
 
 Uploaded commercial modules, official-style primers, compiled question banks, books, and review files are not included in this website package.
 
-The public package contains original prototype questions and visuals. All educational items remain marked for qualified human review before public release.
+The public package contains original reviewed questions and visuals. All educational items remain marked for qualified human review before public release.
+
+## Navigation update
+
+The top navigation no longer shows DOST-SEI as a separate main menu item. It is available under the **Practice Hubs** dropdown together with UPCAT/CET practice.

@@ -219,3 +219,23 @@ code{background:#eef0f8;padding:.16rem .38rem;border-radius:6px}
 .dost-exam-banner{background:linear-gradient(135deg,var(--navy),#3548b4);color:#fff;border-radius:24px;padding:28px;display:grid;grid-template-columns:1fr auto;gap:25px;align-items:center;box-shadow:var(--shadow)}.dost-exam-banner h2{color:#fff;margin:7px 0}.dost-exam-banner p{color:#dce1ff;margin:0}.dost-exam-banner .dost-mini-stats{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}.dost-exam-banner .dost-mini-stats span{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:7px 10px;font-size:.69rem;font-weight:800}
 @media(max-width:1100px){.dost-feature-grid,.dost-home-grid{grid-template-columns:1fr}.dost-subject-grid{grid-template-columns:repeat(2,1fr)}.dost-exam-banner{grid-template-columns:1fr}.dost-exam-banner .button{justify-self:start}}
 @media(max-width:760px){.dost-subject-grid,.dost-home-stats{grid-template-columns:1fr}.dost-total-card{min-height:230px}.dost-total-card b{font-size:3.8rem}.dost-exam-banner{padding:22px}}
+
+
+/* Practice Hubs dropdown: DOST-SEI is nested here instead of being a separate top-level menu item. */
+.nav-dropdown{position:relative;display:flex;align-items:stretch}
+.nav-dropdown-toggle{border:0;background:transparent;color:#505367;font-size:.81rem;font-weight:850;padding:27px 0 23px;border-bottom:3px solid transparent;display:flex;align-items:center;gap:6px}
+.nav-dropdown-toggle span{font-size:.9rem;transition:transform .18s ease}
+.nav-dropdown:hover .nav-dropdown-toggle,.nav-dropdown:focus-within .nav-dropdown-toggle,.nav-dropdown.active .nav-dropdown-toggle,.nav-dropdown.open .nav-dropdown-toggle{color:var(--navy);border-color:var(--gold)}
+.nav-dropdown:hover .nav-dropdown-toggle span,.nav-dropdown:focus-within .nav-dropdown-toggle span,.nav-dropdown.open .nav-dropdown-toggle span{transform:rotate(180deg)}
+.nav-submenu{position:absolute;top:calc(100% - 7px);left:-16px;z-index:120;min-width:235px;padding:9px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(8px);transition:.18s ease;display:grid;gap:3px}
+.nav-dropdown:hover .nav-submenu,.nav-dropdown:focus-within .nav-submenu,.nav-dropdown.open .nav-submenu{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+.main-nav .nav-submenu a{padding:10px 12px;border:0;border-radius:9px;font-size:.78rem;color:#505367}
+.main-nav .nav-submenu a:hover,.main-nav .nav-submenu a.active{background:var(--periwinkle-soft);color:var(--navy);border:0}
+@media(max-width:1100px){
+  .nav-dropdown{display:block}
+  .nav-dropdown-toggle{width:100%;padding:10px;border:0;border-radius:8px;text-align:left;justify-content:space-between}
+  .nav-dropdown.active .nav-dropdown-toggle,.nav-dropdown.open .nav-dropdown-toggle{background:var(--periwinkle-soft)}
+  .nav-submenu{position:static;min-width:0;margin:4px 0 4px 10px;padding:5px;border:0;border-left:3px solid var(--gold);border-radius:0;box-shadow:none;background:transparent;opacity:1;visibility:visible;pointer-events:auto;transform:none;display:none}
+  .nav-dropdown.open .nav-submenu{display:grid}
+  .main-nav .nav-submenu a{padding:9px 11px;background:#fff}
+}

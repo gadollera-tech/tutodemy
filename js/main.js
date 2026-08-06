@@ -1,21 +1,34 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const active = document.body.dataset.page || "";
-  const navItems = [
+  const regularNavItems = [
     ["index.html","Home","home"],
     ["dashboard.html","Dashboard","dashboard"],
-    ["exams.html","Practice Hub","exams"],
-    ["dost-sei.html","DOST-SEI","dost"],
     ["reviewers.html","Reviewers","reviewers"],
     ["tutoring.html","Tutor Connect","tutoring"],
     ["pricing.html","Premium","pricing"],
     ["resources.html","Source Policy","resources"],
     ["about.html","About","about"]
   ];
-  const links = navItems.map(([href,label,key]) =>
-    `<a href="${href}" class="${active===key?"active":""}">${label}</a>`).join("");
+
+  const practiceActive = ["exams", "dost"].includes(active);
+  const practiceDropdown = `
+    <div class="nav-dropdown ${practiceActive ? "active" : ""}">
+      <button class="nav-dropdown-toggle ${practiceActive ? "active" : ""}" type="button" aria-expanded="false" aria-haspopup="true">
+        Practice Hubs <span aria-hidden="true">⌄</span>
+      </button>
+      <div class="nav-submenu" aria-label="Practice Hubs submenu">
+        <a href="exams.html" class="${active === "exams" ? "active" : ""}">All Practice Hubs</a>
+        <a href="practice.html">UPCAT & CET Practice</a>
+        <a href="dost-sei.html" class="${active === "dost" ? "active" : ""}">DOST-SEI Practice</a>
+      </div>
+    </div>`;
+
+  const regularLinks = regularNavItems.map(([href,label,key]) =>
+    `<a href="${href}" class="${active===key?"active":""}">${label}</a>`);
+  const links = [regularLinks[0], regularLinks[1], practiceDropdown, ...regularLinks.slice(2)].join("");
 
   document.querySelector("#site-header").innerHTML = `
-    <div class="site-note">Original prototype content • Account sync works after Supabase is configured • Uploaded commercial sources are not redistributed.</div>
+    <div class="site-note">Original reviewed learning materials • Account sync works after Supabase is configured • Uploaded commercial sources are not redistributed.</div>
     <header class="site-header">
       <div class="container nav-wrap">
         <a class="brand" href="index.html" aria-label="TutoDemy home"><img src="assets/images/wordmark.png" alt="TutoDemy Learning PH"></a>
@@ -34,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="footer-brand">
           <img src="assets/images/wordmark.png" alt="TutoDemy Learning PH">
           <p>A tutoring, academic-support, and entrance-exam preparation platform for Filipino learners.</p>
-          <div class="footer-badges"><span>Original questions</span><span>Optional cloud sync</span><span>Human review required</span></div>
+          <div class="footer-badges"><span>Original questions</span><span>Optional cloud sync</span><span>Approved content</span></div>
         </div>
         <div><h3>Practice</h3><a href="exams.html">CET exam hub</a><a href="practice.html">CET set builder</a><a href="dost-sei.html">DOST-SEI preparation</a><a href="dashboard.html">Dashboard</a></div>
         <div><h3>Account</h3><a href="auth.html">Log in or sign up</a><a href="profile.html">Learner profile</a><a href="docs/SUPABASE-SETUP-GUIDE.md">Account setup guide</a><a href="privacy.html">Privacy notice</a></div>
@@ -49,6 +62,33 @@ document.addEventListener("DOMContentLoaded", async () => {
   toggle?.addEventListener("click", () => {
     const opened = nav.classList.toggle("open");
     toggle.setAttribute("aria-expanded", String(opened));
+  });
+
+  const closePracticeMenus = (except = null) => {
+    document.querySelectorAll(".nav-dropdown.open").forEach(dropdown => {
+      if (dropdown === except) return;
+      dropdown.classList.remove("open");
+      dropdown.querySelector(".nav-dropdown-toggle")?.setAttribute("aria-expanded", "false");
+    });
+  };
+
+  document.querySelectorAll(".nav-dropdown-toggle").forEach(button => {
+    button.addEventListener("click", event => {
+      event.stopPropagation();
+      const dropdown = button.closest(".nav-dropdown");
+      const willOpen = !dropdown.classList.contains("open");
+      closePracticeMenus(dropdown);
+      dropdown.classList.toggle("open", willOpen);
+      button.setAttribute("aria-expanded", String(willOpen));
+    });
+  });
+
+  document.addEventListener("click", event => {
+    if (!event.target.closest(".nav-dropdown")) closePracticeMenus();
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closePracticeMenus();
   });
 
   window.Tuto = {

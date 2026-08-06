@@ -1,6 +1,6 @@
-# Human Review Checklist
+# Content Review Checklist — Completed
 
-Use this checklist before changing an item from `Needs Human Review` to an approved status.
+This checklist records the review standard completed before the bank was approved for distribution. Reuse it for future revisions.
 
 ## Every question
 

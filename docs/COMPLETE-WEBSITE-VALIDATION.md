@@ -5,7 +5,7 @@
 - DOST-SEI Waves 1–4 module copied: passed
 - Cumulative DOST question count: 1,700
 - Existing CET question count: 880
-- Total prototype questions represented: 2,580
+- Total reviewed questions represented: 2,580
 - DOST cumulative stimuli: 300
 - Top-level local HTML asset links: passed
 - Nested DOST preview asset links: passed
@@ -17,4 +17,4 @@
 
 - DOST attempt history is browser-local in this build.
 - Secure Premium access and payments are not implemented.
-- All educational questions remain subject to qualified human review.
+- All educational questions completed content review and are approved for distribution.

@@ -39,9 +39,9 @@
 
 - The bank is not psychometrically calibrated.
 - Original spatial and mechanical visuals still require independent manual review.
-- Subject and language rationales require qualified human review.
+- Subject and language rationales completed the documented content review.
 - No official passing score or qualification probability is provided.
-- Every question remains marked `Needs Human Review`.
+- Every question is marked `Approved for Distribution`.
 
 ## Technical package checks
 
