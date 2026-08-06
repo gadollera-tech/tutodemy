@@ -1,0 +1,4 @@
+PRIVATE ADMIN SETUP — DO NOT UPLOAD THIS FOLDER OR ZIP TO GITHUB PAGES.
+
+These files contain the tutor marketplace database rules and private commission policy.
+Keep them in an owner-controlled location. Run only the SQL file appropriate to your current Supabase installation.
