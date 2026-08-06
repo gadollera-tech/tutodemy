@@ -32,7 +32,7 @@
   <main id="main-content">
     <section class="page-hero tutor-dashboard-hero">
       <div class="container page-hero-grid">
-        <div><span class="eyebrow light">TUTOR DASHBOARD</span><h1>Manage your profile, bookings, and earnings.</h1><p>Respond to schedule requests, track payment confirmation, mark delivered sessions, and see the commission applied only after successful completion.</p><div class="button-row"><a class="button button-light" href="tutor-onboarding.html">Edit tutor profile</a><button class="button button-ghost" id="toggle-bookings" type="button" hidden>Pause new bookings</button><a class="button button-ghost" href="tutor-terms.html">Commission policy</a></div></div>
+        <div><span class="eyebrow light">TUTOR DASHBOARD</span><h1>Manage your profile, bookings, and earnings.</h1><p>Respond to schedule requests, track payment confirmation, mark delivered sessions, and see the commission applied only after successful completion.</p><div class="button-row"><a class="button button-light" href="tutor-onboarding.html">Edit tutor profile</a><button class="button button-ghost" id="toggle-bookings" type="button" hidden>Pause new bookings</button><a class="button button-ghost" href="tutor-terms.html">Tutor guidelines</a></div></div>
         <div class="tutor-dashboard-status"><span>PROFILE STATUS</span><b id="dash-profile-status">Loading…</b><small id="dash-profile-message">Checking your account.</small></div>
       </div>
     </section>
@@ -40,14 +40,14 @@
     <section class="section">
       <div class="container">
         <div class="marketplace-alert" id="dashboard-alert" hidden></div>
-        <div class="tutor-metric-grid">
+        <div class="tutor-metric-grid" id="private-tutor-metrics" hidden>
           <article><span>Current tier</span><b id="metric-tier">—</b><small id="metric-rate">—</small></article>
           <article><span>Completed sessions</span><b id="metric-completed">0</b><small id="metric-progress">Milestone progress</small></article>
           <article><span>Verified rating</span><b id="metric-rating">New</b><small id="metric-reviews">0 reviews</small></article>
           <article><span>Recorded tutor earnings</span><b id="metric-earnings">₱0.00</b><small>Completed paid bookings</small></article>
         </div>
 
-        <div class="dashboard-two-column">
+        <div class="dashboard-two-column" id="private-compensation-panel" hidden>
           <section class="panel commission-calculator">
             <span class="eyebrow">COMMISSION ESTIMATOR</span><h2>Estimate the split for a session</h2>
             <label>Session amount (₱)<input id="commission-gross" type="number" min="0" value="500"></label>
@@ -56,7 +56,7 @@
           </section>
           <section class="panel">
             <span class="eyebrow">TIER RULES</span><h2>How your rate changes</h2>
-            <div class="tier-mini-list"><div><b>Founding Tutor — 10%</b><span>First 20 completed sessions for eligible founding tutors</span></div><div><b>Regular Tutor — 15%</b><span>Standard rate after the founding benefit</span></div><div><b>High-Volume / Top-Rated — 12%</b><span>Milestone, rating, reviews, cancellation rate, and good-standing requirements apply</span></div></div>
+            <div class="tier-mini-list" id="private-tier-rules"></div>
           </section>
         </div>
       </div>
@@ -70,9 +70,9 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="private-ledger-section" hidden>
       <div class="container">
-        <div class="section-heading"><span class="eyebrow">COMMISSION LEDGER</span><h2>Completed booking records</h2></div>
+        <div class="section-heading"><span class="eyebrow">EARNINGS LEDGER</span><h2>Completed booking records</h2></div>
         <div class="ledger-table" id="commission-ledger"></div>
       </div>
     </section>

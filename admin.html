@@ -33,7 +33,7 @@
     <section class="page-hero admin-hero">
       <div class="container page-hero-grid">
         <div><span class="eyebrow light">SECURE ADMIN CONSOLE</span><h1>Approve tutors and close completed bookings.</h1><p>Admin access is enforced through Supabase Row Level Security and checked database functions—not by a browser-only password.</p></div>
-        <div class="admin-security-card"><b>Administrator setup</b><p>Create your normal account first, then add its user ID to <code>public.admin_users</code> using the SQL instruction in the marketplace upgrade file.</p></div>
+        <div class="admin-security-card"><b>Restricted access</b><p>Only authorized TutoDemy administrator accounts can open tutor applications, private verification records, and booking operations.</p></div>
       </div>
     </section>
     <section class="section">
@@ -42,7 +42,7 @@
         <div id="admin-content" hidden>
           <div class="admin-tabs"><button class="active" data-admin-tab="tutors">Tutor applications</button><button data-admin-tab="bookings">Bookings and payments</button></div>
           <section id="admin-tutors-panel" class="admin-panel active"><div class="section-heading"><span class="eyebrow">TUTOR REVIEW</span><h2>Applications and public-profile status</h2></div><div class="admin-list" id="admin-tutor-list"></div></section>
-          <section id="admin-bookings-panel" class="admin-panel"><div class="section-heading"><span class="eyebrow">BOOKING OPERATIONS</span><h2>Manual payment confirmation and completion</h2><p>Automatic payment collection and payout are not connected. Confirm only transactions verified through your actual operational process.</p></div><div class="admin-list" id="admin-booking-list"></div></section>
+          <section id="admin-bookings-panel" class="admin-panel"><div class="section-heading"><span class="eyebrow">BOOKING OPERATIONS</span><h2>Manual payment confirmation and completion</h2><p>Confirm only transactions verified through TutoDemy's approved payment process and supporting reference details.</p></div><div class="admin-list" id="admin-booking-list"></div></section>
         </div>
       </div>
     </section>

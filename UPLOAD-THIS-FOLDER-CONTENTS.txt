@@ -1,0 +1,4 @@
+UPLOAD ONLY THE CONTENTS OF THIS FOLDER TO THE ROOT OF YOUR GITHUB REPOSITORY.
+
+The files index.html, CNAME, css/, js/, data/, assets/, and dost-sei/ must all appear at the repository root.
+Do not upload the separate Private Admin Setup package to GitHub Pages.
