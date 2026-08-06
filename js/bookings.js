@@ -25,12 +25,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tutorName = tutor?.display_name || "Tutor profile";
     const canCancel = ["requested","accepted"].includes(b.status) && b.payment_status === "unpaid";
     const canReview = b.status === "completed" && !reviewed.has(b.id);
+    const canMessage = ["accepted","paid","session_delivered","completed","disputed"].includes(b.status);
     return `<article class="booking-item" data-id="${b.id}">
       <div class="booking-item-head"><div><span class="status-pill status-${b.status}">${esc(statusText(b.status))}</span><h2>${esc(tutorName)}</h2><p>${esc(b.subject)} • ${esc(b.mode)}</p></div><a href="tutor-profile.html?id=${encodeURIComponent(b.tutor_id)}">View tutor</a></div>
       <dl class="booking-details"><div><dt>Schedule</dt><dd>${new Date(b.requested_start).toLocaleString()}</dd></div><div><dt>Duration</dt><dd>${b.duration_minutes} minutes</dd></div><div><dt>Session amount</dt><dd>${money(b.gross_amount)}</dd></div><div><dt>Payment</dt><dd>${esc(b.payment_status)}</dd></div></dl>
       ${b.learning_goal ? `<p class="booking-goal"><b>Learning goal:</b> ${esc(b.learning_goal)}</p>` : ""}
       ${b.tutor_response_note ? `<p class="booking-note-inline"><b>Tutor note:</b> ${esc(b.tutor_response_note)}</p>` : ""}
-      <div class="booking-actions">${canCancel?`<button class="button button-outline cancel-booking" type="button">Cancel request</button>`:""}${canReview?`<button class="button review-booking" type="button">Leave verified review</button>`:""}</div>
+      <div class="booking-actions">${canMessage?`<a class="button" href="messages.html?booking=${encodeURIComponent(b.id)}">Open messages</a>`:""}${canCancel?`<button class="button button-outline cancel-booking" type="button">Cancel request</button>`:""}${canReview?`<button class="button review-booking" type="button">Leave verified review</button>`:""}</div>
       ${canReview?`<form class="inline-review-form" hidden><label>Rating<select name="rating"><option value="5">5 — Excellent</option><option value="4">4 — Very good</option><option value="3">3 — Good</option><option value="2">2 — Fair</option><option value="1">1 — Poor</option></select></label><label>Review<textarea name="review_text" rows="3" maxlength="800"></textarea></label><button class="button" type="submit">Submit review</button><p class="form-status"></p></form>`:""}
     </article>`;
   }

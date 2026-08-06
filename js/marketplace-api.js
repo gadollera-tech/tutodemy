@@ -374,6 +374,85 @@
     return data || [];
   }
 
+
+  async function getMessageThreads() {
+    requireUser();
+    const { data, error } = await client().rpc("get_my_message_threads");
+    if (error) throw friendlyError(error);
+    return data || [];
+  }
+
+  async function getBookingMessages(bookingId) {
+    requireUser();
+    const { data, error } = await client().rpc("get_booking_messages", { p_booking_id: bookingId });
+    if (error) throw friendlyError(error);
+    return data || [];
+  }
+
+  async function sendBookingMessage(bookingId, body) {
+    requireUser();
+    const { data, error } = await client().rpc("send_booking_message", {
+      p_booking_id: bookingId,
+      p_body: String(body || "")
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
+  async function markMessagesRead(bookingId) {
+    requireUser();
+    const { error } = await client().rpc("mark_booking_messages_read", { p_booking_id: bookingId });
+    if (error) throw friendlyError(error);
+  }
+
+  async function reportConversation(bookingId, messageId, reason, details = "") {
+    requireUser();
+    const { data, error } = await client().rpc("report_booking_conversation", {
+      p_booking_id: bookingId,
+      p_message_id: messageId || null,
+      p_reason: reason,
+      p_details: details
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
+  function subscribeBookingMessages(bookingId, onChange) {
+    if (!client() || !bookingId) return null;
+    return client()
+      .channel(`booking-messages-${bookingId}-${Date.now()}`)
+      .on("postgres_changes", {
+        event: "INSERT",
+        schema: "public",
+        table: "booking_messages",
+        filter: `booking_id=eq.${bookingId}`
+      }, payload => onChange?.(payload))
+      .subscribe();
+  }
+
+  async function unsubscribeBookingMessages(channel) {
+    if (!client() || !channel) return;
+    try { await client().removeChannel(channel); } catch (error) { console.warn("Realtime cleanup failed:", error); }
+  }
+
+  async function adminMessageReports() {
+    if (!await checkAdmin()) throw new Error("Administrator access required.");
+    const { data, error } = await client().rpc("admin_get_message_reports");
+    if (error) throw friendlyError(error);
+    return data || [];
+  }
+
+  async function adminResolveMessageReport(reportId, status, note = "") {
+    if (!state.admin && !await checkAdmin()) throw new Error("Administrator access required.");
+    const { data, error } = await client().rpc("admin_resolve_message_report", {
+      p_report_id: reportId,
+      p_status: status,
+      p_admin_note: note
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
   function estimateCommission(profile, gross) {
     const rate = Number(profile?.current_commission_rate || 0);
     const tierLabels = {
@@ -428,6 +507,15 @@
     adminConfirmPayment,
     adminCompleteBooking,
     getMyTutorFeePolicy,
+    getMessageThreads,
+    getBookingMessages,
+    sendBookingMessage,
+    markMessagesRead,
+    reportConversation,
+    subscribeBookingMessages,
+    unsubscribeBookingMessages,
+    adminMessageReports,
+    adminResolveMessageReport,
     estimateCommission,
     cleanArray
   };

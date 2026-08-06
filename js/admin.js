@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const api=window.TutoMarketplace;
   const alert=document.querySelector("#admin-alert"),content=document.querySelector("#admin-content");
   const esc=v=>window.Tuto.escape(v),money=v=>window.Tuto.money(v);
-  let tutors=[],bookings=[];
+  let tutors=[],bookings=[],reports=[];
 
   function tutorCard(t){
     const photo=api.publicAvatarUrl(t.profile_photo_path);
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function bookingCard(b){
     const canPay=b.status==="accepted",canComplete=b.status==="session_delivered"&&b.payment_status==="paid";
-    return `<article class="admin-card booking-admin-card" data-booking-id="${b.id}"><div class="admin-card-head"><div><span class="status-pill status-${b.status}">${esc(b.status)}</span><h3>${esc(b.tutor_name_snapshot||"Tutor")} ↔ ${esc(b.learner_name_snapshot||"Learner")}</h3><p>${new Date(b.requested_start).toLocaleString()} • ${esc(b.subject)} • ${esc(b.mode)}</p></div><b>${money(b.gross_amount)}</b></div><dl class="booking-details"><div><dt>Payment</dt><dd>${esc(b.payment_status)}</dd></div><div><dt>Duration</dt><dd>${b.duration_minutes} minutes</dd></div>${b.commission_rate?`<div><dt>Commission</dt><dd>${b.commission_rate}% / ${money(b.commission_amount)}</dd></div><div><dt>Tutor net</dt><dd>${money(b.tutor_net_amount)}</dd></div>`:""}</dl>${canPay?`<div class="admin-payment-form"><label>Payment method<input data-payment-method placeholder="GCash, bank transfer, etc."></label><label>Payment reference<input data-payment-reference placeholder="Verified transaction reference"></label><button class="button confirm-payment" type="button">Confirm payment</button></div>`:""}${canComplete?`<div class="admin-complete-form"><label>Completion note<input data-completion-note placeholder="Optional admin note"></label><button class="button complete-booking" type="button">Complete booking and record commission</button></div>`:""}</article>`;
+    return `<article class="admin-card booking-admin-card" data-booking-id="${b.id}"><div class="admin-card-head"><div><span class="status-pill status-${b.status}">${esc(b.status)}</span><h3>${esc(b.tutor_name_snapshot||"Tutor")} ↔ ${esc(b.learner_name_snapshot||"Learner")}</h3><p>${new Date(b.requested_start).toLocaleString()} • ${esc(b.subject)} • ${esc(b.mode)}</p></div><b>${money(b.gross_amount)}</b></div><dl class="booking-details"><div><dt>Payment</dt><dd>${esc(b.payment_status)}</dd></div><div><dt>Duration</dt><dd>${b.duration_minutes} minutes</dd></div>${b.commission_rate?`<div><dt>Commission</dt><dd>${b.commission_rate}% / ${money(b.commission_amount)}</dd></div><div><dt>Tutor net</dt><dd>${money(b.tutor_net_amount)}</dd></div>`:""}</dl>${canPay?`<div class="admin-payment-form"><label>Payment method<input data-payment-method placeholder="GCash, bank transfer, etc."></label><label>Payment reference<input data-payment-reference placeholder="Verified transaction reference"></label><button class="button confirm-payment" type="button">Confirm payment</button></div>`:""}<div class="booking-actions"><a class="button button-outline" href="messages.html?booking=${encodeURIComponent(b.id)}">Open conversation</a></div>${canComplete?`<div class="admin-complete-form"><label>Completion note<input data-completion-note placeholder="Optional admin note"></label><button class="button complete-booking" type="button">Complete booking and record commission</button></div>`:""}</article>`;
   }
 
   function renderBookings(){
@@ -39,9 +39,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     list.querySelectorAll(".complete-booking").forEach(btn=>btn.addEventListener("click",async()=>{const card=btn.closest(".admin-card");if(!confirm("Complete this paid, delivered booking and create the commission ledger entry?"))return;try{btn.disabled=true;await api.adminCompleteBooking(card.dataset.bookingId,card.querySelector("[data-completion-note]").value.trim());await loadAll();}catch(error){alert.hidden=false;alert.textContent=error.message;btn.disabled=false;}}));
   }
 
+  function reportCard(r){
+    const message = r.reported_message_body ? `<blockquote>${esc(r.reported_message_body)}</blockquote>` : "";
+    return `<article class="admin-card message-report-card" data-report-id="${esc(r.id)}"><div class="admin-card-head"><div><span class="status-pill status-${esc(r.status)}">${esc(r.status)}</span><h3>${esc(r.reason)}</h3><p>${esc(r.booking_label||"Booking conversation")} • Reported by ${esc(r.reporter_label||"Account")}</p></div><time>${new Date(r.created_at).toLocaleString()}</time></div>${message}${r.details?`<p><b>Details:</b> ${esc(r.details)}</p>`:""}<label>Administrator note<textarea data-report-note rows="2" placeholder="Record the review outcome">${esc(r.admin_note||"")}</textarea></label><div class="admin-actions"><a class="button button-outline" href="messages.html?booking=${encodeURIComponent(r.booking_id)}">Review conversation</a>${r.status!=="resolved"?`<button class="button report-resolve" type="button">Mark resolved</button>`:""}${r.status!=="dismissed"?`<button class="text-button report-dismiss" type="button">Dismiss</button>`:""}</div></article>`;
+  }
+
+  function renderReports(){
+    const list=document.querySelector("#admin-report-list");
+    list.innerHTML=reports.map(reportCard).join("")||`<div class="empty-state"><h3>No conversation reports.</h3><p>Reported booking conversations will appear here for administrator review.</p></div>`;
+    const update=async(button,status)=>{const card=button.closest(".message-report-card");try{button.disabled=true;await api.adminResolveMessageReport(card.dataset.reportId,status,card.querySelector("[data-report-note]").value.trim());await loadAll();}catch(error){alert.hidden=false;alert.textContent=error.message;button.disabled=false;}};
+    list.querySelectorAll(".report-resolve").forEach(button=>button.addEventListener("click",()=>update(button,"resolved")));
+    list.querySelectorAll(".report-dismiss").forEach(button=>button.addEventListener("click",()=>update(button,"dismissed")));
+  }
+
   async function loadAll(){
-    [tutors,bookings]=await Promise.all([api.adminPendingTutors(),api.adminBookings()]);
-    renderTutors();renderBookings();
+    const [tutorResult,bookingResult,reportResult]=await Promise.allSettled([api.adminPendingTutors(),api.adminBookings(),api.adminMessageReports()]);
+    if(tutorResult.status==="rejected")throw tutorResult.reason;
+    if(bookingResult.status==="rejected")throw bookingResult.reason;
+    tutors=tutorResult.value||[];
+    bookings=bookingResult.value||[];
+    reports=reportResult.status==="fulfilled"?(reportResult.value||[]):[];
+    renderTutors();renderBookings();renderReports();
   }
 
   if(!window.TutoAuth?.getUser?.()){location.replace("auth.html");return;}
