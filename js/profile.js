@@ -52,18 +52,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const fallback = user.user_metadata || {};
+    const provinceSelect = document.querySelector("#profile-province");
+    window.TutoPH?.populateProvinceSelect?.(provinceSelect, profile?.province || fallback.province || "");
     const values = {
       full_name: profile?.full_name || fallback.full_name || "",
       student_level: profile?.student_level || fallback.student_level || "",
       target_exam: profile?.target_exam || fallback.target_exam || "",
       school: profile?.school || "",
+      province: profile?.province || fallback.province || "",
+      city: profile?.city || fallback.city || "",
+      share_location_insights: Boolean(profile?.share_location_insights ?? fallback.share_location_insights ?? false),
       avatar_url: profile?.avatar_url || fallback.avatar_url || "",
       role: profile?.role || fallback.role || "learner"
     };
 
     Object.entries(values).forEach(([name, value]) => {
       const field = form.elements[name];
-      if (field) field.value = value || "";
+      if (!field) return;
+      if (field.type === "checkbox") field.checked = Boolean(value);
+      else field.value = value || "";
     });
 
     document.querySelector("#account-heading").textContent = values.full_name ? `Hi, ${values.full_name.split(" ")[0]}!` : "My TutoDemy account";
@@ -113,6 +120,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     status.textContent = "Saving profile…";
     status.classList.remove("error");
     const values = Object.fromEntries(new FormData(form).entries());
+    values.share_location_insights = Boolean(form.elements.share_location_insights?.checked);
     try {
       const profile = await window.TutoCloud.upsertProfile(values);
       await window.TutoSupabase.client.auth.updateUser({
@@ -120,6 +128,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           full_name: profile.full_name,
           student_level: profile.student_level,
           target_exam: profile.target_exam,
+          province: profile.province,
+          city: profile.city,
+          share_location_insights: profile.share_location_insights,
           avatar_url: profile.avatar_url
         }
       });

@@ -12,6 +12,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const panels = [...document.querySelectorAll(".auth-panel")];
   const signupForm = document.querySelector("#signup-form");
   const learnerFields = document.querySelector("#learner-signup-fields");
+  const createAccountButton = document.querySelector("#create-account-button");
+  const signupSuccess = document.querySelector("#signup-success");
+  const signupSuccessEmail = document.querySelector("#signup-success-email");
+  const provinceSelect = document.querySelector("#signup-province");
 
   const setStatus = (message, isError = false) => {
     status.textContent = message;
@@ -25,6 +29,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const selectedRole = () => signupForm?.querySelector('input[name="role"]:checked')?.value || "learner";
   const updateRoleFields = () => learnerFields.hidden = selectedRole() === "tutor";
   signupForm?.querySelectorAll('input[name="role"]').forEach(radio => radio.addEventListener("change", updateRoleFields));
+  window.TutoPH?.populateProvinceSelect?.(provinceSelect);
   updateRoleFields();
 
   if (!window.TutoAuth?.isConfigured?.()) {
@@ -38,9 +43,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   tabs.forEach(tab => tab.addEventListener("click", () => showPanel(tab.dataset.authTab)));
   document.querySelector("#show-forgot")?.addEventListener("click", () => showPanel("forgot"));
   document.querySelector("#back-signin")?.addEventListener("click", () => showPanel("signin"));
+  document.querySelector("#signup-back-to-login")?.addEventListener("click", () => {
+    signupSuccess.hidden = true;
+    signupForm.hidden = false;
+    showPanel("signin");
+  });
 
-  const isResetMode = new URLSearchParams(location.search).get("mode") === "reset";
+  const query = new URLSearchParams(location.search);
+  const isResetMode = query.get("mode") === "reset";
   if (isResetMode) showPanel("reset");
+  else if (query.get("tab") === "signup") showPanel("signup");
+  else if (query.get("tab") === "signin") showPanel("signin");
+  if (query.get("role") === "tutor") {
+    const tutorRadio = signupForm?.querySelector('input[name="role"][value="tutor"]');
+    if (tutorRadio) tutorRadio.checked = true;
+    updateRoleFields();
+  }
 
   async function destinationAfterLogin() {
     const queryNext = new URLSearchParams(location.search).get("next");
@@ -74,11 +92,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   signupForm.addEventListener("submit", async event => {
     event.preventDefault();
-    setStatus("Creating your account…");
     const values = Object.fromEntries(new FormData(event.currentTarget).entries());
     const role = values.role === "tutor" ? "tutor" : "learner";
     const redirectPage = role === "tutor" ? "tutor-onboarding.html" : "profile.html";
     const redirectTo = new URL(redirectPage, location.href).href;
+    createAccountButton.disabled = true;
+    createAccountButton.textContent = "Creating account…";
+    setStatus("Creating your account… Keep this page open. When it is ready, check your email to confirm your account.");
+
     const { data, error } = await client.auth.signUp({
       email: values.email,
       password: values.password,
@@ -88,19 +109,30 @@ document.addEventListener("DOMContentLoaded", async () => {
           full_name: values.full_name,
           student_level: role === "learner" ? values.student_level : "",
           target_exam: role === "learner" ? values.target_exam : "",
+          city: role === "learner" ? values.city || "" : "",
+          province: role === "learner" ? values.province || "" : "",
+          share_location_insights: role === "learner" && Boolean(values.share_location_insights),
           role
         }
       }
     });
+
+    createAccountButton.disabled = false;
+    createAccountButton.textContent = "Create account";
     if (error) return setStatus(error.message, true);
-    event.currentTarget.reset();
-    updateRoleFields();
     if (data.session) {
       await window.TutoAuth.refresh();
       location.replace(redirectPage);
-    } else {
-      setStatus(`Account created. Check your email, confirm the account, then continue to ${role === "tutor" ? "the tutor application" : "your profile"}.`);
+      return;
     }
+
+    signupSuccessEmail.textContent = values.email;
+    signupForm.hidden = true;
+    signupSuccess.hidden = false;
+    setStatus("Confirmation email sent. Open it to activate your TutoDemy account.");
+    event.currentTarget.reset();
+    window.TutoPH?.populateProvinceSelect?.(provinceSelect);
+    updateRoleFields();
   });
 
   document.querySelector("#forgot-form").addEventListener("submit", async event => {

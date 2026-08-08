@@ -1,0 +1,5 @@
+Upload these files and folders to the ROOT of your existing GitHub repository.
+Choose Replace when GitHub asks about files with the same name.
+Do not upload the private SQL setup ZIP to GitHub.
+
+After upload, wait for one GitHub Pages deployment. Do not create repeated commits while it is queued.

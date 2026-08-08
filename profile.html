@@ -24,6 +24,7 @@
   <script defer src="js/cloud-sync.js"></script>
   <script defer src="js/marketplace-api.js"></script>
   <script defer src="data/taxonomy.js"></script>
+  <script defer src="data/philippines-locations.js"></script>
   <script defer src="js/main.js"></script>
   <script defer src="js/profile.js"></script>
 </head>
@@ -48,6 +49,9 @@
             <label>Student level<select name="student_level"><option value="">Not specified</option><option>Elementary</option><option>Junior High</option><option>Senior High</option><option>College</option><option>CET Applicant</option></select></label>
             <label>Target exam<select name="target_exam"><option value="">General academic support</option><option>UPCAT</option><option>DCAT</option><option>Other CET</option><option>DOST-SEI Scholarship Exam</option><option>School subjects</option></select></label>
             <label>School or learning institution<input name="school" maxlength="150" placeholder="Optional"></label>
+            <label>Province<select name="province" id="profile-province"><option value="">Select province (optional)</option></select></label>
+            <label>City or municipality<input name="city" maxlength="100" placeholder="Optional"></label>
+            <label class="consent-label full location-consent"><input type="checkbox" name="share_location_insights"><span>Include my province in anonymous regional learner-demand insights. My name, exact address, and contact information will not appear on the map.</span></label>
             <label class="full">Avatar image URL<input type="url" name="avatar_url" placeholder="Optional public image URL"></label>
             <button class="button full" type="submit">Save profile</button>
             <p class="form-status" id="profile-status"></p>

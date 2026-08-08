@@ -218,6 +218,9 @@
         student_level: String(profile.student_level || "").trim(),
         target_exam: String(profile.target_exam || "").trim(),
         school: String(profile.school || "").trim(),
+        province: String(profile.province || "").trim(),
+        city: String(profile.city || "").trim(),
+        share_location_insights: Boolean(profile.share_location_insights),
         avatar_url: String(profile.avatar_url || "").trim() || null,
         updated_at: new Date().toISOString()
       };

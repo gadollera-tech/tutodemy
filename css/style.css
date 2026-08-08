@@ -375,3 +375,82 @@ code{background:#eef0f8;padding:.16rem .38rem;border-radius:6px}
 @media(max-width:760px){
   .payment-panel-heading{display:grid}.payment-qr-card{grid-template-columns:1fr}.payment-qr-card img{justify-self:center;max-width:360px}.payment-instruction-grid{grid-template-columns:1fr}.payment-instruction-grid .full{grid-column:auto}.payout-qr-preview,.private-payout-account>div{align-items:flex-start;display:grid}.private-payout-account b{text-align:left}
 }
+
+
+/* --------------------------------------------------------------------------
+   Refined landing page and regional location insights
+   -------------------------------------------------------------------------- */
+.home-refined{background:#fff}
+.home-hero-clean{padding:78px 0 72px;background:#fff;border-bottom:1px solid var(--line)}
+.home-hero-layout{display:grid;grid-template-columns:minmax(0,.88fr) minmax(480px,1.12fr);gap:72px;align-items:center}
+.home-hero-copy{max-width:650px}
+.home-hero-copy h1{font-size:clamp(3.2rem,6vw,5.65rem);line-height:.97;letter-spacing:-.065em;color:var(--navy);margin:16px 0 24px}
+.home-hero-copy>p{font-size:1.12rem;line-height:1.75;color:var(--muted);max-width:620px}
+.home-account-actions{display:flex;gap:12px;flex-wrap:wrap;margin:30px 0 14px}
+.home-account-note{font-size:.9rem!important;line-height:1.55!important;color:#667085!important;max-width:610px!important}
+.home-choice-panel{border:1px solid #dfe3f0;background:#fbfcff;border-radius:24px;padding:28px;box-shadow:0 22px 55px rgba(25,31,88,.10)}
+.home-choice-heading{padding:0 4px 18px;border-bottom:1px solid var(--line)}
+.home-choice-heading span{display:block;color:var(--blue);font-weight:800;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase}
+.home-choice-heading h2{font-size:1.75rem;letter-spacing:-.035em;color:var(--navy);margin:7px 0 0}
+.home-choice-list{display:grid}
+.home-choice-list a{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding:19px 4px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;transition:background .18s ease,padding .18s ease,color .18s ease}
+.home-choice-list a:last-child{border-bottom:0}
+.home-choice-list a:hover,.home-choice-list a:focus-visible{background:#f1f3ff;padding-left:14px;padding-right:14px;color:var(--navy);outline:none;border-radius:12px}
+.home-choice-list b{display:block;font-size:1.02rem;margin-bottom:4px}
+.home-choice-list small{display:block;color:var(--muted);line-height:1.45}
+.home-choice-list i{font-style:normal;font-size:1.35rem;color:var(--blue)}
+.home-location-section{background:#f7f8fc;border-bottom:1px solid var(--line)}
+.location-layout{display:grid;grid-template-columns:minmax(0,.88fr) minmax(430px,1.12fr);gap:70px;align-items:center}
+.location-copy h2,.home-tutor-layout h2,.home-final-cta h2{font-size:clamp(2.3rem,4.5vw,4rem);line-height:1.02;letter-spacing:-.052em;color:var(--navy);margin:12px 0 18px}
+.location-copy>p,.home-tutor-layout>div>p{font-size:1.02rem;line-height:1.75;color:var(--muted)}
+.location-layer-tabs,.location-mode-filter{display:flex;flex-wrap:wrap;gap:8px;margin-top:25px}
+.location-mode-filter{margin-top:10px}
+.location-layer-tabs button,.location-mode-filter button{border:1px solid #d9deeb;background:#fff;color:#454b67;border-radius:999px;padding:9px 14px;font:inherit;font-size:.88rem;font-weight:700;cursor:pointer}
+.location-layer-tabs button.active,.location-mode-filter button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.location-summary{margin-top:24px;padding:18px 20px;border:1px solid #dde2ef;border-radius:16px;background:#fff;display:grid;gap:4px}
+.location-summary b{color:var(--navy);font-size:1.05rem}
+.location-summary span{color:var(--muted);font-size:.9rem}
+.location-region-list{display:grid;gap:7px;margin-top:12px}
+.location-region-list button{display:flex;justify-content:space-between;gap:18px;width:100%;padding:11px 14px;border:0;border-bottom:1px solid #e2e5ee;background:transparent;color:#414862;text-align:left;font:inherit;cursor:pointer}
+.location-region-list button:hover{color:var(--navy);background:#fff;border-radius:8px}
+.location-region-list b{color:var(--navy)}
+.location-privacy-note{font-size:.82rem!important;line-height:1.55!important;margin-top:18px;color:#697089!important}
+.philippines-map-card{background:#fff;border:1px solid #dde2ed;border-radius:26px;padding:26px;box-shadow:0 24px 60px rgba(23,26,112,.09)}
+.philippines-map{width:100%;max-height:640px;display:block}
+.map-grid path{fill:none;stroke:#eef0f6;stroke-width:1}
+.ph-outline path,.ph-outline circle{fill:#e8ebf7;stroke:#cfd5e8;stroke-width:2}
+.map-marker{cursor:pointer;outline:none}
+.map-marker circle{fill:#7e8be0;opacity:var(--marker-opacity,.18);stroke:#fff;stroke-width:3;filter:drop-shadow(0 4px 8px rgba(24,31,107,.2));transition:transform .18s ease,opacity .18s ease}
+.map-marker.has-data circle{fill:var(--navy)}
+.map-marker:hover circle,.map-marker:focus circle{transform:scale(1.12);opacity:1}
+.map-marker text{fill:#fff;font-size:10px;text-anchor:middle;font-weight:800;pointer-events:none}
+.map-legend{display:flex;justify-content:center;gap:22px;color:#6b7188;font-size:.78rem;margin-top:-2px}
+.map-legend span{display:flex;align-items:center;gap:7px}
+.map-legend i{display:inline-block;width:11px;height:11px;border-radius:50%;background:#aab3ea}.map-legend span:last-child i{width:19px;height:19px;background:var(--navy)}
+.philippines-map-card>small{display:block;text-align:center;color:#81879b;margin-top:10px}
+.compact-heading{max-width:760px;margin-inline:auto}
+.home-how-section{background:#fff}
+.home-how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.home-how-grid article{padding:28px;border:1px solid #e2e5ee;border-radius:18px;background:#fff}
+.home-how-grid h3{font-size:1.22rem;color:var(--navy);margin:0 0 10px}
+.home-how-grid p{color:var(--muted);line-height:1.65;margin:0}
+.home-tutor-section{background:#fbfaf7}
+.home-tutor-layout{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.refined-tutor-preview{display:grid;gap:12px}
+.refined-mini-tutor{display:grid!important;grid-template-columns:64px 1fr;align-items:center;gap:15px;padding:14px!important;border:1px solid #e2e3e8!important;border-radius:15px!important;background:#fff!important;text-decoration:none}
+.refined-mini-tutor img{width:64px!important;height:64px!important;border-radius:14px!important;object-fit:cover}
+.refined-mini-tutor b{display:block;color:var(--navy);margin-bottom:3px}
+.refined-mini-tutor small,.refined-mini-tutor span{display:block;color:var(--muted);font-size:.82rem;line-height:1.4}
+.home-final-cta{background:var(--navy);color:#fff;padding:58px 0}
+.home-final-cta-inner{display:flex;justify-content:space-between;gap:32px;align-items:center}
+.home-final-cta h2{color:#fff;margin-bottom:0;max-width:720px}
+.signup-success{padding:18px 0 6px;text-align:center}
+.signup-success-mark{display:grid;place-items:center;width:54px;height:54px;border-radius:50%;margin:0 auto 18px;background:#e7f8ed;color:#168245;font-size:1.6rem;font-weight:900}
+.signup-success h3{font-size:1.55rem;line-height:1.25;color:var(--navy);margin:0 0 12px}
+.signup-success p{color:var(--muted);line-height:1.65}
+.signup-success-help{padding:12px 14px;background:#fff8e7;border-radius:10px;font-size:.9rem}
+.location-consent{align-items:flex-start!important}
+.location-consent input{margin-top:4px}
+.policy-prose{max-width:900px}.policy-prose h2{font-size:2rem;color:var(--navy);margin:10px 0 15px}.policy-prose p{color:var(--muted);line-height:1.75}
+@media(max-width:1050px){.home-hero-layout,.location-layout,.home-tutor-layout{grid-template-columns:1fr}.home-hero-copy{max-width:none}.location-layout{gap:40px}.philippines-map-card{max-width:680px;margin:auto;width:100%}}
+@media(max-width:760px){.home-hero-clean{padding:48px 0 44px}.home-hero-copy h1{font-size:3.15rem}.home-choice-panel{padding:20px}.home-choice-list a{padding:17px 2px}.home-account-actions .button{width:100%;text-align:center}.location-layer-tabs,.location-mode-filter{display:grid;grid-template-columns:1fr 1fr}.location-mode-filter{grid-template-columns:repeat(3,1fr)}.location-layer-tabs button,.location-mode-filter button{padding:10px 8px}.philippines-map-card{padding:14px}.home-how-grid{grid-template-columns:1fr}.home-final-cta-inner{display:grid}.home-final-cta .button-row{width:100%}.home-final-cta .button{flex:1;text-align:center}}

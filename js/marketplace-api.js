@@ -110,6 +110,17 @@
     return rows;
   }
 
+  async function publicLearnerLocationInsights() {
+    if (!client()) return [];
+    const { data, error } = await client().rpc("public_learner_location_insights");
+    if (error) {
+      const message = String(error.message || error.details || "").toLowerCase();
+      if (message.includes("public_learner_location_insights") || message.includes("function") || message.includes("schema cache")) return [];
+      throw friendlyError(error);
+    }
+    return data || [];
+  }
+
   async function getPublicTutor(tutorId) {
     if (!client()) return null;
     const [{ data: tutor, error }, { data: availability, error: availabilityError }, { data: reviews, error: reviewError }] = await Promise.all([
@@ -592,6 +603,7 @@
     checkAdmin,
     getMyAccountProfile,
     publicTutors,
+    publicLearnerLocationInsights,
     getPublicTutor,
     getMyTutorProfile,
     saveTutorDraft,

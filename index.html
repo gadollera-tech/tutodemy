@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="TutoDemy Learning PH tutoring, CET practice, reviewer, and tutor-connect website.">
-  <meta name="theme-color" content="#11156f">
+  <meta name="description" content="Prepare for UPCAT, other college entrance tests, and the DOST-SEI scholarship exam, or connect with an approved tutor through TutoDemy Learning PH.">
+  <meta name="theme-color" content="#171A70">
   <link rel="canonical" href="https://tutodemy.net/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Home | TutoDemy Learning PH">
-  <meta property="og:description" content="TutoDemy Learning PH tutoring, CET practice, reviewer, and tutor-connect website.">
+  <meta property="og:title" content="TutoDemy Learning PH">
+  <meta property="og:description" content="Exam preparation, academic support, and an admin-approved tutor marketplace for Filipino learners.">
   <meta property="og:url" content="https://tutodemy.net/">
   <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <title>Home | TutoDemy Learning PH</title>
+  <title>TutoDemy Learning PH | Prepare, Find Support, or Teach</title>
   <link rel="icon" href="assets/images/owl-mark.png">
   <link rel="apple-touch-icon" href="assets/images/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
@@ -22,153 +22,132 @@
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js"></script><script defer src="data/question-bank.js"></script><script defer src="js/home.js"></script>
+  <script defer src="js/marketplace-api.js"></script>
+  <script defer src="data/taxonomy.js"></script>
+  <script defer src="data/philippines-locations.js"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="data/question-bank.js"></script>
+  <script defer src="js/home.js"></script>
 </head>
-<body data-page="home">
+<body data-page="home" class="home-refined">
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div id="site-header"></div>
   <main id="main-content">
-<section class="hero-home">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <span class="eyebrow">TUTORING • CET & DOST-SEI PREP • ACADEMIC SUPPORT</span>
-      <h1>Study smarter.<br><em>Grow with guidance.</em></h1>
-      <p>TutoDemy Learning PH brings together original practice banks, timed mock exams, study reviewers, and a growing tutor directory for Filipino learners.</p>
-      <div class="button-row">
-        <a class="button" href="exams.html">Start CET practice</a>
-        <a class="button button-outline" href="dost-sei.html">Open DOST-SEI prep</a>
+    <section class="home-hero-clean">
+      <div class="container home-hero-layout">
+        <div class="home-hero-copy">
+          <span class="eyebrow">TUTODEMY LEARNING PH</span>
+          <h1>Prepare for the exam.<br>Find the right support.</h1>
+          <p>Choose a clear path for college entrance tests, DOST-SEI preparation, academic help, or tutoring—without searching through a crowded homepage.</p>
+          <div class="home-account-actions">
+            <a class="button" href="auth.html?tab=signup">Create a free account</a>
+            <a class="button button-outline" href="auth.html?tab=signin">Log in</a>
+          </div>
+          <p class="home-account-note">Practice materials may be explored without an account. An account is needed for saved progress, tutor applications, bookings, and private messages.</p>
+        </div>
+
+        <div class="home-choice-panel" aria-labelledby="home-choice-title">
+          <div class="home-choice-heading">
+            <span>Start here</span>
+            <h2 id="home-choice-title">What do you need today?</h2>
+          </div>
+          <nav class="home-choice-list" aria-label="Choose a TutoDemy service">
+            <a href="exams.html"><span><b>UPCAT & other college entrance tests</b><small>Practice sets, timed modes, mock exams, and reviewers</small></span><i aria-hidden="true">→</i></a>
+            <a href="dost-sei.html"><span><b>DOST-SEI preparation</b><small>Verbal, non-verbal, science, mathematics, and technical practice</small></span><i aria-hidden="true">→</i></a>
+            <a href="tutoring.html"><span><b>Looking for a tutor</b><small>Browse admin-approved profiles by subject, mode, and location</small></span><i aria-hidden="true">→</i></a>
+            <a href="auth.html?tab=signup&role=tutor"><span><b>Become a tutor</b><small>Create an account and submit a profile for admin approval</small></span><i aria-hidden="true">→</i></a>
+            <a href="reviewers.html"><span><b>General academic help</b><small>Review subject notes or find support beyond entrance exams</small></span><i aria-hidden="true">→</i></a>
+          </nav>
+        </div>
       </div>
-      <div class="hero-pills">
-        <span>2,580 original reviewed questions</span>
-        <span>20–200 item sets</span>
-        <span>Timer and mock modes</span>
-        <span>Open learning access</span><span>Optional learner accounts</span>
+    </section>
+
+    <section class="section home-location-section" id="location-insights">
+      <div class="container location-layout">
+        <div class="location-copy">
+          <span class="eyebrow">PHILIPPINES LOCATION INSIGHTS</span>
+          <h2>See where tutoring support is available.</h2>
+          <p>The map summarizes approved tutor availability by region. Learner demand appears only as anonymous regional totals when users choose to share their province for this purpose.</p>
+
+          <div class="location-layer-tabs" role="tablist" aria-label="Map data layer">
+            <button class="active" type="button" data-location-layer="tutors" aria-selected="true">Tutor availability</button>
+            <button type="button" data-location-layer="learners" aria-selected="false">Learner demand</button>
+          </div>
+          <div class="location-mode-filter" id="location-mode-filter" aria-label="Tutor teaching mode">
+            <button class="active" type="button" data-location-mode="all">All modes</button>
+            <button type="button" data-location-mode="in-person">Face-to-face</button>
+            <button type="button" data-location-mode="online">Online</button>
+          </div>
+
+          <div class="location-summary" id="location-summary" aria-live="polite">
+            <b>Loading location insights…</b>
+            <span>Approved tutor locations will appear here.</span>
+          </div>
+          <div class="location-region-list" id="location-region-list"></div>
+          <p class="location-privacy-note">Regional overview only. Exact home addresses and private contact details are never shown on this map.</p>
+        </div>
+
+        <div class="philippines-map-card">
+          <svg id="philippines-map" class="philippines-map" viewBox="0 0 430 650" role="img" aria-labelledby="map-title map-desc">
+            <title id="map-title">Philippines tutoring location map</title>
+            <desc id="map-desc">A regional overview of approved tutors or anonymous learner demand.</desc>
+            <g class="map-grid" aria-hidden="true">
+              <path d="M55 80H390M55 190H390M55 300H390M55 410H390M55 520H390" />
+              <path d="M95 45V605M190 45V605M285 45V605M380 45V605" />
+            </g>
+            <g class="ph-outline" aria-hidden="true">
+              <path d="M180 54c26 7 45 20 57 43 11 21 13 44 29 60 14 14 27 23 31 42 5 22-5 42-17 58-12 17-15 33-15 55-1 24-13 45-32 58-18 12-31 7-39-11-9-20-8-42-20-59-12-17-35-20-45-40-10-19-4-43 7-61 12-18 25-29 27-52 2-24-4-45 2-67 3-13 7-22 15-26z" />
+              <path d="M113 273c9 6 11 19 8 31-4 17-11 35-18 50-7 16-17 36-28 49-8 9-17 8-20-4-4-14 2-31 9-44 10-17 13-34 19-53 5-17 17-38 30-29z" />
+              <path d="M206 339c11 2 21 11 23 24 2 15-4 32-15 39-10 7-18 0-19-13-2-16 1-33 11-50z" />
+              <path d="M251 345c9 1 15 9 15 20 0 13-6 29-14 39-7 8-14 3-15-8-1-13 3-39 14-51z" />
+              <path d="M294 332c13 5 19 20 15 34-4 15-13 30-23 35-9 5-16-3-15-16 1-17 10-43 23-53z" />
+              <path d="M168 383c10 3 13 17 8 30-6 14-16 27-25 29-9 1-13-8-10-20 4-17 15-43 27-39z" />
+              <path d="M230 423c12 0 22 8 25 21 3 14-2 30-13 38-10 7-20 0-22-13-3-15-1-36 10-46z" />
+              <path d="M283 445c25-11 61-7 78 13 16 18 17 45 7 67-10 21-30 36-54 40-23 4-48-3-62-21-14-18-15-43-5-63 8-17 21-29 36-36z" />
+              <path d="M143 490c16 7 24 23 24 40 0 18-8 39-21 50-11 10-23 4-27-12-5-20 1-43 8-60 4-11 9-21 16-18z" />
+              <circle cx="112" cy="536" r="8"/><circle cx="95" cy="559" r="6"/><circle cx="77" cy="580" r="5"/>
+            </g>
+            <g id="location-map-markers" class="location-map-markers"></g>
+          </svg>
+          <div class="map-legend"><span><i></i> Lower activity</span><span><i></i> Higher activity</span></div>
+          <small>Map positions are regional guides and are not exact addresses.</small>
+        </div>
       </div>
-    </div>
-    <div class="hero-visual">
-      <div class="owl-glow"></div>
-      <img class="hero-owl" src="assets/images/owl-mark.png" alt="TutoDemy owl mascot wearing a graduation cap">
-      <div class="floating-card card-one"><b>200-item mock</b><small>Randomized each attempt</small></div>
-      <div class="floating-card card-two"><b>Find your tutor</b><small>Admin-approved profiles only</small></div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="section stats-strip">
-  <div class="container stat-grid">
-    <article><b data-count="Mathematics">220</b><span>Mathematics questions</span></article>
-    <article><b data-count="Language & Reading">220</b><span>Language & Reading questions</span></article>
-    <article><b data-count="Science">220</b><span>Science questions</span></article>
-    <article><b data-count="Reasoning">220</b><span>Reasoning questions</span></article>
-  </div>
-</section>
-
-
-<section class="section dost-home-feature">
-  <div class="container dost-home-grid">
-    <div class="section-heading">
-      <span class="eyebrow light">COMPLETE DOST-SEI MODULE</span>
-      <h2>Waves 1–4 are now inside the whole TutoDemy website.</h2>
-      <p>Open a dedicated 1,700-question bank with Verbal, Non-Verbal, English, Science, Mathematics, and Mechanical-Technical preparation, including original passages, tables, and SVG visual reasoning sets.</p>
-      <div class="button-row"><a class="button button-light" href="dost-sei.html">Explore DOST-SEI preparation</a><a class="button button-ghost" href="dost-sei/dost-practice.html">Launch practice builder</a></div>
-    </div>
-    <div class="dost-home-stats">
-      <article><b>1,700</b><span>DOST-SEI-style questions</span></article>
-      <article><b>300</b><span>Original stimuli</span></article>
-      <article><b>200</b><span>Strict mock items</span></article>
-      <article><b>9</b><span>Preparation areas</span></article>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="section-heading centered">
-      <span class="eyebrow">CHOOSE YOUR LEARNING PATH</span>
-      <h2>Practice independently or learn with a tutor.</h2>
-      <p>The website is organized around two connected experiences: self-paced exam preparation and guided academic support.</p>
-    </div>
-    <div class="path-grid">
-      <a href="exams.html" class="path-card exam">
-        <span class="path-icon">✦</span><small>SELF-PACED</small><h3>CET Practice Hub</h3>
-        <p>Create 20, 50, 100, 200, or custom-item sets. Choose Practice, Timed Practice, or Mock Exam mode.</p><b>Open exam hub →</b>
-      </a>
-      <a href="reviewers.html" class="path-card reviewers">
-        <span class="path-icon">▤</span><small>REVIEW</small><h3>Subject Reviewers</h3>
-        <p>Use concise framework-based notes before answering questions from the same domain.</p><b>Browse reviewers →</b>
-      </a>
-      <a href="tutoring.html" class="path-card tutors">
-        <span class="path-icon">☺</span><small>GUIDED SUPPORT</small><h3>Tutor Connect</h3>
-        <p>Browse approved tutor profiles by subject, location, rate, level, and learning mode, then request a schedule.</p><b>Meet the tutor team →</b>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="section section-blue">
-  <div class="container split-feature">
-    <div>
-      <span class="eyebrow light">RANDOMIZED EXAM ENGINE</span>
-      <h2>Different questions, one saved attempt.</h2>
-      <p>Every new attempt selects and shuffles a fresh set from the available pool. The active exam is saved in your browser so a refresh does not silently generate a different test.</p>
-      <div class="feature-checks">
-        <span>✓ Question and choice randomization</span>
-        <span>✓ Countdown warnings and auto-submit</span>
-        <span>✓ Flag-for-review navigator</span>
-        <span>✓ Results by subject, domain, and difficulty</span>
-        <span>✓ Retry incorrect questions</span>
-        <span>✓ Attempt history on the same device</span>
+    <section class="section home-how-section">
+      <div class="container">
+        <div class="section-heading centered compact-heading">
+          <span class="eyebrow">HOW TUTODEMY WORKS</span>
+          <h2>A straightforward path from study goal to support.</h2>
+        </div>
+        <div class="home-how-grid">
+          <article><h3>Choose your goal</h3><p>Start with exam preparation, subject reviewers, or the approved tutor directory.</p></article>
+          <article><h3>Create an account when needed</h3><p>Save progress, apply as a tutor, book a session, and use private booking messages.</p></article>
+          <article><h3>Continue with a clear record</h3><p>Bookings, payment confirmation, session status, reviews, and tutor payouts stay organized.</p></article>
+        </div>
       </div>
-      <a class="button button-light" href="practice.html">Build a practice set</a>
-    </div>
-    <div class="exam-preview">
-      <div class="preview-top"><b>Full Practice</b><span>01:42:18</span></div>
-      <div class="preview-progress"><i style="width:34%"></i></div>
-      <small>Question 67 of 200</small>
-      <h3>A student walks 3 km east and 4 km north. What is the magnitude of the displacement?</h3>
-      <div class="preview-choice"><i>A</i> 1 km</div>
-      <div class="preview-choice selected"><i>B</i> 5 km</div>
-      <div class="preview-choice"><i>C</i> 7 km</div>
-      <div class="preview-choice"><i>D</i> 12 km</div>
-      <div class="preview-nav"><span>Previous</span><b>Flag for review</b><span>Next</span></div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section class="section">
-  <div class="container">
-    <div class="section-heading">
-      <span class="eyebrow">SUBJECT BANKS</span>
-      <h2>Four broad banks, multiple focused domains.</h2>
-    </div>
-    <div class="subject-card-grid" id="home-subjects"></div>
-  </div>
-</section>
+    <section class="section home-tutor-section">
+      <div class="container home-tutor-layout">
+        <div>
+          <span class="eyebrow">APPROVED TUTOR DIRECTORY</span>
+          <h2>Find support by subject, location, and learning mode.</h2>
+          <p>Tutors appear publicly only after admin review. Their private verification files, payout details, and internal platform information are not shown to learners.</p>
+          <div class="button-row"><a class="button" href="tutoring.html">Browse tutors</a><a class="button button-outline" href="auth.html?tab=signup&role=tutor">Apply as a tutor</a></div>
+        </div>
+        <div class="mini-tutor-grid refined-tutor-preview" id="home-tutors"></div>
+      </div>
+    </section>
 
-<section class="section section-cream">
-  <div class="container tutor-teaser">
-    <div>
-      <span class="eyebrow">TUTOR MARKETPLACE</span>
-      <h2>Choose from tutors approved by TutoDemy administration.</h2>
-      <p>Tutors create their own accounts, submit public teaching profiles and private verification files, and appear in the directory only after approval.</p>
-      <div class="button-row"><a class="button" href="tutoring.html">Find a tutor</a><a class="button button-outline" href="tutor-onboarding.html">Become a tutor</a></div>
-    </div>
-    <div class="mini-tutor-grid" id="home-tutors"></div>
-  </div>
-</section>
-
-<section class="section founder-note">
-  <div class="container founder-note-grid">
-    <img src="assets/images/tutodemy-logo.png" alt="TutoDemy Learning PH logo">
-    <div>
-      <span class="eyebrow light">PUBLISHABLE PLATFORM FOUNDATION</span>
-      <h2>Practice, reviewers, accounts, and an approval-based tutor marketplace.</h2>
-      <p>The platform includes reviewed learning materials, learner and tutor accounts, private tutor verification, approved public profiles, booking requests, payment confirmation, verified reviews, private tutor earnings records, and an administrator-managed approval process.</p>
-      <a class="button button-light" href="about.html">See how TutoDemy works</a>
-    </div>
-  </div>
-</section>
-</main>
+    <section class="section home-final-cta">
+      <div class="container home-final-cta-inner">
+        <div><span class="eyebrow light">READY WHEN YOU ARE</span><h2>Start with the support you need today.</h2></div>
+        <div class="button-row"><a class="button button-light" href="auth.html?tab=signup">Create account</a><a class="button button-ghost" href="auth.html?tab=signin">Log in</a></div>
+      </div>
+    </section>
+  </main>
   <div id="site-footer"></div>
   <div class="toast" role="status" aria-live="polite"></div>
 </body>

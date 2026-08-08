@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const header = document.querySelector("#site-header");
   if (header) {
     header.innerHTML = `
-      <div class="site-note">Reviewed original learning materials • Tutor profiles require admin approval • Booking payments are confirmed through TutoDemy.</div>
+      <div class="site-note">UPCAT & CET preparation • DOST-SEI preparation • Admin-approved tutor marketplace</div>
       <header class="site-header">
         <div class="container nav-wrap">
           <a class="brand" href="index.html" aria-label="TutoDemy home"><img src="assets/images/wordmark.png" alt="TutoDemy Learning PH"></a>

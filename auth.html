@@ -24,6 +24,7 @@
   <script defer src="js/cloud-sync.js"></script>
   <script defer src="js/marketplace-api.js"></script>
   <script defer src="data/taxonomy.js"></script>
+  <script defer src="data/philippines-locations.js"></script>
   <script defer src="js/main.js"></script>
   <script defer src="js/auth-page.js"></script>
 </head>
@@ -84,10 +85,20 @@
                 <div id="learner-signup-fields" class="auth-subfields full">
                   <label>Student level<select name="student_level"><option value="">Prefer not to say yet</option><option>Elementary</option><option>Junior High</option><option>Senior High</option><option>College</option><option>CET Applicant</option></select></label>
                   <label>Target exam<select name="target_exam"><option value="">General academic support</option><option>UPCAT</option><option>DCAT</option><option>Other CET</option><option>DOST-SEI Scholarship Exam</option><option>School subjects</option></select></label>
+                  <label>Province<select name="province" id="signup-province"><option value="">Select province (optional)</option></select></label>
+                  <label>City or municipality<input name="city" maxlength="100" placeholder="Optional"></label>
+                  <label class="consent-label full location-consent"><input type="checkbox" name="share_location_insights"><span>Include my province in anonymous regional learner-demand insights. My name, exact address, and contact details will never appear on the map.</span></label>
                 </div>
                 <label class="consent-label full"><input type="checkbox" required><span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms of Use</a> and have read the <a href="privacy.html" target="_blank" rel="noopener">Privacy Notice</a>.</span></label>
-                <button class="button full" type="submit">Create account</button>
+                <button class="button full" type="submit" id="create-account-button">Create account</button>
               </form>
+              <div class="signup-success" id="signup-success" hidden>
+                <span class="signup-success-mark" aria-hidden="true">✓</span>
+                <h3>Check your email to finish creating your account.</h3>
+                <p>We sent a confirmation link to <b id="signup-success-email"></b>. Open the email from <b>TutoDemy Learning PH</b>, then click the confirmation button.</p>
+                <p class="signup-success-help">The message may take a minute. Check Spam, Junk, or Promotions if it is not in your inbox.</p>
+                <button class="button button-outline full" type="button" id="signup-back-to-login">Back to log in</button>
+              </div>
             </div>
 
             <div class="auth-panel" id="forgot-panel">
