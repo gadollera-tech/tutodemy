@@ -42,7 +42,7 @@
       <div class="container onboarding-layout">
         <aside class="onboarding-sidebar">
           <div class="status-card"><span class="eyebrow">APPLICATION STATUS</span><h2 id="application-status">Loading…</h2><p id="application-message">Checking your tutor profile.</p></div>
-          <nav class="onboarding-nav"><a href="#public-profile">Public profile</a><a href="#teaching-details">Teaching details</a><a href="#availability">Availability</a><a href="#verification">Private verification</a><a href="#submit-review">Submit for review</a></nav>
+          <nav class="onboarding-nav"><a href="#public-profile">Public profile</a><a href="#teaching-details">Teaching details</a><a href="#availability">Availability</a><a href="#payout-details">Private payout details</a><a href="#verification">Private verification</a><a href="#submit-review">Submit for review</a></nav>
           <div class="security-note"><b>Private files</b><p>IDs and credential files use a private Supabase Storage bucket. Only you and authorized TutoDemy administrators can access them.</p></div>
         </aside>
 
@@ -95,8 +95,22 @@
               <button class="button button-outline" id="add-availability" type="button">+ Add schedule row</button>
             </section>
 
+
+            <section class="panel form-section" id="payout-details">
+              <div class="panel-heading"><div><span class="eyebrow">PRIVATE PAYOUT DETAILS</span><h2>Where your weekly earnings will be sent</h2></div><span>Step 4</span></div>
+              <div class="private-field-notice"><b>Visible only to you and authorized TutoDemy administrators.</b><span>Students and parents cannot see your GCash number, registered name, payout QR, commission tier, or net earnings.</span></div>
+              <div class="form-grid">
+                <label>Payout method<select name="payout_method"><option value="GCash" selected>GCash</option></select></label>
+                <label>GCash registered name<input name="payout_account_name" maxlength="120" autocomplete="name" placeholder="Name shown in your GCash account"></label>
+                <label class="full">GCash mobile number<input name="payout_account_number" inputmode="numeric" maxlength="13" autocomplete="tel" placeholder="09XXXXXXXXX"><small>Use an active 11-digit GCash number. Double-check this before submitting your tutor application.</small></label>
+                <label class="full">GCash QR code (optional)<input type="file" id="payout-qr-file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG, or WebP; maximum 5 MB. Stored privately and used only by authorized administrators for tutor payouts.</small></label>
+                <div class="payout-qr-preview full" id="payout-qr-preview"><span>No private payout QR uploaded yet.</span><button class="text-button" id="view-payout-qr" type="button" hidden>View current QR</button></div>
+              </div>
+              <p class="muted">TutoDemy records eligible completed-session earnings and processes tutor payouts in a weekly batch. Actual release timing may vary because of verification, weekends, holidays, or GCash service availability.</p>
+            </section>
+
             <section class="panel form-section" id="verification">
-              <div class="panel-heading"><div><span class="eyebrow">PRIVATE VERIFICATION</span><h2>Upload documents for admin review</h2></div><span>Step 4</span></div>
+              <div class="panel-heading"><div><span class="eyebrow">PRIVATE VERIFICATION</span><h2>Upload documents for admin review</h2></div><span>Step 5</span></div>
               <div class="form-grid">
                 <label>Document type<select id="document-type"><option value="Valid ID">Valid ID</option><option value="Education credential">Education credential</option><option value="Teaching credential">Teaching credential</option><option value="Reference or clearance">Reference or clearance</option><option value="Other supporting document">Other supporting document</option></select></label>
                 <label>PDF, JPG, or PNG<input type="file" id="verification-file" accept="application/pdf,image/jpeg,image/png"></label>
@@ -106,8 +120,8 @@
             </section>
 
             <section class="panel form-section" id="submit-review">
-              <div class="panel-heading"><div><span class="eyebrow">SAVE AND SUBMIT</span><h2>Review your information</h2></div><span>Step 5</span></div>
-              <label class="consent-label"><input id="tutor-declaration" type="checkbox"><span>I confirm that the information and documents are accurate, that I will follow the TutoDemy tutor standards, and that my public profile may be displayed after approval.</span></label>
+              <div class="panel-heading"><div><span class="eyebrow">SAVE AND SUBMIT</span><h2>Review your information</h2></div><span>Step 6</span></div>
+              <label class="consent-label"><input id="tutor-declaration" type="checkbox"><span>I confirm that the information, verification documents, and private payout details are accurate; that I will follow the TutoDemy tutor standards; and that my public profile may be displayed after approval.</span></label>
               <div class="button-row"><button class="button button-outline" id="save-draft" type="submit">Save draft</button><button class="button" id="submit-application" type="button">Submit for admin review</button></div>
               <p class="form-status" id="application-form-status" role="status" aria-live="polite"></p>
             </section>
