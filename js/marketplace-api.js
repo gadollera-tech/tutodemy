@@ -155,11 +155,6 @@
       credentials_summary: String(values.credentials_summary || "").trim(),
       years_experience: Number(values.years_experience || 0),
       languages: cleanArray(values.languages),
-      payout_method: String(values.payout_method || "GCash").trim() || "GCash",
-      payout_account_name: String(values.payout_account_name || "").trim(),
-      payout_account_number: String(values.payout_account_number || "").replace(/[^0-9]/g, ""),
-      payout_qr_path: values.payout_qr_path || existing?.payout_qr_path || null,
-      payout_updated_at: new Date().toISOString(),
       updated_at: new Date().toISOString()
     };
     const { data, error } = await client().from("tutor_profiles")
@@ -229,25 +224,6 @@
     }).select().single();
     if (error) throw friendlyError(error);
     return data;
-  }
-
-  async function uploadPayoutQr(file) {
-    const current = requireUser();
-    if (!file) return null;
-    if (!/^image\/(jpeg|png|webp)$/i.test(file.type)) throw new Error("Use a JPG, PNG, or WebP payout QR image.");
-    if (file.size > 5 * 1024 * 1024) throw new Error("Payout QR image must be 5 MB or smaller.");
-    const path = `${current.id}/${Date.now()}-${safeName(file.name)}`;
-    const { error } = await client().storage.from("tutor-payout-qr").upload(path, file, { upsert: true, contentType: file.type });
-    if (error) throw friendlyError(error);
-    return path;
-  }
-
-  async function signedPayoutQrUrl(path) {
-    requireUser();
-    if (!path) return "";
-    const { data, error } = await client().storage.from("tutor-payout-qr").createSignedUrl(path, 900);
-    if (error) throw friendlyError(error);
-    return data?.signedUrl || "";
   }
 
   async function getMyDocuments() {
@@ -399,94 +375,6 @@
   }
 
 
-  async function getBookingPaymentInstructions(bookingId) {
-    requireUser();
-    const { data, error } = await client().rpc("get_booking_payment_instructions", { p_booking_id: bookingId });
-    if (error) throw friendlyError(error);
-    return Array.isArray(data) ? (data[0] || null) : data;
-  }
-
-  async function signedPlatformPaymentQrUrl(path) {
-    requireUser();
-    if (!path) return "";
-    const { data, error } = await client().storage.from("platform-payment-qr").createSignedUrl(path, 600);
-    if (error) throw friendlyError(error);
-    return data?.signedUrl || "";
-  }
-
-  async function uploadPaymentProof(bookingId, file) {
-    const current = requireUser();
-    if (!file) throw new Error("Choose a payment receipt first.");
-    if (!/^(application\/pdf|image\/jpeg|image\/png|image\/webp)$/i.test(file.type)) {
-      throw new Error("Payment receipt must be PDF, JPG, PNG, or WebP.");
-    }
-    if (file.size > 10 * 1024 * 1024) throw new Error("Payment receipt must be 10 MB or smaller.");
-    const path = `${current.id}/${bookingId}/${Date.now()}-${safeName(file.name)}`;
-    const { error } = await client().storage.from("booking-payment-proofs").upload(path, file, {
-      upsert: false,
-      contentType: file.type
-    });
-    if (error) throw friendlyError(error);
-    return path;
-  }
-
-  async function submitPaymentProof(bookingId, payerName, reference, proofPath, originalName = "") {
-    requireUser();
-    const { data, error } = await client().rpc("learner_submit_payment_proof", {
-      p_booking_id: bookingId,
-      p_payer_name: payerName,
-      p_payment_reference: reference,
-      p_payment_proof_path: proofPath,
-      p_original_name: originalName
-    });
-    if (error) throw friendlyError(error);
-    return data;
-  }
-
-  async function signedPaymentProofUrl(path) {
-    requireUser();
-    if (!path) return "";
-    const { data, error } = await client().storage.from("booking-payment-proofs").createSignedUrl(path, 900);
-    if (error) throw friendlyError(error);
-    return data?.signedUrl || "";
-  }
-
-  async function adminRejectPaymentSubmission(bookingId, reason) {
-    if (!state.admin && !await checkAdmin()) throw new Error("Administrator access required.");
-    const { data, error } = await client().rpc("admin_reject_payment_submission", {
-      p_booking_id: bookingId,
-      p_reason: reason
-    });
-    if (error) throw friendlyError(error);
-    return data;
-  }
-
-  async function getMyPayouts() {
-    requireUser();
-    const { data, error } = await client().rpc("get_my_tutor_payouts");
-    if (error) throw friendlyError(error);
-    return data || [];
-  }
-
-  async function adminWeeklyPayoutSummary() {
-    if (!state.admin && !await checkAdmin()) throw new Error("Administrator access required.");
-    const { data, error } = await client().rpc("admin_get_weekly_payout_summary");
-    if (error) throw friendlyError(error);
-    return data || [];
-  }
-
-  async function adminRecordWeeklyPayout(tutorId, reference, note = "") {
-    if (!state.admin && !await checkAdmin()) throw new Error("Administrator access required.");
-    const { data, error } = await client().rpc("admin_record_weekly_tutor_payout", {
-      p_tutor_id: tutorId,
-      p_payout_reference: reference,
-      p_admin_note: note
-    });
-    if (error) throw friendlyError(error);
-    return data;
-  }
-
-
   async function getMessageThreads() {
     requireUser();
     const { data, error } = await client().rpc("get_my_message_threads");
@@ -600,8 +488,6 @@
     uploadAvatar,
     publicAvatarUrl,
     uploadDocument,
-    uploadPayoutQr,
-    signedPayoutQrUrl,
     getMyDocuments,
     submitApplication,
     setAcceptingBookings,
@@ -621,15 +507,6 @@
     adminConfirmPayment,
     adminCompleteBooking,
     getMyTutorFeePolicy,
-    getBookingPaymentInstructions,
-    signedPlatformPaymentQrUrl,
-    uploadPaymentProof,
-    submitPaymentProof,
-    signedPaymentProofUrl,
-    adminRejectPaymentSubmission,
-    getMyPayouts,
-    adminWeeklyPayoutSummary,
-    adminRecordWeeklyPayout,
     getMessageThreads,
     getBookingMessages,
     sendBookingMessage,

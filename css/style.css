@@ -348,30 +348,3 @@ code{background:#eef0f8;padding:.16rem .38rem;border-radius:6px}
   .message-bubble{max-width:90%}
   .conversation-notice{align-items:flex-start;display:grid}
 }
-
-/* Private client payments and weekly tutor payouts */
-.private-field-notice,.payment-warning,.payment-review-note,.payment-pending-message{display:grid;gap:4px;border-radius:14px;padding:13px 15px;margin-bottom:16px}
-.private-field-notice{background:var(--periwinkle-soft);border:1px solid #d7dcfa}
-.private-field-notice b,.private-field-notice span{display:block}.private-field-notice b{color:var(--navy)}.private-field-notice span{color:var(--muted);font-size:.78rem}
-.payout-qr-preview{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px dashed var(--line);border-radius:13px;padding:12px 14px;background:#fafbff;color:var(--muted)}
-.booking-payment-panel{margin:17px 0;border:1px solid #d8ddf6;border-radius:18px;padding:18px;background:linear-gradient(180deg,#fbfcff,#f5f7ff)}
-.payment-panel-loading,.payment-panel-error{display:grid;gap:5px;color:var(--muted)}
-.payment-panel-error{padding:12px;border-radius:12px;background:#fff1f1;color:#8a2c37}.payment-panel-error b{color:#76212d}
-.payment-panel-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px}.payment-panel-heading h3{margin:3px 0 0;color:var(--navy)}
-.payment-instruction-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.payment-instruction-grid>div{position:relative;border:1px solid var(--line);border-radius:13px;padding:12px;background:#fff}.payment-instruction-grid .full{grid-column:1/-1}.payment-instruction-grid span{display:block;color:var(--muted);font-size:.68rem;text-transform:uppercase;letter-spacing:.04em}.payment-instruction-grid b{display:block;color:var(--navy);margin-top:4px;overflow-wrap:anywhere}.payment-instruction-grid .text-button{margin-top:7px}.payment-account-number{font-size:1.15rem;letter-spacing:.04em}
-.payment-instructions-copy{color:var(--muted);margin:13px 0}
-.payment-qr-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,300px);align-items:center;gap:18px;margin:15px 0;padding:16px;border:1px solid #cfd7f4;border-radius:16px;background:#fff}
-.payment-qr-copy{display:grid;align-content:center;justify-items:start;gap:7px}.payment-qr-copy h4{margin:0;color:var(--navy);font-size:1.12rem}.payment-qr-copy p{margin:0 0 6px;color:var(--muted);font-size:.82rem;line-height:1.55}.payment-qr-copy .button{padding:10px 15px}
-.payment-qr-card img{display:block;width:100%;max-width:300px;justify-self:end;border:1px solid var(--line);border-radius:13px;background:#fff;box-shadow:0 12px 30px rgba(17,21,111,.09)}
-.payment-warning{background:#fff8dc;border:1px solid #ead47f}.payment-warning b{color:#67530b}.payment-warning span{color:#6d602c;font-size:.77rem}.payment-review-note{background:#fff0f1;border:1px solid #efc3c9}.payment-review-note b{color:#7b2532}.payment-review-note span{color:#7c4e55;font-size:.77rem}.payment-pending-message{background:#eef8f3;border:1px solid #bee5d2}.payment-pending-message b{color:var(--green)}.payment-pending-message p{margin:0;color:#426655;font-size:.77rem}
-.payment-proof-form{margin-top:15px;border-top:1px solid var(--line);padding-top:16px}.payment-proof-form .button{margin-top:10px}
-.payment-confirmed-card{display:grid;gap:5px;background:#e9f8f0;border:1px solid #bde4cd;border-radius:14px;padding:16px}.payment-confirmed-card span{color:var(--green);font-size:.7rem;font-weight:950;letter-spacing:.06em}.payment-confirmed-card b{color:var(--navy);font-size:1.5rem}.payment-confirmed-card p{margin:0;color:#426655}
-.admin-private-payout,.payout-destination-card{display:grid;gap:5px;border-radius:14px;padding:14px;margin:14px 0}.admin-private-payout.ready,.payout-destination-card.ready{background:#eef8f3;border:1px solid #bee5d2}.admin-private-payout.incomplete,.payout-destination-card.incomplete{background:#fff1f1;border:1px solid #efc3c9}.admin-private-payout span,.payout-destination-card span{font-size:.67rem;font-weight:950;letter-spacing:.05em;color:var(--muted)}.admin-private-payout b,.payout-destination-card b{color:var(--navy)}.admin-private-payout p,.payout-destination-card p{margin:0;color:var(--muted)}
-.admin-payment-proof{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:12px 0}.admin-payment-proof small{color:var(--muted)}.admin-payout-form{display:grid;gap:10px;margin-top:14px}.admin-payout-form label{display:grid;gap:5px;font-size:.73rem;font-weight:900}.admin-payout-form input{border:1px solid var(--line);border-radius:10px;padding:11px}.admin-payout-form .muted{margin:0}
-.private-payout-account{display:grid;gap:9px;margin:12px 0}.private-payout-account>div{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:9px}.private-payout-account span{color:var(--muted);font-size:.75rem}.private-payout-account b{color:var(--navy);text-align:right}.simple-steps{display:grid;gap:10px;padding-left:20px;color:var(--muted)}.simple-steps li::marker{color:var(--gold);font-weight:950}.payout-history-heading{margin-top:34px}.status-pending{background:#fff2c9;color:#725600}.status-paid{background:#e6f6ee;color:var(--green)}
-.policy-section{max-width:1100px;margin:0 auto;padding:18px 24px}.policy-section h2{color:var(--navy)}.policy-section p{color:var(--muted)}
-.conversation-notice a{color:var(--navy);font-weight:900;text-decoration:underline}
-
-@media(max-width:760px){
-  .payment-panel-heading{display:grid}.payment-qr-card{grid-template-columns:1fr}.payment-qr-card img{justify-self:center;max-width:360px}.payment-instruction-grid{grid-template-columns:1fr}.payment-instruction-grid .full{grid-column:auto}.payout-qr-preview,.private-payout-account>div{align-items:flex-start;display:grid}.private-payout-account b{text-align:left}
-}

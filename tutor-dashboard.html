@@ -44,7 +44,7 @@
           <article><span>Current tier</span><b id="metric-tier">—</b><small id="metric-rate">—</small></article>
           <article><span>Completed sessions</span><b id="metric-completed">0</b><small id="metric-progress">Milestone progress</small></article>
           <article><span>Verified rating</span><b id="metric-rating">New</b><small id="metric-reviews">0 reviews</small></article>
-          <article><span>Recorded tutor earnings</span><b id="metric-earnings">₱0.00</b><small>Completed paid bookings</small></article><article><span>Awaiting weekly payout</span><b id="metric-pending-payout">₱0.00</b><small>Completed earnings not yet released</small></article><article><span>Total paid out</span><b id="metric-paid-out">₱0.00</b><small>Recorded weekly GCash payouts</small></article>
+          <article><span>Recorded tutor earnings</span><b id="metric-earnings">₱0.00</b><small>Completed paid bookings</small></article>
         </div>
 
         <div class="dashboard-two-column" id="private-compensation-panel" hidden>
@@ -62,24 +62,6 @@
       </div>
     </section>
 
-
-    <section class="section" id="private-payout-section" hidden>
-      <div class="container">
-        <div class="dashboard-two-column">
-          <section class="panel">
-            <span class="eyebrow">PRIVATE PAYOUT DESTINATION</span><h2>Your weekly GCash payout</h2>
-            <div class="private-payout-account" id="private-payout-account"></div>
-            <p class="muted">Update incorrect payout details before the weekly batch is processed. Students and parents cannot see this information.</p>
-            <a class="button button-outline" href="tutor-onboarding.html#payout-details">Update payout details</a>
-          </section>
-          <section class="panel">
-            <span class="eyebrow">PAYOUT SCHEDULE</span><h2>How weekly payouts work</h2>
-            <ol class="simple-steps"><li>A paid session is delivered and completed by the administrator.</li><li>Your net earning is added to the pending payout ledger.</li><li>TutoDemy sends the weekly batch to your registered GCash destination.</li><li>The completed payout and transaction reference appear below.</li></ol>
-          </section>
-        </div>
-      </div>
-    </section>
-
     <section class="section section-cream">
       <div class="container">
         <div class="section-heading"><span class="eyebrow">BOOKING REQUESTS</span><h2>Respond and deliver sessions on-platform.</h2><p>Only admin-confirmed paid bookings can be marked delivered. TutoDemy administration completes the booking and records the commission after delivery.</p></div>
@@ -90,10 +72,8 @@
 
     <section class="section" id="private-ledger-section" hidden>
       <div class="container">
-        <div class="section-heading"><span class="eyebrow">EARNINGS LEDGER</span><h2>Completed booking and payout records</h2></div>
+        <div class="section-heading"><span class="eyebrow">EARNINGS LEDGER</span><h2>Completed booking records</h2></div>
         <div class="ledger-table" id="commission-ledger"></div>
-        <div class="section-heading payout-history-heading"><span class="eyebrow">WEEKLY PAYOUT HISTORY</span><h2>Recorded GCash releases</h2></div>
-        <div class="ledger-table" id="payout-history"></div>
       </div>
     </section>
   </main>

@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     profile = await api.getMyTutorProfile();
     showProfileStatus(profile);
     if (profile) {
-      ["display_name","contact_email","headline","bio","city","province","service_area","hourly_rate","session_duration_minutes","availability_summary","education","credentials_summary","years_experience","languages","payout_method","payout_account_name","payout_account_number"].forEach(name => {
+      ["display_name","contact_email","headline","bio","city","province","service_area","hourly_rate","session_duration_minutes","availability_summary","education","credentials_summary","years_experience","languages"].forEach(name => {
         const field = form.elements[name];
         if (!field) return;
         field.value = Array.isArray(profile[name]) ? profile[name].join(", ") : (profile[name] ?? "");
@@ -73,10 +73,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (profile.profile_photo_path) {
         document.querySelector("#photo-preview img").src = api.publicAvatarUrl(profile.profile_photo_path);
         document.querySelector("#photo-preview span").textContent = "Current uploaded profile photo";
-      }
-      if (profile.payout_qr_path) {
-        document.querySelector("#payout-qr-preview span").textContent = "Private payout QR uploaded.";
-        document.querySelector("#view-payout-qr").hidden = false;
       }
     } else {
       form.elements.contact_email.value = user.email || "";
@@ -96,20 +92,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function saveDraft() {
     setStatus("Saving tutor profile…");
     const avatar = document.querySelector("#profile-photo-file").files[0];
-    const payoutQr = document.querySelector("#payout-qr-file").files[0];
     let avatarPath = profile?.profile_photo_path || null;
-    let payoutQrPath = profile?.payout_qr_path || null;
     if (avatar) avatarPath = await api.uploadAvatar(avatar);
-    if (payoutQr) payoutQrPath = await api.uploadPayoutQr(payoutQr);
     const data = collectForm();
     data.profile_photo_path = avatarPath;
-    data.payout_qr_path = payoutQrPath;
     profile = await api.saveTutorDraft(data);
-    if (profile.payout_qr_path) {
-      document.querySelector("#payout-qr-preview span").textContent = "Private payout QR uploaded.";
-      document.querySelector("#view-payout-qr").hidden = false;
-      document.querySelector("#payout-qr-file").value = "";
-    }
     await api.replaceAvailability(collectAvailability());
     showProfileStatus(profile);
     setStatus("Draft saved to your account.");
@@ -138,11 +125,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   document.querySelector("#submit-application").addEventListener("click", async () => {
     if (!document.querySelector("#tutor-declaration").checked) return setStatus("Confirm the tutor declaration before submitting.", true);
-    const payoutName = form.elements.payout_account_name.value.trim();
-    const payoutNumber = form.elements.payout_account_number.value.replace(/[^0-9]/g, "");
-    if (!payoutName) return setStatus("Enter the name registered to your GCash account.", true);
-    if (!/^09\d{9}$/.test(payoutNumber)) return setStatus("Enter a valid 11-digit GCash number beginning with 09.", true);
-    form.elements.payout_account_number.value = payoutNumber;
     try {
       await saveDraft();
       setStatus("Submitting application for admin review…");
@@ -159,21 +141,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const url = URL.createObjectURL(file);
     document.querySelector("#photo-preview img").src = url;
     document.querySelector("#photo-preview span").textContent = file.name;
-  });
-
-  document.querySelector("#payout-qr-file").addEventListener("change", event => {
-    const file = event.target.files[0];
-    document.querySelector("#payout-qr-preview span").textContent = file ? file.name : "No private payout QR uploaded yet.";
-  });
-
-  document.querySelector("#view-payout-qr").addEventListener("click", async () => {
-    if (!profile?.payout_qr_path) return;
-    try {
-      const url = await api.signedPayoutQrUrl(profile.payout_qr_path);
-      window.open(url, "_blank", "noopener");
-    } catch (error) {
-      setStatus(error.message || "The private payout QR could not be opened.", true);
-    }
   });
 
   try { await load(); } catch (error) { alert.hidden = false; alert.textContent = error.message || "Application could not be loaded."; }
