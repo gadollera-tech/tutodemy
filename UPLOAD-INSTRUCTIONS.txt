@@ -1,5 +1,12 @@
-Upload these files and folders to the ROOT of your existing GitHub repository.
-Choose Replace when GitHub asks about files with the same name.
-Do not upload the private SQL setup ZIP to GitHub.
+TutoDemy Learner Progress & Community — Public GitHub Patch
 
-After upload, wait for one GitHub Pages deployment. Do not create repeated commits while it is queued.
+1. Run the private Supabase SQL upgrade first.
+2. Extract this ZIP on your computer.
+3. Open the extracted folder.
+4. Upload the files and folders INSIDE this folder to the root of your existing GitHub repository.
+5. Replace matching files.
+6. Create one commit only.
+7. Wait for GitHub Pages deployment to turn green.
+8. Open https://tutodemy.net/dashboard.html and hard refresh with Ctrl + Shift + R.
+
+Do not upload the private SQL file to GitHub.

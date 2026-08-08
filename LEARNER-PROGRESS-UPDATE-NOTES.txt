@@ -1,0 +1,25 @@
+TutoDemy Learning PH — Learner Progress & Community Update
+
+Public website changes:
+- redesigned learner dashboard with preparation score, estimated percentile, streaks, weekly activity, and topic coverage
+- daily Most Active leaderboard and Overall Preparation leaderboard
+- weekly Top 3 and rolling Hall of Fame
+- opt-in leaderboard privacy controls and learner display names
+- profile-picture upload through Supabase Storage plus six preset avatar styles
+- profile avatar shown on profile, dashboard, and updated account chip
+- DOST-SEI attempts now contribute to the main learner dashboard and cloud progress
+- privacy notice updated for rankings, percentiles, avatars, and learning metrics
+
+Required private setup:
+Run LEARNER-PROGRESS-COMMUNITY-UPGRADE.sql from the separate private setup package in Supabase SQL Editor before testing the new community features.
+
+Rules implemented:
+- streak day: at least 10 completed questions in Philippine time
+- percentile eligibility: at least 30 completed questions and at least 5 eligible learners in the same preparation track
+- leaderboard participation: off by default and must be enabled in Profile
+- public leaderboard output: display name, avatar, track, and limited learning totals only
+- exact email, school, city, province, and account identifiers are not returned in ranking results
+- preparation metrics are learning insights, not examination-result predictions
+
+Deployment:
+Upload the public files only. Never upload the private SQL package to GitHub.
