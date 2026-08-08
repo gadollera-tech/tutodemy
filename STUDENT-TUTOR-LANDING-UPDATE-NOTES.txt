@@ -1,0 +1,31 @@
+TutoDemy Student/Tutor Landing Update
+=====================================
+
+This release separates the marketing experience while keeping one shared platform:
+
+1. Student/parent-first homepage
+   - Clear account creation and login actions above the fold
+   - Four learner pathways: CET preparation, DOST-SEI preparation, tutor search, and academic help
+   - Tutor recruitment moved to a dedicated, secondary pathway
+
+2. Dedicated tutor marketing page
+   - New public page: for-tutors.html
+   - Explains profile setup, application review, bookings, privacy, and earnings records
+   - Links to tutor account creation and the existing tutor onboarding form
+
+3. Recognizable Philippines map
+   - Replaces the previous abstract illustration with an actual Philippine island outline
+   - Student homepage shows approved tutor availability by region and teaching mode
+   - Tutor page shows privacy-protected, anonymous learner-demand totals when available
+
+4. Existing authentication message retained
+   - During signup, users are instructed to keep the page open and check their email
+   - Successful signup displays a dedicated email-confirmation message
+
+No new SQL patch is required for this release. The learner-demand map uses the existing location-insights setup.
+
+Deployment
+----------
+Upload the CONTENTS of the patch ZIP to the repository root and replace matching files.
+Do not upload the ZIP itself.
+Create one commit, then wait for the GitHub Pages workflow to finish.
