@@ -1,0 +1,12 @@
+TutoDemy Philippines Map Black-Box Fix
+
+Cause fixed:
+The SVG sea rectangle and map paths depended on the newest stylesheet. When GitHub Pages or the browser served an older cached CSS file, SVG elements used their browser default fill (black).
+
+Fixes included:
+- explicit light fill and stroke attributes inside the SVG
+- explicit white fill and navy stroke on generated Philippine island paths
+- cache-busting version parameters for the map CSS and JavaScript
+- CSS fallback rules
+
+Upload the contents of the small patch to the repository root and replace matching files.
