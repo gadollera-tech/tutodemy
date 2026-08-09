@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const active = document.body.dataset.page || "";
   const practiceActive = ["exams", "practice", "dost"].includes(active);
-  const tutorActive = ["tutoring", "tutor-profile", "tutor-onboarding", "tutor-dashboard", "bookings", "messages", "tutor-terms", "admin"].includes(active);
+  const tutorActive = ["tutoring", "for-tutors", "tutor-profile", "tutor-onboarding", "tutor-dashboard", "bookings", "messages", "tutor-terms", "admin"].includes(active);
 
   const practiceDropdown = `
     <div class="nav-dropdown ${practiceActive ? "active" : ""}">
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </button>
       <div class="nav-submenu tutor-submenu" aria-label="Tutor Connect submenu">
         <a href="tutoring.html" class="${active === "tutoring" ? "active" : ""}">Find a Tutor</a>
-        <a href="tutor-onboarding.html" class="${active === "tutor-onboarding" ? "active" : ""}">Become a Tutor</a>
+        <a href="for-tutors.html" class="${active === "for-tutors" ? "active" : ""}">Become a Tutor</a>
         <a href="bookings.html" class="${active === "bookings" ? "active" : ""}">My Bookings</a>
         <a href="messages.html" class="${active === "messages" ? "active" : ""}">Messages</a>
         <a href="tutor-dashboard.html" class="tutor-only ${active === "tutor-dashboard" ? "active" : ""}" hidden>Tutor Dashboard</a>
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="footer-badges"><span>Reviewed content</span><span>Supabase accounts</span><span>Approved tutors only</span></div>
           </div>
           <div><h3>Practice</h3><a href="exams.html">CET exam hub</a><a href="practice.html">CET set builder</a><a href="dost-sei.html">DOST-SEI preparation</a><a href="dashboard.html">Dashboard</a></div>
-          <div><h3>Tutoring</h3><a href="tutoring.html">Find a tutor</a><a href="tutor-onboarding.html">Become a tutor</a><a href="bookings.html">My bookings</a><a href="messages.html">Booking messages</a><a href="tutor-terms.html">Tutor guidelines</a></div>
+          <div><h3>Tutoring</h3><a href="tutoring.html">Find a tutor</a><a href="for-tutors.html">Become a tutor</a><a href="bookings.html">My bookings</a><a href="messages.html">Booking messages</a><a href="tutor-terms.html">Tutor guidelines</a></div>
           <div><h3>Account</h3><a href="auth.html">Log in or sign up</a><a href="profile.html">My profile</a><a href="privacy.html">Privacy notice</a><a href="terms.html">Terms of use</a></div>
           <div><h3>Project</h3><a href="reviewers.html">Reviewers</a><a href="resources.html">Source policy</a><a href="pricing.html">Access</a><a href="about.html">About</a></div>
         </div>

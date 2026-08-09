@@ -16,17 +16,17 @@
   <link rel="icon" href="assets/images/owl-mark.png">
   <link rel="apple-touch-icon" href="assets/images/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="css/style.css?v=progress-20260808">
+  <link rel="stylesheet" href="css/style.css">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js?v=progress-20260808"></script>
+  <script defer src="js/cloud-sync.js"></script>
   <script defer src="js/marketplace-api.js"></script>
   <script defer src="data/taxonomy.js"></script>
   <script defer src="data/philippines-locations.js"></script>
-  <script defer src="js/main.js?v=progress-20260808"></script>
-  <script defer src="js/profile.js?v=progress-20260808"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/profile.js"></script>
 </head>
 <body data-page="account">
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -34,7 +34,7 @@
   <main id="main-content">
     <section class="profile-account-hero">
       <div class="container profile-account-heading">
-        <div class="account-avatar avatar-preset-owl-navy" id="account-avatar"><img id="account-avatar-image" alt="" hidden><span id="account-avatar-fallback">U</span></div>
+        <div class="account-avatar" id="account-avatar">U</div>
         <div><span class="eyebrow light">ACCOUNT PROFILE</span><h1 id="account-heading">My TutoDemy account</h1><p id="account-email">Loading account…</p></div>
         <button class="button button-ghost" id="logout-button" type="button">Log out</button>
       </div>
@@ -45,39 +45,15 @@
         <section class="panel account-profile-panel">
           <div class="panel-heading"><div><span class="eyebrow">PROFILE</span><h2>Learning information</h2></div><span class="cloud-badge" id="profile-cloud-badge">Checking…</span></div>
           <form class="account-profile-form" id="profile-form">
-            <label>Full name<input name="full_name" maxlength="100" required autocomplete="name"></label>
-            <label>Leaderboard display name<input name="leaderboard_name" maxlength="40" placeholder="Example: StudyOwl21"><small>Shown only when you choose to join public rankings.</small></label>
+            <label>Full name<input name="full_name" maxlength="100" required></label>
             <label>Student level<select name="student_level"><option value="">Not specified</option><option>Elementary</option><option>Junior High</option><option>Senior High</option><option>College</option><option>CET Applicant</option></select></label>
             <label>Target exam<select name="target_exam"><option value="">General academic support</option><option>UPCAT</option><option>DCAT</option><option>Other CET</option><option>DOST-SEI Scholarship Exam</option><option>School subjects</option></select></label>
             <label>School or learning institution<input name="school" maxlength="150" placeholder="Optional"></label>
             <label>Province<select name="province" id="profile-province"><option value="">Select province (optional)</option></select></label>
             <label>City or municipality<input name="city" maxlength="100" placeholder="Optional"></label>
             <label class="consent-label full location-consent"><input type="checkbox" name="share_location_insights"><span>Include my province in anonymous regional learner-demand insights. My name, exact address, and contact information will not appear on the map.</span></label>
-
-            <div class="profile-avatar-editor full">
-              <div class="profile-avatar-preview avatar-preset-owl-navy" id="profile-avatar-preview"><img id="profile-avatar-image" alt="Profile picture preview" hidden><span id="profile-avatar-fallback">U</span></div>
-              <div class="profile-avatar-copy">
-                <b>Profile picture or TutoDemy avatar</b>
-                <p>Upload a JPG, PNG, or WebP image up to 5 MB. Uploaded images use a public image URL; choose a preset below when you prefer not to use a personal photo.</p>
-                <label class="file-picker">Choose profile picture<input id="profile-avatar-file" type="file" accept="image/jpeg,image/png,image/webp"></label>
-                <button class="text-button" id="remove-profile-photo" type="button">Remove uploaded photo</button>
-              </div>
-            </div>
-            <input type="hidden" name="avatar_url">
-            <fieldset class="avatar-preset-fieldset full">
-              <legend>Preset avatar</legend>
-              <div class="avatar-preset-grid" role="radiogroup" aria-label="Preset avatar">
-                <label><input type="radio" name="avatar_key" value="owl-navy" checked><span class="avatar-choice avatar-preset-owl-navy">🦉</span><small>Navy</small></label>
-                <label><input type="radio" name="avatar_key" value="owl-gold"><span class="avatar-choice avatar-preset-owl-gold">🦉</span><small>Gold</small></label>
-                <label><input type="radio" name="avatar_key" value="owl-sky"><span class="avatar-choice avatar-preset-owl-sky">🦉</span><small>Sky</small></label>
-                <label><input type="radio" name="avatar_key" value="owl-mint"><span class="avatar-choice avatar-preset-owl-mint">🦉</span><small>Mint</small></label>
-                <label><input type="radio" name="avatar_key" value="owl-plum"><span class="avatar-choice avatar-preset-owl-plum">🦉</span><small>Plum</small></label>
-                <label><input type="radio" name="avatar_key" value="initials"><span class="avatar-choice avatar-preset-initials">AB</span><small>Initials</small></label>
-              </div>
-            </fieldset>
-
-            <label class="consent-label full leaderboard-consent"><input type="checkbox" name="leaderboard_opt_in"><span><b>Show me on TutoDemy leaderboards and Hall of Fame.</b><small>Only your display name, selected avatar, preparation track, and learning totals are shown. Your email, school, and location stay private.</small></span></label>
-            <button class="button full" type="submit">Save profile and privacy choices</button>
+            <label class="full">Avatar image URL<input type="url" name="avatar_url" placeholder="Optional public image URL"></label>
+            <button class="button full" type="submit">Save profile</button>
             <p class="form-status" id="profile-status"></p>
           </form>
         </section>

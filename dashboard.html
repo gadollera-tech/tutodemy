@@ -3,168 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="TutoDemy learner dashboard with progress, preparation percentile, streaks, and privacy-friendly community rankings.">
+  <meta name="description" content="TutoDemy learner dashboard with optional account-based cloud sync.">
   <meta name="theme-color" content="#11156f">
-  <meta name="robots" content="noindex,nofollow">
   <link rel="canonical" href="https://tutodemy.net/dashboard.html">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Learner Dashboard | TutoDemy Learning PH">
-  <meta property="og:description" content="Track preparation, build a learning streak, and compare progress with learners in the same preparation track.">
+  <meta property="og:title" content="Dashboard | TutoDemy Learning PH">
+  <meta property="og:description" content="TutoDemy learner dashboard with optional account-based cloud sync.">
   <meta property="og:url" content="https://tutodemy.net/dashboard.html">
   <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <title>Learner Dashboard | TutoDemy Learning PH</title>
+  <title>Dashboard | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
   <link rel="apple-touch-icon" href="assets/images/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="css/style.css?v=progress-20260808">
+  <link rel="stylesheet" href="css/style.css">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js?v=progress-20260808"></script>
-  <script defer src="js/marketplace-api.js"></script>
-  <script defer src="data/taxonomy.js"></script>
-  <script defer src="js/main.js?v=progress-20260808"></script>
-  <script defer src="data/question-bank.js"></script>
-  <script defer src="data/reviewers.js"></script>
-  <script defer src="js/dashboard.js?v=progress-20260808"></script>
+  <script defer src="js/cloud-sync.js"></script>
+  <script defer src="js/marketplace-api.js"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js"></script><script defer src="data/question-bank.js"></script><script defer src="data/reviewers.js"></script><script defer src="js/dashboard.js"></script>
 </head>
 <body data-page="dashboard">
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div id="site-header"></div>
   <main id="main-content">
-    <section class="learner-dashboard-hero">
-      <div class="container learner-dashboard-hero-grid">
-        <div class="learner-dashboard-identity">
-          <div class="dashboard-profile-avatar avatar-preset-owl-navy" id="dashboard-profile-avatar">
-            <img id="dashboard-avatar-image" alt="" hidden>
-            <span id="dashboard-avatar-fallback">🦉</span>
-          </div>
-          <div>
-            <span class="eyebrow light">LEARNER DASHBOARD</span>
-            <h1 id="dashboard-greeting">Your preparation, clearly tracked.</h1>
-            <p id="dashboard-track-intro">Complete practice sets to build your preparation score, streak, and subject insights.</p>
-          </div>
-        </div>
-        <div class="dashboard-hero-actions">
-          <a class="button button-gold" href="exams.html">Continue practicing</a>
-          <a class="button button-ghost" href="profile.html">Edit profile & avatar</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dashboard-section">
-      <div class="container">
-        <div class="cloud-account-note" id="dashboard-account-note">
-          <span>☁</span>
-          <div>
-            <b id="dashboard-account-title">Checking account status…</b>
-            <small id="dashboard-account-description">Local progress remains available.</small>
-          </div>
-          <a id="dashboard-account-link" href="auth.html">Account</a>
-        </div>
-
-        <div class="learning-overview-grid">
-          <article class="learning-score-card primary">
-            <div class="score-ring" id="preparation-score-ring" style="--score:0">
-              <span><b id="dash-preparation-score">0</b><small>/100</small></span>
-            </div>
-            <div>
-              <span class="eyebrow">PREPARATION SCORE</span>
-              <h2 id="dash-track-label">Your learning track</h2>
-              <p>Balanced from accuracy, completed questions, topic coverage, consistency, and recent activity.</p>
-            </div>
-          </article>
-
-          <article class="learning-metric-card percentile-card">
-            <span class="metric-icon">↗</span>
-            <small>ESTIMATED PERCENTILE</small>
-            <b id="dash-percentile">Building baseline</b>
-            <p id="dash-percentile-note">Complete at least 30 questions to begin comparing preparation.</p>
-          </article>
-
-          <article class="learning-metric-card streak-card">
-            <span class="metric-icon">🔥</span>
-            <small>CURRENT STREAK</small>
-            <b><span id="dash-streak">0</span> days</b>
-            <p id="dash-streak-note">Complete 10 questions today to begin a streak.</p>
-          </article>
-
-          <article class="learning-metric-card weekly-card">
-            <span class="metric-icon">✓</span>
-            <small>QUESTIONS THIS WEEK</small>
-            <b id="dash-weekly-questions">0</b>
-            <p><span id="dash-accuracy">—</span> overall accuracy · <span id="dash-topic-count">0</span> areas practiced</p>
-          </article>
-        </div>
-
-        <div class="dashboard-disclaimer">
-          <b>Preparation insight—not an admission or scholarship prediction.</b>
-          <span>Percentiles compare eligible TutoDemy learners in the same preparation track and will become more stable as participation grows.</span>
-        </div>
-
-        <div class="community-dashboard-grid">
-          <section class="panel community-leaderboard-panel">
-            <div class="panel-heading community-heading">
-              <div>
-                <span class="eyebrow">COMPARE YOUR PREPARATION</span>
-                <h2 id="leaderboard-track-heading">Learners in your preparation track</h2>
-                <p id="leaderboard-privacy-note">Only opted-in display names and avatars appear.</p>
-              </div>
-              <a class="text-link" href="profile.html" id="leaderboard-settings-link">Leaderboard settings</a>
-            </div>
-            <div class="leaderboard-tabs" role="tablist" aria-label="Leaderboard view">
-              <button class="leaderboard-tab active" type="button" role="tab" aria-selected="true" data-board="daily">Most active today</button>
-              <button class="leaderboard-tab" type="button" role="tab" aria-selected="false" data-board="overall">Overall preparation</button>
-            </div>
-            <div class="leaderboard-list" id="learning-leaderboard" aria-live="polite">
-              <div class="empty-state">Loading community rankings…</div>
-            </div>
-            <div class="leaderboard-opt-in-note" id="leaderboard-opt-in-note" hidden>
-              Your progress is private from public rankings. <a href="profile.html">Choose a display name and opt in</a> when you are ready.
-            </div>
-          </section>
-
-          <section class="panel weekly-champions-panel">
-            <div class="panel-heading">
-              <div><span class="eyebrow">THIS WEEK</span><h2>Top 3 learners</h2><p>Weekly activity and accuracy within your track.</p></div>
-            </div>
-            <div class="weekly-podium" id="weekly-top-three">
-              <div class="empty-state">Weekly leaders will appear after eligible activity.</div>
-            </div>
-          </section>
-        </div>
-
-        <section class="panel hall-of-fame-panel">
-          <div class="panel-heading">
-            <div><span class="eyebrow">HALL OF FAME</span><h2>Previous weekly leaders</h2><p>A rolling record of opted-in learners who reached the weekly Top 3.</p></div>
-          </div>
-          <div class="hall-of-fame-list" id="hall-of-fame-list">
-            <div class="empty-state">Hall of Fame entries will appear after the first completed week.</div>
-          </div>
-        </section>
-
-        <div class="dashboard-layout learner-detail-layout">
-          <section class="panel wide">
-            <div class="panel-heading">
-              <div><span class="eyebrow">RECENT ATTEMPTS</span><h2>Practice history</h2></div>
-              <button class="text-button" id="clear-history" type="button">Clear history</button>
-            </div>
-            <div id="attempt-history" class="history-list"></div>
-          </section>
-          <section class="panel">
-            <div class="panel-heading"><div><span class="eyebrow">SUBJECT PERFORMANCE</span><h2>Accuracy by bank</h2></div></div>
-            <div id="subject-performance" class="performance-list"></div>
-          </section>
-          <section class="panel">
-            <div class="panel-heading"><div><span class="eyebrow">SAVED REVIEWERS</span><h2>Continue reviewing</h2></div><a href="reviewers.html">Browse</a></div>
-            <div id="saved-reviewers" class="saved-reviewer-list"></div>
-          </section>
-        </div>
-      </div>
-    </section>
-  </main>
+<section class="page-hero dashboard-hero">
+  <div class="container page-hero-grid">
+    <div><span class="eyebrow light">LEARNER DASHBOARD</span><h1>Your learning progress.</h1><p>Progress is saved on this device and can synchronize with the learner account when logged in.</p></div>
+    <div class="plan-summary"><small>LEARNING ACCESS</small><b>Open access</b><p>Practice tools and reviewers are available through the current website.</p><a href="pricing.html">View access details →</a></div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="cloud-account-note" id="dashboard-account-note">
+      <span>☁</span><div><b id="dashboard-account-title">Checking account status…</b><small id="dashboard-account-description">Local progress remains available.</small></div><a id="dashboard-account-link" href="auth.html">Account</a>
+    </div>
+    <div class="dashboard-metrics">
+      <article><span>✓</span><small>ATTEMPTS</small><b id="dash-attempts">0</b><p>Completed practice and mock sets</p></article>
+      <article><span>%</span><small>AVERAGE ACCURACY</small><b id="dash-accuracy">—</b><p>Across completed attempts</p></article>
+      <article><span>★</span><small>SAVED REVIEWERS</small><b id="dash-saved">0</b><p>Saved locally and to the account</p></article>
+      <article><span>⌁</span><small>TUTOR INQUIRIES</small><b id="dash-inquiries">0</b><p>Saved locally; synced when logged in</p></article>
+    </div>
+    <div class="dashboard-layout">
+      <section class="panel wide">
+        <div class="panel-heading"><div><span class="eyebrow">RECENT ATTEMPTS</span><h2>Exam history</h2></div><button class="text-button" id="clear-history">Clear history</button></div>
+        <div id="attempt-history" class="history-list"></div>
+      </section>
+      <section class="panel">
+        <div class="panel-heading"><div><span class="eyebrow">SUBJECT PERFORMANCE</span><h2>Accuracy by bank</h2></div></div>
+        <div id="subject-performance" class="performance-list"></div>
+      </section>
+      <section class="panel">
+        <div class="panel-heading"><div><span class="eyebrow">SAVED REVIEWERS</span><h2>Continue reviewing</h2></div><a href="reviewers.html">Browse</a></div>
+        <div id="saved-reviewers" class="saved-reviewer-list"></div>
+      </section>
+    </div>
+  </div>
+</section>
+</main>
   <div id="site-footer"></div>
   <div class="toast" role="status" aria-live="polite"></div>
 </body>

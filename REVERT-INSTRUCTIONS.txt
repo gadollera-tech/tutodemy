@@ -1,0 +1,20 @@
+TutoDemy Learning PH — Revert to the version before Learner Progress & Community
+
+This patch restores the exact public website files from the immediately previous release:
+Student-first homepage + separate tutor landing page + corrected Philippines map.
+
+UPLOAD STEPS
+1. Extract this ZIP.
+2. Open the folder TutoDemy-Revert-Pre-Learner-Progress-Patch.
+3. Upload all files and folders INSIDE it to the root of the GitHub repository.
+4. Replace files with the same names.
+5. Make one commit only.
+6. Wait for GitHub Pages to finish, then hard-refresh the site with Ctrl+Shift+R.
+
+OPTIONAL CLEANUP IN GITHUB
+Delete these two files only if they exist:
+- LEARNER-PROGRESS-UPDATE-NOTES.txt
+- map-test.html
+
+Do not upload any SQL file to GitHub.
+The public-site revert works even if the learner-progress database objects remain in Supabase.
