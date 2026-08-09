@@ -880,3 +880,39 @@ body.role-tutor-applicant .main-nav a{font-weight:900}
   body.role-tutor .booking-tabs{display:grid;grid-template-columns:1fr 1fr}
   body.role-tutor .booking-tabs button{min-height:44px}
 }
+
+
+/* Admin Overview Phase 1 */
+.admin-overview-header{display:flex;justify-content:space-between;gap:24px;align-items:flex-end;margin-bottom:24px}
+.admin-overview-header .section-heading{margin-bottom:0;max-width:760px}
+.admin-overview-refresh{display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap;text-align:right}
+.admin-overview-refresh span{color:var(--muted);font-size:.72rem;font-weight:800;max-width:230px}
+.admin-overview-refresh .button{min-height:42px;white-space:nowrap}
+.admin-overview-setup{border:1px solid #f0ca68;background:#fff9e7;border-radius:16px;padding:16px 18px;margin-bottom:20px;color:#614a00}
+.admin-overview-setup b{display:block;color:#523c00;margin-bottom:5px}.admin-overview-setup p{margin:0;font-size:.8rem;line-height:1.55}
+.admin-overview-block{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;margin-top:18px;box-shadow:0 10px 30px rgba(17,21,111,.045)}
+.admin-overview-block-heading{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:16px}
+.admin-overview-block-heading>div>span{display:block;color:var(--gold-dark,#9d6f00);font-size:.65rem;font-weight:950;letter-spacing:.09em;margin-bottom:5px}
+.admin-overview-block-heading h3{color:var(--navy);margin:0;font-size:1.12rem}
+.admin-overview-block-heading>small{color:var(--muted);font-size:.72rem;line-height:1.45;max-width:390px;text-align:right}
+.admin-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.admin-stat-card{min-width:0;min-height:150px;border:1px solid var(--line);border-radius:17px;background:#fbfcff;padding:17px;text-align:left;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;box-shadow:none;color:inherit}
+button.admin-stat-card{font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(244,185,66,.22)}
+.admin-stat-card>span{color:var(--muted);font-size:.67rem;font-weight:950;text-transform:uppercase;letter-spacing:.045em;line-height:1.35}
+.admin-stat-card>b{color:var(--navy);font-size:1.9rem;line-height:1.05;margin:13px 0 9px;overflow-wrap:anywhere}
+.admin-stat-card>small{color:var(--muted);font-size:.72rem;line-height:1.48}
+.admin-stat-card.is-link{position:relative;background:#fff}.admin-stat-card.is-link::after{content:"Open →";color:var(--navy);font-size:.66rem;font-weight:950;margin-top:auto;padding-top:10px}
+.admin-stat-card.is-link:hover,.admin-stat-card.is-link:focus-visible{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 12px 28px rgba(17,21,111,.09);outline:none}
+.admin-stat-card[data-tone="navy"]{background:#f1f3ff;border-color:#dce0ff}.admin-stat-card[data-tone="blue"]{background:#f0f8ff;border-color:#d7ebfb}.admin-stat-card[data-tone="violet"]{background:#f7f2ff;border-color:#eadcff}.admin-stat-card[data-tone="green"]{background:#f0faf5;border-color:#d5f0e2}.admin-stat-card[data-tone="gold"]{background:#fff9e7;border-color:#f5df9c}.admin-stat-card[data-tone="rose"]{background:#fff3f6;border-color:#f4dbe2}
+.admin-growth-strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:13px}
+.admin-growth-strip>div{background:#fff;padding:13px 14px;min-width:0}.admin-growth-strip span{display:block;color:var(--muted);font-size:.63rem;font-weight:900;text-transform:uppercase;letter-spacing:.035em;line-height:1.35}.admin-growth-strip b{display:block;color:var(--navy);font-size:1.05rem;margin-top:5px}
+.admin-finance-snapshot{background:linear-gradient(180deg,#fffef9,#fff)}
+.admin-finance-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.admin-finance-grid article,.admin-finance-grid button{min-width:0;border:1px solid #eadfbf;background:#fff;border-radius:16px;padding:17px;text-align:left;display:flex;flex-direction:column;align-items:flex-start;font:inherit;color:inherit}
+.admin-finance-grid button{cursor:pointer;touch-action:manipulation}.admin-finance-grid button:hover,.admin-finance-grid button:focus-visible{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 12px 26px rgba(17,21,111,.08);outline:none}
+.admin-finance-grid .primary{background:linear-gradient(145deg,var(--navy),var(--navy-2));border-color:transparent}.admin-finance-grid .primary span,.admin-finance-grid .primary b,.admin-finance-grid .primary small{color:#fff}.admin-finance-grid .primary small{opacity:.78}
+.admin-finance-grid span{color:var(--muted);font-size:.65rem;font-weight:950;text-transform:uppercase;letter-spacing:.04em;line-height:1.35}.admin-finance-grid b{color:var(--navy);font-size:1.55rem;line-height:1.1;margin:12px 0 8px;overflow-wrap:anywhere}.admin-finance-grid small{color:var(--muted);font-size:.7rem;line-height:1.48}.admin-finance-grid button::after{content:"Open payouts →";color:var(--navy);font-size:.65rem;font-weight:950;margin-top:auto;padding-top:10px}
+.admin-finance-note{margin:14px 0 0;color:var(--muted);font-size:.72rem;line-height:1.55}
+@media(max-width:1000px){.admin-overview-header{align-items:flex-start}.admin-stat-grid,.admin-finance-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-growth-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.admin-overview-header,.admin-overview-block-heading{display:grid;grid-template-columns:1fr;align-items:start}.admin-overview-refresh{justify-content:flex-start;text-align:left}.admin-overview-block-heading>small{text-align:left}.admin-overview-block{padding:17px}.admin-stat-card{min-height:138px}}
+@media(max-width:520px){.admin-stat-grid,.admin-finance-grid,.admin-growth-strip{grid-template-columns:1fr}.admin-stat-card{min-height:128px}.admin-overview-refresh .button{width:100%}.admin-growth-strip>div{padding:12px 14px}}

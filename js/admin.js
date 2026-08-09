@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   let bookings = [];
   let reports = [];
   let payouts = [];
+  let overview = null;
+  let overviewLoadedAt = null;
+  let overviewLoading = false;
   let activeTab = "overview";
 
   const esc = value => window.Tuto.escape(value);
@@ -110,25 +113,72 @@ document.addEventListener("DOMContentLoaded", async () => {
     alertBox.textContent = message || "";
   }
 
+  function metricNumber(value) {
+    const number = Number(value);
+    return Number.isFinite(number) ? number : 0;
+  }
+
+  function setMetric(selector, value) {
+    const element = document.querySelector(selector);
+    if (element) element.textContent = value;
+  }
+
   function renderOverview() {
-    const pendingTutors = tutors.filter(tutor => tutor.status === "pending").length;
-    const paymentActions = bookings.filter(booking =>
+    const pendingTutorsFallback = tutors.filter(tutor => tutor.status === "pending").length;
+    const paymentActionsFallback = bookings.filter(booking =>
       (booking.payment_proof_path && booking.payment_status !== "paid") ||
       (booking.status === "session_delivered" && booking.payment_status === "paid")
     ).length;
-    const payoutDue = payouts.reduce((sum, row) => sum + Number(row.amount_due || 0), 0);
-    const openReports = reports.filter(report => !["resolved", "dismissed"].includes(report.status)).length;
+    const payoutDueFallback = payouts.reduce((sum, row) => sum + Number(row.amount_due || 0), 0);
+    const payoutItemsFallback = payouts.reduce((sum, row) => sum + Number(row.session_count || 0), 0);
+    const openReportsFallback = reports.filter(report => !["resolved", "dismissed"].includes(report.status)).length;
 
-    const values = {
-      "#admin-metric-tutors": String(pendingTutors),
-      "#admin-metric-payments": String(paymentActions),
-      "#admin-metric-payouts": money(payoutDue),
-      "#admin-metric-reports": String(openReports)
+    const accounts = overview?.accounts || {};
+    const activity = overview?.activity || {};
+    const bookingStats = overview?.bookings || {};
+    const finance = overview?.finance || {};
+    const safety = overview?.safety || {};
+
+    const metrics = {
+      "#admin-total-users": overview ? metricNumber(accounts.total_users).toLocaleString() : "—",
+      "#admin-learner-users": overview ? metricNumber(accounts.learner_only_users).toLocaleString() : "—",
+      "#admin-active-users-month": overview ? metricNumber(activity.active_users_month).toLocaleString() : "—",
+      "#admin-approved-tutors": overview ? metricNumber(accounts.approved_tutors).toLocaleString() : tutors.filter(t => t.status === "approved").length.toLocaleString(),
+      "#admin-pending-tutors": overview ? metricNumber(accounts.pending_tutor_applications).toLocaleString() : pendingTutorsFallback.toLocaleString(),
+      "#admin-suspended-users": overview ? metricNumber(accounts.suspended_accounts).toLocaleString() : "—",
+      "#admin-new-users-week": overview ? metricNumber(accounts.new_users_week).toLocaleString() : "—",
+      "#admin-new-users-month": overview ? metricNumber(accounts.new_users_month).toLocaleString() : "—",
+      "#admin-total-tutor-accounts": overview ? metricNumber(accounts.tutor_accounts).toLocaleString() : tutors.length.toLocaleString(),
+      "#admin-total-admins": overview ? metricNumber(accounts.admin_accounts).toLocaleString() : "—",
+      "#admin-booking-requests": overview ? metricNumber(bookingStats.booking_requests).toLocaleString() : bookings.filter(b => b.status === "requested").length.toLocaleString(),
+      "#admin-upcoming-sessions": overview ? metricNumber(bookingStats.upcoming_sessions).toLocaleString() : bookings.filter(b => ["accepted", "paid"].includes(b.status) && new Date(b.requested_start) >= new Date()).length.toLocaleString(),
+      "#admin-pending-payments": overview ? metricNumber(bookingStats.pending_payment_verification).toLocaleString() : paymentActionsFallback.toLocaleString(),
+      "#admin-awaiting-completion": overview ? metricNumber(bookingStats.awaiting_completion).toLocaleString() : bookings.filter(b => b.status === "session_delivered" && b.payment_status === "paid").length.toLocaleString(),
+      "#admin-payout-due": overview ? money(finance.pending_tutor_payout_amount) : money(payoutDueFallback),
+      "#admin-payout-items": overview ? metricNumber(finance.pending_tutor_payout_items).toLocaleString() : payoutItemsFallback.toLocaleString(),
+      "#admin-open-reports": overview ? metricNumber(safety.open_reports).toLocaleString() : openReportsFallback.toLocaleString(),
+      "#admin-bookings-week": overview ? metricNumber(bookingStats.new_bookings_week).toLocaleString() : "—",
+      "#admin-bookings-month": overview ? metricNumber(bookingStats.new_bookings_month).toLocaleString() : "—",
+      "#admin-completed-month": overview ? metricNumber(bookingStats.completed_sessions_month).toLocaleString() : "—",
+      "#admin-completed-all": overview ? metricNumber(bookingStats.completed_sessions_all_time).toLocaleString() : bookings.filter(b => b.status === "completed").length.toLocaleString(),
+      "#admin-gross-completed": overview ? money(finance.gross_completed_value) : "—",
+      "#admin-platform-commission": overview ? money(finance.platform_commission_earned) : "—",
+      "#admin-platform-commission-month": overview ? money(finance.platform_commission_month) : "—",
+      "#admin-tutor-net-recorded": overview ? money(finance.tutor_net_earned) : "—",
+      "#admin-payouts-paid": overview ? money(finance.tutor_payouts_recorded_paid) : "—",
+      "#admin-payout-pending-finance": overview ? money(finance.pending_tutor_payout_amount) : money(payoutDueFallback)
     };
-    Object.entries(values).forEach(([selector, value]) => {
-      const element = document.querySelector(selector);
-      if (element) element.textContent = value;
-    });
+    Object.entries(metrics).forEach(([selector, value]) => setMetric(selector, value));
+
+    const setup = document.querySelector("#admin-overview-setup");
+    if (setup) setup.hidden = Boolean(overview);
+
+    const updated = document.querySelector("#admin-overview-updated");
+    if (updated) {
+      if (overviewLoading) updated.textContent = "Refreshing overview…";
+      else if (overviewLoadedAt) updated.textContent = `Updated ${overviewLoadedAt.toLocaleString()}`;
+      else updated.textContent = overview ? "Overview loaded" : "Overview database setup not detected";
+    }
   }
 
   function tutorCard(tutor) {
@@ -403,8 +453,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     list.querySelectorAll(".report-dismiss").forEach(button => button.addEventListener("click", () => update(button, "dismissed")));
   }
 
-  async function loadAll() {
+  async function loadAll({ manual = false } = {}) {
+    if (overviewLoading) return;
+    overviewLoading = true;
+    const refreshButton = document.querySelector("#admin-overview-refresh");
+    if (refreshButton) {
+      refreshButton.disabled = true;
+      refreshButton.textContent = manual ? "Refreshing…" : "Loading…";
+    }
+    renderOverview();
+
     const tasks = [
+      ["Platform overview", () => api.adminPlatformOverview ? api.adminPlatformOverview() : Promise.reject(new Error("Admin Overview client method is unavailable."))],
       ["Tutor applications", () => api.adminPendingTutors?.()],
       ["Bookings and payments", () => api.adminBookings?.()],
       ["Message reports", () => api.adminMessageReports?.()],
@@ -412,10 +472,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     ];
 
     const results = await Promise.allSettled(tasks.map(([, task]) => Promise.resolve().then(task)));
-    tutors = results[0].status === "fulfilled" && Array.isArray(results[0].value) ? results[0].value : [];
-    bookings = results[1].status === "fulfilled" && Array.isArray(results[1].value) ? results[1].value : [];
-    reports = results[2].status === "fulfilled" && Array.isArray(results[2].value) ? results[2].value : [];
-    payouts = results[3].status === "fulfilled" && Array.isArray(results[3].value) ? results[3].value : [];
+    overview = results[0].status === "fulfilled" && results[0].value && typeof results[0].value === "object" ? results[0].value : null;
+    tutors = results[1].status === "fulfilled" && Array.isArray(results[1].value) ? results[1].value : [];
+    bookings = results[2].status === "fulfilled" && Array.isArray(results[2].value) ? results[2].value : [];
+    reports = results[3].status === "fulfilled" && Array.isArray(results[3].value) ? results[3].value : [];
+    payouts = results[4].status === "fulfilled" && Array.isArray(results[4].value) ? results[4].value : [];
+    overviewLoadedAt = overview ? new Date(overview.generated_at || Date.now()) : null;
+    overviewLoading = false;
 
     renderOverview();
     renderTutors();
@@ -423,6 +486,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderPayouts();
     renderReports();
     syncAdminNavigation(activeTab);
+
+    if (refreshButton) {
+      refreshButton.disabled = false;
+      refreshButton.textContent = "Refresh overview";
+    }
 
     const failures = results
       .map((result, index) => result.status === "rejected" ? `${tasks[index][0]}: ${result.reason?.message || "could not be loaded"}` : "")
@@ -433,6 +501,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   bindAdminNavigation();
   activateAdminTab(tabFromUrl());
+  document.querySelector("#admin-overview-refresh")?.addEventListener("click", () => {
+    if (!api) {
+      showAdminAlert("The Admin Console is still loading. Please try again in a moment.", "warning");
+      return;
+    }
+    loadAll({ manual: true });
+  });
 
   await window.TutoAuth?.ready;
   if (window.TutoMarketplace?.ready) await window.TutoMarketplace.ready;

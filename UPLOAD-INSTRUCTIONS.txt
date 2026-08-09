@@ -1,11 +1,11 @@
-TutoDemy Tutor UI Reliability Fix
+TutoDemy Admin Overview Phase 1 — Public Patch
 
-1. Extract this ZIP.
-2. Upload every file and folder inside this extracted folder to the root of the GitHub repository.
-3. Replace matching files.
-4. Make one commit.
-5. Wait for GitHub Pages to turn green.
-6. Hard-refresh tutodemy.net with Ctrl + Shift + R.
-7. On the installed phone app, close TutoDemy completely and reopen it.
+1. First run the private ADMIN-OVERVIEW-PHASE-1.sql in Supabase.
+2. Extract this patch ZIP.
+3. Upload all files and folders inside the extracted patch folder to the root of the GitHub repository.
+4. Replace matching files and create one commit.
+5. Wait for the GitHub Pages workflow to turn green.
+6. Open https://tutodemy.net/admin.html and press Ctrl + Shift + R.
+7. For an installed phone app, close TutoDemy completely and reopen it.
 
-No Supabase SQL changes are required.
+Never upload the private SQL file to GitHub.

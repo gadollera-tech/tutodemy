@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="TutoDemy administrator console for tutor approval and booking completion.">
+  <meta name="description" content="TutoDemy administrator console for platform health, user growth, tutor approvals, bookings, payments, payouts, and safety reports.">
   <meta name="theme-color" content="#11156f">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,21 +14,21 @@
   <meta name="robots" content="noindex,nofollow">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Admin Console | TutoDemy Learning PH">
-  <meta property="og:description" content="TutoDemy administrator console for tutor approval and booking completion.">
+  <meta property="og:description" content="TutoDemy administrator console for platform health, user growth, tutor approvals, bookings, payments, payouts, and safety reports.">
   <meta property="og:url" content="https://tutodemy.net/admin.html">
   <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
   <meta name="twitter:card" content="summary_large_image">
   <title>Admin Console | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260809-tutorfix1">
+  <link rel="stylesheet" href="css/style.css?v=20260809-adminoverview1">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
+  <script defer src="js/marketplace-api.js?v=20260809-adminoverview1"></script>
   <script defer src="js/main.js?v=20260809-tutorfix1"></script>
-  <script defer src="js/admin.js?v=20260809-adminfix1"></script>
+  <script defer src="js/admin.js?v=20260809-adminoverview1"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="admin">
@@ -37,8 +37,8 @@
   <main id="main-content">
     <section class="page-hero admin-hero">
       <div class="container page-hero-grid">
-        <div><span class="eyebrow light">SECURE ADMIN CONSOLE</span><h1>Approve tutors and close completed bookings.</h1><p>Admin access is enforced through Supabase Row Level Security and checked database functions—not by a browser-only password.</p></div>
-        <div class="admin-security-card"><b>Restricted access</b><p>Only authorized TutoDemy administrator accounts can open tutor applications, private verification records, and booking operations.</p></div>
+        <div><span class="eyebrow light">SECURE ADMIN CONSOLE</span><h1>See the health of your learning platform.</h1><p>Monitor accounts, tutor operations, bookings, payments, payouts, and safety items from one protected workspace.</p></div>
+        <div class="admin-security-card"><b>Restricted access</b><p>Only authorized TutoDemy administrator accounts can view platform totals, private verification records, payment operations, payouts, and safety reports.</p></div>
       </div>
     </section>
     <section class="section">
@@ -53,13 +53,80 @@
             <button type="button" role="tab" aria-selected="false" aria-controls="admin-reports-panel" data-admin-tab="reports">Message reports</button>
           </div>
           <section id="admin-overview-panel" class="admin-panel active" role="tabpanel">
-            <div class="section-heading"><span class="eyebrow">ADMIN OVERVIEW</span><h2>Items that need attention</h2><p>A private summary of tutor reviews, booking operations, payouts, and safety reports.</p></div>
-            <div class="admin-overview-grid">
-              <button type="button" data-overview-tab="tutors"><span>Pending tutor applications</span><b id="admin-metric-tutors">0</b><small>Review tutor credentials and public profiles</small></button>
-              <button type="button" data-overview-tab="bookings"><span>Payment actions</span><b id="admin-metric-payments">0</b><small>Receipts or completed sessions needing review</small></button>
-              <button type="button" data-overview-tab="payouts"><span>Weekly payout due</span><b id="admin-metric-payouts">₱0.00</b><small>Net tutor earnings waiting for release</small></button>
-              <button type="button" data-overview-tab="reports"><span>Open safety reports</span><b id="admin-metric-reports">0</b><small>Reported conversations needing a decision</small></button>
+            <div class="admin-overview-header">
+              <div class="section-heading">
+                <span class="eyebrow">ADMIN OVERVIEW</span>
+                <h2>Platform health at a glance</h2>
+                <p>Secure totals for accounts, tutoring activity, operations, and earned platform commission.</p>
+              </div>
+              <div class="admin-overview-refresh">
+                <span id="admin-overview-updated" role="status" aria-live="polite">Loading overview…</span>
+                <button class="button button-outline" id="admin-overview-refresh" type="button">Refresh overview</button>
+              </div>
             </div>
+
+            <div class="admin-overview-setup" id="admin-overview-setup" hidden>
+              <b>Phase 1 database setup is required.</b>
+              <p>Run the private Admin Overview SQL in Supabase. The existing tutor, booking, payout, and report sections will continue to work.</p>
+            </div>
+
+            <section class="admin-overview-block" aria-labelledby="accounts-overview-title">
+              <div class="admin-overview-block-heading">
+                <div><span>ACCOUNT BASE</span><h3 id="accounts-overview-title">Who is using TutoDemy</h3></div>
+                <small>Detailed user management will be added in Phase 2.</small>
+              </div>
+              <div class="admin-stat-grid admin-stat-grid-accounts">
+                <article class="admin-stat-card" data-tone="navy"><span>Total registered accounts</span><b id="admin-total-users">—</b><small>All current TutoDemy profiles, including administrators</small></article>
+                <article class="admin-stat-card" data-tone="blue"><span>Learner-only accounts</span><b id="admin-learner-users">—</b><small>Accounts currently registered as learners, excluding admins</small></article>
+                <article class="admin-stat-card" data-tone="violet"><span>Active users this month</span><b id="admin-active-users-month">—</b><small>Unique users with meaningful platform activity</small></article>
+                <button class="admin-stat-card is-link" data-tone="green" type="button" data-overview-tab="tutors"><span>Approved tutors</span><b id="admin-approved-tutors">—</b><small>Open the tutor application and status list</small></button>
+                <button class="admin-stat-card is-link" data-tone="gold" type="button" data-overview-tab="tutors"><span>Pending tutor applications</span><b id="admin-pending-tutors">—</b><small>Applications waiting for administrator review</small></button>
+                <article class="admin-stat-card" data-tone="rose"><span>Suspended accounts</span><b id="admin-suspended-users">—</b><small>Account or tutor access currently suspended</small></article>
+              </div>
+              <div class="admin-growth-strip">
+                <div><span>New accounts this week</span><b id="admin-new-users-week">—</b></div>
+                <div><span>New accounts this month</span><b id="admin-new-users-month">—</b></div>
+                <div><span>All tutor accounts</span><b id="admin-total-tutor-accounts">—</b></div>
+                <div><span>Administrator accounts</span><b id="admin-total-admins">—</b></div>
+              </div>
+            </section>
+
+            <section class="admin-overview-block" aria-labelledby="operations-overview-title">
+              <div class="admin-overview-block-heading">
+                <div><span>OPERATIONS</span><h3 id="operations-overview-title">Items that may need attention</h3></div>
+                <small>Click an operational card to open the corresponding admin section.</small>
+              </div>
+              <div class="admin-stat-grid admin-stat-grid-operations">
+                <button class="admin-stat-card is-link" type="button" data-overview-tab="bookings"><span>New booking requests</span><b id="admin-booking-requests">—</b><small>Requests still waiting for a tutor response</small></button>
+                <button class="admin-stat-card is-link" type="button" data-overview-tab="bookings"><span>Upcoming accepted sessions</span><b id="admin-upcoming-sessions">—</b><small>Accepted or paid sessions scheduled in the future</small></button>
+                <button class="admin-stat-card is-link" type="button" data-overview-tab="bookings"><span>Payment verification</span><b id="admin-pending-payments">—</b><small>Submitted receipts waiting for administrator review</small></button>
+                <button class="admin-stat-card is-link" type="button" data-overview-tab="bookings"><span>Sessions to complete</span><b id="admin-awaiting-completion">—</b><small>Paid sessions marked delivered but not yet closed</small></button>
+                <button class="admin-stat-card is-link" type="button" data-overview-tab="payouts"><span>Tutor payout due</span><b id="admin-payout-due">—</b><small><span id="admin-payout-items">—</span> completed earning records remain unpaid</small></button>
+                <button class="admin-stat-card is-link" type="button" data-overview-tab="reports"><span>Open safety reports</span><b id="admin-open-reports">—</b><small>Open or reviewing conversation reports</small></button>
+              </div>
+              <div class="admin-growth-strip">
+                <div><span>Bookings this week</span><b id="admin-bookings-week">—</b></div>
+                <div><span>Bookings this month</span><b id="admin-bookings-month">—</b></div>
+                <div><span>Completed this month</span><b id="admin-completed-month">—</b></div>
+                <div><span>Completed all time</span><b id="admin-completed-all">—</b></div>
+              </div>
+            </section>
+
+            <section class="admin-overview-block admin-finance-snapshot" aria-labelledby="finance-overview-title">
+              <div class="admin-overview-block-heading">
+                <div><span>FINANCE SNAPSHOT</span><h3 id="finance-overview-title">Completed-booking earnings</h3></div>
+                <small>These are operational totals, not accounting profit. Business expenses are not deducted.</small>
+              </div>
+              <div class="admin-finance-grid">
+                <article><span>Gross completed booking value</span><b id="admin-gross-completed">—</b><small>Total client value represented in the completed-booking ledger</small></article>
+                <article class="primary"><span>Platform commission earned</span><b id="admin-platform-commission">—</b><small>All-time commission from completed bookings</small></article>
+                <article><span>Commission earned this month</span><b id="admin-platform-commission-month">—</b><small>Calendar month based on Philippine time</small></article>
+                <article><span>Tutor earnings recorded</span><b id="admin-tutor-net-recorded">—</b><small>Net tutor earnings generated by completed bookings</small></article>
+                <article><span>Tutor payouts recorded as paid</span><b id="admin-payouts-paid">—</b><small>Transfers recorded through the weekly payout workflow</small></article>
+                <button type="button" data-overview-tab="payouts"><span>Pending tutor payout amount</span><b id="admin-payout-pending-finance">—</b><small>Open the payout section to release and record transfers</small></button>
+              </div>
+              <p class="admin-finance-note">Platform commission is recognized only when a paid booking is completed and entered into the commission ledger. It is not a prediction of cash currently in the bank.</p>
+            </section>
           </section>
           <section id="admin-tutors-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">TUTOR REVIEW</span><h2>Applications and public-profile status</h2></div><div class="admin-list" id="admin-tutor-list"></div></section>
           <section id="admin-bookings-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">BOOKING OPERATIONS</span><h2>Client payment verification and booking completion</h2><p>Open each uploaded receipt, independently confirm the LANDBANK transaction, then approve or return the payment submission.</p></div><div class="admin-list" id="admin-booking-list"></div></section><section id="admin-payouts-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">WEEKLY PAYOUTS</span><h2>Send completed-session earnings to tutors</h2><p>Transfer the displayed amount to the tutor’s private GCash destination, then enter the successful transaction reference to record the payout.</p></div><div class="admin-list" id="admin-payout-list"></div></section><section id="admin-reports-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">MESSAGE SAFETY</span><h2>Conversation reports</h2><p>Review reported booking messages, record the outcome, and take appropriate account or booking action.</p></div><div class="admin-list" id="admin-report-list"></div></section>

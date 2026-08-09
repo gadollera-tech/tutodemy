@@ -347,6 +347,13 @@
     return data || [];
   }
 
+  async function adminPlatformOverview() {
+    if (!state.admin && !await checkAdmin()) throw new Error("Administrator access required.");
+    const { data, error } = await client().rpc("admin_get_platform_overview");
+    if (error) throw friendlyError(error);
+    return data || null;
+  }
+
   async function adminPendingTutors() {
     if (!await checkAdmin()) throw new Error("Administrator access required.");
     const { data, error } = await client().from("tutor_profiles").select("*").in("status", ["pending","approved","rejected","suspended"]).order("submitted_at", { ascending: false, nullsFirst: false });
@@ -686,6 +693,7 @@
     submitReview,
     getMyReviews,
     getMyLedger,
+    adminPlatformOverview,
     adminPendingTutors,
     adminTutorDocuments,
     signedDocumentUrl,
