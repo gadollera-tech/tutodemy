@@ -20,15 +20,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Admin Console | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260809-users2">
+  <link rel="stylesheet" href="css/style.css?v=20260809-finance3">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-users2"></script>
+  <script defer src="js/marketplace-api.js?v=20260809-finance3"></script>
   <script defer src="js/main.js?v=20260809-tutorfix1"></script>
-  <script defer src="js/admin.js?v=20260809-users2"></script>
+  <script defer src="js/admin.js?v=20260809-finance3"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="admin">
@@ -50,6 +50,7 @@
             <button type="button" role="tab" aria-selected="false" aria-controls="admin-users-panel" data-admin-tab="users">Users</button>
             <button type="button" role="tab" aria-selected="false" aria-controls="admin-tutors-panel" data-admin-tab="tutors">Tutor applications</button>
             <button type="button" role="tab" aria-selected="false" aria-controls="admin-bookings-panel" data-admin-tab="bookings">Bookings and payments</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="admin-finance-panel" data-admin-tab="finance">Finance</button>
             <button type="button" role="tab" aria-selected="false" aria-controls="admin-payouts-panel" data-admin-tab="payouts">Weekly tutor payouts</button>
             <button type="button" role="tab" aria-selected="false" aria-controls="admin-reports-panel" data-admin-tab="reports">Message reports</button>
           </div>
@@ -116,7 +117,7 @@
             <section class="admin-overview-block admin-finance-snapshot" aria-labelledby="finance-overview-title">
               <div class="admin-overview-block-heading">
                 <div><span>FINANCE SNAPSHOT</span><h3 id="finance-overview-title">Completed-booking earnings</h3></div>
-                <small>These are operational totals, not accounting profit. Business expenses are not deducted.</small>
+                <button class="admin-overview-link" type="button" data-overview-tab="finance">Open the full Finance Dashboard →</button>
               </div>
               <div class="admin-finance-grid">
                 <article><span>Gross completed booking value</span><b id="admin-gross-completed">—</b><small>Total client value represented in the completed-booking ledger</small></article>
@@ -200,7 +201,133 @@
           </section>
 
           <section id="admin-tutors-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">TUTOR REVIEW</span><h2>Applications and public-profile status</h2></div><div class="admin-list" id="admin-tutor-list"></div></section>
-          <section id="admin-bookings-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">BOOKING OPERATIONS</span><h2>Client payment verification and booking completion</h2><p>Open each uploaded receipt, independently confirm the LANDBANK transaction, then approve or return the payment submission.</p></div><div class="admin-list" id="admin-booking-list"></div></section><section id="admin-payouts-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">WEEKLY PAYOUTS</span><h2>Send completed-session earnings to tutors</h2><p>Transfer the displayed amount to the tutor’s private GCash destination, then enter the successful transaction reference to record the payout.</p></div><div class="admin-list" id="admin-payout-list"></div></section><section id="admin-reports-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">MESSAGE SAFETY</span><h2>Conversation reports</h2><p>Review reported booking messages, record the outcome, and take appropriate account or booking action.</p></div><div class="admin-list" id="admin-report-list"></div></section>
+          <section id="admin-bookings-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">BOOKING OPERATIONS</span><h2>Client payment verification and booking completion</h2><p>Open each uploaded receipt, independently confirm the LANDBANK transaction, then approve or return the payment submission.</p></div><div class="admin-list" id="admin-booking-list"></div></section>
+
+          <section id="admin-finance-panel" class="admin-panel" role="tabpanel" hidden>
+            <div class="admin-finance-header">
+              <div class="section-heading">
+                <span class="eyebrow">FINANCE DASHBOARD</span>
+                <h2>Collections, commissions, payouts, refunds, and expenses</h2>
+                <p>Review live Supabase records, reconcile operational cash movement, and record non-booking finance entries without exposing private information outside the administrator console.</p>
+              </div>
+              <div class="admin-finance-actions">
+                <span id="admin-finance-updated" role="status" aria-live="polite">Finance data not loaded</span>
+                <button class="button button-outline" id="admin-finance-refresh" type="button">Refresh finance</button>
+                <button class="button button-outline" id="admin-finance-export" type="button">Export CSV</button>
+              </div>
+            </div>
+
+            <div class="admin-overview-setup" id="admin-finance-setup" hidden>
+              <b>Phase 3 database setup is required.</b>
+              <p>Run the private Finance Dashboard SQL in Supabase before loading finance totals or recording expenses and refunds.</p>
+            </div>
+
+            <form class="admin-finance-filters" id="admin-finance-filters">
+              <label>Start date<input id="admin-finance-start" type="date" required></label>
+              <label>End date<input id="admin-finance-end" type="date" required></label>
+              <label>Transaction type
+                <select id="admin-finance-type">
+                  <option value="all">All transactions</option>
+                  <option value="payment">Booking payments</option>
+                  <option value="payout">Tutor payouts</option>
+                  <option value="expense">Operating expenses</option>
+                  <option value="refund">Refunds</option>
+                  <option value="adjustment">Capital and adjustments</option>
+                </select>
+              </label>
+              <label>Status
+                <select id="admin-finance-status">
+                  <option value="all">All statuses</option>
+                  <option value="issue">Needs attention</option>
+                  <option value="pending">Pending</option>
+                  <option value="confirmed">Confirmed</option>
+                  <option value="paid">Paid</option>
+                  <option value="refunded">Refunded</option>
+                  <option value="returned">Returned receipt</option>
+                  <option value="reversed">Reversed</option>
+                  <option value="voided">Voided</option>
+                </select>
+              </label>
+              <label class="admin-finance-search">Search<input id="admin-finance-search" type="search" maxlength="140" placeholder="Reference, booking ID, learner, or tutor"></label>
+              <button class="button" type="submit">Apply filters</button>
+              <button class="text-button" id="admin-finance-clear" type="button">Reset</button>
+            </form>
+
+            <div class="admin-finance-kpis" aria-label="Finance key performance indicators">
+              <article><span>Gross bookings</span><b id="finance-gross-bookings">—</b><small>Bookings created in the selected period</small></article>
+              <article><span>Verified collections</span><b id="finance-verified-collections">—</b><small><span id="finance-payment-count">—</span> confirmed payments</small></article>
+              <article class="primary"><span>Platform revenue</span><b id="finance-platform-revenue">—</b><small>Earned commission excluding reversed refunds</small></article>
+              <article><span>Tutor earnings</span><b id="finance-tutor-earnings">—</b><small>Completed-session tutor net</small></article>
+              <article><span>Tutor payouts paid</span><b id="finance-payouts-paid">—</b><small><span id="finance-payout-count">—</span> payout records</small></article>
+              <article><span>Outstanding payouts</span><b id="finance-outstanding-payouts">—</b><small><span id="finance-outstanding-items">—</span> unpaid ledger items</small></article>
+              <article><span>Refunds</span><b id="finance-refunds">—</b><small>Confirmed refund cash movements</small></article>
+              <article><span>Operating expenses</span><b id="finance-expenses">—</b><small>Confirmed business expenses</small></article>
+              <article class="net"><span>Net cash movement</span><b id="finance-net-cash">—</b><small>Collections and inflows less payouts and outflows</small></article>
+            </div>
+
+            <section class="admin-finance-attention" aria-labelledby="finance-attention-title">
+              <div><span>RECONCILIATION</span><h3 id="finance-attention-title">Items requiring administrator attention</h3></div>
+              <div class="admin-finance-attention-grid">
+                <button type="button" data-finance-quick-status="pending"><span>Pending payment receipts</span><b id="finance-pending-payments">—</b></button>
+                <button type="button" data-finance-quick-status="returned"><span>Returned submissions</span><b id="finance-returned-payments">—</b></button>
+                <button type="button" data-finance-quick-status="issue"><span>Refund records missing</span><b id="finance-missing-refunds">—</b></button>
+                <button type="button" data-finance-quick-status="issue"><span>Payout recovery needed</span><b id="finance-payout-recovery">—</b></button>
+                <article><span>Finance gate</span><b id="finance-gate-status">—</b></article>
+              </div>
+            </section>
+
+            <div class="admin-finance-layout">
+              <section class="admin-finance-trend" aria-labelledby="finance-trend-title">
+                <div class="admin-finance-section-head"><div><span>MONTHLY VIEW</span><h3 id="finance-trend-title">Cash movement by month</h3></div><small>Amounts are in Philippine pesos.</small></div>
+                <div class="admin-finance-chart-legend" aria-hidden="true"><span data-series="collections">Collections</span><span data-series="payouts">Payouts</span><span data-series="expenses">Expenses + refunds</span><span data-series="net">Net cash</span></div>
+                <div class="admin-finance-chart" id="admin-finance-chart" role="img" aria-label="Monthly finance chart"></div>
+              </section>
+
+              <details class="admin-finance-entry-card">
+                <summary>Record an expense, refund, capital contribution, or adjustment</summary>
+                <p>Use this form only after checking the supporting receipt or transaction. Booking collections, commissions, and weekly payouts are generated automatically from their existing workflows.</p>
+                <form id="admin-finance-entry-form" class="admin-finance-entry-form">
+                  <label>Date<input id="finance-entry-date" type="date" required></label>
+                  <label>Entry type
+                    <select id="finance-entry-type" required>
+                      <option value="operating_expense">Operating expense</option>
+                      <option value="refund">Booking refund</option>
+                      <option value="capital_contribution">Capital contribution</option>
+                      <option value="adjustment_in">Cash adjustment in</option>
+                      <option value="adjustment_out">Cash adjustment out</option>
+                    </select>
+                  </label>
+                  <label>Category<input id="finance-entry-category" maxlength="80" value="Other" required></label>
+                  <label>Amount (PHP)<input id="finance-entry-amount" type="number" min="0.01" step="0.01" required></label>
+                  <label>Status
+                    <select id="finance-entry-status"><option value="confirmed">Confirmed cash movement</option><option value="pending">Pending / planned</option></select>
+                  </label>
+                  <label>Booking ID <small>Required for refunds</small><input id="finance-entry-booking" maxlength="36" placeholder="UUID from Bookings"></label>
+                  <label>Method<input id="finance-entry-method" maxlength="80" placeholder="GCash, LANDBANK, bank transfer, cash"></label>
+                  <label>Reference<input id="finance-entry-reference" maxlength="160" placeholder="Official receipt or transaction reference"></label>
+                  <label class="wide">Description<textarea id="finance-entry-description" rows="3" maxlength="500" placeholder="What was paid, refunded, or adjusted?" required></textarea></label>
+                  <button class="button wide" id="finance-entry-submit" type="submit">Save finance entry</button>
+                </form>
+              </details>
+            </div>
+
+            <section class="admin-finance-transactions" aria-labelledby="finance-transactions-title">
+              <div class="admin-finance-section-head"><div><span>TRANSACTION REGISTER</span><h3 id="finance-transactions-title">Finance activity</h3></div><span id="admin-finance-results" role="status" aria-live="polite">No finance results loaded</span></div>
+              <div class="admin-finance-table-wrap">
+                <table class="admin-finance-table">
+                  <thead><tr><th>Date</th><th>Type and details</th><th>Status</th><th>Cash in</th><th>Cash out</th><th>Gross / fee / tutor net</th><th>Reference</th><th>Action</th></tr></thead>
+                  <tbody id="admin-finance-transaction-body"></tbody>
+                </table>
+              </div>
+              <div class="admin-user-pagination" id="admin-finance-pagination" hidden>
+                <button class="button button-outline" id="admin-finance-prev" type="button">Previous</button>
+                <span id="admin-finance-page">Page 1</span>
+                <button class="button button-outline" id="admin-finance-next" type="button">Next</button>
+              </div>
+            </section>
+          </section>
+
+          <section id="admin-payouts-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">WEEKLY PAYOUTS</span><h2>Send completed-session earnings to tutors</h2><p>Transfer the displayed amount to the tutor’s private GCash destination, then enter the successful transaction reference to record the payout.</p></div><div class="admin-list" id="admin-payout-list"></div></section><section id="admin-reports-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">MESSAGE SAFETY</span><h2>Conversation reports</h2><p>Review reported booking messages, record the outcome, and take appropriate account or booking action.</p></div><div class="admin-list" id="admin-report-list"></div></section>
         </div>
       </div>
     </section>

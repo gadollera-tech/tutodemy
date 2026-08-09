@@ -380,6 +380,57 @@
     return data;
   }
 
+  async function adminFinanceDashboard(filters = {}) {
+    if (!state.admin && !await checkAdmin()) throw new Error("Administrator access required.");
+    const { data, error } = await client().rpc("admin_get_finance_dashboard", {
+      p_start_date: filters.startDate || null,
+      p_end_date: filters.endDate || null,
+      p_type: filters.type || "all",
+      p_status: filters.status || "all",
+      p_search: String(filters.search || "").trim(),
+      p_limit: Math.min(Math.max(Number(filters.limit) || 50, 1), 500),
+      p_offset: Math.max(Number(filters.offset) || 0, 0)
+    });
+    if (error) throw error;
+    return data || { summary: {}, attention: {}, monthly: [], transactions: [], transaction_total: 0 };
+  }
+
+  async function adminCreateFinanceEntry(entry = {}) {
+    if (!state.admin && !await checkAdmin()) throw new Error("Administrator access required.");
+    const { data, error } = await client().rpc("admin_create_finance_entry", {
+      p_entry_date: entry.entryDate || null,
+      p_entry_type: entry.entryType || "operating_expense",
+      p_category: String(entry.category || "Other").trim(),
+      p_description: String(entry.description || "").trim(),
+      p_booking_id: entry.bookingId || null,
+      p_amount: Number(entry.amount),
+      p_payment_method: String(entry.paymentMethod || "").trim(),
+      p_reference: String(entry.reference || "").trim(),
+      p_status: entry.status || "confirmed"
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
+  async function adminConfirmFinanceEntry(entryId) {
+    if (!state.admin && !await checkAdmin()) throw new Error("Administrator access required.");
+    const { data, error } = await client().rpc("admin_confirm_finance_entry", {
+      p_entry_id: entryId
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
+  async function adminVoidFinanceEntry(entryId, reason) {
+    if (!state.admin && !await checkAdmin()) throw new Error("Administrator access required.");
+    const { data, error } = await client().rpc("admin_void_finance_entry", {
+      p_entry_id: entryId,
+      p_reason: String(reason || "").trim()
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
   async function adminPendingTutors() {
     if (!await checkAdmin()) throw new Error("Administrator access required.");
     const { data, error } = await client().from("tutor_profiles").select("*").in("status", ["pending","approved","rejected","suspended"]).order("submitted_at", { ascending: false, nullsFirst: false });
@@ -722,6 +773,10 @@
     adminPlatformOverview,
     adminListUsers,
     adminSetUserAccountStatus,
+    adminFinanceDashboard,
+    adminCreateFinanceEntry,
+    adminConfirmFinanceEntry,
+    adminVoidFinanceEntry,
     adminPendingTutors,
     adminTutorDocuments,
     signedDocumentUrl,

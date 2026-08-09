@@ -16,6 +16,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   let usersResult = { items: [], total: 0 };
   const usersPageSize = 25;
   let usersPage = 0;
+  let financeLoading = false;
+  let financeLoaded = false;
+  let financeLoadedAt = null;
+  let financeData = { summary: {}, attention: {}, monthly: [], transactions: [], transaction_total: 0 };
+  const financePageSize = 50;
+  let financePage = 0;
   let activeTab = "overview";
 
   const esc = value => window.Tuto.escape(value);
@@ -26,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `${digits.slice(0, 4)}•••${digits.slice(-4)}`;
   };
 
-  const allowedTabs = new Set(["overview", "users", "tutors", "bookings", "payouts", "reports"]);
+  const allowedTabs = new Set(["overview", "users", "tutors", "bookings", "finance", "payouts", "reports"]);
 
   function tabFromUrl(urlLike = location.href) {
     const url = new URL(urlLike, location.href);
@@ -72,6 +78,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.querySelector(".menu-toggle")?.setAttribute("aria-expanded", "false");
     if (scroll) content?.scrollIntoView({ behavior: "smooth", block: "start" });
     if (tab === "users" && api && !usersLoaded && !usersLoading) loadUsers();
+    if (tab === "finance" && api && !financeLoading) loadFinance();
   }
 
   function bindAdminNavigation() {
@@ -338,6 +345,254 @@ document.addEventListener("DOMContentLoaded", async () => {
     link.remove();
     URL.revokeObjectURL(url);
   }
+
+  function localDateValue(date) {
+    const offset = date.getTimezoneOffset() * 60000;
+    return new Date(date.getTime() - offset).toISOString().slice(0, 10);
+  }
+
+  function setFinanceDefaultDates() {
+    const today = new Date();
+    const start = new Date(today.getFullYear(), today.getMonth(), 1);
+    const startInput = document.querySelector("#admin-finance-start");
+    const endInput = document.querySelector("#admin-finance-end");
+    const entryInput = document.querySelector("#finance-entry-date");
+    if (startInput && !startInput.value) startInput.value = localDateValue(start);
+    if (endInput && !endInput.value) endInput.value = localDateValue(today);
+    if (entryInput && !entryInput.value) entryInput.value = localDateValue(today);
+  }
+
+  function currentFinanceFilters({ limit = financePageSize, offset = financePage * financePageSize } = {}) {
+    setFinanceDefaultDates();
+    return {
+      startDate: document.querySelector("#admin-finance-start")?.value || "",
+      endDate: document.querySelector("#admin-finance-end")?.value || "",
+      type: document.querySelector("#admin-finance-type")?.value || "all",
+      status: document.querySelector("#admin-finance-status")?.value || "all",
+      search: document.querySelector("#admin-finance-search")?.value || "",
+      limit,
+      offset
+    };
+  }
+
+  function financeTypeLabel(type) {
+    return ({
+      booking_payment: "Booking payment",
+      tutor_payout: "Tutor payout",
+      operating_expense: "Operating expense",
+      refund: "Booking refund",
+      adjustment_in: "Cash adjustment in",
+      adjustment_out: "Cash adjustment out",
+      capital_contribution: "Capital contribution"
+    })[type] || String(type || "Transaction").replace(/_/g, " ");
+  }
+
+  function financeStatusLabel(status) {
+    return ({ returned: "Returned receipt", confirmed: "Confirmed" })[status] || String(status || "unknown").replace(/_/g, " ");
+  }
+
+  function renderFinanceTrend() {
+    const chart = document.querySelector("#admin-finance-chart");
+    if (!chart) return;
+    const months = Array.isArray(financeData.monthly) ? financeData.monthly : [];
+    if (!months.length) {
+      chart.innerHTML = `<div class="empty-state"><h3>No monthly data in this period.</h3><p>Change the dates or record finance activity.</p></div>`;
+      chart.setAttribute("aria-label", "No monthly finance data in the selected period");
+      return;
+    }
+    const maxValue = Math.max(1, ...months.flatMap(month => [
+      Math.abs(Number(month.collections || 0)),
+      Math.abs(Number(month.payouts || 0)),
+      Math.abs(Number(month.expenses || 0) + Number(month.refunds || 0)),
+      Math.abs(Number(month.net_cash || 0))
+    ]));
+    const bar = (series, value) => {
+      const numeric = Number(value || 0);
+      const height = Math.max(numeric === 0 ? 2 : 8, Math.round(Math.abs(numeric) / maxValue * 100));
+      return `<span class="admin-finance-bar ${numeric < 0 ? "negative" : ""}" data-series="${series}" style="--bar-height:${height}%" title="${esc(financeTypeLabel(series))}: ${esc(money(numeric))}"></span>`;
+    };
+    chart.innerHTML = months.map(month => {
+      const expensesAndRefunds = Number(month.expenses || 0) + Number(month.refunds || 0);
+      return `<article class="admin-finance-month">
+        <div class="admin-finance-bars" aria-hidden="true">
+          ${bar("collections", month.collections)}
+          ${bar("payouts", month.payouts)}
+          ${bar("expenses", expensesAndRefunds)}
+          ${bar("net", month.net_cash)}
+        </div>
+        <b>${esc(month.label || month.month || "Month")}</b>
+        <small>Net ${esc(money(month.net_cash || 0))}</small>
+      </article>`;
+    }).join("");
+    chart.setAttribute("aria-label", months.map(month => `${month.label}: collections ${money(month.collections || 0)}, payouts ${money(month.payouts || 0)}, expenses and refunds ${money(Number(month.expenses || 0) + Number(month.refunds || 0))}, net cash ${money(month.net_cash || 0)}`).join(". "));
+  }
+
+  function financeTransactionRow(row) {
+    const date = row.transaction_date ? new Date(row.transaction_date).toLocaleString() : "—";
+    const issue = row.issue ? `<div class="admin-finance-issue">${esc(row.issue)}</div>` : "";
+    const people = [row.learner_name && `Learner: ${row.learner_name}`, row.tutor_name && `Tutor: ${row.tutor_name}`].filter(Boolean).join(" • ");
+    const booking = row.booking_id ? `<code>${esc(row.booking_id)}</code>` : "";
+    const entryActions = [];
+    if (row.source_kind === "entry" && row.status === "pending") entryActions.push(`<button class="text-button finance-confirm-entry" type="button" data-entry-id="${esc(row.transaction_id)}">Confirm</button>`);
+    if (row.source_kind === "entry" && row.can_void) entryActions.push(`<button class="text-button finance-void-entry" type="button" data-entry-id="${esc(row.transaction_id)}">Void</button>`);
+    const action = entryActions.length ? `<div class="admin-finance-row-actions">${entryActions.join("")}</div>` : "—";
+    return `<tr class="${row.issue ? "has-issue" : ""}">
+      <td data-label="Date"><time>${esc(date)}</time></td>
+      <td data-label="Type and details"><b>${esc(financeTypeLabel(row.transaction_type))}</b><p>${esc(row.description || "—")}</p>${people ? `<small>${esc(people)}</small>` : ""}${booking}</td>
+      <td data-label="Status"><span class="status-pill status-${esc(row.status || "pending")}">${esc(financeStatusLabel(row.status))}</span>${issue}</td>
+      <td data-label="Cash in" class="amount positive">${Number(row.cash_in || 0) ? esc(money(row.cash_in)) : "—"}</td>
+      <td data-label="Cash out" class="amount negative">${Number(row.cash_out || 0) ? esc(money(row.cash_out)) : "—"}</td>
+      <td data-label="Gross / fee / tutor net" class="finance-split"><span>Gross <b>${esc(money(row.gross_amount || 0))}</b></span><span>Fee <b>${esc(money(row.platform_fee || 0))}</b></span><span>Tutor <b>${esc(money(row.tutor_net || 0))}</b></span></td>
+      <td data-label="Reference"><b>${esc(row.reference || "—")}</b><small>${esc(row.payment_method || "")}</small></td>
+      <td data-label="Action">${action}</td>
+    </tr>`;
+  }
+
+  function renderFinance() {
+    const summary = financeData.summary || {};
+    const attention = financeData.attention || {};
+    const metrics = {
+      "#finance-gross-bookings": money(summary.gross_bookings || 0),
+      "#finance-verified-collections": money(summary.verified_collections || 0),
+      "#finance-payment-count": metricNumber(summary.verified_payment_count).toLocaleString(),
+      "#finance-platform-revenue": money(summary.platform_revenue || 0),
+      "#finance-tutor-earnings": money(summary.tutor_earnings || 0),
+      "#finance-payouts-paid": money(summary.tutor_payouts_paid || 0),
+      "#finance-payout-count": metricNumber(summary.paid_payout_count).toLocaleString(),
+      "#finance-outstanding-payouts": money(summary.outstanding_payouts || 0),
+      "#finance-outstanding-items": metricNumber(summary.outstanding_payout_items).toLocaleString(),
+      "#finance-refunds": money(summary.refunds || 0),
+      "#finance-expenses": money(summary.operating_expenses || 0),
+      "#finance-net-cash": money(summary.net_cash || 0),
+      "#finance-pending-payments": metricNumber(attention.pending_payments).toLocaleString(),
+      "#finance-returned-payments": metricNumber(attention.returned_payments).toLocaleString(),
+      "#finance-missing-refunds": metricNumber(attention.refunded_without_entry).toLocaleString(),
+      "#finance-payout-recovery": metricNumber(attention.payout_recovery_needed).toLocaleString(),
+      "#finance-gate-status": attention.finance_gate_status || "—"
+    };
+    Object.entries(metrics).forEach(([selector, value]) => setMetric(selector, value));
+
+    const netCard = document.querySelector("#finance-net-cash")?.closest("article");
+    if (netCard) netCard.classList.toggle("is-negative", Number(summary.net_cash || 0) < 0);
+    const gate = document.querySelector("#finance-gate-status");
+    if (gate) gate.dataset.status = String(attention.finance_gate_status || "").toLowerCase().replace(/\s+/g, "-");
+
+    renderFinanceTrend();
+
+    const rows = Array.isArray(financeData.transactions) ? financeData.transactions : [];
+    const body = document.querySelector("#admin-finance-transaction-body");
+    if (body) {
+      body.innerHTML = rows.map(financeTransactionRow).join("") || `<tr><td colspan="8"><div class="empty-state"><h3>No finance transactions match these filters.</h3><p>Change the period, filters, or search terms.</p></div></td></tr>`;
+      body.querySelectorAll(".finance-confirm-entry").forEach(button => button.addEventListener("click", async () => {
+        if (!confirm("Confirm this pending cash movement? This will update Finance Dashboard totals.")) return;
+        try {
+          button.disabled = true;
+          await api.adminConfirmFinanceEntry(button.dataset.entryId);
+          window.Tuto.toast("Finance entry confirmed.");
+          await Promise.all([loadFinance(), loadAll({ manual: true })]);
+        } catch (error) {
+          showAdminAlert(error.message || "The finance entry could not be confirmed.");
+          button.disabled = false;
+        }
+      }));
+      body.querySelectorAll(".finance-void-entry").forEach(button => button.addEventListener("click", async () => {
+        const reason = prompt("Why should this finance entry be voided? This action is recorded for reconciliation.");
+        if (reason === null) return;
+        if (reason.trim().length < 3) return window.Tuto.toast("Enter a clear reason for voiding the entry.");
+        if (!confirm("Void this finance entry? Dashboard totals will be recalculated.")) return;
+        try {
+          button.disabled = true;
+          await api.adminVoidFinanceEntry(button.dataset.entryId, reason.trim());
+          window.Tuto.toast("Finance entry voided.");
+          await Promise.all([loadFinance(), loadAll({ manual: true })]);
+        } catch (error) {
+          showAdminAlert(error.message || "The finance entry could not be voided.");
+          button.disabled = false;
+        }
+      }));
+    }
+
+    const total = metricNumber(financeData.transaction_total);
+    const start = total ? financePage * financePageSize + 1 : 0;
+    const end = Math.min((financePage + 1) * financePageSize, total);
+    setMetric("#admin-finance-results", total ? `Showing ${start}–${end} of ${total.toLocaleString()} transactions` : "No matching transactions");
+    const pagination = document.querySelector("#admin-finance-pagination");
+    if (pagination) pagination.hidden = total <= financePageSize;
+    setMetric("#admin-finance-page", `Page ${financePage + 1} of ${Math.max(1, Math.ceil(total / financePageSize))}`);
+    const prev = document.querySelector("#admin-finance-prev");
+    const next = document.querySelector("#admin-finance-next");
+    if (prev) prev.disabled = financePage === 0;
+    if (next) next.disabled = end >= total;
+
+    const updated = document.querySelector("#admin-finance-updated");
+    if (updated) {
+      if (financeLoading) updated.textContent = "Refreshing finance…";
+      else if (financeLoadedAt) updated.textContent = `Updated ${financeLoadedAt.toLocaleString()}`;
+      else updated.textContent = "Finance data not loaded";
+    }
+  }
+
+  async function loadFinance({ resetPage = false, manual = false } = {}) {
+    if (!api || financeLoading) return;
+    if (resetPage) financePage = 0;
+    financeLoading = true;
+    const refresh = document.querySelector("#admin-finance-refresh");
+    if (refresh) {
+      refresh.disabled = true;
+      refresh.textContent = manual ? "Refreshing…" : "Loading…";
+    }
+    renderFinance();
+    try {
+      financeData = await api.adminFinanceDashboard(currentFinanceFilters());
+      financeLoaded = true;
+      financeLoadedAt = new Date(financeData.generated_at || Date.now());
+      const setup = document.querySelector("#admin-finance-setup");
+      if (setup) setup.hidden = true;
+      showAdminAlert("");
+    } catch (error) {
+      financeLoaded = false;
+      financeData = { summary: {}, attention: {}, monthly: [], transactions: [], transaction_total: 0 };
+      const setup = document.querySelector("#admin-finance-setup");
+      if (setup) setup.hidden = false;
+      showAdminAlert(`Finance Dashboard could not be loaded. ${error.message || "Run the Phase 3 private SQL setup."}`, "warning");
+    } finally {
+      financeLoading = false;
+      if (refresh) {
+        refresh.disabled = false;
+        refresh.textContent = "Refresh finance";
+      }
+      renderFinance();
+    }
+  }
+
+  async function exportFinanceCsv() {
+    if (!api) return;
+    const button = document.querySelector("#admin-finance-export");
+    try {
+      if (button) { button.disabled = true; button.textContent = "Preparing CSV…"; }
+      const result = await api.adminFinanceDashboard(currentFinanceFilters({ limit: 500, offset: 0 }));
+      const rows = Array.isArray(result.transactions) ? result.transactions : [];
+      if (!rows.length) return window.Tuto.toast("There are no matching finance transactions to export.");
+      const headers = ["Date","Type","Status","Booking ID","Learner","Tutor","Description","Payment Method","Reference","Cash In PHP","Cash Out PHP","Gross PHP","Platform Fee PHP","Tutor Net PHP","Issue","Transaction ID"];
+      const quote = value => `"${String(value ?? "").replace(/"/g, '""')}"`;
+      const lines = rows.map(row => [row.transaction_date,financeTypeLabel(row.transaction_type),financeStatusLabel(row.status),row.booking_id || "",row.learner_name || "",row.tutor_name || "",row.description || "",row.payment_method || "",row.reference || "",row.cash_in || 0,row.cash_out || 0,row.gross_amount || 0,row.platform_fee || 0,row.tutor_net || 0,row.issue || "",row.transaction_id].map(quote).join(","));
+      const blob = new Blob([[headers.map(quote).join(","), ...lines].join("\n")], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `tutodemy-finance-${currentFinanceFilters().startDate}-to-${currentFinanceFilters().endDate}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      if (Number(result.transaction_total || 0) > rows.length) window.Tuto.toast(`CSV contains the first ${rows.length} matching transactions.`);
+    } catch (error) {
+      showAdminAlert(error.message || "The finance CSV could not be created.");
+    } finally {
+      if (button) { button.disabled = false; button.textContent = "Export CSV"; }
+    }
+  }
+
 
   function tutorCard(tutor) {
     const photo = api.publicAvatarUrl(tutor.profile_photo_path);
@@ -680,6 +935,61 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.querySelector("#admin-users-prev")?.addEventListener("click", () => { if (usersPage > 0) { usersPage -= 1; loadUsers(); } });
   document.querySelector("#admin-users-next")?.addEventListener("click", () => { usersPage += 1; loadUsers(); });
 
+  setFinanceDefaultDates();
+  document.querySelector("#admin-finance-filters")?.addEventListener("submit", event => {
+    event.preventDefault();
+    loadFinance({ resetPage: true, manual: true });
+  });
+  document.querySelector("#admin-finance-clear")?.addEventListener("click", () => {
+    document.querySelector("#admin-finance-filters")?.reset();
+    document.querySelector("#admin-finance-start").value = "";
+    document.querySelector("#admin-finance-end").value = "";
+    setFinanceDefaultDates();
+    loadFinance({ resetPage: true, manual: true });
+  });
+  document.querySelector("#admin-finance-refresh")?.addEventListener("click", () => loadFinance({ manual: true }));
+  document.querySelector("#admin-finance-export")?.addEventListener("click", exportFinanceCsv);
+  document.querySelector("#admin-finance-prev")?.addEventListener("click", () => { if (financePage > 0) { financePage -= 1; loadFinance(); } });
+  document.querySelector("#admin-finance-next")?.addEventListener("click", () => { financePage += 1; loadFinance(); });
+  document.querySelectorAll("[data-finance-quick-status]").forEach(button => button.addEventListener("click", () => {
+    const status = document.querySelector("#admin-finance-status");
+    if (status) status.value = button.dataset.financeQuickStatus || "issue";
+    loadFinance({ resetPage: true, manual: true });
+  }));
+  document.querySelector("#finance-entry-type")?.addEventListener("change", event => {
+    const bookingInput = document.querySelector("#finance-entry-booking");
+    if (bookingInput) bookingInput.required = event.target.value === "refund";
+  });
+  document.querySelector("#admin-finance-entry-form")?.addEventListener("submit", async event => {
+    event.preventDefault();
+    const button = document.querySelector("#finance-entry-submit");
+    const entryType = document.querySelector("#finance-entry-type")?.value || "operating_expense";
+    const bookingId = document.querySelector("#finance-entry-booking")?.value.trim() || null;
+    if (entryType === "refund" && !bookingId) return window.Tuto.toast("Enter the booking ID for this refund.");
+    try {
+      if (button) { button.disabled = true; button.textContent = "Saving…"; }
+      await api.adminCreateFinanceEntry({
+        entryDate: document.querySelector("#finance-entry-date")?.value,
+        entryType,
+        category: document.querySelector("#finance-entry-category")?.value,
+        amount: document.querySelector("#finance-entry-amount")?.value,
+        status: document.querySelector("#finance-entry-status")?.value,
+        bookingId,
+        paymentMethod: document.querySelector("#finance-entry-method")?.value,
+        reference: document.querySelector("#finance-entry-reference")?.value,
+        description: document.querySelector("#finance-entry-description")?.value
+      });
+      event.target.reset();
+      setFinanceDefaultDates();
+      window.Tuto.toast("Finance entry saved.");
+      await Promise.all([loadFinance({ resetPage: true }), loadAll({ manual: true })]);
+    } catch (error) {
+      showAdminAlert(error.message || "The finance entry could not be saved.");
+    } finally {
+      if (button) { button.disabled = false; button.textContent = "Save finance entry"; }
+    }
+  });
+
   await window.TutoAuth?.ready;
   if (window.TutoMarketplace?.ready) await window.TutoMarketplace.ready;
   api = window.TutoMarketplace;
@@ -697,6 +1007,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     syncAdminNavigation(activeTab);
     await loadAll();
     if (activeTab === "users") await loadUsers();
+    if (activeTab === "finance") await loadFinance({ resetPage: true });
   } catch (error) {
     content.hidden = false;
     showAdminAlert(error.message || "Admin Console could not be opened.");
