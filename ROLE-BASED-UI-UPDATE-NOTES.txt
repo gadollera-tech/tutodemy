@@ -1,0 +1,17 @@
+TutoDemy Role-Based UI Update
+Release: 2026-08-09 role1
+
+What changed
+- Learners receive a learner-focused navigation and footer.
+- Tutors receive a tutor workspace navigation and footer.
+- Authorized administrators receive a separate dark admin navigation and admin overview.
+- Approved/pending tutor accounts can switch between Tutor View and Learner View.
+- Administrator accounts can preview the public site and return to the Admin Console.
+- Login routing now sends admins to Admin Console, tutors to Tutor Dashboard, and learners to Learner Dashboard.
+- Tutor applicants only see application/status tools until approved. Booking, earnings, and payout tools unlock after approval.
+- Admin Console includes an overview for pending tutor applications, payment actions, payout amount due, and open message reports.
+- Mobile navigation and PWA support are retained.
+- Notification bell and realtime alerts are retained.
+
+Installation
+Upload the contents of the public patch to the root of the existing GitHub repository and replace matching files. Do not upload this ZIP as a single file. No Supabase SQL changes are required.

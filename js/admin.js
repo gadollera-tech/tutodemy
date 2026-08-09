@@ -18,6 +18,27 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `${digits.slice(0, 4)}•••${digits.slice(-4)}`;
   };
 
+
+  function renderOverview() {
+    const pendingTutors = tutors.filter(tutor => tutor.status === "pending").length;
+    const paymentActions = bookings.filter(booking =>
+      (booking.payment_proof_path && booking.payment_status !== "paid") ||
+      (booking.status === "session_delivered" && booking.payment_status === "paid")
+    ).length;
+    const payoutDue = payouts.reduce((sum, row) => sum + Number(row.amount_due || 0), 0);
+    const openReports = reports.filter(report => !["resolved", "dismissed"].includes(report.status)).length;
+
+    document.querySelector("#admin-metric-tutors").textContent = String(pendingTutors);
+    document.querySelector("#admin-metric-payments").textContent = String(paymentActions);
+    document.querySelector("#admin-metric-payouts").textContent = money(payoutDue);
+    document.querySelector("#admin-metric-reports").textContent = String(openReports);
+
+    document.querySelectorAll("[data-overview-tab]").forEach(button => button.addEventListener("click", () => {
+      activateAdminTab(button.dataset.overviewTab, { updateUrl: true });
+      document.querySelector("#admin-content")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }));
+  }
+
   function tutorCard(tutor) {
     const photo = api.publicAvatarUrl(tutor.profile_photo_path);
     const payoutReady = Boolean(tutor.payout_account_name && tutor.payout_account_number);
@@ -307,6 +328,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     reports = reportResult.status === "fulfilled" ? (reportResult.value || []) : [];
     payouts = payoutResult.value || [];
 
+    renderOverview();
     renderTutors();
     renderBookings();
     renderPayouts();
@@ -329,8 +351,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     alertBox.textContent = error.message || "Admin Console could not be opened.";
   }
 
+  function activateAdminTab(tabName, { updateUrl = false } = {}) {
+    const allowed = ["overview", "tutors", "bookings", "payouts", "reports"];
+    const tab = allowed.includes(tabName) ? tabName : "overview";
+    document.querySelectorAll("[data-admin-tab]").forEach(item => item.classList.toggle("active", item.dataset.adminTab === tab));
+    document.querySelectorAll(".admin-panel").forEach(panel => panel.classList.toggle("active", panel.id === `admin-${tab}-panel`));
+    if (updateUrl) {
+      const url = new URL(location.href);
+      url.searchParams.set("tab", tab);
+      history.replaceState({}, "", url);
+    }
+  }
+
   document.querySelectorAll("[data-admin-tab]").forEach(button => button.addEventListener("click", () => {
-    document.querySelectorAll("[data-admin-tab]").forEach(item => item.classList.toggle("active", item === button));
-    document.querySelectorAll(".admin-panel").forEach(panel => panel.classList.toggle("active", panel.id === `admin-${button.dataset.adminTab}-panel`));
+    activateAdminTab(button.dataset.adminTab, { updateUrl: true });
   }));
+
+  activateAdminTab(new URLSearchParams(location.search).get("tab") || "overview");
 });

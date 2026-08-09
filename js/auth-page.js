@@ -67,8 +67,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (queryNext) return queryNext;
     if (storedNext) return storedNext;
     try {
+      const isAdmin = await window.TutoMarketplace?.checkAdmin?.();
+      if (isAdmin) return "admin.html";
       const profile = await window.TutoMarketplace?.getMyAccountProfile(true);
-      return profile?.role === "tutor" ? "tutor-dashboard.html" : "dashboard.html";
+      if (profile?.role === "tutor") {
+        const userId = window.TutoAuth?.getUser?.()?.id;
+        if (userId) localStorage.setItem(`tutodemyPreferredWorkspace:${userId}`, "tutor");
+        return "tutor-dashboard.html";
+      }
+      return "dashboard.html";
     } catch {
       return "dashboard.html";
     }
@@ -160,7 +167,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     googleHelper.textContent = "Google login is enabled. It starts as a learner account; tutor applications can be opened after login.";
     googleButton.addEventListener("click", async () => {
       setStatus("Opening Google login…");
-      const { error } = await client.auth.signInWithOAuth({ provider: "google", options: { redirectTo: new URL("profile.html", location.href).href } });
+      const { error } = await client.auth.signInWithOAuth({ provider: "google", options: { redirectTo: new URL("dashboard.html", location.href).href } });
       if (error) setStatus(error.message, true);
     });
   } else {

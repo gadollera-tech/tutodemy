@@ -38,11 +38,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `${digits.slice(0, 4)} ••• ${digits.slice(-4)}`;
   }
 
+  function setApprovedWorkspace(approved) {
+    document.querySelector("#private-tutor-metrics").hidden = !approved;
+    document.querySelector("#private-compensation-panel").hidden = !approved;
+    document.querySelector("#private-payout-section").hidden = !approved;
+    document.querySelector("#private-ledger-section").hidden = !approved;
+    document.querySelector("#booking-requests").hidden = !approved;
+    document.querySelector("#toggle-bookings").hidden = !approved;
+  }
+
   function revealPrivateSections() {
-    document.querySelector("#private-tutor-metrics").hidden = false;
-    document.querySelector("#private-compensation-panel").hidden = false;
-    document.querySelector("#private-payout-section").hidden = false;
-    document.querySelector("#private-ledger-section").hidden = false;
+    setApprovedWorkspace(true);
     document.querySelector("#private-tier-rules").innerHTML = feePolicy.map(row => `<div><b>${esc(row.tier_label)} — ${Number(row.rate)}%</b><span>${esc(row.description)}</span></div>`).join("") || `<div><b>Your current platform fee is shown above.</b><span>Additional tier details are temporarily unavailable.</span></div>`;
   }
 
@@ -160,11 +166,33 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (!api.isReady()) throw new Error("The tutor dashboard is temporarily unavailable. Please try again later.");
       profile = await api.getMyTutorProfile();
       if (!profile) {
+        setApprovedWorkspace(false);
+        document.querySelector("#tutor-dashboard-title").textContent = "Start your tutor application.";
+        document.querySelector("#tutor-dashboard-intro").textContent = "Create your tutor profile and submit the required details for administrator review.";
         profileStatus();
-        bookingList.innerHTML = `<div class="empty-state"><h3>Create your tutor profile first.</h3><p>Your private fee schedule, payout destination, and earnings tools will appear after your tutor profile is created.</p><a class="button" href="tutor-onboarding.html">Start application</a></div>`;
+        alertBox.hidden = false;
+        alertBox.innerHTML = `<b>Your tutor workspace is not active yet.</b> Complete your profile and submit your application to unlock booking, session, earnings, and payout tools. <a href="tutor-onboarding.html">Start application →</a>`;
         return;
       }
 
+      profileStatus();
+      if (profile.status !== "approved") {
+        setApprovedWorkspace(false);
+        const copy = {
+          draft: ["Complete your tutor application.", "Finish your profile, availability, credentials, and payout details, then submit them for review."],
+          pending: ["Your application is under review.", "You can update your profile while TutoDemy reviews your application. Booking and payout tools will open after approval."],
+          rejected: ["Your application needs revision.", profile.rejection_reason || "Review the administrator note, update your application, and submit it again."],
+          suspended: ["Your tutor access is currently suspended.", "Contact TutoDemy support before accepting or managing tutoring sessions."]
+        }[profile.status] || ["Your tutor workspace is not active yet.", "Complete the required application steps to continue."];
+        document.querySelector("#tutor-dashboard-title").textContent = copy[0];
+        document.querySelector("#tutor-dashboard-intro").textContent = copy[1];
+        alertBox.hidden = false;
+        alertBox.innerHTML = `<b>${esc(copy[0])}</b> ${esc(copy[1])} <a href="tutor-onboarding.html">Open tutor profile →</a>`;
+        return;
+      }
+
+      document.querySelector("#tutor-dashboard-title").textContent = "Manage your profile, bookings, and earnings.";
+      document.querySelector("#tutor-dashboard-intro").textContent = "Respond to schedule requests, track payment confirmation, mark delivered sessions, and review your payout records.";
       [bookings, ledger, feePolicy, payouts] = await Promise.all([
         api.getMyBookings("tutor"),
         api.getMyLedger(),
@@ -173,13 +201,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       ]);
 
       alertBox.hidden = true;
-      profileStatus();
       updateMetrics();
       renderBookings();
       renderLedger();
 
       const toggle = document.querySelector("#toggle-bookings");
-      toggle.hidden = profile.status !== "approved";
+      toggle.hidden = false;
       toggle.textContent = profile.is_accepting_bookings ? "Pause new bookings" : "Accept new bookings";
     } catch (error) {
       if (!quiet) {

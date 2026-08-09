@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260809-live1";
+const CACHE_VERSION = "tutodemy-20260809-role1";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -6,9 +6,9 @@ const CORE_ASSETS = [
   "./index.html",
   "./offline.html",
   "./manifest.webmanifest",
-  "./css/style.css?v=20260809-notify1",
+  "./css/style.css?v=20260809-role1",
   "./js/marketplace-api.js?v=20260809-live1",
-  "./js/main.js?v=20260809-live1",
+  "./js/main.js?v=20260809-role1",
   "./js/notifications.js?v=20260809-live1",
   "./js/pwa.js?v=20260809-pwa1",
   "./assets/images/icon-192.png",

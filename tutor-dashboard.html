@@ -20,14 +20,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Tutor Dashboard | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260809-notify1">
+  <link rel="stylesheet" href="css/style.css?v=20260809-role1">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
   <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
-  <script defer src="js/main.js?v=20260809-live1"></script>
+  <script defer src="js/main.js?v=20260809-role1"></script>
   <script defer src="js/tutor-dashboard.js?v=20260809-live1"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
@@ -37,7 +37,7 @@
   <main id="main-content">
     <section class="page-hero tutor-dashboard-hero">
       <div class="container page-hero-grid">
-        <div><span class="eyebrow light">TUTOR DASHBOARD</span><h1>Manage your profile, bookings, and earnings.</h1><p>Respond to schedule requests, track payment confirmation, mark delivered sessions, and see the commission applied only after successful completion.</p><div class="button-row"><a class="button button-light" href="tutor-onboarding.html">Edit tutor profile</a><button class="button button-ghost" id="toggle-bookings" type="button" hidden>Pause new bookings</button><a class="button button-ghost" href="tutor-terms.html">Tutor guidelines</a></div></div>
+        <div><span class="eyebrow light">TUTOR DASHBOARD</span><h1 id="tutor-dashboard-title">Manage your profile, bookings, and earnings.</h1><p id="tutor-dashboard-intro">Respond to schedule requests, track payment confirmation, mark delivered sessions, and see the commission applied only after successful completion.</p><div class="button-row"><a class="button button-light" href="tutor-onboarding.html">Edit tutor profile</a><button class="button button-ghost" id="toggle-bookings" type="button" hidden>Pause new bookings</button><a class="button button-ghost" href="tutor-terms.html">Tutor guidelines</a></div></div>
         <div class="tutor-dashboard-status"><span>PROFILE STATUS</span><b id="dash-profile-status">Loading…</b><small id="dash-profile-message">Checking your account.</small></div>
       </div>
     </section>
@@ -85,7 +85,7 @@
       </div>
     </section>
 
-    <section class="section section-cream">
+    <section class="section section-cream" id="booking-requests">
       <div class="container">
         <div class="section-heading"><span class="eyebrow">BOOKING REQUESTS</span><h2>Respond and deliver sessions on-platform.</h2><p>Only admin-confirmed paid bookings can be marked delivered. TutoDemy administration completes the booking and records the commission after delivery.</p></div>
         <div class="booking-tabs"><button class="active" data-tutor-filter="action">Needs action</button><button data-tutor-filter="upcoming">Accepted and paid</button><button data-tutor-filter="completed">Completed</button><button data-tutor-filter="all">All</button></div>
