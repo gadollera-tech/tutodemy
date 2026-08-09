@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="Private TutoDemy learner progress summary with weekly activity, accuracy, study streaks, and subject performance.">
+  <meta name="description" content="Private TutoDemy learner progress and percentile summary with weekly activity, accuracy, study streaks, and subject comparisons.">
   <meta name="theme-color" content="#11156f">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,13 +14,13 @@
   <link rel="canonical" href="https://tutodemy.net/dashboard.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Student Progress | TutoDemy Learning PH">
-  <meta property="og:description" content="Private weekly learning progress, accuracy, study streaks, and subject performance.">
+  <meta property="og:description" content="Private weekly learning progress, percentile comparisons, accuracy, study streaks, and subject performance.">
   <meta property="og:url" content="https://tutodemy.net/dashboard.html">
   <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
   <meta name="twitter:card" content="summary_large_image">
   <title>Student Progress | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260809-progress4a">
+  <link rel="stylesheet" href="css/style.css?v=20260809-progress4b">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
@@ -31,7 +31,7 @@
   <script defer src="js/main.js?v=20260809-tutorfix1"></script>
   <script defer src="data/question-bank.js"></script>
   <script defer src="data/reviewers.js"></script>
-  <script defer src="js/dashboard.js?v=20260809-progress4a"></script>
+  <script defer src="js/dashboard.js?v=20260809-progress4b"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="dashboard">
@@ -43,7 +43,7 @@
         <div>
           <span class="eyebrow light">PRIVATE STUDENT DASHBOARD</span>
           <h1>Your weekly learning summary.</h1>
-          <p>See what you reviewed, how accurately you answered, how consistently you studied, and how this week compares with your previous week.</p>
+          <p>See what you reviewed, how accurately you answered, how consistently you studied, and—when enough data exists—how your progress compares with similar learners.</p>
         </div>
         <div class="plan-summary progress-week-card">
           <small>CURRENT STUDY WEEK</small>
@@ -147,6 +147,21 @@
                 <div class="streak-record"><span>Last learning activity</span><b id="dash-last-activity">No activity yet</b></div>
               </div>
             </div>
+          </section>
+
+          <section class="panel wide progress-percentile-panel" id="progress-percentile-panel">
+            <div class="panel-heading percentile-panel-heading">
+              <div><span class="eyebrow">PRIVATE LEARNER COMPARISON</span><h2>How your progress compares</h2></div>
+              <span class="progress-period-label" id="percentile-track-label">Sign in to compare</span>
+            </div>
+            <p class="panel-intro">Percentiles compare anonymous summary values only. They are relative learning indicators—not official grades, class ranks, or measures of intelligence.</p>
+            <div class="percentile-status" id="percentile-status" role="status" aria-live="polite"><span aria-hidden="true">◌</span><div><b>Checking comparison eligibility…</b><small>Your personal progress remains private.</small></div></div>
+            <div class="percentile-card-grid" id="percentile-cards"></div>
+            <div class="subject-percentile-section" id="subject-percentile-section" hidden>
+              <div class="subject-percentile-heading"><div><span class="eyebrow">BY REVIEW BANK</span><h3>Subject percentiles</h3></div><small>Each subject compares learners in the same preparation track and review bank; minimum activity and cohort rules apply separately.</small></div>
+              <div class="subject-percentile-list" id="subject-percentile-list"></div>
+            </div>
+            <div class="percentile-methodology" id="percentile-methodology" hidden></div>
           </section>
 
           <section class="panel wide progress-activity-panel">

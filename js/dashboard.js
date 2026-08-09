@@ -430,6 +430,96 @@
     }).join("") || `<div class="empty-state">Complete a practice or mock set to see subject progress.</div>`;
   }
 
+  function percentileOrdinal(value) {
+    const n = Math.max(1, Math.min(99, Math.round(number(value))));
+    const mod100 = n % 100;
+    const suffix = mod100 >= 11 && mod100 <= 13 ? "th" : n % 10 === 1 ? "st" : n % 10 === 2 ? "nd" : n % 10 === 3 ? "rd" : "th";
+    return `${n}${suffix}`;
+  }
+
+  function normalizePercentiles(payload) {
+    if (!payload || typeof payload !== "object") return null;
+    const comparison = row => ({
+      id: String(row?.id || "comparison"), label: String(row?.label || "Comparison"), eligible: Boolean(row?.eligible),
+      percentile: row?.percentile == null ? null : clamp(row.percentile, 1, 99), cohortSize: Math.max(0, Math.round(number(row?.cohortSize))),
+      minimumCohortSize: Math.max(1, Math.round(number(row?.minimumCohortSize) || number(payload.minimumCohortSize) || 20)),
+      minimumQuestions: Math.max(0, Math.round(number(row?.minimumQuestions))), currentQuestions: Math.max(0, Math.round(number(row?.currentQuestions))),
+      questionsNeeded: Math.max(0, Math.round(number(row?.questionsNeeded))), valueLabel: String(row?.valueLabel || "No value yet"),
+      description: String(row?.description || "")
+    });
+    return {
+      trackLabel: String(payload.trackLabel || "Your preparation track"), minimumCohortSize: Math.max(1, Math.round(number(payload.minimumCohortSize) || 20)),
+      cards: Array.isArray(payload.cards) ? payload.cards.map(comparison) : [],
+      subjects: Array.isArray(payload.subjects) ? payload.subjects.map(row => ({
+        subject: String(row?.subject || "Other"), questions: Math.max(0, Math.round(number(row?.questions))), accuracy: clamp(row?.accuracy, 0, 100),
+        eligible: Boolean(row?.eligible), percentile: row?.percentile == null ? null : clamp(row.percentile, 1, 99), cohortSize: Math.max(0, Math.round(number(row?.cohortSize))),
+        minimumCohortSize: Math.max(1, Math.round(number(row?.minimumCohortSize) || number(payload.minimumCohortSize) || 20)),
+        minimumQuestions: Math.max(0, Math.round(number(row?.minimumQuestions))), questionsNeeded: Math.max(0, Math.round(number(row?.questionsNeeded)))
+      })) : [], methodology: payload.methodology || {}, privacyNote: String(payload.privacyNote || "Anonymous aggregate values only are used.")
+    };
+  }
+
+  function eligibilityText(row) {
+    if (row.eligible && row.percentile != null) return `${row.cohortSize.toLocaleString("en-PH")} eligible learners in this comparison`;
+    if (row.questionsNeeded > 0) return `Review ${row.questionsNeeded.toLocaleString("en-PH")} more question${row.questionsNeeded === 1 ? "" : "s"} to meet the activity minimum.`;
+    const needed = Math.max(0, row.minimumCohortSize - row.cohortSize);
+    return needed ? `Waiting for ${needed.toLocaleString("en-PH")} more eligible learner${needed === 1 ? "" : "s"}.` : "More eligible comparison data is needed.";
+  }
+
+  function percentileStatus(title, description, kind = "info") {
+    const box = document.querySelector("#percentile-status"); if (!box) return;
+    box.hidden = false; box.className = `percentile-status ${kind}`;
+    box.innerHTML = `<span aria-hidden="true">${kind === "warning" ? "!" : kind === "locked" ? "🔒" : "◌"}</span><div><b>${escapeHtml(title)}</b><small>${escapeHtml(description)}</small></div>`;
+  }
+
+  function clearPercentiles() {
+    const cards = document.querySelector("#percentile-cards"); if (cards) cards.innerHTML = "";
+    const subjects = document.querySelector("#subject-percentile-section"); if (subjects) subjects.hidden = true;
+    const method = document.querySelector("#percentile-methodology"); if (method) method.hidden = true;
+  }
+
+  function renderPercentileLocked() {
+    clearPercentiles(); setText("#percentile-track-label", "Account required");
+    percentileStatus("Log in to unlock private comparisons", "Percentiles require synchronized account data and cannot be calculated from one browser alone.", "locked");
+  }
+
+  function renderPercentileUnavailable(title, description) {
+    clearPercentiles(); setText("#percentile-track-label", "Comparison unavailable"); percentileStatus(title, description, "warning");
+  }
+
+  function renderPercentiles(payload) {
+    const data = normalizePercentiles(payload); if (!data) return renderPercentileUnavailable("Comparison data could not be read", "Your weekly progress remains available above.");
+    setText("#percentile-track-label", data.trackLabel);
+    const status = document.querySelector("#percentile-status"); if (status) status.hidden = true;
+    const cards = document.querySelector("#percentile-cards");
+    if (cards) cards.innerHTML = data.cards.map(row => {
+      const pct = row.eligible && row.percentile != null ? Math.round(row.percentile) : 0;
+      const progress = row.minimumQuestions ? Math.min(100, Math.round(row.currentQuestions / row.minimumQuestions * 100)) : 0;
+      const title = row.eligible ? `${percentileOrdinal(row.percentile)} percentile` : row.questionsNeeded ? `${progress}% eligible` : "Cohort building";
+      return `<article class="percentile-card ${row.eligible ? "eligible" : "building"}">
+        <div class="percentile-ring" style="--percentile-value:${pct}%;--eligibility-value:${progress}%"><span>${row.eligible ? percentileOrdinal(row.percentile) : `${progress}%`}</span><small>${row.eligible ? "percentile" : "eligibility"}</small></div>
+        <div class="percentile-card-copy"><span class="percentile-card-label">${escapeHtml(row.label)}</span><b>${escapeHtml(title)}</b><p>${escapeHtml(row.valueLabel)}</p><small>${escapeHtml(eligibilityText(row))}</small></div>
+        <p class="percentile-card-description">${escapeHtml(row.description)}</p></article>`;
+    }).join("") || `<div class="empty-state">No comparison categories are available yet.</div>`;
+
+    const section = document.querySelector("#subject-percentile-section"), list = document.querySelector("#subject-percentile-list");
+    if (section) section.hidden = data.subjects.length === 0;
+    if (list) list.innerHTML = data.subjects.map(row => {
+      const pct = row.eligible && row.percentile != null ? Math.round(row.percentile) : 0;
+      const progress = row.minimumQuestions ? Math.min(100, Math.round(row.questions / row.minimumQuestions * 100)) : 0;
+      const result = row.eligible ? `${percentileOrdinal(row.percentile)} percentile` : eligibilityText({...row,currentQuestions:row.questions});
+      return `<article class="subject-percentile-row ${row.eligible ? "eligible" : "building"}"><div class="subject-percentile-copy"><b>${escapeHtml(row.subject)}</b><small>${row.questions} questions · ${formatPercent(row.accuracy,row.questions>0)} accuracy</small></div><div class="subject-percentile-result"><b>${row.eligible ? percentileOrdinal(row.percentile) : `${progress}%`}</b><small>${row.eligible ? `of ${row.cohortSize} eligible learners` : escapeHtml(result)}</small></div><div class="subject-percentile-bar"><i style="width:${row.eligible ? pct : progress}%"></i></div></article>`;
+    }).join("");
+
+    const method = document.querySelector("#percentile-methodology");
+    if (method) { method.hidden = false; method.innerHTML = `<b>How this comparison works</b><p>${escapeHtml(data.methodology.note || "Percentiles are private relative indicators.")} A result appears only after you meet its activity minimum and at least ${data.minimumCohortSize} learners qualify. ${escapeHtml(data.privacyNote)}</p>`; }
+  }
+
+  async function loadCloudPercentiles() {
+    const client = window.TutoSupabase?.client; if (!client) throw new Error("Supabase client is unavailable.");
+    const {data,error} = await client.rpc("get_my_student_percentiles"); if (error) throw error; return data;
+  }
+
   function renderHistory() {
     const historyBox = document.querySelector("#attempt-history");
     if (!historyBox) return;
@@ -511,6 +601,7 @@
     const history = window.Tuto.storage.get("tutodemyHistory", []);
     const localSummary = buildLocalSummary(history);
     let summary = localSummary;
+    const percentilePromise = account.configured && account.user ? loadCloudPercentiles() : null;
 
     if (account.configured && account.user) {
       try {
@@ -533,6 +624,14 @@
     renderSummary(summary);
     renderHistory();
     renderSavedReviewers();
+
+    if (!percentilePromise) renderPercentileLocked();
+    else try { renderPercentiles(await percentilePromise); }
+    catch (error) {
+      console.error("Student percentiles could not be loaded:", error);
+      const missing = /get_my_student_percentiles|learner_comparison_snapshots|does not exist|schema cache|could not find the function/i.test(String(error?.message || error || ""));
+      renderPercentileUnavailable(missing ? "Phase 4B database setup is not installed yet" : "Private comparisons could not be refreshed", missing ? "Run the private Phase 4B SQL in Supabase. The Phase 4A progress summary remains usable." : "The comparison service is temporarily unavailable. No other learner data was exposed.");
+    }
 
     document.querySelector("#clear-history")?.addEventListener("click", async () => {
       if (!confirm("Clear all attempt history from this browser and, when logged in, from the learner account?")) return;

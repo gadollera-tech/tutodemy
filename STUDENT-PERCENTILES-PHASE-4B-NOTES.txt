@@ -1,0 +1,13 @@
+TutoDemy Learning PH — Phase 4B: Private Learner Percentiles
+
+Adds private overall-preparation, accuracy, 28-day activity, and subject percentiles to the Phase 4A student dashboard. Comparisons require at least 20 eligible learners. Overall/accuracy require 30 completed questions; activity requires 20 questions in 28 days; subject comparisons require 20 questions in the same review bank and preparation track.
+
+Percentiles are relative learning indicators, not official grades or academic ranks. No names, schools, emails, locations, profiles, or answers from other learners are returned.
+
+INSTALLATION
+1. Confirm Phase 4A SQL is installed.
+2. Run STUDENT-PERCENTILES-PHASE-4B.sql privately in Supabase.
+3. Upload this website or the public patch.
+4. Commit, push, and hard-refresh dashboard.html once.
+
+Never upload the SQL/private setup package to GitHub.
