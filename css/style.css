@@ -6,6 +6,13 @@
   --periwinkle-soft:#edf0ff;
   --gold:#f3a51b;
   --gold-soft:#fff0ca;
+  --map-cream:#fffaf0;
+  --map-yellow-1:#ffefbd;
+  --map-yellow-2:#ffe39a;
+  --map-yellow-3:#f9d56b;
+  --map-yellow-4:#f4bd42;
+  --map-yellow-stroke:#8a5a00;
+  --map-yellow-label:#6b4b0a;
   --cream:#fffaf3;
   --paper:#ffffff;
   --ink:#27283b;
@@ -563,3 +570,64 @@ code{background:#eef0f8;padding:.16rem .38rem;border-radius:6px}
 .philippines-map .map-sea{fill:#f4f7fb!important;stroke:#e3e9f2!important;stroke-width:1.5}
 .philippines-map .ph-map-shapes path{fill:#fff!important;stroke:#2638a5!important;stroke-width:1.55!important;vector-effect:non-scaling-stroke}
 .philippines-map .map-group-labels text{fill:#8c93a6!important}
+
+
+/* --------------------------------------------------------------------------
+   TutoDemy yellow Philippines map — high-contrast, cache-safe visual patch
+   -------------------------------------------------------------------------- */
+.philippines-map-card{
+  background:linear-gradient(180deg,#fff 0%,#fffdf7 100%);
+  border-color:#efd99c;
+  box-shadow:0 24px 60px rgba(138,90,0,.10);
+}
+.philippines-map{
+  background:var(--map-cream)!important;
+  border:1px solid #f0dca7;
+  border-radius:28px;
+}
+.philippines-map .map-sea{
+  fill:var(--map-cream)!important;
+  stroke:#efd99c!important;
+  stroke-width:1.6!important;
+}
+.philippines-map .ph-map-shapes path{
+  stroke:var(--map-yellow-stroke)!important;
+  stroke-width:1.9!important;
+  stroke-linejoin:round;
+  stroke-linecap:round;
+  vector-effect:non-scaling-stroke;
+  filter:drop-shadow(0 3px 3px rgba(106,70,0,.14));
+  transition:filter .18s ease,opacity .18s ease;
+}
+.philippines-map .ph-map-shapes path:nth-child(4n+1){fill:var(--map-yellow-1)!important}
+.philippines-map .ph-map-shapes path:nth-child(4n+2){fill:var(--map-yellow-2)!important}
+.philippines-map .ph-map-shapes path:nth-child(4n+3){fill:var(--map-yellow-3)!important}
+.philippines-map .ph-map-shapes path:nth-child(4n){fill:var(--map-yellow-4)!important}
+.philippines-map .ph-map-shapes path:hover{filter:drop-shadow(0 5px 5px rgba(106,70,0,.22));opacity:.92}
+.philippines-map .map-group-labels text{
+  fill:var(--map-yellow-label)!important;
+  paint-order:stroke;
+  stroke:rgba(255,250,240,.96);
+  stroke-width:4px;
+  stroke-linejoin:round;
+}
+.philippines-map .map-marker circle{
+  fill:var(--navy)!important;
+  stroke:#fff9e8!important;
+  stroke-width:4!important;
+  opacity:.94;
+}
+.philippines-map .map-marker text{fill:#fff!important}
+.tutor-demand-map-card .philippines-map .map-marker circle{
+  fill:#a96500!important;
+  stroke:#fff9e8!important;
+}
+.tutor-demand-map-card .philippines-map .map-marker text{fill:#fff!important}
+.map-legend i{
+  background:var(--navy)!important;
+  box-shadow:0 0 0 4px rgba(17,21,111,.10)!important;
+}
+.tutor-demand-map-card .map-legend i{
+  background:#a96500!important;
+  box-shadow:0 0 0 4px rgba(169,101,0,.14)!important;
+}
