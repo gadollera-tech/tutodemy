@@ -631,3 +631,89 @@ code{background:#eef0f8;padding:.16rem .38rem;border-radius:6px}
   background:#a96500!important;
   box-shadow:0 0 0 4px rgba(169,101,0,.14)!important;
 }
+
+
+/* ===== Mobile readiness and installable app UI (2026-08-09) ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:96px}
+body{min-width:0;overflow-x:hidden}
+img,picture,video,canvas,svg{max-width:100%}
+img,video{height:auto}
+button,input,select,textarea{font:inherit}
+a,button,input,select,textarea{touch-action:manipulation}
+button,.button,[role="button"],input[type="button"],input[type="submit"]{min-height:44px}
+input,select,textarea{max-width:100%}
+pre,code,.breakable{overflow-wrap:anywhere;word-break:break-word}
+.table-wrap,.admin-table-wrap,.booking-table-wrap,.responsive-table{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{max-width:100%}
+
+.pwa-install-card{position:fixed;z-index:9998;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));width:min(430px,calc(100vw - 32px));display:grid;grid-template-columns:48px minmax(0,1fr) auto auto;align-items:center;gap:12px;padding:13px;background:#fff;border:1px solid #efd477;border-radius:18px;box-shadow:0 18px 50px rgba(23,26,112,.22);color:#171a70}
+.pwa-install-card>img{width:48px;height:48px;border-radius:13px;background:#fff8e8}
+.pwa-install-copy{min-width:0;display:grid;gap:3px}
+.pwa-install-copy strong{font-size:.98rem}
+.pwa-install-copy span{font-size:.82rem;line-height:1.35;color:#626780}
+.pwa-install-action{border:0;border-radius:10px;padding:9px 13px;background:#f4b942;color:#2f2506;font-weight:900;cursor:pointer}
+.pwa-install-close{width:36px;height:36px;min-height:36px;padding:0;border:0;background:transparent;color:#666b81;border-radius:50%;font-size:1.45rem;cursor:pointer}
+.pwa-install-close:hover,.pwa-install-close:focus-visible{background:#f5f1e8}
+.pwa-install-dialog{width:min(92vw,480px);border:0;border-radius:24px;padding:0;color:#171a70;box-shadow:0 24px 80px rgba(15,20,74,.35)}
+.pwa-install-dialog::backdrop{background:rgba(13,17,53,.58);backdrop-filter:blur(3px)}
+.pwa-install-dialog form{position:relative;margin:0;padding:30px;display:grid;justify-items:center;text-align:center}
+.pwa-install-dialog img{border-radius:20px;background:#fff8e8}
+.pwa-install-dialog h2{margin:15px 0 8px;font-size:1.55rem}
+.pwa-install-dialog ol{text-align:left;margin:8px 0 22px;padding-left:23px;color:#575d78;line-height:1.6}
+.pwa-dialog-close{position:absolute;right:12px;top:10px;width:40px;height:40px;min-height:40px;border:0;border-radius:50%;background:transparent;font-size:1.5rem;color:#6c7187;cursor:pointer}
+.pwa-standalone .site-note{display:none}
+.pwa-standalone body{padding-top:env(safe-area-inset-top)}
+
+@media(max-width:760px){
+  :root{--mobile-edge:16px}
+  .container{width:min(100% - 32px,1200px)}
+  body{padding-bottom:env(safe-area-inset-bottom)}
+  .site-note{padding:7px 14px;font-size:.72rem;line-height:1.35;text-align:center}
+  .site-header{position:sticky;top:0}
+  .nav-wrap{min-height:68px;gap:10px}
+  .brand img{max-width:155px;height:auto}
+  .menu-toggle{flex:0 0 44px;width:44px;height:44px;min-height:44px}
+  .main-nav.open{max-height:calc(100dvh - 78px);overflow-y:auto;overscroll-behavior:contain;padding-bottom:max(18px,env(safe-area-inset-bottom))}
+  .main-nav a,.nav-dropdown-toggle{min-height:46px;display:flex;align-items:center}
+  .nav-submenu a{min-height:44px}
+  .nav-actions{margin-left:auto}
+  .plan-chip{display:none}
+  .auth-chip{min-width:44px;min-height:44px;justify-content:center}
+  .section{padding-top:52px;padding-bottom:52px}
+  .home-hero-clean{padding-top:40px}
+  .home-hero-copy h1{font-size:clamp(2.35rem,12vw,3.15rem);line-height:1.02}
+  .home-hero-copy>p{font-size:1rem}
+  .home-choice-panel,.card,.auth-card,.dashboard-card,.philippines-map-card{border-radius:18px}
+  .button-row,.home-account-actions{display:flex;flex-wrap:wrap;gap:10px}
+  .button-row>.button,.home-account-actions>.button{flex:1 1 190px;text-align:center;justify-content:center}
+  .location-mode-filter{grid-template-columns:repeat(3,minmax(96px,1fr));overflow-x:auto;padding-bottom:3px}
+  .location-mode-filter button{white-space:nowrap}
+  .philippines-map{width:100%;height:auto;max-height:72dvh}
+  .map-card-heading{gap:8px;flex-wrap:wrap}
+  .map-legend{align-items:flex-start;gap:8px}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-brand{grid-column:auto}
+  .footer-bottom{display:grid;gap:6px;text-align:center;justify-items:center}
+  form{min-width:0}
+  input,select,textarea{font-size:16px}
+  .auth-layout,.account-grid,.dashboard-grid,.practice-layout,.tutoring-layout,.booking-layout,.messages-layout,.profile-layout,.reviewer-layout,.pricing-grid{min-width:0}
+  .pwa-install-card{left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));width:auto;grid-template-columns:44px minmax(0,1fr) auto;padding:11px;gap:10px}
+  .pwa-install-card>img{width:44px;height:44px}
+  .pwa-install-close{position:absolute;right:-4px;top:-13px;background:#fff;border:1px solid #e7dfca;box-shadow:0 4px 12px rgba(23,26,112,.12)}
+  .pwa-install-copy span{font-size:.78rem}
+  .pwa-install-action{padding:9px 11px}
+  body.pwa-install-visible{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+}
+
+@media(max-width:420px){
+  .container{width:min(100% - 24px,1200px)}
+  .home-choice-panel,.auth-card,.philippines-map-card{padding-left:15px;padding-right:15px}
+  .location-mode-filter{grid-template-columns:none;display:flex}
+  .location-mode-filter button{flex:0 0 auto}
+  .pwa-install-copy span{display:none}
+  .pwa-install-card{grid-template-columns:42px minmax(0,1fr) auto}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .pwa-install-card,.pwa-install-dialog{scroll-behavior:auto;animation:none!important;transition:none!important}
+}

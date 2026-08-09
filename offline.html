@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#171A70">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="TutoDemy">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <title>You’re offline | TutoDemy Learning PH</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#171A70;background:#fff8e8}
+    *{box-sizing:border-box}body{min-height:100dvh;margin:0;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at top,#fffdf5,#fff3c9)}
+    main{width:min(100%,520px);background:#fff;border:1px solid #f1d678;border-radius:24px;padding:32px;box-shadow:0 20px 50px rgba(23,26,112,.12);text-align:center}
+    img{width:92px;height:92px;border-radius:22px}h1{font-size:clamp(1.8rem,7vw,2.6rem);margin:18px 0 10px}p{color:#555b78;line-height:1.65;margin:0 auto 22px}
+    button,a{min-height:46px;border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;background:#171A70;color:#fff}
+    small{display:block;margin-top:18px;color:#777b90;line-height:1.5}
+  </style>
+  <script defer src="js/pwa.js?v=20260809-pwa1"></script>
+</head>
+<body>
+  <main>
+    <img src="assets/images/icon-192.png" alt="TutoDemy owl icon">
+    <h1>You’re offline</h1>
+    <p>Reconnect to continue using accounts, tutor bookings, messages, and other live features. Pages and study materials you previously opened may still be available.</p>
+    <button type="button" onclick="location.reload()">Try again</button>
+    <small>TutoDemy will automatically reconnect when your internet connection returns.</small>
+  </main>
+</body>
+</html>

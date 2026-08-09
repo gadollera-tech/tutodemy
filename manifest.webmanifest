@@ -1,22 +1,91 @@
 {
+  "id": "./",
   "name": "TutoDemy Learning PH",
   "short_name": "TutoDemy",
-  "start_url": "./index.html",
+  "description": "Exam preparation, academic reviewers, and an admin-approved tutor marketplace for Filipino learners.",
+  "lang": "en-PH",
+  "dir": "ltr",
+  "start_url": "./index.html?source=pwa",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#fffaf3",
-  "theme_color": "#11156f",
-  "description": "Practice hubs, reviewed learning materials, and an admin-approved tutor marketplace for Filipino learners.",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "background_color": "#FFF8E8",
+  "theme_color": "#171A70",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "assets/images/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "assets/images/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/images/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "assets/images/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Practice Hubs",
+      "short_name": "Practice",
+      "description": "Open TutoDemy practice hubs",
+      "url": "./exams.html?source=pwa-shortcut",
+      "icons": [
+        {
+          "src": "assets/images/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Find a Tutor",
+      "short_name": "Tutors",
+      "description": "Browse approved tutors",
+      "url": "./tutoring.html?source=pwa-shortcut",
+      "icons": [
+        {
+          "src": "assets/images/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "My Dashboard",
+      "short_name": "Dashboard",
+      "description": "Open your learning dashboard",
+      "url": "./dashboard.html?source=pwa-shortcut",
+      "icons": [
+        {
+          "src": "assets/images/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }

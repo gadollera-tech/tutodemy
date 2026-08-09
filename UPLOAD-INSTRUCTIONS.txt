@@ -1,19 +1,18 @@
-TutoDemy Yellow Philippines Map Patch
+TutoDemy Mobile + Installable App Patch
 
-Modified files:
-- index.html
-- for-tutors.html
-- css/style.css
-- js/location-map.js
+VERSION: 20260809-pwa1
 
-Upload the CONTENTS of this folder to the ROOT of the GitHub repository.
-Choose Replace for matching files, then make one commit.
+WHAT THIS ADDS
+- Responsive mobile safeguards for phones and tablets
+- Installable Progressive Web App (PWA) support
+- Android/Chrome/Edge install prompt when supported
+- iPhone/iPad Add to Home Screen instructions
+- Standalone app display with TutoDemy icons
+- A lightweight offline fallback page
+- Safe runtime caching for previously opened static pages and assets
 
-What changed:
-- Actual Philippines island shapes now use four TutoDemy yellow/gold shades.
-- Dark mustard outlines make Luzon, Visayas, Mindanao, Palawan, and smaller islands easier to see.
-- Cream map background improves contrast.
-- Tutor markers remain navy; learner-demand markers use dark gold.
-- Inline SVG fallback colors and cache-busting prevent a black or invisible map when old CSS is cached.
-
-No SQL or Supabase changes are required.
+IMPORTANT
+- Accounts, sign-in, bookings, messages, payments, tutor data, and Supabase features still require an internet connection.
+- Upload the CONTENTS of this patch to the GitHub repository root and replace matching files.
+- Do not upload this ZIP itself.
+- No Supabase SQL change is required.
