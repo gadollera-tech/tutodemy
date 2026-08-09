@@ -53,6 +53,21 @@ document.addEventListener("DOMContentLoaded", async () => {
           <nav class="main-nav" aria-label="Primary navigation">${links}</nav>
           <div class="nav-actions">
             <a class="plan-chip" id="plan-chip" href="pricing.html"><i></i><span>Access</span></a>
+            <div class="notification-center" id="notification-center" hidden>
+              <button class="notification-bell" id="notification-bell" type="button" aria-label="Notifications" aria-haspopup="true" aria-expanded="false" aria-controls="notification-popover">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                <span class="notification-badge" id="notification-badge" hidden>0</span>
+              </button>
+              <section class="notification-popover" id="notification-popover" aria-label="Notifications" hidden>
+                <header class="notification-popover-head">
+                  <div><span>ACCOUNT UPDATES</span><h2>Notifications</h2></div>
+                  <button class="notification-mark-all" id="notification-mark-all" type="button">Mark all as read</button>
+                </header>
+                <p class="notification-status" id="notification-status" role="status" aria-live="polite">Loading notifications…</p>
+                <div class="notification-list" id="notification-list"></div>
+                <footer class="notification-popover-foot"><a href="bookings.html">My bookings</a><a href="messages.html">Messages</a></footer>
+              </section>
+            </div>
             <a class="auth-chip" id="auth-chip" href="auth.html"><span class="auth-avatar">?</span><span class="auth-label">Log in</span></a>
           </div>
         </div>
@@ -232,6 +247,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  async function loadNotifications() {
+    if (window.TutoNotifications?.init) {
+      await window.TutoNotifications.init();
+      return;
+    }
+    await new Promise((resolve, reject) => {
+      const existing = document.querySelector('script[data-tutodemy-notifications]');
+      if (existing) {
+        existing.addEventListener("load", resolve, { once: true });
+        existing.addEventListener("error", reject, { once: true });
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "js/notifications.js?v=20260809-live1";
+      script.async = true;
+      script.dataset.tutodemyNotifications = "true";
+      script.addEventListener("load", resolve, { once: true });
+      script.addEventListener("error", reject, { once: true });
+      document.head.append(script);
+    });
+    await window.TutoNotifications?.init?.();
+  }
+
   window.Tuto.applyPlan();
   document.querySelectorAll("[data-year]").forEach(el => el.textContent = new Date().getFullYear());
 
@@ -241,6 +279,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await window.TutoMarketplace.ready;
     refreshAdminLinks();
     await refreshTutorLinks();
+    loadNotifications().catch(error => console.warn("Notification bell could not be loaded:", error));
   }
   window.addEventListener("tutodemy-auth-change", async () => { refreshAuthChip(); await refreshTutorLinks(); });
   window.addEventListener("tutodemy-admin-change", refreshAdminLinks);

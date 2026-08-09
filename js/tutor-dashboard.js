@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let payouts = [];
   let feePolicy = [];
   let filter = "action";
+  let realtimeRefreshTimer = null;
 
   const esc = value => window.Tuto.escape(value);
   const money = value => window.Tuto.money(value);
@@ -154,7 +155,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       : `<div class="empty-state"><p>No weekly payout records yet.</p></div>`;
   }
 
-  async function load() {
+  async function load({ quiet = false } = {}) {
     try {
       if (!api.isReady()) throw new Error("The tutor dashboard is temporarily unavailable. Please try again later.");
       profile = await api.getMyTutorProfile();
@@ -181,8 +182,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       toggle.hidden = profile.status !== "approved";
       toggle.textContent = profile.is_accepting_bookings ? "Pause new bookings" : "Accept new bookings";
     } catch (error) {
-      alertBox.hidden = false;
-      alertBox.textContent = error.message || "Tutor dashboard could not be loaded.";
+      if (!quiet) {
+        alertBox.hidden = false;
+        alertBox.textContent = error.message || "Tutor dashboard could not be loaded.";
+      } else {
+        console.warn("Realtime tutor dashboard refresh failed:", error);
+      }
     }
   }
 
@@ -206,5 +211,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     renderBookings();
   }));
 
+  window.addEventListener("tutodemy-live-notification", event => {
+    const item = event.detail?.notification;
+    if (!item?.notification_type) return;
+    const type = String(item.notification_type);
+    const affectsTutorDashboard = type.startsWith("booking_") || type.startsWith("payment_") || type === "session_delivered";
+    if (!affectsTutorDashboard) return;
+    clearTimeout(realtimeRefreshTimer);
+    realtimeRefreshTimer = setTimeout(() => load({ quiet: true }), 220);
+  });
+
+  window.addEventListener("beforeunload", () => clearTimeout(realtimeRefreshTimer));
   await load();
 });

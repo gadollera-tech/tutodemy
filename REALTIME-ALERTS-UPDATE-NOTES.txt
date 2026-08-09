@@ -1,0 +1,32 @@
+TutoDemy Learning PH — Real-Time Booking and Message Alerts
+Release: 2026-08-09 live1
+
+This update builds on the existing Notification Bell upgrade.
+
+Added:
+- Immediate on-screen alert cards for new private messages and booking updates.
+- Action links that open the correct booking or message thread.
+- Live unread badge and browser-tab unread count.
+- Automatic refresh of My Bookings after booking/payment status changes.
+- Automatic refresh of Tutor Dashboard after new requests and booking updates.
+- Automatic refresh of message threads and the active conversation.
+- Reconnect handling when the Realtime connection is interrupted.
+- 20–30 second fallback refresh if a live socket is temporarily unavailable.
+- Mobile-friendly alerts and a brief optional vibration when the app is in the background.
+
+Database:
+- No new SQL is required if NOTIFICATION-BELL-UPGRADE.sql was already run.
+- That earlier SQL publishes user_notifications to Supabase Realtime.
+- The Booking Messaging setup publishes booking_messages for live active conversations.
+
+Privacy:
+- Alert cards show only the privacy-safe notification title and summary already stored in user_notifications.
+- Full private message text is not copied into the alert.
+- Supabase Row Level Security continues to limit notifications to the signed-in recipient.
+
+Deployment:
+1. Upload every file and folder inside the patch to the GitHub repository root.
+2. Replace matching files.
+3. Make one commit.
+4. Wait for GitHub Pages to turn green.
+5. Hard refresh the browser. For the installed PWA, close it fully and reopen it.

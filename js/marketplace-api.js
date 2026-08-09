@@ -540,7 +540,7 @@
     return data;
   }
 
-  function subscribeBookingMessages(bookingId, onChange) {
+  function subscribeBookingMessages(bookingId, onChange, onStatus = null) {
     if (!client() || !bookingId) return null;
     return client()
       .channel(`booking-messages-${bookingId}-${Date.now()}`)
@@ -550,12 +550,16 @@
         table: "booking_messages",
         filter: `booking_id=eq.${bookingId}`
       }, payload => onChange?.(payload))
-      .subscribe();
+      .subscribe(status => onStatus?.(status));
+  }
+
+  async function unsubscribeRealtimeChannel(channel) {
+    if (!client() || !channel) return;
+    try { await client().removeChannel(channel); } catch (error) { console.warn("Realtime cleanup failed:", error); }
   }
 
   async function unsubscribeBookingMessages(channel) {
-    if (!client() || !channel) return;
-    try { await client().removeChannel(channel); } catch (error) { console.warn("Realtime cleanup failed:", error); }
+    await unsubscribeRealtimeChannel(channel);
   }
 
   async function adminMessageReports() {
@@ -574,6 +578,63 @@
     });
     if (error) throw friendlyError(error);
     return data;
+  }
+
+  function optionalNotificationError(error) {
+    const message = error?.message || error?.details || String(error || "Notification service unavailable.");
+    if (/get_my_notifications|get_my_unread_notification_count|mark_notification|mark_all_notifications|mark_booking_notifications|user_notifications|schema cache|could not find the function|does not exist/i.test(message)) {
+      return new Error("In-app notifications have not been enabled yet.");
+    }
+    return error instanceof Error ? error : new Error(message);
+  }
+
+  async function getMyNotifications(limit = 30) {
+    requireUser();
+    const safeLimit = Math.max(1, Math.min(Number(limit) || 30, 100));
+    const { data, error } = await client().rpc("get_my_notifications", { p_limit: safeLimit });
+    if (error) throw optionalNotificationError(error);
+    return data || [];
+  }
+
+  async function getUnreadNotificationCount() {
+    requireUser();
+    const { data, error } = await client().rpc("get_my_unread_notification_count");
+    if (error) throw optionalNotificationError(error);
+    return Number(data || 0);
+  }
+
+  async function markNotificationRead(notificationId) {
+    requireUser();
+    const { error } = await client().rpc("mark_notification_read", { p_notification_id: notificationId });
+    if (error) throw optionalNotificationError(error);
+  }
+
+  async function markAllNotificationsRead() {
+    requireUser();
+    const { error } = await client().rpc("mark_all_notifications_read");
+    if (error) throw optionalNotificationError(error);
+  }
+
+  async function markBookingNotificationsRead(bookingId, notificationType = null) {
+    requireUser();
+    const { error } = await client().rpc("mark_booking_notifications_read", {
+      p_booking_id: bookingId,
+      p_notification_type: notificationType || null
+    });
+    if (error) throw optionalNotificationError(error);
+  }
+
+  function subscribeMyNotifications(userId, onChange, onStatus = null) {
+    if (!client() || !userId) return null;
+    return client()
+      .channel(`user-notifications-${userId}-${Date.now()}`)
+      .on("postgres_changes", {
+        event: "*",
+        schema: "public",
+        table: "user_notifications",
+        filter: `user_id=eq.${userId}`
+      }, payload => onChange?.(payload))
+      .subscribe(status => onStatus?.(status));
   }
 
   function estimateCommission(profile, gross) {
@@ -649,8 +710,15 @@
     reportConversation,
     subscribeBookingMessages,
     unsubscribeBookingMessages,
+    unsubscribeRealtimeChannel,
     adminMessageReports,
     adminResolveMessageReport,
+    getMyNotifications,
+    getUnreadNotificationCount,
+    markNotificationRead,
+    markAllNotificationsRead,
+    markBookingNotificationsRead,
+    subscribeMyNotifications,
     estimateCommission,
     cleanArray
   };

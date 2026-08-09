@@ -15,6 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   let tutorMap = new Map();
   let reviewed = new Set();
   let filter = "active";
+  let realtimeRefreshTimer = null;
 
   const esc = value => window.Tuto.escape(value);
   const money = value => window.Tuto.money(value);
@@ -244,7 +245,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }));
   }
 
-  async function load() {
+  async function load({ quiet = false } = {}) {
     try {
       if (!api.isReady()) throw new Error("Bookings are temporarily unavailable. Please try again later.");
       [bookings] = await Promise.all([api.getMyBookings("learner")]);
@@ -257,9 +258,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       alertBox.hidden = true;
       await render();
     } catch (error) {
-      alertBox.hidden = false;
-      alertBox.textContent = error.message || "Bookings could not be loaded.";
-      list.innerHTML = "";
+      if (!quiet) {
+        alertBox.hidden = false;
+        alertBox.textContent = error.message || "Bookings could not be loaded.";
+        list.innerHTML = "";
+      } else {
+        console.warn("Realtime booking refresh failed:", error);
+      }
     }
   }
 
@@ -269,5 +274,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     await render();
   }));
 
+  window.addEventListener("tutodemy-live-notification", event => {
+    const item = event.detail?.notification;
+    if (!item?.notification_type) return;
+    const type = String(item.notification_type);
+    const affectsBookings = type.startsWith("booking_") || type.startsWith("payment_") || type === "session_delivered";
+    if (!affectsBookings) return;
+    clearTimeout(realtimeRefreshTimer);
+    realtimeRefreshTimer = setTimeout(() => load({ quiet: true }), 220);
+  });
+
+  window.addEventListener("beforeunload", () => clearTimeout(realtimeRefreshTimer));
   await load();
 });

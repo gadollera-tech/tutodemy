@@ -26,6 +26,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   let activeThread = null;
   let realtimeChannel = null;
   let fallbackTimer = null;
+  let reconnectTimer = null;
+  let realtimeRefreshTimer = null;
+  let reconnectAttempt = 0;
 
   const esc = value => window.Tuto.escape(value);
   const statusLabel = value => String(value || "booking").replaceAll("_", " ");
@@ -113,6 +116,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       const messages = await api.getBookingMessages(activeBookingId);
       renderMessages(messages);
       await api.markMessagesRead(activeBookingId);
+      if (api.markBookingNotificationsRead) {
+        try {
+          await api.markBookingNotificationsRead(activeBookingId, "new_message");
+          await window.TutoNotifications?.refresh?.({ quiet: true });
+        } catch (notificationError) {
+          console.warn("Message notification could not be marked as read:", notificationError);
+        }
+      }
       const current = threads.find(thread => thread.booking_id === activeBookingId);
       if (current) current.unread_count = 0;
       renderThreads();
@@ -128,17 +139,47 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function stopRealtime() {
-    if (realtimeChannel) api.unsubscribeBookingMessages(realtimeChannel);
-    realtimeChannel = null;
+    if (realtimeChannel) {
+      const channel = realtimeChannel;
+      realtimeChannel = null;
+      api.unsubscribeBookingMessages(channel);
+    }
     clearInterval(fallbackTimer);
+    clearTimeout(reconnectTimer);
     fallbackTimer = null;
+    reconnectTimer = null;
+  }
+
+  function scheduleReconnect(bookingId) {
+    if (!bookingId || reconnectTimer || !navigator.onLine) return;
+    const delay = Math.min(30000, 1500 * (2 ** reconnectAttempt));
+    reconnectAttempt += 1;
+    reconnectTimer = setTimeout(() => {
+      reconnectTimer = null;
+      if (activeBookingId === bookingId) startRealtime(bookingId);
+    }, delay);
   }
 
   function startRealtime(bookingId) {
     stopRealtime();
-    realtimeChannel = api.subscribeBookingMessages(bookingId, async () => {
+    let channel = null;
+    channel = api.subscribeBookingMessages(bookingId, async payload => {
       await Promise.all([refreshMessages({ quiet: true }), loadThreads({ keepSelection: true, quiet: true })]);
+      const incoming = payload?.new;
+      if (incoming?.sender_id && incoming.sender_id !== currentUser.id && document.hidden && navigator.vibrate) {
+        try { navigator.vibrate(100); } catch {}
+      }
+    }, realtimeStatus => {
+      if (realtimeChannel !== channel) return;
+      if (realtimeStatus === "SUBSCRIBED") {
+        reconnectAttempt = 0;
+        clearTimeout(reconnectTimer);
+        reconnectTimer = null;
+      } else if (["CHANNEL_ERROR", "TIMED_OUT", "CLOSED"].includes(realtimeStatus)) {
+        scheduleReconnect(bookingId);
+      }
     });
+    realtimeChannel = channel;
     fallbackTimer = setInterval(() => refreshMessages({ quiet: true }), 20000);
   }
 
@@ -159,6 +200,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function loadThreads({ keepSelection = false, quiet = false } = {}) {
     try {
       threads = await api.getMessageThreads();
+      if (activeBookingId) {
+        const updatedThread = threads.find(thread => thread.booking_id === activeBookingId);
+        if (updatedThread) {
+          activeThread = updatedThread;
+          if (!panel.hidden) updateConversationHeader(updatedThread);
+        }
+      }
       renderThreads();
       const requested = new URLSearchParams(location.search).get("booking");
       const nextId = keepSelection && activeBookingId
@@ -217,7 +265,32 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   document.querySelector("#refresh-threads").addEventListener("click", () => loadThreads({ keepSelection: true }));
-  window.addEventListener("beforeunload", stopRealtime);
+
+  window.addEventListener("tutodemy-live-notification", event => {
+    const item = event.detail?.notification;
+    if (!item?.notification_type) return;
+    clearTimeout(realtimeRefreshTimer);
+    realtimeRefreshTimer = setTimeout(async () => {
+      const type = String(item.notification_type);
+      if (type === "new_message") {
+        if (item.booking_id === activeBookingId) await refreshMessages({ quiet: true });
+        await loadThreads({ keepSelection: true, quiet: true });
+        return;
+      }
+      if (type.startsWith("booking_") || type.startsWith("payment_") || type === "session_delivered") {
+        await loadThreads({ keepSelection: true, quiet: true });
+      }
+    }, 180);
+  });
+
+  window.addEventListener("online", () => {
+    if (activeBookingId) startRealtime(activeBookingId);
+    loadThreads({ keepSelection: true, quiet: true });
+  });
+  window.addEventListener("beforeunload", () => {
+    clearTimeout(realtimeRefreshTimer);
+    stopRealtime();
+  });
 
   try {
     if (!api.isReady()) throw new Error("Booking messages are temporarily unavailable.");
