@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", async () => {
-  await window.TutoAuth?.ready;
-  await window.TutoMarketplace?.ready;
+  "use strict";
 
-  const api = window.TutoMarketplace;
   const content = document.querySelector("#admin-content");
   const alertBox = document.querySelector("#admin-alert");
+  let api = null;
   let tutors = [];
   let bookings = [];
   let reports = [];
   let payouts = [];
+  let activeTab = "overview";
 
   const esc = value => window.Tuto.escape(value);
   const money = value => window.Tuto.money(value);
@@ -18,6 +18,97 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `${digits.slice(0, 4)}•••${digits.slice(-4)}`;
   };
 
+  const allowedTabs = new Set(["overview", "tutors", "bookings", "payouts", "reports"]);
+
+  function tabFromUrl(urlLike = location.href) {
+    const url = new URL(urlLike, location.href);
+    const requested = url.searchParams.get("tab") || "overview";
+    return allowedTabs.has(requested) ? requested : "overview";
+  }
+
+  function syncAdminNavigation(tab) {
+    document.querySelectorAll("[data-admin-tab]").forEach(button => {
+      const selected = button.dataset.adminTab === tab;
+      button.classList.toggle("active", selected);
+      button.setAttribute("aria-selected", String(selected));
+      button.tabIndex = selected ? 0 : -1;
+    });
+
+    document.querySelectorAll(".admin-panel").forEach(panel => {
+      const selected = panel.id === `admin-${tab}-panel`;
+      panel.classList.toggle("active", selected);
+      panel.hidden = !selected;
+    });
+
+    document.querySelectorAll('#site-header a[href*="admin.html"], #site-footer a[href*="admin.html"]').forEach(link => {
+      const linkTab = tabFromUrl(link.href);
+      link.classList.toggle("active", linkTab === tab);
+      if (linkTab === tab) link.setAttribute("aria-current", "page");
+      else link.removeAttribute("aria-current");
+    });
+  }
+
+  function activateAdminTab(tabName, { updateUrl = false, push = false, scroll = false } = {}) {
+    const tab = allowedTabs.has(tabName) ? tabName : "overview";
+    activeTab = tab;
+    syncAdminNavigation(tab);
+
+    if (updateUrl) {
+      const url = new URL(location.href);
+      if (tab === "overview") url.searchParams.delete("tab");
+      else url.searchParams.set("tab", tab);
+      history[push ? "pushState" : "replaceState"]({ adminTab: tab }, "", url);
+    }
+
+    document.querySelector(".main-nav")?.classList.remove("open");
+    document.querySelector(".menu-toggle")?.setAttribute("aria-expanded", "false");
+    if (scroll) content?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function bindAdminNavigation() {
+    document.addEventListener("click", event => {
+      const button = event.target.closest("[data-admin-tab], [data-overview-tab]");
+      if (button) {
+        event.preventDefault();
+        const tab = button.dataset.adminTab || button.dataset.overviewTab;
+        activateAdminTab(tab, { updateUrl: true, scroll: Boolean(button.dataset.overviewTab) });
+        return;
+      }
+
+      const link = event.target.closest('a[href*="admin.html"]');
+      if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.target === "_blank" || link.hasAttribute("download")) return;
+      const url = new URL(link.href, location.href);
+      if (url.origin !== location.origin || !url.pathname.endsWith("/admin.html")) return;
+      event.preventDefault();
+      activateAdminTab(tabFromUrl(url), { updateUrl: true, push: true, scroll: true });
+    });
+
+    document.addEventListener("keydown", event => {
+      const current = event.target.closest?.("[data-admin-tab]");
+      if (!current || !["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      const tabs = [...document.querySelectorAll("[data-admin-tab]")];
+      const currentIndex = tabs.indexOf(current);
+      let nextIndex = currentIndex;
+      if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % tabs.length;
+      if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+      if (event.key === "Home") nextIndex = 0;
+      if (event.key === "End") nextIndex = tabs.length - 1;
+      event.preventDefault();
+      const next = tabs[nextIndex];
+      activateAdminTab(next.dataset.adminTab, { updateUrl: true });
+      next.focus();
+    });
+
+    window.addEventListener("popstate", () => activateAdminTab(tabFromUrl()));
+    window.addEventListener("tutodemy-role-ready", () => syncAdminNavigation(activeTab));
+  }
+
+  function showAdminAlert(message, kind = "error") {
+    if (!alertBox) return;
+    alertBox.hidden = !message;
+    alertBox.dataset.kind = kind;
+    alertBox.textContent = message || "";
+  }
 
   function renderOverview() {
     const pendingTutors = tutors.filter(tutor => tutor.status === "pending").length;
@@ -28,15 +119,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const payoutDue = payouts.reduce((sum, row) => sum + Number(row.amount_due || 0), 0);
     const openReports = reports.filter(report => !["resolved", "dismissed"].includes(report.status)).length;
 
-    document.querySelector("#admin-metric-tutors").textContent = String(pendingTutors);
-    document.querySelector("#admin-metric-payments").textContent = String(paymentActions);
-    document.querySelector("#admin-metric-payouts").textContent = money(payoutDue);
-    document.querySelector("#admin-metric-reports").textContent = String(openReports);
-
-    document.querySelectorAll("[data-overview-tab]").forEach(button => button.addEventListener("click", () => {
-      activateAdminTab(button.dataset.overviewTab, { updateUrl: true });
-      document.querySelector("#admin-content")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }));
+    const values = {
+      "#admin-metric-tutors": String(pendingTutors),
+      "#admin-metric-payments": String(paymentActions),
+      "#admin-metric-payouts": money(payoutDue),
+      "#admin-metric-reports": String(openReports)
+    };
+    Object.entries(values).forEach(([selector, value]) => {
+      const element = document.querySelector(selector);
+      if (element) element.textContent = value;
+    });
   }
 
   function tutorCard(tutor) {
@@ -312,60 +404,55 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function loadAll() {
-    const [tutorResult, bookingResult, reportResult, payoutResult] = await Promise.allSettled([
-      api.adminPendingTutors(),
-      api.adminBookings(),
-      api.adminMessageReports(),
-      api.adminWeeklyPayoutSummary()
-    ]);
+    const tasks = [
+      ["Tutor applications", () => api.adminPendingTutors?.()],
+      ["Bookings and payments", () => api.adminBookings?.()],
+      ["Message reports", () => api.adminMessageReports?.()],
+      ["Weekly payouts", () => api.adminWeeklyPayoutSummary?.()]
+    ];
 
-    if (tutorResult.status === "rejected") throw tutorResult.reason;
-    if (bookingResult.status === "rejected") throw bookingResult.reason;
-    if (payoutResult.status === "rejected") throw payoutResult.reason;
-
-    tutors = tutorResult.value || [];
-    bookings = bookingResult.value || [];
-    reports = reportResult.status === "fulfilled" ? (reportResult.value || []) : [];
-    payouts = payoutResult.value || [];
+    const results = await Promise.allSettled(tasks.map(([, task]) => Promise.resolve().then(task)));
+    tutors = results[0].status === "fulfilled" && Array.isArray(results[0].value) ? results[0].value : [];
+    bookings = results[1].status === "fulfilled" && Array.isArray(results[1].value) ? results[1].value : [];
+    reports = results[2].status === "fulfilled" && Array.isArray(results[2].value) ? results[2].value : [];
+    payouts = results[3].status === "fulfilled" && Array.isArray(results[3].value) ? results[3].value : [];
 
     renderOverview();
     renderTutors();
     renderBookings();
     renderPayouts();
     renderReports();
+    syncAdminNavigation(activeTab);
+
+    const failures = results
+      .map((result, index) => result.status === "rejected" ? `${tasks[index][0]}: ${result.reason?.message || "could not be loaded"}` : "")
+      .filter(Boolean);
+    if (failures.length) showAdminAlert(`Some admin data could not be loaded. ${failures.join(" • ")}`, "warning");
+    else showAdminAlert("");
   }
 
+  bindAdminNavigation();
+  activateAdminTab(tabFromUrl());
+
+  await window.TutoAuth?.ready;
+  if (window.TutoMarketplace?.ready) await window.TutoMarketplace.ready;
+  api = window.TutoMarketplace;
+
   if (!window.TutoAuth?.getUser?.()) {
-    location.replace("auth.html");
+    location.replace(`auth.html?next=${encodeURIComponent("admin.html")}`);
     return;
   }
 
   try {
-    if (!api.isReady()) throw new Error("The Admin Console is temporarily unavailable.");
+    if (!api?.isReady?.()) throw new Error("The Admin Console is temporarily unavailable.");
     if (!await api.checkAdmin()) throw new Error("Administrator access is required for this account.");
     content.hidden = false;
-    alertBox.hidden = true;
+    showAdminAlert("");
+    syncAdminNavigation(activeTab);
     await loadAll();
   } catch (error) {
-    alertBox.hidden = false;
-    alertBox.textContent = error.message || "Admin Console could not be opened.";
+    content.hidden = false;
+    showAdminAlert(error.message || "Admin Console could not be opened.");
+    syncAdminNavigation(activeTab);
   }
-
-  function activateAdminTab(tabName, { updateUrl = false } = {}) {
-    const allowed = ["overview", "tutors", "bookings", "payouts", "reports"];
-    const tab = allowed.includes(tabName) ? tabName : "overview";
-    document.querySelectorAll("[data-admin-tab]").forEach(item => item.classList.toggle("active", item.dataset.adminTab === tab));
-    document.querySelectorAll(".admin-panel").forEach(panel => panel.classList.toggle("active", panel.id === `admin-${tab}-panel`));
-    if (updateUrl) {
-      const url = new URL(location.href);
-      url.searchParams.set("tab", tab);
-      history.replaceState({}, "", url);
-    }
-  }
-
-  document.querySelectorAll("[data-admin-tab]").forEach(button => button.addEventListener("click", () => {
-    activateAdminTab(button.dataset.adminTab, { updateUrl: true });
-  }));
-
-  activateAdminTab(new URLSearchParams(location.search).get("tab") || "overview");
 });

@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Admin Console | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260809-role1">
+  <link rel="stylesheet" href="css/style.css?v=20260809-adminfix1">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
@@ -28,7 +28,7 @@
   <script defer src="js/cloud-sync.js"></script>
   <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
   <script defer src="js/main.js?v=20260809-role1"></script>
-  <script defer src="js/admin.js"></script>
+  <script defer src="js/admin.js?v=20260809-adminfix1"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="admin">
@@ -45,8 +45,14 @@
       <div class="container">
         <div class="marketplace-alert" id="admin-alert" hidden></div>
         <div id="admin-content" hidden>
-          <div class="admin-tabs"><button class="active" data-admin-tab="overview">Overview</button><button data-admin-tab="tutors">Tutor applications</button><button data-admin-tab="bookings">Bookings and payments</button><button data-admin-tab="payouts">Weekly tutor payouts</button><button data-admin-tab="reports">Message reports</button></div>
-          <section id="admin-overview-panel" class="admin-panel active">
+          <div class="admin-tabs" role="tablist" aria-label="Admin Console sections">
+            <button class="active" type="button" role="tab" aria-selected="true" aria-controls="admin-overview-panel" data-admin-tab="overview">Overview</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="admin-tutors-panel" data-admin-tab="tutors">Tutor applications</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="admin-bookings-panel" data-admin-tab="bookings">Bookings and payments</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="admin-payouts-panel" data-admin-tab="payouts">Weekly tutor payouts</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="admin-reports-panel" data-admin-tab="reports">Message reports</button>
+          </div>
+          <section id="admin-overview-panel" class="admin-panel active" role="tabpanel">
             <div class="section-heading"><span class="eyebrow">ADMIN OVERVIEW</span><h2>Items that need attention</h2><p>A private summary of tutor reviews, booking operations, payouts, and safety reports.</p></div>
             <div class="admin-overview-grid">
               <button type="button" data-overview-tab="tutors"><span>Pending tutor applications</span><b id="admin-metric-tutors">0</b><small>Review tutor credentials and public profiles</small></button>
@@ -55,8 +61,8 @@
               <button type="button" data-overview-tab="reports"><span>Open safety reports</span><b id="admin-metric-reports">0</b><small>Reported conversations needing a decision</small></button>
             </div>
           </section>
-          <section id="admin-tutors-panel" class="admin-panel"><div class="section-heading"><span class="eyebrow">TUTOR REVIEW</span><h2>Applications and public-profile status</h2></div><div class="admin-list" id="admin-tutor-list"></div></section>
-          <section id="admin-bookings-panel" class="admin-panel"><div class="section-heading"><span class="eyebrow">BOOKING OPERATIONS</span><h2>Client payment verification and booking completion</h2><p>Open each uploaded receipt, independently confirm the LANDBANK transaction, then approve or return the payment submission.</p></div><div class="admin-list" id="admin-booking-list"></div></section><section id="admin-payouts-panel" class="admin-panel"><div class="section-heading"><span class="eyebrow">WEEKLY PAYOUTS</span><h2>Send completed-session earnings to tutors</h2><p>Transfer the displayed amount to the tutor’s private GCash destination, then enter the successful transaction reference to record the payout.</p></div><div class="admin-list" id="admin-payout-list"></div></section><section id="admin-reports-panel" class="admin-panel"><div class="section-heading"><span class="eyebrow">MESSAGE SAFETY</span><h2>Conversation reports</h2><p>Review reported booking messages, record the outcome, and take appropriate account or booking action.</p></div><div class="admin-list" id="admin-report-list"></div></section>
+          <section id="admin-tutors-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">TUTOR REVIEW</span><h2>Applications and public-profile status</h2></div><div class="admin-list" id="admin-tutor-list"></div></section>
+          <section id="admin-bookings-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">BOOKING OPERATIONS</span><h2>Client payment verification and booking completion</h2><p>Open each uploaded receipt, independently confirm the LANDBANK transaction, then approve or return the payment submission.</p></div><div class="admin-list" id="admin-booking-list"></div></section><section id="admin-payouts-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">WEEKLY PAYOUTS</span><h2>Send completed-session earnings to tutors</h2><p>Transfer the displayed amount to the tutor’s private GCash destination, then enter the successful transaction reference to record the payout.</p></div><div class="admin-list" id="admin-payout-list"></div></section><section id="admin-reports-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">MESSAGE SAFETY</span><h2>Conversation reports</h2><p>Review reported booking messages, record the outcome, and take appropriate account or booking action.</p></div><div class="admin-list" id="admin-report-list"></div></section>
         </div>
       </div>
     </section>

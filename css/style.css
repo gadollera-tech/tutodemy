@@ -853,3 +853,18 @@ body.role-dual-account .workspace-badge{background:var(--periwinkle);color:#fff}
 .marketplace-alert a{color:var(--navy);font-weight:950}
 @media(max-width:1000px){.admin-overview-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.admin-overview-grid{grid-template-columns:1fr}.admin-overview-grid button{min-height:145px}}
+
+
+/* Admin Console interaction hardening — 2026-08-09 */
+.admin-tabs{position:relative;z-index:4;isolation:isolate}
+.admin-tabs button,.admin-overview-grid button,.admin-actions button,.document-link{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(244,185,66,.22)}
+.admin-tabs button{position:relative;z-index:1;min-height:42px}
+.admin-tabs button:focus-visible,.admin-overview-grid button:focus-visible{outline:3px solid rgba(244,185,66,.48);outline-offset:3px}
+.admin-panel[hidden]{display:none!important}
+.admin-panel.active:not([hidden]){display:block}
+.marketplace-alert[data-kind="warning"]{background:#fff8dc;border-color:#ecd274;color:#5d4800}
+@media(max-width:760px){
+  .admin-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .admin-tabs button{width:100%;justify-content:center;text-align:center;border-radius:12px;padding:10px 8px;line-height:1.2}
+}
+@media(max-width:420px){.admin-tabs{grid-template-columns:1fr}}

@@ -1,17 +1,15 @@
-TutoDemy Notification Bell — Public Website Patch
+TutoDemy Admin Console Clickability Fix
 
-IMPORTANT INSTALLATION ORDER
-1. First run the private Supabase SQL file: NOTIFICATION-BELL-UPGRADE.sql.
-2. Then upload this public patch to GitHub.
-
-GITHUB UPLOAD
 1. Extract this ZIP.
-2. Open the extracted TutoDemy-Notification-Bell-Update-Patch folder.
-3. Upload every file and folder INSIDE it to the root of the existing TutoDemy repository.
-4. Choose Replace for matching files.
-5. Make one commit only.
-6. Wait for GitHub Pages to become green.
-7. Open https://tutodemy.net and press Ctrl + Shift + R.
-8. On an installed phone app, close and reopen TutoDemy once after deployment.
+2. Upload the CONTENTS of this folder to the root of the existing GitHub repository.
+3. Replace matching files:
+   - admin.html
+   - css/style.css
+   - js/admin.js
+   - service-worker.js
+4. Make one commit only.
+5. Wait for GitHub Pages deployment to become green.
+6. In a browser, open https://tutodemy.net/admin.html and hard refresh.
+7. In the installed phone app, close TutoDemy completely and reopen it.
 
-DO NOT upload the private SQL setup ZIP or SQL file to GitHub.
+No Supabase SQL changes are required.
