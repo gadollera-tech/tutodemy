@@ -11,6 +11,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   let overview = null;
   let overviewLoadedAt = null;
   let overviewLoading = false;
+  let usersLoading = false;
+  let usersLoaded = false;
+  let usersResult = { items: [], total: 0 };
+  const usersPageSize = 25;
+  let usersPage = 0;
   let activeTab = "overview";
 
   const esc = value => window.Tuto.escape(value);
@@ -21,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `${digits.slice(0, 4)}•••${digits.slice(-4)}`;
   };
 
-  const allowedTabs = new Set(["overview", "tutors", "bookings", "payouts", "reports"]);
+  const allowedTabs = new Set(["overview", "users", "tutors", "bookings", "payouts", "reports"]);
 
   function tabFromUrl(urlLike = location.href) {
     const url = new URL(urlLike, location.href);
@@ -66,6 +71,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.querySelector(".main-nav")?.classList.remove("open");
     document.querySelector(".menu-toggle")?.setAttribute("aria-expanded", "false");
     if (scroll) content?.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (tab === "users" && api && !usersLoaded && !usersLoading) loadUsers();
   }
 
   function bindAdminNavigation() {
@@ -179,6 +185,158 @@ document.addEventListener("DOMContentLoaded", async () => {
       else if (overviewLoadedAt) updated.textContent = `Updated ${overviewLoadedAt.toLocaleString()}`;
       else updated.textContent = overview ? "Overview loaded" : "Overview database setup not detected";
     }
+  }
+
+  function userRoleLabel(user) {
+    if (user.is_admin) return "Administrator";
+    if (user.tutor_status) return user.tutor_status === "approved" ? "Approved tutor" : "Tutor applicant";
+    return "Learner";
+  }
+
+  function userInitials(name, email) {
+    const parts = String(name || "").trim().split(/\s+/).filter(Boolean);
+    if (parts.length) return parts.slice(0, 2).map(part => part[0]).join("").toUpperCase();
+    return String(email || "U")[0].toUpperCase();
+  }
+
+  function userCard(user) {
+    const suspended = user.account_status === "suspended";
+    const cannotManage = Boolean(user.is_admin || user.is_current_admin);
+    const tutorStatus = user.tutor_status ? `<span class="status-pill status-${esc(user.tutor_status)}">Tutor: ${esc(user.tutor_status)}</span>` : "";
+    const lastSignIn = user.last_sign_in_at ? new Date(user.last_sign_in_at).toLocaleString() : "No recorded sign-in";
+    const confirmed = user.email_confirmed_at ? "Confirmed" : "Unconfirmed";
+    return `<article class="admin-user-card ${suspended ? "is-suspended" : ""}" data-user-id="${esc(user.id)}">
+      <div class="admin-user-card-main">
+        <div class="admin-user-avatar">${esc(userInitials(user.full_name, user.email))}</div>
+        <div class="admin-user-identity">
+          <div class="admin-user-title-row"><h3>${esc(user.full_name || "Unnamed account")}</h3><span class="status-pill ${suspended ? "status-suspended" : "status-approved"}">${suspended ? "Suspended" : "Active"}</span>${tutorStatus}</div>
+          <p>${esc(user.email || "No email available")}</p>
+          <div class="admin-user-meta"><span>${esc(userRoleLabel(user))}</span><span>Joined ${new Date(user.created_at).toLocaleDateString()}</span><span>Last sign-in: ${esc(lastSignIn)}</span><span>Email: ${confirmed}</span></div>
+        </div>
+      </div>
+      <dl class="admin-user-stats">
+        <div><dt>Learner bookings</dt><dd>${Number(user.learner_booking_count || 0).toLocaleString()}</dd></div>
+        <div><dt>Tutor bookings</dt><dd>${Number(user.tutor_booking_count || 0).toLocaleString()}</dd></div>
+        <div><dt>Completed sessions</dt><dd>${Number(user.completed_booking_count || 0).toLocaleString()}</dd></div>
+        <div><dt>Practice attempts</dt><dd>${Number(user.exam_attempt_count || 0).toLocaleString()}</dd></div>
+      </dl>
+      <div class="admin-user-details-grid">
+        <div><span>Student level</span><b>${esc(user.student_level || "Not provided")}</b></div>
+        <div><span>Target exam</span><b>${esc(user.target_exam || "Not provided")}</b></div>
+        <div><span>School</span><b>${esc(user.school || "Not provided")}</b></div>
+        <div><span>User ID</span><code>${esc(user.id)}</code></div>
+      </div>
+      <div class="admin-user-card-actions">
+        ${cannotManage ? `<small>${user.is_current_admin ? "This is your administrator account." : "Administrator accounts cannot be suspended here."}</small>` : suspended ? `<button class="button restore-user" type="button">Restore account</button>` : `<button class="button button-danger suspend-user" type="button">Suspend account</button>`}
+      </div>
+    </article>`;
+  }
+
+  function renderUsers() {
+    const list = document.querySelector("#admin-user-list");
+    if (!list) return;
+    if (usersLoading) {
+      list.innerHTML = `<div class="admin-users-loading"><span class="loading-spinner" aria-hidden="true"></span><p>Loading user accounts…</p></div>`;
+      return;
+    }
+    const items = Array.isArray(usersResult.items) ? usersResult.items : [];
+    list.innerHTML = items.map(userCard).join("") || `<div class="empty-state"><h3>No accounts match these filters.</h3><p>Clear or adjust the filters and try again.</p></div>`;
+    const total = Number(usersResult.total || 0);
+    const start = total ? usersPage * usersPageSize + 1 : 0;
+    const end = Math.min((usersPage + 1) * usersPageSize, total);
+    const summary = document.querySelector("#admin-user-results-count");
+    if (summary) summary.textContent = total ? `Showing ${start}–${end} of ${total.toLocaleString()} accounts` : "No matching accounts";
+    const pagination = document.querySelector("#admin-user-pagination");
+    if (pagination) pagination.hidden = total <= usersPageSize;
+    const page = document.querySelector("#admin-users-page");
+    if (page) page.textContent = `Page ${usersPage + 1} of ${Math.max(1, Math.ceil(total / usersPageSize))}`;
+    const prev = document.querySelector("#admin-users-prev");
+    const next = document.querySelector("#admin-users-next");
+    if (prev) prev.disabled = usersPage === 0;
+    if (next) next.disabled = end >= total;
+    document.querySelector("#admin-users-setup")?.toggleAttribute("hidden", true);
+
+    list.querySelectorAll(".suspend-user").forEach(button => button.addEventListener("click", async () => {
+      const card = button.closest(".admin-user-card");
+      const reason = prompt("Reason for suspending this account:");
+      if (!reason?.trim()) return window.Tuto.toast("A suspension reason is required.");
+      if (!confirm("Suspend this account? The user will be signed out and prevented from signing in until restored.")) return;
+      try {
+        button.disabled = true;
+        await api.adminSetUserAccountStatus(card.dataset.userId, "suspended", reason.trim());
+        window.Tuto.toast("Account suspended.");
+        await Promise.all([loadUsers(), loadAll({ manual: true })]);
+      } catch (error) {
+        showAdminAlert(error.message || "The account could not be suspended.");
+        button.disabled = false;
+      }
+    }));
+    list.querySelectorAll(".restore-user").forEach(button => button.addEventListener("click", async () => {
+      const card = button.closest(".admin-user-card");
+      const reason = prompt("Reason for restoring this account:", "Account access restored after administrator review.");
+      if (!reason?.trim()) return window.Tuto.toast("A restoration note is required.");
+      if (!confirm("Restore this account and allow the user to sign in again?")) return;
+      try {
+        button.disabled = true;
+        await api.adminSetUserAccountStatus(card.dataset.userId, "active", reason.trim());
+        window.Tuto.toast("Account restored.");
+        await Promise.all([loadUsers(), loadAll({ manual: true })]);
+      } catch (error) {
+        showAdminAlert(error.message || "The account could not be restored.");
+        button.disabled = false;
+      }
+    }));
+  }
+
+  function currentUserFilters() {
+    return {
+      search: document.querySelector("#admin-user-search")?.value || "",
+      role: document.querySelector("#admin-user-role")?.value || "all",
+      status: document.querySelector("#admin-user-status")?.value || "all",
+      tutorStatus: document.querySelector("#admin-user-tutor-status")?.value || "all",
+      sort: document.querySelector("#admin-user-sort")?.value || "newest",
+      limit: usersPageSize,
+      offset: usersPage * usersPageSize
+    };
+  }
+
+  async function loadUsers({ resetPage = false } = {}) {
+    if (!api || usersLoading) return;
+    if (resetPage) usersPage = 0;
+    usersLoading = true;
+    renderUsers();
+    try {
+      usersResult = await api.adminListUsers(currentUserFilters());
+      usersLoaded = true;
+      showAdminAlert("");
+      document.querySelector("#admin-users-setup")?.toggleAttribute("hidden", true);
+    } catch (error) {
+      usersResult = { items: [], total: 0 };
+      usersLoaded = false;
+      const setup = document.querySelector("#admin-users-setup");
+      if (setup) setup.hidden = false;
+      showAdminAlert(`Users Management could not be loaded. ${error.message || "Run the Phase 2 private SQL setup."}`, "warning");
+    } finally {
+      usersLoading = false;
+      renderUsers();
+    }
+  }
+
+  function exportUsersCsv() {
+    const rows = Array.isArray(usersResult.items) ? usersResult.items : [];
+    if (!rows.length) return window.Tuto.toast("There are no current results to export.");
+    const headers = ["User ID","Name","Email","Account Type","Account Status","Tutor Status","Email Confirmed","Joined","Last Sign-in","Learner Bookings","Tutor Bookings","Completed Sessions","Practice Attempts"];
+    const quote = value => `"${String(value ?? "").replace(/"/g, '""')}"`;
+    const body = rows.map(user => [user.id,user.full_name,user.email,userRoleLabel(user),user.account_status,user.tutor_status || "",Boolean(user.email_confirmed_at),user.created_at,user.last_sign_in_at || "",user.learner_booking_count,user.tutor_booking_count,user.completed_booking_count,user.exam_attempt_count].map(quote).join(","));
+    const blob = new Blob([[headers.map(quote).join(","), ...body].join("\n")], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `tutodemy-users-${new Date().toISOString().slice(0,10)}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
   }
 
   function tutorCard(tutor) {
@@ -509,6 +667,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     loadAll({ manual: true });
   });
 
+  document.querySelector("#admin-user-filters")?.addEventListener("submit", event => {
+    event.preventDefault();
+    loadUsers({ resetPage: true });
+  });
+  document.querySelector("#admin-user-clear")?.addEventListener("click", () => {
+    document.querySelector("#admin-user-filters")?.reset();
+    loadUsers({ resetPage: true });
+  });
+  document.querySelector("#admin-users-refresh")?.addEventListener("click", () => loadUsers());
+  document.querySelector("#admin-users-export")?.addEventListener("click", exportUsersCsv);
+  document.querySelector("#admin-users-prev")?.addEventListener("click", () => { if (usersPage > 0) { usersPage -= 1; loadUsers(); } });
+  document.querySelector("#admin-users-next")?.addEventListener("click", () => { usersPage += 1; loadUsers(); });
+
   await window.TutoAuth?.ready;
   if (window.TutoMarketplace?.ready) await window.TutoMarketplace.ready;
   api = window.TutoMarketplace;
@@ -525,6 +696,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     showAdminAlert("");
     syncAdminNavigation(activeTab);
     await loadAll();
+    if (activeTab === "users") await loadUsers();
   } catch (error) {
     content.hidden = false;
     showAdminAlert(error.message || "Admin Console could not be opened.");

@@ -20,15 +20,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Admin Console | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260809-adminoverview1">
+  <link rel="stylesheet" href="css/style.css?v=20260809-users2">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-adminoverview1"></script>
+  <script defer src="js/marketplace-api.js?v=20260809-users2"></script>
   <script defer src="js/main.js?v=20260809-tutorfix1"></script>
-  <script defer src="js/admin.js?v=20260809-adminoverview1"></script>
+  <script defer src="js/admin.js?v=20260809-users2"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="admin">
@@ -47,6 +47,7 @@
         <div id="admin-content" hidden>
           <div class="admin-tabs" role="tablist" aria-label="Admin Console sections">
             <button class="active" type="button" role="tab" aria-selected="true" aria-controls="admin-overview-panel" data-admin-tab="overview">Overview</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="admin-users-panel" data-admin-tab="users">Users</button>
             <button type="button" role="tab" aria-selected="false" aria-controls="admin-tutors-panel" data-admin-tab="tutors">Tutor applications</button>
             <button type="button" role="tab" aria-selected="false" aria-controls="admin-bookings-panel" data-admin-tab="bookings">Bookings and payments</button>
             <button type="button" role="tab" aria-selected="false" aria-controls="admin-payouts-panel" data-admin-tab="payouts">Weekly tutor payouts</button>
@@ -73,15 +74,15 @@
             <section class="admin-overview-block" aria-labelledby="accounts-overview-title">
               <div class="admin-overview-block-heading">
                 <div><span>ACCOUNT BASE</span><h3 id="accounts-overview-title">Who is using TutoDemy</h3></div>
-                <small>Detailed user management will be added in Phase 2.</small>
+                <small>Click an account card to open Users Management.</small>
               </div>
               <div class="admin-stat-grid admin-stat-grid-accounts">
-                <article class="admin-stat-card" data-tone="navy"><span>Total registered accounts</span><b id="admin-total-users">—</b><small>All current TutoDemy profiles, including administrators</small></article>
-                <article class="admin-stat-card" data-tone="blue"><span>Learner-only accounts</span><b id="admin-learner-users">—</b><small>Accounts currently registered as learners, excluding admins</small></article>
+                <button class="admin-stat-card is-link" data-tone="navy" type="button" data-overview-tab="users"><span>Total registered accounts</span><b id="admin-total-users">—</b><small>Open the complete account list</small></button>
+                <button class="admin-stat-card is-link" data-tone="blue" type="button" data-overview-tab="users"><span>Learner-only accounts</span><b id="admin-learner-users">—</b><small>Open Users Management and filter learners</small></button>
                 <article class="admin-stat-card" data-tone="violet"><span>Active users this month</span><b id="admin-active-users-month">—</b><small>Unique users with meaningful platform activity</small></article>
                 <button class="admin-stat-card is-link" data-tone="green" type="button" data-overview-tab="tutors"><span>Approved tutors</span><b id="admin-approved-tutors">—</b><small>Open the tutor application and status list</small></button>
                 <button class="admin-stat-card is-link" data-tone="gold" type="button" data-overview-tab="tutors"><span>Pending tutor applications</span><b id="admin-pending-tutors">—</b><small>Applications waiting for administrator review</small></button>
-                <article class="admin-stat-card" data-tone="rose"><span>Suspended accounts</span><b id="admin-suspended-users">—</b><small>Account or tutor access currently suspended</small></article>
+                <button class="admin-stat-card is-link" data-tone="rose" type="button" data-overview-tab="users"><span>Suspended accounts</span><b id="admin-suspended-users">—</b><small>Review suspended account access</small></button>
               </div>
               <div class="admin-growth-strip">
                 <div><span>New accounts this week</span><b id="admin-new-users-week">—</b></div>
@@ -128,6 +129,76 @@
               <p class="admin-finance-note">Platform commission is recognized only when a paid booking is completed and entered into the commission ledger. It is not a prediction of cash currently in the bank.</p>
             </section>
           </section>
+
+          <section id="admin-users-panel" class="admin-panel" role="tabpanel" hidden>
+            <div class="admin-users-header">
+              <div class="section-heading">
+                <span class="eyebrow">USERS MANAGEMENT</span>
+                <h2>Search and manage TutoDemy accounts</h2>
+                <p>Review learners, tutors, administrators, account status, sign-in activity, and booking participation from one protected list.</p>
+              </div>
+              <div class="admin-users-actions">
+                <button class="button button-outline" id="admin-users-refresh" type="button">Refresh users</button>
+                <button class="button button-outline" id="admin-users-export" type="button">Export current results</button>
+              </div>
+            </div>
+            <div class="admin-overview-setup" id="admin-users-setup" hidden>
+              <b>Phase 2 database setup is required.</b>
+              <p>Run the private Users Management SQL in Supabase before loading or changing account status.</p>
+            </div>
+            <form class="admin-user-filters" id="admin-user-filters">
+              <label class="admin-user-search">Search
+                <input id="admin-user-search" type="search" maxlength="120" placeholder="Name or email address" autocomplete="off">
+              </label>
+              <label>Account type
+                <select id="admin-user-role">
+                  <option value="all">All accounts</option>
+                  <option value="learner">Learners</option>
+                  <option value="tutor">Tutors</option>
+                  <option value="admin">Administrators</option>
+                </select>
+              </label>
+              <label>Account status
+                <select id="admin-user-status">
+                  <option value="all">All statuses</option>
+                  <option value="active">Active</option>
+                  <option value="suspended">Suspended</option>
+                </select>
+              </label>
+              <label>Tutor status
+                <select id="admin-user-tutor-status">
+                  <option value="all">Any tutor status</option>
+                  <option value="none">Not a tutor</option>
+                  <option value="draft">Draft</option>
+                  <option value="pending">Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                  <option value="suspended">Tutor suspended</option>
+                </select>
+              </label>
+              <label>Sort
+                <select id="admin-user-sort">
+                  <option value="newest">Newest accounts</option>
+                  <option value="oldest">Oldest accounts</option>
+                  <option value="name">Name A–Z</option>
+                  <option value="last_active">Most recent sign-in</option>
+                </select>
+              </label>
+              <button class="button" type="submit">Apply filters</button>
+              <button class="text-button" id="admin-user-clear" type="button">Clear</button>
+            </form>
+            <div class="admin-user-results-summary">
+              <span id="admin-user-results-count" role="status" aria-live="polite">Loading users…</span>
+              <small>Email addresses and sign-in details are visible only to authorized administrators.</small>
+            </div>
+            <div id="admin-user-list" class="admin-user-list" aria-live="polite"></div>
+            <div class="admin-user-pagination" id="admin-user-pagination" hidden>
+              <button class="button button-outline" id="admin-users-prev" type="button">Previous</button>
+              <span id="admin-users-page">Page 1</span>
+              <button class="button button-outline" id="admin-users-next" type="button">Next</button>
+            </div>
+          </section>
+
           <section id="admin-tutors-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">TUTOR REVIEW</span><h2>Applications and public-profile status</h2></div><div class="admin-list" id="admin-tutor-list"></div></section>
           <section id="admin-bookings-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">BOOKING OPERATIONS</span><h2>Client payment verification and booking completion</h2><p>Open each uploaded receipt, independently confirm the LANDBANK transaction, then approve or return the payment submission.</p></div><div class="admin-list" id="admin-booking-list"></div></section><section id="admin-payouts-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">WEEKLY PAYOUTS</span><h2>Send completed-session earnings to tutors</h2><p>Transfer the displayed amount to the tutor’s private GCash destination, then enter the successful transaction reference to record the payout.</p></div><div class="admin-list" id="admin-payout-list"></div></section><section id="admin-reports-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">MESSAGE SAFETY</span><h2>Conversation reports</h2><p>Review reported booking messages, record the outcome, and take appropriate account or booking action.</p></div><div class="admin-list" id="admin-report-list"></div></section>
         </div>

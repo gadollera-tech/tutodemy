@@ -1,0 +1,14 @@
+TutoDemy Learning PH — Users Management Phase 2
+
+Adds a protected Users tab to the Admin Console with:
+- Search by name or email
+- Learner, tutor, and administrator filters
+- Active/suspended and tutor-status filters
+- Joined date, last sign-in, email-confirmation status
+- Booking and practice counts
+- CSV export of the current page
+- Administrator-audited suspend and restore actions
+- Mobile-responsive interface
+
+Run the private USERS-MANAGEMENT-PHASE-2.sql in Supabase before deploying the public patch.
+Never upload the private SQL file to GitHub.

@@ -354,6 +354,32 @@
     return data || null;
   }
 
+  async function adminListUsers(filters = {}) {
+    requireUser();
+    const { data, error } = await client().rpc("admin_list_users", {
+      p_search: String(filters.search || "").trim(),
+      p_role: filters.role || "all",
+      p_status: filters.status || "all",
+      p_tutor_status: filters.tutorStatus || "all",
+      p_sort: filters.sort || "newest",
+      p_limit: Math.min(Math.max(Number(filters.limit) || 25, 1), 100),
+      p_offset: Math.max(Number(filters.offset) || 0, 0)
+    });
+    if (error) throw error;
+    return data || { items: [], total: 0 };
+  }
+
+  async function adminSetUserAccountStatus(userId, status, reason) {
+    requireUser();
+    const { data, error } = await client().rpc("admin_set_user_account_status", {
+      p_user_id: userId,
+      p_status: status,
+      p_reason: String(reason || "").trim()
+    });
+    if (error) throw error;
+    return data;
+  }
+
   async function adminPendingTutors() {
     if (!await checkAdmin()) throw new Error("Administrator access required.");
     const { data, error } = await client().from("tutor_profiles").select("*").in("status", ["pending","approved","rejected","suspended"]).order("submitted_at", { ascending: false, nullsFirst: false });
@@ -694,6 +720,8 @@
     getMyReviews,
     getMyLedger,
     adminPlatformOverview,
+    adminListUsers,
+    adminSetUserAccountStatus,
     adminPendingTutors,
     adminTutorDocuments,
     signedDocumentUrl,
