@@ -1,12 +1,5 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  await window.TutoAuth?.ready;
-  await window.TutoMarketplace?.ready;
-
+document.addEventListener("DOMContentLoaded", () => {
   const api = window.TutoMarketplace;
-  if (!window.TutoAuth?.getUser?.()) {
-    location.replace("auth.html");
-    return;
-  }
 
   const alertBox = document.querySelector("#dashboard-alert");
   const bookingList = document.querySelector("#tutor-booking-list");
@@ -17,6 +10,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   let feePolicy = [];
   let filter = "action";
   let realtimeRefreshTimer = null;
+  let initialized = false;
+
+  alertBox.hidden = false;
+  alertBox.textContent = "Loading your tutor workspace…";
 
   const esc = value => window.Tuto.escape(value);
   const money = value => window.Tuto.money(value);
@@ -219,6 +216,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   document.querySelector("#toggle-bookings").addEventListener("click", async () => {
+    if (!initialized || !profile) {
+      alertBox.hidden = false;
+      alertBox.textContent = "Your tutor workspace is still loading. Please wait a moment.";
+      return;
+    }
     try {
       const next = !profile.is_accepting_bookings;
       profile = await api.setAcceptingBookings(next);
@@ -249,5 +251,22 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   window.addEventListener("beforeunload", () => clearTimeout(realtimeRefreshTimer));
-  await load();
+
+  async function initialize() {
+    try {
+      await window.TutoAuth?.ready;
+      await window.TutoMarketplace?.ready;
+      if (!window.TutoAuth?.getUser?.()) {
+        location.replace("auth.html");
+        return;
+      }
+      initialized = true;
+      await load();
+    } catch (error) {
+      alertBox.hidden = false;
+      alertBox.textContent = error.message || "Tutor dashboard could not be initialized.";
+    }
+  }
+
+  initialize();
 });

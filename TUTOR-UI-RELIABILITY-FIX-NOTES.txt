@@ -1,0 +1,14 @@
+TutoDemy Tutor UI Reliability Fix
+Release: 2026-08-09 tutorfix1
+
+Checked and improved
+- Approved tutor navigation shows only tutor work tools.
+- Draft, pending, rejected, or suspended tutor applicants see only Application Status, Edit Application, and Tutor Guidelines.
+- Tutor dashboard booking filters bind immediately instead of waiting for all account/database requests.
+- Tutor application controls bind immediately and show a clear loading message when account data is still loading.
+- Tutor navigation and booking filters remain touch-friendly on mobile.
+- Main UI, tutor scripts, and CSS use a new cache version.
+- The service worker uses a new cache version and preloads tutor dashboard/application assets.
+
+No Supabase SQL changes are required.
+Upload the contents of the patch to the repository root and replace matching files.

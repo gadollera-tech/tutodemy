@@ -1,15 +1,11 @@
-TutoDemy Admin Console Clickability Fix
+TutoDemy Tutor UI Reliability Fix
 
 1. Extract this ZIP.
-2. Upload the CONTENTS of this folder to the root of the existing GitHub repository.
-3. Replace matching files:
-   - admin.html
-   - css/style.css
-   - js/admin.js
-   - service-worker.js
-4. Make one commit only.
-5. Wait for GitHub Pages deployment to become green.
-6. In a browser, open https://tutodemy.net/admin.html and hard refresh.
-7. In the installed phone app, close TutoDemy completely and reopen it.
+2. Upload every file and folder inside this extracted folder to the root of the GitHub repository.
+3. Replace matching files.
+4. Make one commit.
+5. Wait for GitHub Pages to turn green.
+6. Hard-refresh tutodemy.net with Ctrl + Shift + R.
+7. On the installed phone app, close TutoDemy completely and reopen it.
 
 No Supabase SQL changes are required.

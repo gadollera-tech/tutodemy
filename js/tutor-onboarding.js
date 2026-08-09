@@ -1,13 +1,7 @@
-document.addEventListener("DOMContentLoaded", async () => {
-  await window.TutoAuth?.ready;
-  await window.TutoMarketplace?.ready;
+document.addEventListener("DOMContentLoaded", () => {
   const api = window.TutoMarketplace;
-  const user = window.TutoAuth?.getUser?.();
-  if (!user) {
-    const next = encodeURIComponent("tutor-onboarding.html");
-    location.replace(`auth.html?next=${next}`);
-    return;
-  }
+  let user = null;
+  let initialized = false;
 
   const form = document.querySelector("#tutor-application-form");
   const status = document.querySelector("#application-form-status");
@@ -19,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     status.textContent = message;
     status.classList.toggle("error", error);
   };
+  setStatus("Loading your tutor application…");
   const valuesForGroup = name => [...document.querySelectorAll(`[data-checkbox-group="${name}"] input:checked`)].map(x => x.value);
   const setGroup = (name, values = []) => document.querySelectorAll(`[data-checkbox-group="${name}"] input`).forEach(input => input.checked = values.includes(input.value));
 
@@ -94,6 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function saveDraft() {
+    if (!initialized) throw new Error("Your tutor application is still loading. Please wait a moment.");
     setStatus("Saving tutor profile…");
     const avatar = document.querySelector("#profile-photo-file").files[0];
     const payoutQr = document.querySelector("#payout-qr-file").files[0];
@@ -176,5 +172,25 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  try { await load(); } catch (error) { alert.hidden = false; alert.textContent = error.message || "Application could not be loaded."; }
+  async function initialize() {
+    try {
+      await window.TutoAuth?.ready;
+      await window.TutoMarketplace?.ready;
+      user = window.TutoAuth?.getUser?.();
+      if (!user) {
+        const next = encodeURIComponent("tutor-onboarding.html");
+        location.replace(`auth.html?next=${next}`);
+        return;
+      }
+      initialized = true;
+      await load();
+      if (api?.isReady?.() && !status.classList.contains("error")) setStatus("Your tutor application is ready.");
+    } catch (error) {
+      alert.hidden = false;
+      alert.textContent = error.message || "Application could not be loaded.";
+      setStatus("Application could not be loaded.", true);
+    }
+  }
+
+  initialize();
 });

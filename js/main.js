@@ -55,13 +55,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     ].join("");
   }
 
-  function tutorNavigation() {
+  function tutorNavigation(context = roleContext) {
+    const approved = context.tutorStatus === "approved";
+    if (!approved) {
+      return [
+        `<a href="tutor-dashboard.html" class="${isActive("tutor-dashboard")}">Application Status</a>`,
+        `<a href="tutor-onboarding.html" class="${isActive("tutor-onboarding")}">Edit Application</a>`,
+        `<a href="tutor-terms.html" class="${isActive("tutor-terms")}">Tutor Guidelines</a>`
+      ].join("");
+    }
     return [
       `<a href="tutor-dashboard.html" class="${isActive("tutor-dashboard")}">Tutor Dashboard</a>`,
       `<a href="tutor-onboarding.html" class="${isActive("tutor-onboarding")}">Profile & Availability</a>`,
-      `<a href="tutor-dashboard.html#booking-requests" class="${isActive("bookings")}">Booking Requests</a>`,
+      `<a href="tutor-dashboard.html#booking-requests">Booking Requests</a>`,
       `<a href="messages.html" class="${isActive("messages")}">Messages</a>`,
-      `<a href="tutor-dashboard.html#private-ledger-section" class="${active === "tutor-dashboard" && location.hash === "#private-ledger-section" ? "active" : ""}">Earnings & Payouts</a>`,
+      `<a href="tutor-dashboard.html#private-ledger-section">Earnings & Payouts</a>`,
       `<a href="tutor-terms.html" class="${isActive("tutor-terms")}">Tutor Guidelines</a>`
     ].join("");
   }
@@ -101,11 +109,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       };
     }
     if (context.view === "tutor") {
+      const approved = context.tutorStatus === "approved";
       return {
-        bodyClass: "role-tutor",
-        badge: context.tutorStatus === "approved" ? "TUTOR" : "TUTOR APPLICANT",
-        note: "TUTOR WORKSPACE • Manage your profile, requests, sessions, messages, and payouts",
-        navigation: tutorNavigation(),
+        bodyClass: approved ? "role-tutor" : "role-tutor role-tutor-applicant",
+        badge: approved ? "TUTOR" : "TUTOR APPLICANT",
+        note: approved
+          ? "TUTOR WORKSPACE • Manage your profile, requests, sessions, messages, and payouts"
+          : "TUTOR APPLICATION • Review your status, complete your profile, and submit required information",
+        navigation: tutorNavigation(context),
         planVisible: false,
         switchLabel: "Switch to Learner View",
         switchKind: "learner"

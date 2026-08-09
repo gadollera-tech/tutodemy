@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260809-adminfix1";
+const CACHE_VERSION = "tutodemy-20260809-tutorfix1";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -6,10 +6,13 @@ const CORE_ASSETS = [
   "./index.html",
   "./offline.html",
   "./manifest.webmanifest",
-  "./css/style.css?v=20260809-role1",
-  "./css/style.css?v=20260809-adminfix1",
+  "./css/style.css?v=20260809-tutorfix1",
   "./js/marketplace-api.js?v=20260809-live1",
-  "./js/main.js?v=20260809-role1",
+  "./js/main.js?v=20260809-tutorfix1",
+  "./tutor-dashboard.html",
+  "./tutor-onboarding.html",
+  "./js/tutor-dashboard.js?v=20260809-tutorfix1",
+  "./js/tutor-onboarding.js?v=20260809-tutorfix1",
   "./admin.html",
   "./js/admin.js?v=20260809-adminfix1",
   "./js/notifications.js?v=20260809-live1",
