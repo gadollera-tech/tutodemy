@@ -1,18 +1,17 @@
-TutoDemy Mobile + Installable App Patch
+TutoDemy Notification Bell — Public Website Patch
 
-VERSION: 20260809-pwa1
+IMPORTANT INSTALLATION ORDER
+1. First run the private Supabase SQL file: NOTIFICATION-BELL-UPGRADE.sql.
+2. Then upload this public patch to GitHub.
 
-WHAT THIS ADDS
-- Responsive mobile safeguards for phones and tablets
-- Installable Progressive Web App (PWA) support
-- Android/Chrome/Edge install prompt when supported
-- iPhone/iPad Add to Home Screen instructions
-- Standalone app display with TutoDemy icons
-- A lightweight offline fallback page
-- Safe runtime caching for previously opened static pages and assets
+GITHUB UPLOAD
+1. Extract this ZIP.
+2. Open the extracted TutoDemy-Notification-Bell-Update-Patch folder.
+3. Upload every file and folder INSIDE it to the root of the existing TutoDemy repository.
+4. Choose Replace for matching files.
+5. Make one commit only.
+6. Wait for GitHub Pages to become green.
+7. Open https://tutodemy.net and press Ctrl + Shift + R.
+8. On an installed phone app, close and reopen TutoDemy once after deployment.
 
-IMPORTANT
-- Accounts, sign-in, bookings, messages, payments, tutor data, and Supabase features still require an internet connection.
-- Upload the CONTENTS of this patch to the GitHub repository root and replace matching files.
-- Do not upload this ZIP itself.
-- No Supabase SQL change is required.
+DO NOT upload the private SQL setup ZIP or SQL file to GitHub.
