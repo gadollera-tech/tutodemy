@@ -1,0 +1,27 @@
+TutoDemy Learning PH — Admin Finance Dashboard Phase 3
+Date: 2026-08-09
+
+PUBLIC WEBSITE CHANGES
+- Adds a Finance tab to the protected Admin Console.
+- Uses live Supabase data from bookings, commission_ledger, and tutor_payouts.
+- Adds date, transaction-type, status, and text-search filters.
+- Shows gross booking value, verified collections, earned platform commission,
+  tutor earnings, paid and outstanding payouts, refunds, expenses, and net cash movement.
+- Shows reconciliation alerts for pending/returned payment receipts, missing refund
+  records, and payout recovery issues.
+- Adds a monthly cash-movement visualization and CSV export.
+- Adds secure forms for operating expenses, refunds, capital contributions, and
+  cash adjustments. Pending entries can be confirmed or voided by an admin.
+- Full confirmed refunds automatically mark the booking refunded and reverse an
+  unpaid commission ledger item. A refund after a tutor payout is flagged for
+  manual payout recovery instead of silently rewriting a completed payout.
+- Updates the PWA cache version so the new Admin Console files replace older cached files.
+
+IMPORTANT
+The public website package does not contain the private database installer.
+Run FINANCE-DASHBOARD-PHASE-3.sql in the Supabase SQL Editor before using the
+Finance tab. Keep that SQL file private and do not upload it to the public GitHub repository.
+
+This phase does not connect a payment gateway or move money automatically.
+TutoDemy's existing manual receipt-verification and weekly tutor-payout workflows remain in place.
+The Finance Dashboard records, summarizes, filters, and reconciles those workflows.

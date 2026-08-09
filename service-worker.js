@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260809-finance3";
+const CACHE_VERSION = "tutodemy-20260809-progress4a";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -6,7 +6,7 @@ const CORE_ASSETS = [
   "./index.html",
   "./offline.html",
   "./manifest.webmanifest",
-  "./css/style.css?v=20260809-finance3",
+  "./css/style.css?v=20260809-progress4a",
   "./js/marketplace-api.js?v=20260809-finance3",
   "./js/main.js?v=20260809-tutorfix1",
   "./tutor-dashboard.html",
@@ -14,6 +14,8 @@ const CORE_ASSETS = [
   "./js/tutor-dashboard.js?v=20260809-tutorfix1",
   "./js/tutor-onboarding.js?v=20260809-tutorfix1",
   "./admin.html",
+  "./dashboard.html",
+  "./js/dashboard.js?v=20260809-progress4a",
   "./js/admin.js?v=20260809-finance3",
   "./js/notifications.js?v=20260809-live1",
   "./js/pwa.js?v=20260809-pwa1",

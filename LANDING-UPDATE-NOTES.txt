@@ -1,0 +1,11 @@
+TutoDemy landing-page update
+
+Included:
+- Clear five-path homepage
+- Create account and log-in actions above the fold
+- Improved signup status and check-email confirmation screen
+- Regional Philippines tutor-availability map
+- Optional anonymous learner-demand map support
+- Learner profile province/city and opt-in location setting
+
+Run the separate private Supabase location-insights SQL patch before expecting learner-demand totals. Tutor availability works from approved tutor profiles.

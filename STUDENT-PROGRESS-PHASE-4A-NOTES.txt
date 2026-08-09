@@ -1,0 +1,59 @@
+TutoDemy Learning PH — Phase 4A: Student Progress Summary
+==========================================================
+
+PUBLIC WEBSITE FILES CHANGED
+- dashboard.html
+- js/dashboard.js
+- css/style.css
+- service-worker.js
+
+PRIVATE SUPABASE SETUP
+- STUDENT-PROGRESS-PHASE-4A.sql
+- Run this file in Supabase SQL Editor.
+- Do not upload the SQL file to GitHub or place it in the public website.
+
+WHAT PHASE 4A ADDS
+- Questions reviewed during the current Monday–Sunday week
+- Weekly accuracy and correct-answer count
+- Completed review/practice sessions
+- Active study days
+- Current and longest study streak
+- Ten-question daily threshold for a streak day
+- Current-week versus previous-week comparison
+- Seven-day activity chart
+- Current-week and all-time subject performance
+- All-time questions, accuracy, attempts, active days, and estimated review time
+- Existing recent attempts and saved reviewers remain available
+
+PRIVACY AND PERFORMANCE
+- The Supabase RPC summarizes only auth.uid(), the signed-in learner.
+- It does not read or expose another learner's data.
+- No leaderboard or percentile calculation is included in Phase 4A.
+- The query uses the existing exam_attempts user/date index.
+- The browser never downloads the full learning history of other users.
+- When logged out or when the SQL is not installed, the page safely uses local device progress.
+
+INSTALLATION
+1. Run STUDENT-PROGRESS-PHASE-4A.sql in Supabase SQL Editor.
+2. Upload the changed public files, or replace the repository with the supplied full website.
+3. Commit and push.
+4. Open dashboard.html while logged in.
+5. Hard-refresh once so the Phase 4A service-worker cache is installed.
+
+TESTING CHECKLIST
+- Complete one practice set while logged in.
+- Return to dashboard.html.
+- Confirm weekly questions, accuracy, and sessions change.
+- Complete at least 10 questions on a day and confirm the streak counts that day.
+- Confirm subject rows match the completed set's category breakdown.
+- Confirm the page still works while logged out using device-only progress.
+- Confirm Clear history removes both local and account history when signed in.
+
+NOT INCLUDED YET
+- Percentile rank
+- Comparison with other learners
+- Weekly Top 5 or Top 10 leaderboard
+- Most-improved ranking
+- Personalized reviewer recommendations
+
+Those belong to later Phase 4 steps and should reuse the clean Phase 4A summary foundation.
