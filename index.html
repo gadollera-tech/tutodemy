@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="Prepare for UPCAT, other college entrance tests, and the DOST-SEI scholarship exam, or connect with an approved tutor through TutoDemy Learning PH.">
+  <meta name="description" content="Find the right tutor, prepare for your next big exam, and access learning resources—all in one place with TutoDemy Learning PH.">
   <meta name="theme-color" content="#171A70">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,153 +14,138 @@
   <link rel="canonical" href="https://tutodemy.net/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="TutoDemy Learning PH">
-  <meta property="og:description" content="Exam preparation, academic support, and an admin-approved tutor marketplace for Filipino learners.">
+  <meta property="og:description" content="Tutors, exam preparation, and learning resources made for Filipino learners.">
   <meta property="og:url" content="https://tutodemy.net/">
   <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
   <meta name="twitter:card" content="summary_large_image">
-  <title>TutoDemy Learning PH | Exam Preparation and Tutoring</title>
+  <title>TutoDemy Learning PH | Tutors, Exam Prep &amp; Learning Resources</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260810-landing2">
+  <link rel="stylesheet" href="css/style.css?v=20260810-landing3">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
-  <script defer src="data/taxonomy.js"></script>
-  <script defer src="data/philippines-locations.js"></script>
-  <script defer src="data/philippines-map.js?v=20260808-mapfix2"></script>
+  <script defer src="js/marketplace-api.js?v=20260809-finance3"></script>
   <script defer src="js/main.js?v=20260809-tutorfix1"></script>
-  <script defer src="js/location-map.js?v=20260809-yellowmap1"></script>
-  <script defer src="data/question-bank.js"></script>
-  <script defer src="js/home.js?v=20260808-mapfix2"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="home" class="home-refined">
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div id="site-header"></div>
   <main id="main-content">
-    <section class="home-hero-clean home-hero-redesigned">
-      <div class="container home-hero-layout">
-        <div class="home-hero-copy">
-          <span class="eyebrow">FOR STUDENTS, PARENTS, AND LEARNERS</span>
-          <h1>One clear place to review, practice, and find support.</h1>
-          <p>TutoDemy helps you prepare for entrance exams, strengthen school subjects, and connect with approved tutors—without a confusing homepage or too many steps.</p>
-          <div class="home-account-actions">
-            <a class="button" href="auth.html?tab=signup">Create a free account</a>
-            <a class="button button-outline" href="exams.html">Explore practice</a>
+    <section class="td-landing-hero">
+      <div class="container td-hero-grid">
+        <div class="td-hero-copy">
+          <span class="eyebrow">TUTODEMY LEARNING PH</span>
+          <h1>Learn better. Reach further.</h1>
+          <p class="td-hero-lead">Find the right tutor, prepare for your next big exam, and access learning resources—all in one place.</p>
+          <div class="td-hero-actions">
+            <a class="button" href="tutoring.html">Find a Tutor</a>
+            <a class="button button-outline" href="exams.html">Start Practicing</a>
           </div>
-          <div class="home-trust-row" aria-label="Key benefits">
-            <span class="home-trust-pill">Practice anytime</span>
-            <span class="home-trust-pill">Track your progress</span>
-            <span class="home-trust-pill">Find approved tutors</span>
-          </div>
-          <p class="home-account-note">You can browse public materials first. Create an account only when you want to save progress, message tutors, or book sessions.</p>
+          <p class="td-made-for">Made for Filipino learners. <span aria-hidden="true">🇵🇭</span></p>
         </div>
-
-        <aside class="home-decision-card" aria-labelledby="home-decision-title">
-          <div class="home-choice-heading compact">
-            <span>QUICK START</span>
-            <h2 id="home-decision-title">What do you want to do today?</h2>
+        <div class="td-hero-visual" aria-label="TutoDemy learning options">
+          <div class="td-hero-visual-main">
+            <img src="assets/images/owl-mark.png" alt="TutoDemy owl mascot">
+            <div><span>YOUR LEARNING, YOUR NEXT STEP</span><b>Practice. Connect. Progress.</b></div>
           </div>
-          <div class="home-decision-grid">
-            <a class="home-decision-item" href="exams.html">
-              <b>Prepare for college entrance exams</b>
-              <small>UPCAT and other entrance-test practice sets, reviewers, and mock exams.</small>
-            </a>
-            <a class="home-decision-item" href="dost-sei.html">
-              <b>Review for DOST-SEI</b>
-              <small>Practice verbal, non-verbal, science, mathematics, and technical items.</small>
-            </a>
-            <a class="home-decision-item" href="reviewers.html">
-              <b>Study school subjects</b>
-              <small>Use reviewers and learning materials for general academic support.</small>
-            </a>
-            <a class="home-decision-item" href="tutoring.html">
-              <b>Find a tutor</b>
-              <small>Browse approved tutors by subject, setup, and availability.</small>
-            </a>
+          <div class="td-hero-mini-grid">
+            <a href="exams.html"><b>Exam Prep</b><span>Practice and mock exams</span></a>
+            <a href="tutoring.html"><b>Tutoring</b><span>Find approved tutors</span></a>
+            <a href="reviewers.html"><b>Resources</b><span>Reviewers and study materials</span></a>
           </div>
-          <div class="home-tutor-path simple">
-            <span>Are you a tutor?</span>
-            <a href="for-tutors.html">See the tutor pathway →</a>
-          </div>
-        </aside>
+        </div>
       </div>
     </section>
 
-    <section class="section home-benefits-section">
+    <section class="section td-what-section" id="what-you-can-do">
       <div class="container">
-        <div class="section-heading centered compact-heading">
-          <span class="eyebrow">WHY THIS PAGE IS SIMPLER</span>
-          <h2>Start faster, with less confusion.</h2>
-          <p class="section-lead">Instead of showing too many things at once, the homepage now guides learners to the most important next steps.</p>
+        <div class="section-heading td-section-heading">
+          <span class="eyebrow">WHAT YOU CAN DO</span>
+          <h2>Everything you need to keep learning.</h2>
+          <p>Whether you need one-on-one support or you're preparing for an important exam, TutoDemy helps you find the tools and support you need.</p>
         </div>
-        <div class="home-benefits-grid">
-          <article>
-            <h3>Clear pathways</h3>
-            <p>Choose whether you want exam prep, school subject support, or a tutor—without digging through unnecessary sections.</p>
-          </article>
-          <article>
-            <h3>Mobile-friendly layout</h3>
-            <p>The hero, buttons, and cards stack cleanly on phones so text stays readable and actions stay easy to tap.</p>
-          </article>
-          <article>
-            <h3>Friendly for parents too</h3>
-            <p>Parents can quickly understand what TutoDemy offers and where to go next when helping a learner.</p>
-          </article>
+        <div class="td-path-grid">
+          <article class="td-path-card"><span class="td-card-number">01</span><h3>Find a Tutor</h3><p>Get the help you need from tutors across different subjects and learning levels.</p><a href="tutoring.html">Browse Tutors →</a></article>
+          <article class="td-path-card"><span class="td-card-number">02</span><h3>Practice for Exams</h3><p>Prepare for college entrance and scholarship exams with practice questions, mock tests, and performance insights.</p><a href="exams.html">Start Practicing →</a></article>
+          <article class="td-path-card"><span class="td-card-number">03</span><h3>Explore Resources</h3><p>Find reviewers and learning materials that make studying easier and more organized.</p><a href="reviewers.html">Explore Resources →</a></article>
         </div>
       </div>
     </section>
 
-    <section class="section home-how-section">
+    <section class="section td-feature-section td-feature-soft" id="exam-preparation">
+      <div class="container td-feature-grid">
+        <div class="td-feature-copy">
+          <span class="eyebrow">EXAM PREPARATION</span>
+          <h2>Preparing for your next big exam?</h2>
+          <h3>Practice with purpose.</h3>
+          <p>Build your confidence through practice questions and mock exams designed to help you understand where you stand and what you still need to work on.</p>
+          <div class="td-exam-tags" aria-label="Supported exam preparation"><span>UPCAT</span><span>DOST-SEI</span><span>College Entrance Tests</span><span>Scholarship Exams</span></div>
+          <a class="button" href="exams.html">Start Practicing</a>
+        </div>
+        <div class="td-feature-visual td-practice-visual" aria-hidden="true">
+          <div class="td-visual-kicker">PRACTICE WITH FEEDBACK</div>
+          <div class="td-score-card"><span>Practice set</span><b>Build confidence one set at a time.</b></div>
+          <div class="td-progress-line"><i style="width:74%"></i></div>
+          <div class="td-visual-stats"><div><b>Practice</b><span>Question banks</span></div><div><b>Review</b><span>See your results</span></div><div><b>Improve</b><span>Track progress</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section td-feature-section" id="find-a-tutor">
+      <div class="container td-feature-grid td-feature-reverse">
+        <div class="td-feature-copy">
+          <span class="eyebrow">FIND A TUTOR</span>
+          <h2>Sometimes, you just need the right person to help.</h2>
+          <p>Find tutors based on the subject you need, their availability, and the kind of support you're looking for.</p>
+          <p class="td-emphasis">Find a tutor. Book a session. Start learning.</p>
+          <a class="button" href="tutoring.html">Browse Tutors</a>
+        </div>
+        <div class="td-feature-visual td-tutor-visual" aria-hidden="true">
+          <div class="td-tutor-search-card"><span>FIND THE RIGHT SUPPORT</span><b>Search by subject, learning mode, and availability.</b><div class="td-search-row"><span>Mathematics</span><i>→</i></div><div class="td-search-row"><span>Science</span><i>→</i></div><div class="td-search-row"><span>Language &amp; Reading</span><i>→</i></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section td-tutors-section" id="for-tutors">
+      <div class="container td-tutors-grid">
+        <div><span class="eyebrow light">FOR TUTORS</span><h2>Teach what you know. Help someone grow.</h2></div>
+        <div class="td-tutors-copy">
+          <p>TutoDemy gives tutors a space to reach more students, build their professional profile, manage availability, and organize tutoring sessions in one place.</p>
+          <p>Whether you're an experienced tutor, teacher, or someone with a subject you know well, you can use your knowledge to make a difference—and earn along the way.</p>
+          <a class="button button-light" href="for-tutors.html">Become a Tutor</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section td-how-section" id="how-it-works">
       <div class="container">
-        <div class="section-heading centered compact-heading">
-          <span class="eyebrow">HOW TUTODEMY WORKS</span>
-          <h2>A simple path from goal to support.</h2>
+        <div class="section-heading td-section-heading centered"><span class="eyebrow">HOW IT WORKS</span><h2>Getting started is simple.</h2></div>
+        <div class="td-steps-grid">
+          <article><span>01</span><h3>Create your account</h3><p>Sign up as a student or tutor and set up your profile.</p></article>
+          <article><span>02</span><h3>Find what you need</h3><p>Browse tutors, practice for an exam, or explore learning resources.</p></article>
+          <article><span>03</span><h3>Start learning</h3><p>Study, practice, connect with tutors, and keep track of your progress.</p></article>
         </div>
-        <div class="home-how-grid">
-          <article><h3>1. Choose your goal</h3><p>Start with exam preparation, school subject review, or the tutor directory.</p></article>
-          <article><h3>2. Practice or connect</h3><p>Use reviewers and practice sets, or browse approved tutors for the support you need.</p></article>
-          <article><h3>3. Continue with confidence</h3><p>Save progress, message tutors, and manage your learning in one place when you sign in.</p></article>
+        <div class="td-centered-action"><a class="button" href="auth.html?tab=signup">Get Started</a></div>
+      </div>
+    </section>
+
+    <section class="section td-why-section" id="why-tutodemy">
+      <div class="container td-why-grid">
+        <div class="td-why-copy"><span class="eyebrow">WHY TUTODEMY</span><h2>Built around how students actually learn.</h2><p>Learning support shouldn't be scattered across different websites, group chats, files, and apps.</p><p>TutoDemy brings the essentials together so you can spend less time searching and more time learning.</p></div>
+        <div class="td-value-grid">
+          <article><h3>Accessible</h3><p>Learning support wherever you are.</p></article>
+          <article><h3>Flexible</h3><p>Learn and practice at your own pace.</p></article>
+          <article><h3>Personalized</h3><p>Choose the support that works for you.</p></article>
+          <article><h3>Made for Filipino learners</h3><p>Built with the needs of students in the Philippines in mind.</p></article>
         </div>
       </div>
     </section>
 
-    <section class="section home-tutor-section">
-      <div class="container home-tutor-layout">
-        <div>
-          <span class="eyebrow">APPROVED TUTOR DIRECTORY</span>
-          <h2>Compare tutors before sending a request.</h2>
-          <p>Review subjects, teaching setup, location, availability, and public rates. Private verification files and payout details always stay hidden.</p>
-          <div class="button-row"><a class="button" href="tutoring.html">Find a tutor</a><a class="button button-outline" href="for-tutors.html">Teach with TutoDemy</a></div>
-        </div>
-        <div class="mini-tutor-grid refined-tutor-preview" id="home-tutors"></div>
-      </div>
-    </section>
-
-    <section class="section home-support-section">
-      <div class="container home-support-layout">
-        <div class="home-support-card">
-          <span class="eyebrow">SELF-STUDY</span>
-          <h3>Want to study on your own first?</h3>
-          <p>Start with practice sets and reviewers before deciding whether you also want a tutor.</p>
-          <a class="button button-outline" href="reviewers.html">Browse reviewers</a>
-        </div>
-        <div class="home-support-card accent">
-          <span class="eyebrow light">GUIDED SUPPORT</span>
-          <h3>Need guided help?</h3>
-          <p>Browse approved tutors and find someone who matches your subject, learning mode, and schedule.</p>
-          <a class="button button-light" href="tutoring.html">Browse tutors</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section home-final-cta">
-      <div class="container home-final-cta-inner">
-        <div><span class="eyebrow light">READY WHEN YOU ARE</span><h2>Start with the support you need today.</h2></div>
-        <div class="button-row"><a class="button button-light" href="auth.html?tab=signup">Create account</a><a class="button button-ghost" href="auth.html?tab=signin">Log in</a></div>
-      </div>
+    <section class="section td-final-cta">
+      <div class="container td-final-cta-inner"><span class="eyebrow light">YOUR NEXT STEP</span><h2>Your next step starts here.</h2><p>Preparing for an exam? Need help with a subject? Ready to start tutoring?</p><p>There's a place for you at TutoDemy.</p><div class="td-final-actions"><a class="button button-light" href="auth.html?tab=signup">Get Started Free</a><a class="td-login-link" href="auth.html?tab=signin">Already have an account? <b>Log in</b></a></div></div>
     </section>
   </main>
   <div id="site-footer"></div>
