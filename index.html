@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>TutoDemy Learning PH | Exam Preparation and Tutoring</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260809-tutorfix1">
+  <link rel="stylesheet" href="css/style.css?v=20260810-landing2">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
@@ -40,77 +40,75 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div id="site-header"></div>
   <main id="main-content">
-    <section class="home-hero-clean">
+    <section class="home-hero-clean home-hero-redesigned">
       <div class="container home-hero-layout">
         <div class="home-hero-copy">
-          <span class="eyebrow">FOR STUDENTS AND PARENTS</span>
-          <h1>Prepare well.<br>Find the right support.</h1>
-          <p>Study for entrance exams, strengthen school subjects, or connect with an approved tutor—all from one clear starting point.</p>
+          <span class="eyebrow">FOR STUDENTS, PARENTS, AND LEARNERS</span>
+          <h1>One clear place to review, practice, and find support.</h1>
+          <p>TutoDemy helps you prepare for entrance exams, strengthen school subjects, and connect with approved tutors—without a confusing homepage or too many steps.</p>
           <div class="home-account-actions">
             <a class="button" href="auth.html?tab=signup">Create a free account</a>
-            <a class="button button-outline" href="auth.html?tab=signin">Log in</a>
+            <a class="button button-outline" href="exams.html">Explore practice</a>
           </div>
-          <p class="home-account-note">Explore practice materials without an account. Create one when you are ready to save progress, book a tutor, or use private messages.</p>
+          <div class="home-trust-row" aria-label="Key benefits">
+            <span class="home-trust-pill">Practice anytime</span>
+            <span class="home-trust-pill">Track your progress</span>
+            <span class="home-trust-pill">Find approved tutors</span>
+          </div>
+          <p class="home-account-note">You can browse public materials first. Create an account only when you want to save progress, message tutors, or book sessions.</p>
         </div>
 
-        <div class="home-choice-panel" aria-labelledby="home-choice-title">
-          <div class="home-choice-heading">
-            <span>Choose your next step</span>
-            <h2 id="home-choice-title">What support do you need?</h2>
+        <aside class="home-decision-card" aria-labelledby="home-decision-title">
+          <div class="home-choice-heading compact">
+            <span>QUICK START</span>
+            <h2 id="home-decision-title">What do you want to do today?</h2>
           </div>
-          <nav class="home-choice-list" aria-label="Student and parent services">
-            <a href="exams.html"><span><b>UPCAT & other college entrance tests</b><small>Practice sets, timed modes, mock exams, and reviewers</small></span><i aria-hidden="true">→</i></a>
-            <a href="dost-sei.html"><span><b>DOST-SEI preparation</b><small>Verbal, non-verbal, science, mathematics, and technical practice</small></span><i aria-hidden="true">→</i></a>
-            <a href="tutoring.html"><span><b>Find a tutor</b><small>Browse approved tutors by subject, location, and learning mode</small></span><i aria-hidden="true">→</i></a>
-            <a href="reviewers.html"><span><b>General academic help</b><small>Review subject notes and find support beyond entrance exams</small></span><i aria-hidden="true">→</i></a>
-          </nav>
-          <div class="home-tutor-path">
+          <div class="home-decision-grid">
+            <a class="home-decision-item" href="exams.html">
+              <b>Prepare for college entrance exams</b>
+              <small>UPCAT and other entrance-test practice sets, reviewers, and mock exams.</small>
+            </a>
+            <a class="home-decision-item" href="dost-sei.html">
+              <b>Review for DOST-SEI</b>
+              <small>Practice verbal, non-verbal, science, mathematics, and technical items.</small>
+            </a>
+            <a class="home-decision-item" href="reviewers.html">
+              <b>Study school subjects</b>
+              <small>Use reviewers and learning materials for general academic support.</small>
+            </a>
+            <a class="home-decision-item" href="tutoring.html">
+              <b>Find a tutor</b>
+              <small>Browse approved tutors by subject, setup, and availability.</small>
+            </a>
+          </div>
+          <div class="home-tutor-path simple">
             <span>Are you a tutor?</span>
-            <a href="for-tutors.html">See how teaching with TutoDemy works →</a>
+            <a href="for-tutors.html">See the tutor pathway →</a>
           </div>
-        </div>
+        </aside>
       </div>
     </section>
 
-    <section class="section home-location-section" id="location-insights">
-      <div class="container location-layout">
-        <div class="location-copy">
-          <span class="eyebrow">TUTOR AVAILABILITY ACROSS THE PHILIPPINES</span>
-          <h2>Find support near you—or learn online.</h2>
-          <p>See where approved tutors are available by region. Use the filters to check face-to-face or online options, then open the tutor directory for full profiles.</p>
-
-          <div class="location-mode-filter" id="location-mode-filter" aria-label="Tutor teaching mode">
-            <button class="active" type="button" data-location-mode="all">All modes</button>
-            <button type="button" data-location-mode="in-person">Face-to-face</button>
-            <button type="button" data-location-mode="online">Online</button>
-          </div>
-
-          <div class="location-summary" id="location-summary" aria-live="polite">
-            <b>Loading tutor availability…</b>
-            <span>Approved tutor locations will appear here.</span>
-          </div>
-          <div class="location-region-list" id="location-region-list"></div>
-          <div class="button-row location-actions"><a class="button" href="tutoring.html">Browse approved tutors</a></div>
-          <p class="location-privacy-note">Regional overview only. Exact home addresses and private contact details are never shown.</p>
+    <section class="section home-benefits-section">
+      <div class="container">
+        <div class="section-heading centered compact-heading">
+          <span class="eyebrow">WHY THIS PAGE IS SIMPLER</span>
+          <h2>Start faster, with less confusion.</h2>
+          <p class="section-lead">Instead of showing too many things at once, the homepage now guides learners to the most important next steps.</p>
         </div>
-
-        <div class="philippines-map-card">
-          <div class="map-card-heading"><span>Philippines</span><b>Approved tutor locations</b></div>
-          <svg id="home-philippines-map" class="philippines-map" viewBox="0 0 560 720" preserveAspectRatio="xMidYMid meet" style="background:#fffaf0;border-radius:28px" role="img" aria-labelledby="map-title map-desc">
-            <title id="map-title">Map of the Philippines showing tutor availability</title>
-            <desc id="map-desc">A recognizable outline of the Philippine islands with regional markers for approved tutor availability.</desc>
-            <rect class="map-sea" x="0" y="0" width="560" height="720" rx="28" fill="#fffaf0" stroke="#efd99c" stroke-width="1.6"></rect>
-            <g class="ph-map-shapes" data-map-shapes aria-hidden="true"></g>
-            <g class="map-group-labels" aria-hidden="true" fill="#6b4b0a" font-size="12" font-weight="900" text-anchor="middle">
-              <text x="244" y="164">LUZON</text>
-              <text x="322" y="427">VISAYAS</text>
-              <text x="365" y="592">MINDANAO</text>
-              <text x="126" y="480" transform="rotate(-29 126 480)">PALAWAN</text>
-            </g>
-            <g class="location-map-markers" data-map-markers></g>
-          </svg>
-          <div class="map-legend"><span><i></i> Tutor location</span><span>Bubble size reflects availability</span></div>
-          <small>Map markers represent regional totals, not exact addresses.</small>
+        <div class="home-benefits-grid">
+          <article>
+            <h3>Clear pathways</h3>
+            <p>Choose whether you want exam prep, school subject support, or a tutor—without digging through unnecessary sections.</p>
+          </article>
+          <article>
+            <h3>Mobile-friendly layout</h3>
+            <p>The hero, buttons, and cards stack cleanly on phones so text stays readable and actions stay easy to tap.</p>
+          </article>
+          <article>
+            <h3>Friendly for parents too</h3>
+            <p>Parents can quickly understand what TutoDemy offers and where to go next when helping a learner.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -119,12 +117,12 @@
       <div class="container">
         <div class="section-heading centered compact-heading">
           <span class="eyebrow">HOW TUTODEMY WORKS</span>
-          <h2>A simple path from study goal to support.</h2>
+          <h2>A simple path from goal to support.</h2>
         </div>
         <div class="home-how-grid">
-          <article><h3>Choose your goal</h3><p>Start with entrance-exam preparation, subject reviewers, or the tutor directory.</p></article>
-          <article><h3>Create an account when needed</h3><p>Save progress, request a tutor session, and use private booking messages.</p></article>
-          <article><h3>Continue with a clear record</h3><p>Keep schedules, payment confirmation, session status, and verified reviews organized.</p></article>
+          <article><h3>1. Choose your goal</h3><p>Start with exam preparation, school subject review, or the tutor directory.</p></article>
+          <article><h3>2. Practice or connect</h3><p>Use reviewers and practice sets, or browse approved tutors for the support you need.</p></article>
+          <article><h3>3. Continue with confidence</h3><p>Save progress, message tutors, and manage your learning in one place when you sign in.</p></article>
         </div>
       </div>
     </section>
@@ -134,17 +132,27 @@
         <div>
           <span class="eyebrow">APPROVED TUTOR DIRECTORY</span>
           <h2>Compare tutors before sending a request.</h2>
-          <p>Review subjects, teaching modes, location, availability, and public rates. Tutor verification files and payout details remain private.</p>
+          <p>Review subjects, teaching setup, location, availability, and public rates. Private verification files and payout details always stay hidden.</p>
           <div class="button-row"><a class="button" href="tutoring.html">Find a tutor</a><a class="button button-outline" href="for-tutors.html">Teach with TutoDemy</a></div>
         </div>
         <div class="mini-tutor-grid refined-tutor-preview" id="home-tutors"></div>
       </div>
     </section>
 
-    <section class="section home-tutor-recruitment">
-      <div class="container home-tutor-recruitment-inner">
-        <div><span class="eyebrow light">FOR TUTORS</span><h2>Share what you know with learners who need it.</h2><p>Create a public teaching profile, set your subjects and availability, and submit your application for review.</p></div>
-        <a class="button button-light" href="for-tutors.html">Explore the tutor pathway</a>
+    <section class="section home-support-section">
+      <div class="container home-support-layout">
+        <div class="home-support-card">
+          <span class="eyebrow">SELF-STUDY</span>
+          <h3>Want to study on your own first?</h3>
+          <p>Start with practice sets and reviewers before deciding whether you also want a tutor.</p>
+          <a class="button button-outline" href="reviewers.html">Browse reviewers</a>
+        </div>
+        <div class="home-support-card accent">
+          <span class="eyebrow light">GUIDED SUPPORT</span>
+          <h3>Need guided help?</h3>
+          <p>Browse approved tutors and find someone who matches your subject, learning mode, and schedule.</p>
+          <a class="button button-light" href="tutoring.html">Browse tutors</a>
+        </div>
       </div>
     </section>
 
