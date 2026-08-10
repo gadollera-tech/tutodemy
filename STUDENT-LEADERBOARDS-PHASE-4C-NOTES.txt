@@ -1,0 +1,28 @@
+TutoDemy Learning PH — Phase 4C: Weekly Study Leaderboards
+
+Public website changes
+- dashboard.html: Weekly Study Leaders panel, filters, opt-in controls, personal rank
+- js/dashboard.js: leaderboard RPC loading, privacy settings, rendering and fallbacks
+- css/style.css: responsive leaderboard styles
+- service-worker.js: cache version bumped for Phase 4C assets
+
+Private database setup
+- STUDENT-LEADERBOARDS-PHASE-4C.sql must be run separately in Supabase SQL Editor.
+- Do NOT upload SQL setup files to GitHub/public hosting.
+
+Leaderboard rules
+- Participation is opt-in.
+- Full names, schools, emails, answers and user IDs are never returned.
+- Blank aliases become stable generated Study Owl aliases.
+- Minimum 20 counted questions/week to qualify.
+- Minimum 3 eligible opt-in learners before public ranks appear.
+- Ranking uses capped questions + consistency + small accuracy bonus.
+- At most 75 questions/day and 350 questions/week count toward points.
+- Current week and previous week are available.
+- Subject/review-bank filter is supported.
+- The signed-in learner sees their own rank even outside the Top 10 when eligible.
+
+Dependencies
+1. STUDENT-PROGRESS-PHASE-4A.sql
+2. STUDENT-PERCENTILES-PHASE-4B.sql
+3. STUDENT-LEADERBOARDS-PHASE-4C.sql
