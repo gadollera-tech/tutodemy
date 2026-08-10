@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="Private TutoDemy learner progress and percentile summary with weekly activity, accuracy, study streaks, and subject comparisons.">
+  <meta name="description" content="Private TutoDemy learner progress, percentile, and weekly leaderboard summary with activity, accuracy, study streaks, and privacy-safe comparisons.">
   <meta name="theme-color" content="#11156f">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,13 +14,13 @@
   <link rel="canonical" href="https://tutodemy.net/dashboard.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Student Progress | TutoDemy Learning PH">
-  <meta property="og:description" content="Private weekly learning progress, percentile comparisons, accuracy, study streaks, and subject performance.">
+  <meta property="og:description" content="Private weekly learning progress, percentile comparisons, privacy-safe study leaderboards, accuracy, streaks, and subject performance.">
   <meta property="og:url" content="https://tutodemy.net/dashboard.html">
   <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
   <meta name="twitter:card" content="summary_large_image">
   <title>Student Progress | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260809-progress4b">
+  <link rel="stylesheet" href="css/style.css?v=20260810-progress4c">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
@@ -31,7 +31,7 @@
   <script defer src="js/main.js?v=20260809-tutorfix1"></script>
   <script defer src="data/question-bank.js"></script>
   <script defer src="data/reviewers.js"></script>
-  <script defer src="js/dashboard.js?v=20260809-progress4b"></script>
+  <script defer src="js/dashboard.js?v=20260810-progress4c"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="dashboard">
@@ -162,6 +162,38 @@
               <div class="subject-percentile-list" id="subject-percentile-list"></div>
             </div>
             <div class="percentile-methodology" id="percentile-methodology" hidden></div>
+          </section>
+
+          <section class="panel wide progress-leaderboard-panel" id="weekly-leaderboard-panel">
+            <div class="panel-heading leaderboard-panel-heading">
+              <div><span class="eyebrow">WEEKLY LEADERBOARD</span><h2>Weekly Study Leaders</h2></div>
+              <span class="progress-period-label" id="leaderboard-track-label">Sign in to participate</span>
+            </div>
+            <p class="panel-intro">Top 10 rankings reward meaningful review activity, consistency, and a small accuracy bonus. Participation is optional, and full names are never shown by default.</p>
+
+            <div class="leaderboard-toolbar" aria-label="Leaderboard filters">
+              <label><span>Week</span><select id="leaderboard-week-select"><option value="0">This week</option><option value="1">Last week</option></select></label>
+              <label><span>Review bank</span><select id="leaderboard-subject-select"><option value="All subjects">All subjects</option></select></label>
+            </div>
+
+            <div class="leaderboard-status locked" id="leaderboard-status" role="status" aria-live="polite"><span aria-hidden="true">🔒</span><div><b>Log in to view the weekly leaderboard</b><small>Your local study progress remains available without joining.</small></div></div>
+
+            <div class="leaderboard-layout" id="leaderboard-content" hidden>
+              <aside class="leaderboard-profile-card">
+                <div class="leaderboard-card-heading"><div><span class="eyebrow">YOUR PUBLIC PROFILE</span><h3>Leaderboard participation</h3></div><span class="leaderboard-privacy-badge">Opt-in only</span></div>
+                <label class="leaderboard-optin-row"><input type="checkbox" id="leaderboard-opt-in"><span><b>Join weekly leaderboards</b><small>Only your alias and weekly summary values can appear.</small></span></label>
+                <label class="leaderboard-name-field"><span>Public alias <small>(optional)</small></span><input id="leaderboard-display-name" type="text" maxlength="28" autocomplete="off" placeholder="Leave blank for a Study Owl alias"><small>3–28 letters/numbers, spaces, periods, underscores, or hyphens.</small></label>
+                <button class="button button-outline full" id="save-leaderboard-preferences" type="button">Save leaderboard settings</button>
+                <div class="leaderboard-my-rank" id="leaderboard-my-rank"></div>
+              </aside>
+
+              <div class="leaderboard-ranking-card">
+                <div class="leaderboard-card-heading"><div><span class="eyebrow">TOP 10</span><h3 id="leaderboard-list-title">This week's leaders</h3></div><span class="leaderboard-participant-count" id="leaderboard-participant-count">0 eligible</span></div>
+                <div class="leaderboard-list" id="leaderboard-list"></div>
+              </div>
+            </div>
+
+            <div class="leaderboard-methodology" id="leaderboard-methodology" hidden></div>
           </section>
 
           <section class="panel wide progress-activity-panel">

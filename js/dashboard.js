@@ -520,6 +520,162 @@
     const {data,error} = await client.rpc("get_my_student_percentiles"); if (error) throw error; return data;
   }
 
+  const leaderboardState = { weekOffset: 0, subject: "All subjects", loaded: false };
+
+  function normalizeLeaderboard(payload) {
+    if (!payload || typeof payload !== "object") return null;
+    const me = payload.me && typeof payload.me === "object" ? payload.me : {};
+    return {
+      weekOffset: Math.max(0, Math.min(1, Math.round(number(payload.weekOffset)))),
+      weekStart: String(payload.weekStart || ""), weekEnd: String(payload.weekEnd || ""),
+      track: String(payload.track || "general-academic"), trackLabel: String(payload.trackLabel || "Your preparation track"),
+      subject: String(payload.subject || "All subjects"),
+      subjectOptions: Array.isArray(payload.subjectOptions) && payload.subjectOptions.length ? payload.subjectOptions.map(String) : ["All subjects"],
+      minimumQuestions: Math.max(1, Math.round(number(payload.minimumQuestions || 20))),
+      minimumParticipants: Math.max(1, Math.round(number(payload.minimumParticipants || 3))),
+      participantCount: Math.max(0, Math.round(number(payload.participantCount))),
+      leaderboardVisible: Boolean(payload.leaderboardVisible),
+      topTen: Array.isArray(payload.topTen) ? payload.topTen.map(row => ({
+        rank: Math.max(1, Math.round(number(row?.rank))), displayName: String(row?.displayName || "Study Owl"),
+        points: Math.max(0, Math.round(number(row?.points))), questions: Math.max(0, Math.round(number(row?.questions))),
+        accuracy: clamp(row?.accuracy,0,100), activeDays: Math.max(0,Math.round(number(row?.activeDays))),
+        attempts: Math.max(0,Math.round(number(row?.attempts))), isMe: Boolean(row?.isMe)
+      })) : [],
+      me: {
+        optIn: Boolean(me.optIn), displayName: String(me.displayName || "Study Owl"), customName: String(me.customName || ""),
+        eligible: Boolean(me.eligible), rank: me.rank == null ? null : Math.max(1,Math.round(number(me.rank))),
+        points: Math.max(0,Math.round(number(me.points))), questions: Math.max(0,Math.round(number(me.questions))),
+        rawQuestions: Math.max(0,Math.round(number(me.rawQuestions))), accuracy: clamp(me.accuracy,0,100),
+        activeDays: Math.max(0,Math.round(number(me.activeDays))), attempts: Math.max(0,Math.round(number(me.attempts))),
+        questionsNeeded: Math.max(0,Math.round(number(me.questionsNeeded)))
+      },
+      scoring: payload.scoring && typeof payload.scoring === "object" ? payload.scoring : {},
+      privacyNote: String(payload.privacyNote || "Only opted-in learner aliases and weekly summaries are returned.")
+    };
+  }
+
+  function leaderboardStatus(title, description, kind = "info") {
+    const box = document.querySelector("#leaderboard-status"); if (!box) return;
+    box.hidden = false; box.className = `leaderboard-status ${kind}`;
+    box.innerHTML = `<span aria-hidden="true">${kind === "warning" ? "!" : kind === "locked" ? "🔒" : "◌"}</span><div><b>${escapeHtml(title)}</b><small>${escapeHtml(description)}</small></div>`;
+  }
+
+  function renderLeaderboardLocked() {
+    const content = document.querySelector("#leaderboard-content"); if (content) content.hidden = true;
+    const method = document.querySelector("#leaderboard-methodology"); if (method) method.hidden = true;
+    setText("#leaderboard-track-label", "Account required");
+    leaderboardStatus("Log in to view or join weekly leaderboards", "Leaderboard participation is optional. Your local progress remains private and usable without joining.", "locked");
+  }
+
+  function renderLeaderboardUnavailable(title, description) {
+    const content = document.querySelector("#leaderboard-content"); if (content) content.hidden = true;
+    const method = document.querySelector("#leaderboard-methodology"); if (method) method.hidden = true;
+    setText("#leaderboard-track-label", "Leaderboard unavailable");
+    leaderboardStatus(title, description, "warning");
+  }
+
+  function renderLeaderboard(payload) {
+    const data = normalizeLeaderboard(payload);
+    if (!data) return renderLeaderboardUnavailable("Leaderboard data could not be read", "Your Phase 4A progress and Phase 4B percentiles remain available.");
+    leaderboardState.weekOffset = data.weekOffset;
+    leaderboardState.subject = data.subject;
+    leaderboardState.loaded = true;
+
+    setText("#leaderboard-track-label", `${data.trackLabel} · ${data.subject}`);
+    const status = document.querySelector("#leaderboard-status"); if (status) status.hidden = true;
+    const content = document.querySelector("#leaderboard-content"); if (content) content.hidden = false;
+
+    const weekSelect = document.querySelector("#leaderboard-week-select"); if (weekSelect) weekSelect.value = String(data.weekOffset);
+    const subjectSelect = document.querySelector("#leaderboard-subject-select");
+    if (subjectSelect) {
+      subjectSelect.innerHTML = data.subjectOptions.map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`).join("");
+      if (![...subjectSelect.options].some(option => option.value === data.subject)) subjectSelect.insertAdjacentHTML("beforeend", `<option value="${escapeHtml(data.subject)}">${escapeHtml(data.subject)}</option>`);
+      subjectSelect.value = data.subject;
+    }
+
+    const optIn = document.querySelector("#leaderboard-opt-in"); if (optIn) optIn.checked = data.me.optIn;
+    const nameInput = document.querySelector("#leaderboard-display-name");
+    if (nameInput && document.activeElement !== nameInput) nameInput.value = data.me.customName;
+
+    const range = data.weekStart && data.weekEnd ? displayDateRange(data.weekStart,data.weekEnd) : (data.weekOffset ? "Last week" : "This week");
+    setText("#leaderboard-list-title", `${range} · ${data.subject}`);
+    setText("#leaderboard-participant-count", `${data.participantCount.toLocaleString("en-PH")} eligible`);
+
+    const myRank = document.querySelector("#leaderboard-my-rank");
+    if (myRank) {
+      let headline = "Leaderboard is off";
+      let copy = `Turn on participation if you want the alias ${data.me.displayName} to be eligible for public ranking.`;
+      if (data.me.optIn && !data.me.eligible) {
+        headline = `${data.me.questions.toLocaleString("en-PH")} counted questions`;
+        copy = `Review ${data.me.questionsNeeded.toLocaleString("en-PH")} more question${data.me.questionsNeeded === 1 ? "" : "s"} this week to qualify.`;
+      } else if (data.me.optIn && data.me.eligible && data.me.rank != null) {
+        headline = `Your rank: #${data.me.rank}`;
+        copy = `${data.me.points.toLocaleString("en-PH")} points · ${data.me.questions.toLocaleString("en-PH")} counted questions · ${formatPercent(data.me.accuracy,true)} accuracy · ${data.me.activeDays} active day${data.me.activeDays === 1 ? "" : "s"}.`;
+      } else if (data.me.optIn && data.me.eligible) {
+        headline = "You qualify this week";
+        copy = `${data.me.points.toLocaleString("en-PH")} points. Your rank will appear once the minimum public cohort is available.`;
+      }
+      myRank.innerHTML = `<span>${escapeHtml(data.me.displayName)}</span><b>${escapeHtml(headline)}</b><small>${escapeHtml(copy)}</small>`;
+    }
+
+    const list = document.querySelector("#leaderboard-list");
+    if (list) {
+      if (!data.leaderboardVisible) {
+        const needed = Math.max(0,data.minimumParticipants-data.participantCount);
+        list.innerHTML = `<div class="leaderboard-cohort-building"><span aria-hidden="true">◌</span><div><b>Leaderboard cohort is still building</b><small>${needed ? `${needed} more eligible opt-in learner${needed === 1 ? " is" : "s are"} needed before public ranks appear.` : "More eligible opt-in activity is needed."}</small></div></div>`;
+      } else {
+        list.innerHTML = data.topTen.map(row => `<article class="leaderboard-row ${row.isMe ? "is-me" : ""}"><span class="leaderboard-rank">${row.rank <= 3 ? ["🥇","🥈","🥉"][row.rank-1] : `#${row.rank}`}</span><div class="leaderboard-learner"><b>${escapeHtml(row.displayName)}${row.isMe ? " · You" : ""}</b><small>${row.questions.toLocaleString("en-PH")} questions · ${formatPercent(row.accuracy,true)} · ${row.activeDays} active day${row.activeDays === 1 ? "" : "s"}</small></div><div class="leaderboard-points"><b>${row.points.toLocaleString("en-PH")}</b><small>points</small></div></article>`).join("") || `<div class="empty-state">No eligible learners yet.</div>`;
+      }
+    }
+
+    const method = document.querySelector("#leaderboard-methodology");
+    if (method) {
+      method.hidden = false;
+      const scoring = data.scoring || {};
+      method.innerHTML = `<b>How weekly study points work</b><p>${escapeHtml(scoring.description || "Points reward capped review activity, consistency, and a small accuracy bonus.")} Up to ${number(scoring.dailyQuestionCap || 75)} questions/day and ${number(scoring.weeklyQuestionCap || 350)} questions/week count toward points; a consistency day requires ${number(scoring.consistencyDayMinimum || 10)} questions. ${escapeHtml(data.privacyNote)}</p>`;
+    }
+  }
+
+  async function loadCloudLeaderboard() {
+    const client = window.TutoSupabase?.client; if (!client) throw new Error("Supabase client is unavailable.");
+    const {data,error} = await client.rpc("get_weekly_learning_leaderboard", { p_week_offset: leaderboardState.weekOffset, p_subject: leaderboardState.subject });
+    if (error) throw error; return data;
+  }
+
+  async function refreshLeaderboard() {
+    leaderboardStatus("Refreshing weekly leaderboard…", "Only privacy-safe summary rows are requested.", "info");
+    try { renderLeaderboard(await loadCloudLeaderboard()); }
+    catch (error) {
+      console.error("Weekly leaderboard could not be loaded:", error);
+      const missing = /get_weekly_learning_leaderboard|learner_weekly_leaderboard_snapshots|does not exist|schema cache|could not find the function/i.test(String(error?.message || error || ""));
+      renderLeaderboardUnavailable(missing ? "Phase 4C database setup is not installed yet" : "Weekly leaderboard could not be refreshed", missing ? "Run the private Phase 4C SQL in Supabase. Phase 4A progress and Phase 4B percentiles remain usable." : "The leaderboard service is temporarily unavailable. No private learner records were exposed.");
+    }
+  }
+
+  function setupLeaderboardControls(account) {
+    const week = document.querySelector("#leaderboard-week-select");
+    const subject = document.querySelector("#leaderboard-subject-select");
+    const save = document.querySelector("#save-leaderboard-preferences");
+    week?.addEventListener("change", async () => { leaderboardState.weekOffset = Number(week.value) === 1 ? 1 : 0; await refreshLeaderboard(); });
+    subject?.addEventListener("change", async () => { leaderboardState.subject = subject.value || "All subjects"; await refreshLeaderboard(); });
+    save?.addEventListener("click", async () => {
+      if (!account?.configured || !account?.user) return renderLeaderboardLocked();
+      const optIn = Boolean(document.querySelector("#leaderboard-opt-in")?.checked);
+      const displayName = String(document.querySelector("#leaderboard-display-name")?.value || "").trim();
+      save.disabled = true; save.textContent = "Saving…";
+      try {
+        const client = window.TutoSupabase?.client; if (!client) throw new Error("Supabase client is unavailable.");
+        const {error} = await client.rpc("set_my_leaderboard_preferences", { p_opt_in: optIn, p_display_name: displayName });
+        if (error) throw error;
+        window.Tuto.toast(optIn ? "Leaderboard settings saved." : "Leaderboard participation turned off.");
+        await refreshLeaderboard();
+      } catch (error) {
+        console.error(error);
+        window.Tuto.toast(error?.message || "Leaderboard settings could not be saved.");
+      } finally { save.disabled = false; save.textContent = "Save leaderboard settings"; }
+    });
+  }
+
   function renderHistory() {
     const historyBox = document.querySelector("#attempt-history");
     if (!historyBox) return;
@@ -632,6 +788,10 @@
       const missing = /get_my_student_percentiles|learner_comparison_snapshots|does not exist|schema cache|could not find the function/i.test(String(error?.message || error || ""));
       renderPercentileUnavailable(missing ? "Phase 4B database setup is not installed yet" : "Private comparisons could not be refreshed", missing ? "Run the private Phase 4B SQL in Supabase. The Phase 4A progress summary remains usable." : "The comparison service is temporarily unavailable. No other learner data was exposed.");
     }
+
+    setupLeaderboardControls(account);
+    if (account.configured && account.user) await refreshLeaderboard();
+    else renderLeaderboardLocked();
 
     document.querySelector("#clear-history")?.addEventListener("click", async () => {
       if (!confirm("Clear all attempt history from this browser and, when logged in, from the learner account?")) return;
