@@ -1,0 +1,47 @@
+TutoDemy DOST Visual Reasoning — Phase 3 Live Integration
+Date: 2026-08-16
+
+Base:
+- User-provided current GitHub ZIP: tutodemy-main.zip
+
+What changed:
+- Replaced 24 existing Non-Verbal Reasoning question slots; total bank remains exactly 1,700.
+- 18 weak/repetitive Figure Series items were replaced.
+- 6 repetitive Wave 4 rotation items were replaced.
+- Added 24 original responsive SVG figures from the approved Phase 1 and Phase 2 upgrades.
+- New visual questions use fixed A–E figure labels, so their answer order is no longer shuffled.
+- Existing non-visual questions continue to shuffle answer choices normally.
+- Added click/tap figure enlargement with a scrollable high-resolution view.
+- Removed the old 115px max-height cap on visual answer SVGs.
+- Updated cumulative and Wave 4 runtime JSON/JS sources.
+- Removed 24 now-unused legacy stimuli from the cumulative stimulus set.
+- Bumped service-worker cache to tutodemy-20260816-dostvr3.
+
+Replacement slots:
+- DOST-W2-111: Visual Pattern 1: Which option correctly fills the missing position? -> dost-ar-p1-01 (series, Medium-Hard)
+- DOST-W2-112: Visual Pattern 2: Which option correctly fills the missing position? -> dost-ar-p1-02 (series, Medium-Hard)
+- DOST-W2-113: Visual Pattern 3: Which option correctly fills the missing position? -> dost-ar-p1-03 (series, Hard)
+- DOST-W2-114: Visual Pattern 4: Which option correctly fills the missing position? -> dost-ar-p1-04 (analogy, Hard)
+- DOST-W3-066: Figure Series 1: Which option completes the sequence? -> dost-ar-p1-05 (series, Hard)
+- DOST-W3-067: Figure Series 2: Which option completes the sequence? -> dost-ar-p1-06 (odd-one-out, Medium-Hard)
+- DOST-W3-068: Figure Series 3: Which option completes the sequence? -> dost-ar-p1-07 (odd-one-out, Medium-Hard)
+- DOST-W3-069: Figure Series 4: Which option completes the sequence? -> dost-ar-p1-08 (matrix, Hard)
+- DOST-W4-066: Wave 4 Figure Series 1: Which option completes the sequence? -> dost-ar-p1-09 (matrix, Hard)
+- DOST-W4-067: Wave 4 Figure Series 2: Which option completes the sequence? -> dost-ar-p1-10 (series, Hard)
+- DOST-W4-068: Wave 4 Figure Series 3: Which option completes the sequence? -> dost-ar-p1-11 (series, Hard)
+- DOST-W4-069: Wave 4 Figure Series 4: Which option completes the sequence? -> dost-ar-p1-12 (classification, Hard)
+- DOST-W2-115: Visual Pattern 5: Which option correctly fills the missing position? -> dost-pi-p2-01 (inductive-series, Hard)
+- DOST-W3-070: Figure Series 5: Which option completes the sequence? -> dost-pi-p2-02 (inductive-series, Hard)
+- DOST-W4-070: Wave 4 Figure Series 5: Which option completes the sequence? -> dost-pi-p2-03 (inductive-series, Hard)
+- DOST-W1-261: Study the sequence and select the missing figure. -> dost-pi-p2-04 (inductive-series, Hard)
+- DOST-W1-262: Which option belongs in the blank position? -> dost-pi-p2-05 (inductive-series, Hard)
+- DOST-W1-263: Choose the figure that continues the visual pattern. -> dost-pi-p2-06 (inductive-series, Medium-Hard)
+- DOST-W4-056: Wave 4 Rotation Set 1: Which option is the reference figure after rotation only? -> dost-pi-p2-07 (perceptual-rotation, Hard)
+- DOST-W4-057: Wave 4 Rotation Set 2: Which option is the reference figure after rotation only? -> dost-pi-p2-08 (perceptual-match, Hard)
+- DOST-W4-058: Wave 4 Rotation Set 3: Which option is the reference figure after rotation only? -> dost-pi-p2-09 (matrix, Medium-Hard)
+- DOST-W4-059: Wave 4 Rotation Set 4: Which option is the reference figure after rotation only? -> dost-pi-p2-10 (diagrammatic-operators, Hard)
+- DOST-W4-060: Wave 4 Rotation Set 5: Which option is the reference figure after rotation only? -> dost-pi-p2-11 (perceptual-overlap, Hard)
+- DOST-W4-061: Wave 4 Rotation Set 6: Which option is the reference figure after rotation only? -> dost-pi-p2-12 (classification, Medium-Hard)
+
+No Supabase SQL changes are required.
+The overall bank count, Non-Verbal Reasoning count, and strict-mock quotas remain unchanged.
