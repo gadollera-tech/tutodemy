@@ -1,0 +1,61 @@
+TutoDemy UI Refresh — Landing Revamp + Number-Box Cleanup
+Build: 2026-08-16 UI4
+
+WHAT CHANGED
+
+LANDING PAGE
+- Rebuilt the homepage with a cleaner, mobile-first editorial layout.
+- Kept the main TutoDemy message: tutors, exam preparation, and learning resources.
+- Added one compact, fully clickable "What do you need today?" hub.
+- Removed decorative 01/02/03 labels and fake dashboard-style visuals.
+- Simplified service, exam-prep, tutoring, tutor, how-it-works, why-TutoDemy, and final CTA sections.
+- Every card-like route in the hero is now an actual link.
+- Mobile CTAs stack cleanly on narrow phones.
+
+PUBLIC NUMBER-BOX CLEANUP
+- exams.html:
+  * replaced the large 2,580 number card with a simple hero summary
+  * changed set-size number cards into a flat list
+  * removed 01/02/03 mode labels and boxed mode cards
+  * flattened DOST mini-stat pills
+- dost-sei.html:
+  * replaced the large 1,700 card with a simple hero summary
+  * changed the nine subject-count cards into a clean subject/count list
+- dost-sei/dost-practice.html:
+  * removed the cumulative numeric badge cluster
+  * removed the four static stat boxes
+  * kept the useful bank totals as one summary line
+- tutoring.html:
+  * removed the 01/02/03 non-clickable process cards
+  * converted them to a flat three-part information row
+- for-tutors.html:
+  * removed the numbered application circles
+  * converted the application process into a clean text list
+
+NOT REMOVED
+- Student dashboard metrics
+- Admin/finance KPIs
+- Progress, streak, percentile, leaderboard, and other functional numbers
+These are useful information rather than decorative public-page boxes.
+
+CACHE
+- Main CSS version: 20260816-ui4
+- Service worker cache: tutodemy-20260816-ui4
+- DOST practice CSS: 20260816-ui4
+
+FILES CHANGED
+- index.html
+- exams.html
+- dost-sei.html
+- tutoring.html
+- for-tutors.html
+- service-worker.js
+- css/style.css
+- dost-sei/dost-practice.html
+- dost-sei/css/dost-wave4.css
+
+No Supabase SQL is required.
+
+UPLOAD
+For GitHub, extract the Patch ZIP and upload/replace the files using the same folder structure.
+After GitHub Pages deploys, hard-refresh once so the new service worker and CSS are used.

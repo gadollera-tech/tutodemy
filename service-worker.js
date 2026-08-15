@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260816-dostvr3";
+const CACHE_VERSION = "tutodemy-20260816-ui4";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -6,7 +6,7 @@ const CORE_ASSETS = [
   "./index.html",
   "./offline.html",
   "./manifest.webmanifest",
-  "./css/style.css?v=20260810-landing3",
+  "./css/style.css?v=20260816-ui4",
   "./js/marketplace-api.js?v=20260809-finance3",
   "./js/main.js?v=20260809-tutorfix1",
   "./tutor-dashboard.html",
