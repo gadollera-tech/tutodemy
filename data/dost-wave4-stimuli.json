@@ -1,0 +1,883 @@
+{
+  "W4-VRPASS-001": {
+    "id": "W4-VRPASS-001",
+    "type": "passage",
+    "title": "Wave 4 Reasoning Passage 1",
+    "html": null,
+    "content": "A municipality installed water-level sensors in several drainage canals. Early alerts improved response time, but false alarms occurred when floating debris covered the sensors. The maintenance plan was revised to include protective screens and scheduled cleaning.",
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-VRPASS-002": {
+    "id": "W4-VRPASS-002",
+    "type": "passage",
+    "title": "Wave 4 Reasoning Passage 2",
+    "html": null,
+    "content": "A laboratory measured the same standard solution with two pipettes. One produced tightly grouped values that were consistently low. Recalibration corrected the offset.",
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-VRPASS-003": {
+    "id": "W4-VRPASS-003",
+    "type": "passage",
+    "title": "Wave 4 Reasoning Passage 3",
+    "html": null,
+    "content": "A library considered opening two hours later every day. Attendance records showed strong late demand only during examination periods, so the library tested extended hours during those weeks first.",
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-VRPASS-004": {
+    "id": "W4-VRPASS-004",
+    "type": "passage",
+    "title": "Wave 4 Reasoning Passage 4",
+    "html": null,
+    "content": "A coastal town built a seawall and restored dunes. After a storm, damage was lower, but investigators also noted that the storm followed a different path than previous storms.",
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-VRPASS-005": {
+    "id": "W4-VRPASS-005",
+    "type": "passage",
+    "title": "Wave 4 Reasoning Passage 5",
+    "html": null,
+    "content": "A school shortened a laboratory activity to reduce waiting time. Students completed the procedure faster, but cleanup errors increased. The revised plan kept the efficient setup while restoring a separate cleanup checklist.",
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-VRPASS-006": {
+    "id": "W4-VRPASS-006",
+    "type": "passage",
+    "title": "Wave 4 Reasoning Passage 6",
+    "html": null,
+    "content": "Researchers compared temperature readings from sensors mounted on walls, roofs, and shaded posts. They standardized height and shielding before interpreting location differences.",
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-VRPASS-007": {
+    "id": "W4-VRPASS-007",
+    "type": "passage",
+    "title": "Wave 4 Reasoning Passage 7",
+    "html": null,
+    "content": "A cooperative tested compost from several suppliers. Plant growth varied, so the team measured nitrogen content and moisture before comparing application rates.",
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-VRPASS-008": {
+    "id": "W4-VRPASS-008",
+    "type": "passage",
+    "title": "Wave 4 Reasoning Passage 8",
+    "html": null,
+    "content": "A student says one battery brand is better because it lasted longer in a flashlight. The teacher asks whether both flashlights used the same bulb and brightness setting.",
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-VRPASS-009": {
+    "id": "W4-VRPASS-009",
+    "type": "passage",
+    "title": "Wave 4 Reasoning Passage 9",
+    "html": null,
+    "content": "Flood reports cluster near a low-lying district with narrow drains. Engineers review both elevation and drain capacity before choosing a solution.",
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRROT-016": {
+    "id": "W4-NVRROT-016",
+    "type": "visual",
+    "title": "Wave 4 Rotation Reference 7",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 140 110\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <g transform=\"translate(68 55) rotate(0) scale(1 1) translate(-68 -55)\">\n      <path d=\"M24 30 L83 18 L108 45 L96 82 L40 88 L18 58 Z\"\n            fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/>\n      <path d=\"M105 72 L124 84\" stroke=\"#111\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n      <circle cx=\"90\" cy=\"73\" r=\"7\" fill=\"#111\"/>\n      <polygon points=\"38,64 46,72 38,80 30,72\"\n               fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n      <line x1=\"53\" y1=\"48\" x2=\"78\" y2=\"62\" stroke=\"#777\" stroke-width=\"4\"/>\n    </g></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRROT-017": {
+    "id": "W4-NVRROT-017",
+    "type": "visual",
+    "title": "Wave 4 Rotation Reference 8",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 140 110\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <g transform=\"translate(68 55) rotate(0) scale(1 1) translate(-68 -55)\">\n      <path d=\"M24 30 L83 18 L108 45 L96 82 L40 88 L18 58 Z\"\n            fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/>\n      <path d=\"M55 20 L55 4\" stroke=\"#111\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n      <circle cx=\"38\" cy=\"72\" r=\"7\" fill=\"#111\"/>\n      <polygon points=\"38,27 46,35 38,43 30,35\"\n               fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n      <line x1=\"53\" y1=\"48\" x2=\"78\" y2=\"62\" stroke=\"#777\" stroke-width=\"4\"/>\n    </g></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRROT-018": {
+    "id": "W4-NVRROT-018",
+    "type": "visual",
+    "title": "Wave 4 Rotation Reference 9",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 140 110\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <g transform=\"translate(68 55) rotate(0) scale(1 1) translate(-68 -55)\">\n      <path d=\"M24 30 L83 18 L108 45 L96 82 L40 88 L18 58 Z\"\n            fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/>\n      <path d=\"M98 30 L119 18\" stroke=\"#111\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n      <circle cx=\"38\" cy=\"35\" r=\"7\" fill=\"#111\"/>\n      <polygon points=\"91,27 99,35 91,43 83,35\"\n               fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n      <line x1=\"53\" y1=\"48\" x2=\"78\" y2=\"62\" stroke=\"#777\" stroke-width=\"4\"/>\n    </g></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRROT-019": {
+    "id": "W4-NVRROT-019",
+    "type": "visual",
+    "title": "Wave 4 Rotation Reference 10",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 140 110\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <g transform=\"translate(68 55) rotate(0) scale(1 1) translate(-68 -55)\">\n      <path d=\"M24 30 L83 18 L108 45 L96 82 L40 88 L18 58 Z\"\n            fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/>\n      <path d=\"M30 82 L14 98\" stroke=\"#111\" stroke-width=\"4\" stroke-linecap=\"round\"/>\n      <circle cx=\"91\" cy=\"35\" r=\"7\" fill=\"#111\"/>\n      <polygon points=\"90,65 98,73 90,81 82,73\"\n               fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n      <line x1=\"53\" y1=\"48\" x2=\"78\" y2=\"62\" stroke=\"#777\" stroke-width=\"4\"/>\n    </g></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRMAT-025": {
+    "id": "W4-NVRMAT-025",
+    "type": "visual",
+    "title": "Wave 4 Matrix 1",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 382 222\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"8\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(8, 8)\"><g transform=\"rotate(0 58 52)\"><polygon points=\"58.0,25.0 81.4,65.5 34.6,65.5\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/></g></g><rect x=\"130\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(130, 8)\"><g transform=\"rotate(45 58 52)\"><polygon points=\"58.0,25.0 85.0,52.0 58.0,79.0 31.0,52.0\" fill=\"#111\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"252\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(252, 8)\"><g transform=\"rotate(90 58 52)\"><polygon points=\"58.0,25.0 83.7,43.7 73.9,73.8 42.1,73.8 32.3,43.7\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/><line x1=\"38\" y1=\"48\" x2=\"78\" y2=\"48\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"8\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(8, 114)\"><g transform=\"rotate(45 58 52)\"><polygon points=\"58.0,25.0 85.0,52.0 58.0,79.0 31.0,52.0\" fill=\"#111\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"130\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(130, 114)\"><g transform=\"rotate(90 58 52)\"><polygon points=\"58.0,25.0 83.7,43.7 73.9,73.8 42.1,73.8 32.3,43.7\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/><line x1=\"38\" y1=\"48\" x2=\"78\" y2=\"48\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"252\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(252, 114)\"><text x=\"58\" y=\"66\" text-anchor=\"middle\" font-size=\"44\" font-weight=\"900\">?</text></g></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRMAT-026": {
+    "id": "W4-NVRMAT-026",
+    "type": "visual",
+    "title": "Wave 4 Matrix 2",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 382 222\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"8\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(8, 8)\"><g transform=\"rotate(0 58 52)\"><polygon points=\"58.0,25.0 85.0,52.0 58.0,79.0 31.0,52.0\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/></g></g><rect x=\"130\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(130, 8)\"><g transform=\"rotate(45 58 52)\"><polygon points=\"58.0,25.0 83.7,43.7 73.9,73.8 42.1,73.8 32.3,43.7\" fill=\"#111\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"252\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(252, 8)\"><g transform=\"rotate(90 58 52)\"><polygon points=\"58.0,25.0 81.4,38.5 81.4,65.5 58.0,79.0 34.6,65.5 34.6,38.5\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/><line x1=\"38\" y1=\"48\" x2=\"78\" y2=\"48\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"8\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(8, 114)\"><g transform=\"rotate(45 58 52)\"><polygon points=\"58.0,25.0 83.7,43.7 73.9,73.8 42.1,73.8 32.3,43.7\" fill=\"#111\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"130\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(130, 114)\"><g transform=\"rotate(90 58 52)\"><polygon points=\"58.0,25.0 81.4,38.5 81.4,65.5 58.0,79.0 34.6,65.5 34.6,38.5\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/><line x1=\"38\" y1=\"48\" x2=\"78\" y2=\"48\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"252\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(252, 114)\"><text x=\"58\" y=\"66\" text-anchor=\"middle\" font-size=\"44\" font-weight=\"900\">?</text></g></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRMAT-027": {
+    "id": "W4-NVRMAT-027",
+    "type": "visual",
+    "title": "Wave 4 Matrix 3",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 382 222\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"8\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(8, 8)\"><g transform=\"rotate(0 58 52)\"><polygon points=\"58.0,25.0 81.4,65.5 34.6,65.5\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/></g></g><rect x=\"130\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(130, 8)\"><g transform=\"rotate(45 58 52)\"><polygon points=\"58.0,25.0 85.0,52.0 58.0,79.0 31.0,52.0\" fill=\"#111\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"252\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(252, 8)\"><g transform=\"rotate(90 58 52)\"><polygon points=\"58.0,25.0 83.7,43.7 73.9,73.8 42.1,73.8 32.3,43.7\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/><line x1=\"38\" y1=\"48\" x2=\"78\" y2=\"48\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"8\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(8, 114)\"><g transform=\"rotate(45 58 52)\"><polygon points=\"58.0,25.0 85.0,52.0 58.0,79.0 31.0,52.0\" fill=\"#111\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"130\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(130, 114)\"><g transform=\"rotate(90 58 52)\"><polygon points=\"58.0,25.0 83.7,43.7 73.9,73.8 42.1,73.8 32.3,43.7\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/><line x1=\"38\" y1=\"48\" x2=\"78\" y2=\"48\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"252\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(252, 114)\"><text x=\"58\" y=\"66\" text-anchor=\"middle\" font-size=\"44\" font-weight=\"900\">?</text></g></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRMAT-028": {
+    "id": "W4-NVRMAT-028",
+    "type": "visual",
+    "title": "Wave 4 Matrix 4",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 382 222\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"8\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(8, 8)\"><g transform=\"rotate(0 58 52)\"><polygon points=\"58.0,25.0 85.0,52.0 58.0,79.0 31.0,52.0\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/></g></g><rect x=\"130\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(130, 8)\"><g transform=\"rotate(45 58 52)\"><polygon points=\"58.0,25.0 83.7,43.7 73.9,73.8 42.1,73.8 32.3,43.7\" fill=\"#111\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"252\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(252, 8)\"><g transform=\"rotate(90 58 52)\"><polygon points=\"58.0,25.0 81.4,38.5 81.4,65.5 58.0,79.0 34.6,65.5 34.6,38.5\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/><line x1=\"38\" y1=\"48\" x2=\"78\" y2=\"48\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"8\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(8, 114)\"><g transform=\"rotate(45 58 52)\"><polygon points=\"58.0,25.0 83.7,43.7 73.9,73.8 42.1,73.8 32.3,43.7\" fill=\"#111\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"130\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(130, 114)\"><g transform=\"rotate(90 58 52)\"><polygon points=\"58.0,25.0 81.4,38.5 81.4,65.5 58.0,79.0 34.6,65.5 34.6,38.5\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/><line x1=\"38\" y1=\"48\" x2=\"78\" y2=\"48\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"252\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(252, 114)\"><text x=\"58\" y=\"66\" text-anchor=\"middle\" font-size=\"44\" font-weight=\"900\">?</text></g></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRMAT-029": {
+    "id": "W4-NVRMAT-029",
+    "type": "visual",
+    "title": "Wave 4 Matrix 5",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 382 222\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"8\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(8, 8)\"><g transform=\"rotate(0 58 52)\"><polygon points=\"58.0,25.0 81.4,65.5 34.6,65.5\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/></g></g><rect x=\"130\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(130, 8)\"><g transform=\"rotate(45 58 52)\"><polygon points=\"58.0,25.0 85.0,52.0 58.0,79.0 31.0,52.0\" fill=\"#111\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"252\" y=\"8\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(252, 8)\"><g transform=\"rotate(90 58 52)\"><polygon points=\"58.0,25.0 83.7,43.7 73.9,73.8 42.1,73.8 32.3,43.7\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/><line x1=\"38\" y1=\"48\" x2=\"78\" y2=\"48\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"8\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(8, 114)\"><g transform=\"rotate(45 58 52)\"><polygon points=\"58.0,25.0 85.0,52.0 58.0,79.0 31.0,52.0\" fill=\"#111\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"130\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(130, 114)\"><g transform=\"rotate(90 58 52)\"><polygon points=\"58.0,25.0 83.7,43.7 73.9,73.8 42.1,73.8 32.3,43.7\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"58.0\" cy=\"33.0\" r=\"5\" fill=\"#d14b4b\" stroke=\"#111\"/><line x1=\"38\" y1=\"35\" x2=\"78\" y2=\"35\" stroke=\"#d14b4b\" stroke-width=\"3\"/><line x1=\"38\" y1=\"48\" x2=\"78\" y2=\"48\" stroke=\"#d14b4b\" stroke-width=\"3\"/></g></g><rect x=\"252\" y=\"114\" width=\"114\" height=\"98\" fill=\"#fff\" stroke=\"#bbb\"/><g transform=\"translate(252, 114)\"><text x=\"58\" y=\"66\" text-anchor=\"middle\" font-size=\"44\" font-weight=\"900\">?</text></g></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRFOLD-030": {
+    "id": "W4-NVRFOLD-030",
+    "type": "visual",
+    "title": "Wave 4 Paper Fold 1",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"22\" width=\"112\" height=\"112\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><line x1=\"74\" y1=\"22\" x2=\"74\" y2=\"134\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M120 10 H86\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M88 4 L76 10 L88 16 Z\" fill=\"#3159c7\"/><rect x=\"174\" y=\"28\" width=\"56\" height=\"112\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"184.08\" cy=\"67.19999999999999\" r=\"6\" fill=\"#111\"/><text x=\"202.0\" y=\"158\" text-anchor=\"middle\" font-size=\"12\">folded packet</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRFOLD-031": {
+    "id": "W4-NVRFOLD-031",
+    "type": "visual",
+    "title": "Wave 4 Paper Fold 2",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"22\" width=\"112\" height=\"112\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><line x1=\"18\" y1=\"78\" x2=\"130\" y2=\"78\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M145 124 V90\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M139 92 L145 80 L151 92 Z\" fill=\"#3159c7\"/><rect x=\"174\" y=\"28\" width=\"112\" height=\"56\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"213.2\" cy=\"68.32\" r=\"6\" fill=\"#111\"/><text x=\"230.0\" y=\"102\" text-anchor=\"middle\" font-size=\"12\">folded packet</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRFOLD-032": {
+    "id": "W4-NVRFOLD-032",
+    "type": "visual",
+    "title": "Wave 4 Paper Fold 3",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"22\" width=\"112\" height=\"112\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><line x1=\"74\" y1=\"22\" x2=\"74\" y2=\"134\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M120 10 H86\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M88 4 L76 10 L88 16 Z\" fill=\"#3159c7\"/><line x1=\"18\" y1=\"78\" x2=\"130\" y2=\"78\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M145 124 V90\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M139 92 L145 80 L151 92 Z\" fill=\"#3159c7\"/><rect x=\"174\" y=\"28\" width=\"56\" height=\"56\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"185.2\" cy=\"44.8\" r=\"6\" fill=\"#111\"/><text x=\"202.0\" y=\"102\" text-anchor=\"middle\" font-size=\"12\">folded packet</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRFOLD-033": {
+    "id": "W4-NVRFOLD-033",
+    "type": "visual",
+    "title": "Wave 4 Paper Fold 4",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"22\" width=\"112\" height=\"112\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><line x1=\"74\" y1=\"22\" x2=\"74\" y2=\"134\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M120 10 H86\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M88 4 L76 10 L88 16 Z\" fill=\"#3159c7\"/><line x1=\"18\" y1=\"78\" x2=\"130\" y2=\"78\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M145 124 V90\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M139 92 L145 80 L151 92 Z\" fill=\"#3159c7\"/><rect x=\"174\" y=\"28\" width=\"56\" height=\"56\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"214.32\" cy=\"40.32\" r=\"6\" fill=\"#111\"/><text x=\"202.0\" y=\"102\" text-anchor=\"middle\" font-size=\"12\">folded packet</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRFOLD-034": {
+    "id": "W4-NVRFOLD-034",
+    "type": "visual",
+    "title": "Wave 4 Paper Fold 5",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"22\" width=\"112\" height=\"112\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><line x1=\"74\" y1=\"22\" x2=\"74\" y2=\"134\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M120 10 H86\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M88 4 L76 10 L88 16 Z\" fill=\"#3159c7\"/><rect x=\"174\" y=\"28\" width=\"56\" height=\"112\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"184.08\" cy=\"56.0\" r=\"6\" fill=\"#111\"/><circle cx=\"184.08\" cy=\"106.39999999999999\" r=\"6\" fill=\"#111\"/><text x=\"202.0\" y=\"158\" text-anchor=\"middle\" font-size=\"12\">folded packet</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRFOLD-035": {
+    "id": "W4-NVRFOLD-035",
+    "type": "visual",
+    "title": "Wave 4 Paper Fold 6",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"22\" width=\"112\" height=\"112\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><line x1=\"18\" y1=\"78\" x2=\"130\" y2=\"78\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M145 124 V90\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M139 92 L145 80 L151 92 Z\" fill=\"#3159c7\"/><rect x=\"174\" y=\"28\" width=\"112\" height=\"56\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"198.64\" cy=\"38.08\" r=\"6\" fill=\"#111\"/><circle cx=\"254.64\" cy=\"38.08\" r=\"6\" fill=\"#111\"/><text x=\"230.0\" y=\"102\" text-anchor=\"middle\" font-size=\"12\">folded packet</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRFOLD-036": {
+    "id": "W4-NVRFOLD-036",
+    "type": "visual",
+    "title": "Wave 4 Paper Fold 7",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"22\" width=\"112\" height=\"112\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><line x1=\"74\" y1=\"22\" x2=\"74\" y2=\"134\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M120 10 H86\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M88 4 L76 10 L88 16 Z\" fill=\"#3159c7\"/><line x1=\"18\" y1=\"78\" x2=\"130\" y2=\"78\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M145 124 V90\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M139 92 L145 80 L151 92 Z\" fill=\"#3159c7\"/><rect x=\"174\" y=\"28\" width=\"56\" height=\"56\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"186.32\" cy=\"40.32\" r=\"6\" fill=\"#111\"/><circle cx=\"212.08\" cy=\"66.08000000000001\" r=\"6\" fill=\"#111\"/><text x=\"202.0\" y=\"102\" text-anchor=\"middle\" font-size=\"12\">folded packet</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRFOLD-037": {
+    "id": "W4-NVRFOLD-037",
+    "type": "visual",
+    "title": "Wave 4 Paper Fold 8",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 170\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"22\" width=\"112\" height=\"112\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/><line x1=\"74\" y1=\"22\" x2=\"74\" y2=\"134\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M120 10 H86\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M88 4 L76 10 L88 16 Z\" fill=\"#3159c7\"/><line x1=\"18\" y1=\"78\" x2=\"130\" y2=\"78\" stroke=\"#777\" stroke-width=\"3\" stroke-dasharray=\"7 5\"/><path d=\"M145 124 V90\" stroke=\"#3159c7\" stroke-width=\"4\"/><path d=\"M139 92 L145 80 L151 92 Z\" fill=\"#3159c7\"/><rect x=\"174\" y=\"28\" width=\"56\" height=\"56\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"4\"/><circle cx=\"188.0\" cy=\"56.0\" r=\"6\" fill=\"#111\"/><circle cx=\"214.32\" cy=\"45.92\" r=\"6\" fill=\"#111\"/><text x=\"202.0\" y=\"102\" text-anchor=\"middle\" font-size=\"12\">folded packet</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRCUBE-038": {
+    "id": "W4-NVRCUBE-038",
+    "type": "visual",
+    "title": "Wave 4 Cube Net 1",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 120 246\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"18\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"39\" y=\"45\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">G</text><rect x=\"18\" y=\"60\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"39\" y=\"87\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">H</text><rect x=\"18\" y=\"102\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"39\" y=\"129\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">I</text><rect x=\"60\" y=\"102\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"129\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">J</text><rect x=\"60\" y=\"144\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"171\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">K</text><rect x=\"60\" y=\"186\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"213\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">L</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRCUBE-039": {
+    "id": "W4-NVRCUBE-039",
+    "type": "visual",
+    "title": "Wave 4 Cube Net 2",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 162 204\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"18\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"39\" y=\"45\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">G</text><rect x=\"18\" y=\"60\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"39\" y=\"87\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">H</text><rect x=\"60\" y=\"60\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"87\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">I</text><rect x=\"60\" y=\"102\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"129\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">J</text><rect x=\"102\" y=\"102\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"123\" y=\"129\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">K</text><rect x=\"60\" y=\"144\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"171\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">L</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRCUBE-040": {
+    "id": "W4-NVRCUBE-040",
+    "type": "visual",
+    "title": "Wave 4 Cube Net 3",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 162 204\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"18\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"39\" y=\"45\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">G</text><rect x=\"18\" y=\"60\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"39\" y=\"87\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">H</text><rect x=\"60\" y=\"60\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"87\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">I</text><rect x=\"60\" y=\"102\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"129\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">J</text><rect x=\"102\" y=\"102\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"123\" y=\"129\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">K</text><rect x=\"102\" y=\"144\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"123\" y=\"171\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">L</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRCUBE-041": {
+    "id": "W4-NVRCUBE-041",
+    "type": "visual",
+    "title": "Wave 4 Cube Net 4",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 162 204\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"60\" y=\"18\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"45\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">G</text><rect x=\"18\" y=\"60\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"39\" y=\"87\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">H</text><rect x=\"60\" y=\"60\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"87\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">I</text><rect x=\"60\" y=\"102\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"129\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">J</text><rect x=\"102\" y=\"102\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"123\" y=\"129\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">K</text><rect x=\"60\" y=\"144\" width=\"42\" height=\"42\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"81\" y=\"171\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">L</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRSOLID-042": {
+    "id": "W4-NVRSOLID-042",
+    "type": "visual",
+    "title": "Wave 4 Solid Rotation 1",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 130 115\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <polygon points=\"65,12 105,35 65,58 25,35\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <polygon points=\"25,35 65,58 65,102 25,78\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <polygon points=\"65,58 105,35 105,78 65,102\" fill=\"#ddd\" stroke=\"#111\" stroke-width=\"3\"/>\n    <text x=\"65\" y=\"39\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">G</text>\n    <text x=\"45\" y=\"73\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">H</text>\n    <text x=\"85\" y=\"73\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">J</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRSOLID-043": {
+    "id": "W4-NVRSOLID-043",
+    "type": "visual",
+    "title": "Wave 4 Solid Rotation 2",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 130 115\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <polygon points=\"65,12 105,35 65,58 25,35\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <polygon points=\"25,35 65,58 65,102 25,78\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <polygon points=\"65,58 105,35 105,78 65,102\" fill=\"#ddd\" stroke=\"#111\" stroke-width=\"3\"/>\n    <text x=\"65\" y=\"39\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text>\n    <text x=\"45\" y=\"73\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">5</text>\n    <text x=\"85\" y=\"73\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">8</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRSOLID-044": {
+    "id": "W4-NVRSOLID-044",
+    "type": "visual",
+    "title": "Wave 4 Solid Rotation 3",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 130 115\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <polygon points=\"65,12 105,35 65,58 25,35\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <polygon points=\"25,35 65,58 65,102 25,78\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <polygon points=\"65,58 105,35 105,78 65,102\" fill=\"#ddd\" stroke=\"#111\" stroke-width=\"3\"/>\n    <text x=\"65\" y=\"39\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">R</text>\n    <text x=\"45\" y=\"73\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">S</text>\n    <text x=\"85\" y=\"73\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">T</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRSOLID-045": {
+    "id": "W4-NVRSOLID-045",
+    "type": "visual",
+    "title": "Wave 4 Solid Rotation 4",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 130 115\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <polygon points=\"65,12 105,35 65,58 25,35\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <polygon points=\"25,35 65,58 65,102 25,78\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <polygon points=\"65,58 105,35 105,78 65,102\" fill=\"#ddd\" stroke=\"#111\" stroke-width=\"3\"/>\n    <text x=\"65\" y=\"39\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">K</text>\n    <text x=\"45\" y=\"73\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">M</text>\n    <text x=\"85\" y=\"73\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">N</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRBLOCK-046": {
+    "id": "W4-NVRBLOCK-046",
+    "type": "visual",
+    "title": "Wave 4 Block Map 1",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 156 116\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"58\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(194,194,194)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">3</text><rect x=\"98\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"18\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"58\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"98\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRBLOCK-047": {
+    "id": "W4-NVRBLOCK-047",
+    "type": "visual",
+    "title": "Wave 4 Block Map 2",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 156 116\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(176,176,176)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">4</text><rect x=\"58\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"98\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(248,248,248)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">0</text><rect x=\"18\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"58\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(194,194,194)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">3</text><rect x=\"98\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRBLOCK-048": {
+    "id": "W4-NVRBLOCK-048",
+    "type": "visual",
+    "title": "Wave 4 Block Map 3",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 156 156\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"58\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"98\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"18\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"58\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(176,176,176)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">4</text><rect x=\"98\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(194,194,194)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">3</text><rect x=\"18\" y=\"98\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"124\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"58\" y=\"98\" width=\"40\" height=\"40\" fill=\"rgb(248,248,248)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"124\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">0</text><rect x=\"98\" y=\"98\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"124\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRBLOCK-049": {
+    "id": "W4-NVRBLOCK-049",
+    "type": "visual",
+    "title": "Wave 4 Block Map 4",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 116 156\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(194,194,194)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">3</text><rect x=\"58\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"18\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"58\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(176,176,176)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">4</text><rect x=\"18\" y=\"98\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"124\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"58\" y=\"98\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"124\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRBLOCK-050": {
+    "id": "W4-NVRBLOCK-050",
+    "type": "visual",
+    "title": "Wave 4 Block Map 5",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 156 116\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"58\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(194,194,194)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">3</text><rect x=\"98\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"18\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"58\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"98\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRBLOCK-051": {
+    "id": "W4-NVRBLOCK-051",
+    "type": "visual",
+    "title": "Wave 4 Block Map 6",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 156 116\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(158,158,158)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">5</text><rect x=\"58\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"98\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"18\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"58\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(194,194,194)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">3</text><rect x=\"98\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(248,248,248)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">0</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRBLOCK-052": {
+    "id": "W4-NVRBLOCK-052",
+    "type": "visual",
+    "title": "Wave 4 Block Map 7",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 196 116\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"58\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"98\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(194,194,194)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">3</text><rect x=\"138\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"158\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"18\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"58\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"98\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(248,248,248)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">0</text><rect x=\"138\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"158\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRBLOCK-053": {
+    "id": "W4-NVRBLOCK-053",
+    "type": "visual",
+    "title": "Wave 4 Block Map 8",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 156 156\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"18\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"58\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"98\" y=\"18\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"44\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"18\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(176,176,176)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">4</text><rect x=\"58\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(194,194,194)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">3</text><rect x=\"98\" y=\"58\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"84\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"18\" y=\"98\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"38\" y=\"124\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text><rect x=\"58\" y=\"98\" width=\"40\" height=\"40\" fill=\"rgb(230,230,230)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"78\" y=\"124\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">1</text><rect x=\"98\" y=\"98\" width=\"40\" height=\"40\" fill=\"rgb(212,212,212)\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"118\" y=\"124\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"850\">2</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPIECE-054": {
+    "id": "W4-NVRPIECE-054",
+    "type": "visual",
+    "title": "Wave 4 Piece Assembly 1",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 230 165\" role=\"img\" aria-label=\"Original TutoDemy visual\"><polygon points=\"20,85 40,30 90,30 105,85\" fill=\"#dce4ff\" stroke=\"#111\" stroke-width=\"3\"/><polygon points=\"125,30 175,30 195,85 110,85\" fill=\"#ffd98a\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"115\" y=\"150\" text-anchor=\"middle\" font-size=\"12\">two identical trapezoids</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPIECE-055": {
+    "id": "W4-NVRPIECE-055",
+    "type": "visual",
+    "title": "Wave 4 Piece Assembly 2",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 230 165\" role=\"img\" aria-label=\"Original TutoDemy visual\"><polygon points=\"20,70 20,20 70,70\" fill=\"#dce4ff\" stroke=\"#111\" stroke-width=\"2\"/><polygon points=\"80,20 130,20 80,70\" fill=\"#ffd98a\" stroke=\"#111\" stroke-width=\"2\"/><polygon points=\"20,80 70,80 70,130\" fill=\"#ffd98a\" stroke=\"#111\" stroke-width=\"2\"/><polygon points=\"80,80 130,130 80,130\" fill=\"#dce4ff\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"115\" y=\"150\" text-anchor=\"middle\" font-size=\"12\">four congruent right triangles</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPIECE-056": {
+    "id": "W4-NVRPIECE-056",
+    "type": "visual",
+    "title": "Wave 4 Piece Assembly 3",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 230 165\" role=\"img\" aria-label=\"Original TutoDemy visual\"><path d=\"M20 90 A60 60 0 0 1 80 30 L80 90 Z\" fill=\"#dce4ff\" stroke=\"#111\" stroke-width=\"3\"/><path d=\"M115 30 A60 60 0 0 1 175 90 H115 Z\" fill=\"#ffd98a\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"115\" y=\"150\" text-anchor=\"middle\" font-size=\"12\">two quarter-circles</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPIECE-057": {
+    "id": "W4-NVRPIECE-057",
+    "type": "visual",
+    "title": "Wave 4 Piece Assembly 4",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 230 165\" role=\"img\" aria-label=\"Original TutoDemy visual\"><polygon points=\"20,90 50,38 80,90\" fill=\"#dce4ff\" stroke=\"#111\" stroke-width=\"3\"/><polygon points=\"78,90 108,38 138,90\" fill=\"#ffd98a\" stroke=\"#111\" stroke-width=\"3\"/><polygon points=\"136,90 166,38 196,90\" fill=\"#dce4ff\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"115\" y=\"150\" text-anchor=\"middle\" font-size=\"12\">three equal equilateral triangles</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPIECE-058": {
+    "id": "W4-NVRPIECE-058",
+    "type": "visual",
+    "title": "Wave 4 Piece Assembly 5",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 230 165\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"72\" y=\"35\" width=\"70\" height=\"60\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/><polygon points=\"20,35 72,35 72,95\" fill=\"#dce4ff\" stroke=\"#111\" stroke-width=\"3\"/><polygon points=\"142,35 194,95 142,95\" fill=\"#ffd98a\" stroke=\"#111\" stroke-width=\"3\"/><text x=\"115\" y=\"150\" text-anchor=\"middle\" font-size=\"12\">one rectangle and two congruent triangles</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPIECE-059": {
+    "id": "W4-NVRPIECE-059",
+    "type": "visual",
+    "title": "Wave 4 Piece Assembly 6",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 230 165\" role=\"img\" aria-label=\"Original TutoDemy visual\"><rect x=\"30\" y=\"61\" width=\"36\" height=\"36\" fill=\"#dce4ff\" stroke=\"#111\" stroke-width=\"2\"/><rect x=\"66\" y=\"61\" width=\"36\" height=\"36\" fill=\"#ffd98a\" stroke=\"#111\" stroke-width=\"2\"/><rect x=\"102\" y=\"61\" width=\"36\" height=\"36\" fill=\"#dce4ff\" stroke=\"#111\" stroke-width=\"2\"/><rect x=\"138\" y=\"61\" width=\"36\" height=\"36\" fill=\"#ffd98a\" stroke=\"#111\" stroke-width=\"2\"/><rect x=\"66\" y=\"25\" width=\"36\" height=\"36\" fill=\"#dce4ff\" stroke=\"#111\" stroke-width=\"2\"/><rect x=\"66\" y=\"97\" width=\"36\" height=\"36\" fill=\"#dce4ff\" stroke=\"#111\" stroke-width=\"2\"/><text x=\"115\" y=\"150\" text-anchor=\"middle\" font-size=\"12\">six equal squares</text></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPATH-060": {
+    "id": "W4-NVRPATH-060",
+    "type": "visual",
+    "title": "Wave 4 Route 1",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 240\" role=\"img\" aria-label=\"Original TutoDemy visual\"><line x1=\"30\" y1=\"30\" x2=\"210\" y2=\"30\" stroke=\"#bbb\"/><line x1=\"30\" y1=\"30\" x2=\"30\" y2=\"210\" stroke=\"#bbb\"/><text x=\"30\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">0</text><text x=\"14\" y=\"34\" text-anchor=\"middle\" font-size=\"10\">0</text><line x1=\"30\" y1=\"60\" x2=\"210\" y2=\"60\" stroke=\"#bbb\"/><line x1=\"60\" y1=\"30\" x2=\"60\" y2=\"210\" stroke=\"#bbb\"/><text x=\"60\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">1</text><text x=\"14\" y=\"64\" text-anchor=\"middle\" font-size=\"10\">1</text><line x1=\"30\" y1=\"90\" x2=\"210\" y2=\"90\" stroke=\"#bbb\"/><line x1=\"90\" y1=\"30\" x2=\"90\" y2=\"210\" stroke=\"#bbb\"/><text x=\"90\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">2</text><text x=\"14\" y=\"94\" text-anchor=\"middle\" font-size=\"10\">2</text><line x1=\"30\" y1=\"120\" x2=\"210\" y2=\"120\" stroke=\"#bbb\"/><line x1=\"120\" y1=\"30\" x2=\"120\" y2=\"210\" stroke=\"#bbb\"/><text x=\"120\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">3</text><text x=\"14\" y=\"124\" text-anchor=\"middle\" font-size=\"10\">3</text><line x1=\"30\" y1=\"150\" x2=\"210\" y2=\"150\" stroke=\"#bbb\"/><line x1=\"150\" y1=\"30\" x2=\"150\" y2=\"210\" stroke=\"#bbb\"/><text x=\"150\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">4</text><text x=\"14\" y=\"154\" text-anchor=\"middle\" font-size=\"10\">4</text><line x1=\"30\" y1=\"180\" x2=\"210\" y2=\"180\" stroke=\"#bbb\"/><line x1=\"180\" y1=\"30\" x2=\"180\" y2=\"210\" stroke=\"#bbb\"/><text x=\"180\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">5</text><text x=\"14\" y=\"184\" text-anchor=\"middle\" font-size=\"10\">5</text><line x1=\"30\" y1=\"210\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><line x1=\"210\" y1=\"30\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><text x=\"210\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">6</text><text x=\"14\" y=\"214\" text-anchor=\"middle\" font-size=\"10\">6</text><polyline points=\"60,210 60,180 60,150 60,120 90,120 120,120 150,120\" fill=\"none\" stroke=\"#3159c7\" stroke-width=\"5\"/><circle cx=\"60\" cy=\"210\" r=\"7\" fill=\"#f3a51b\" stroke=\"#111\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPATH-061": {
+    "id": "W4-NVRPATH-061",
+    "type": "visual",
+    "title": "Wave 4 Route 2",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 240\" role=\"img\" aria-label=\"Original TutoDemy visual\"><line x1=\"30\" y1=\"30\" x2=\"210\" y2=\"30\" stroke=\"#bbb\"/><line x1=\"30\" y1=\"30\" x2=\"30\" y2=\"210\" stroke=\"#bbb\"/><text x=\"30\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">0</text><text x=\"14\" y=\"34\" text-anchor=\"middle\" font-size=\"10\">0</text><line x1=\"30\" y1=\"60\" x2=\"210\" y2=\"60\" stroke=\"#bbb\"/><line x1=\"60\" y1=\"30\" x2=\"60\" y2=\"210\" stroke=\"#bbb\"/><text x=\"60\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">1</text><text x=\"14\" y=\"64\" text-anchor=\"middle\" font-size=\"10\">1</text><line x1=\"30\" y1=\"90\" x2=\"210\" y2=\"90\" stroke=\"#bbb\"/><line x1=\"90\" y1=\"30\" x2=\"90\" y2=\"210\" stroke=\"#bbb\"/><text x=\"90\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">2</text><text x=\"14\" y=\"94\" text-anchor=\"middle\" font-size=\"10\">2</text><line x1=\"30\" y1=\"120\" x2=\"210\" y2=\"120\" stroke=\"#bbb\"/><line x1=\"120\" y1=\"30\" x2=\"120\" y2=\"210\" stroke=\"#bbb\"/><text x=\"120\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">3</text><text x=\"14\" y=\"124\" text-anchor=\"middle\" font-size=\"10\">3</text><line x1=\"30\" y1=\"150\" x2=\"210\" y2=\"150\" stroke=\"#bbb\"/><line x1=\"150\" y1=\"30\" x2=\"150\" y2=\"210\" stroke=\"#bbb\"/><text x=\"150\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">4</text><text x=\"14\" y=\"154\" text-anchor=\"middle\" font-size=\"10\">4</text><line x1=\"30\" y1=\"180\" x2=\"210\" y2=\"180\" stroke=\"#bbb\"/><line x1=\"180\" y1=\"30\" x2=\"180\" y2=\"210\" stroke=\"#bbb\"/><text x=\"180\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">5</text><text x=\"14\" y=\"184\" text-anchor=\"middle\" font-size=\"10\">5</text><line x1=\"30\" y1=\"210\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><line x1=\"210\" y1=\"30\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><text x=\"210\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">6</text><text x=\"14\" y=\"214\" text-anchor=\"middle\" font-size=\"10\">6</text><polyline points=\"30,60 60,60 90,60 90,90 90,120 60,120 60,90\" fill=\"none\" stroke=\"#3159c7\" stroke-width=\"5\"/><circle cx=\"30\" cy=\"60\" r=\"7\" fill=\"#f3a51b\" stroke=\"#111\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPATH-062": {
+    "id": "W4-NVRPATH-062",
+    "type": "visual",
+    "title": "Wave 4 Route 3",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 240\" role=\"img\" aria-label=\"Original TutoDemy visual\"><line x1=\"30\" y1=\"30\" x2=\"210\" y2=\"30\" stroke=\"#bbb\"/><line x1=\"30\" y1=\"30\" x2=\"30\" y2=\"210\" stroke=\"#bbb\"/><text x=\"30\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">0</text><text x=\"14\" y=\"34\" text-anchor=\"middle\" font-size=\"10\">0</text><line x1=\"30\" y1=\"60\" x2=\"210\" y2=\"60\" stroke=\"#bbb\"/><line x1=\"60\" y1=\"30\" x2=\"60\" y2=\"210\" stroke=\"#bbb\"/><text x=\"60\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">1</text><text x=\"14\" y=\"64\" text-anchor=\"middle\" font-size=\"10\">1</text><line x1=\"30\" y1=\"90\" x2=\"210\" y2=\"90\" stroke=\"#bbb\"/><line x1=\"90\" y1=\"30\" x2=\"90\" y2=\"210\" stroke=\"#bbb\"/><text x=\"90\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">2</text><text x=\"14\" y=\"94\" text-anchor=\"middle\" font-size=\"10\">2</text><line x1=\"30\" y1=\"120\" x2=\"210\" y2=\"120\" stroke=\"#bbb\"/><line x1=\"120\" y1=\"30\" x2=\"120\" y2=\"210\" stroke=\"#bbb\"/><text x=\"120\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">3</text><text x=\"14\" y=\"124\" text-anchor=\"middle\" font-size=\"10\">3</text><line x1=\"30\" y1=\"150\" x2=\"210\" y2=\"150\" stroke=\"#bbb\"/><line x1=\"150\" y1=\"30\" x2=\"150\" y2=\"210\" stroke=\"#bbb\"/><text x=\"150\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">4</text><text x=\"14\" y=\"154\" text-anchor=\"middle\" font-size=\"10\">4</text><line x1=\"30\" y1=\"180\" x2=\"210\" y2=\"180\" stroke=\"#bbb\"/><line x1=\"180\" y1=\"30\" x2=\"180\" y2=\"210\" stroke=\"#bbb\"/><text x=\"180\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">5</text><text x=\"14\" y=\"184\" text-anchor=\"middle\" font-size=\"10\">5</text><line x1=\"30\" y1=\"210\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><line x1=\"210\" y1=\"30\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><text x=\"210\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">6</text><text x=\"14\" y=\"214\" text-anchor=\"middle\" font-size=\"10\">6</text><polyline points=\"210,180 180,180 150,180 150,150 150,120 180,120 180,90\" fill=\"none\" stroke=\"#3159c7\" stroke-width=\"5\"/><circle cx=\"210\" cy=\"180\" r=\"7\" fill=\"#f3a51b\" stroke=\"#111\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPATH-063": {
+    "id": "W4-NVRPATH-063",
+    "type": "visual",
+    "title": "Wave 4 Route 4",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 240\" role=\"img\" aria-label=\"Original TutoDemy visual\"><line x1=\"30\" y1=\"30\" x2=\"210\" y2=\"30\" stroke=\"#bbb\"/><line x1=\"30\" y1=\"30\" x2=\"30\" y2=\"210\" stroke=\"#bbb\"/><text x=\"30\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">0</text><text x=\"14\" y=\"34\" text-anchor=\"middle\" font-size=\"10\">0</text><line x1=\"30\" y1=\"60\" x2=\"210\" y2=\"60\" stroke=\"#bbb\"/><line x1=\"60\" y1=\"30\" x2=\"60\" y2=\"210\" stroke=\"#bbb\"/><text x=\"60\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">1</text><text x=\"14\" y=\"64\" text-anchor=\"middle\" font-size=\"10\">1</text><line x1=\"30\" y1=\"90\" x2=\"210\" y2=\"90\" stroke=\"#bbb\"/><line x1=\"90\" y1=\"30\" x2=\"90\" y2=\"210\" stroke=\"#bbb\"/><text x=\"90\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">2</text><text x=\"14\" y=\"94\" text-anchor=\"middle\" font-size=\"10\">2</text><line x1=\"30\" y1=\"120\" x2=\"210\" y2=\"120\" stroke=\"#bbb\"/><line x1=\"120\" y1=\"30\" x2=\"120\" y2=\"210\" stroke=\"#bbb\"/><text x=\"120\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">3</text><text x=\"14\" y=\"124\" text-anchor=\"middle\" font-size=\"10\">3</text><line x1=\"30\" y1=\"150\" x2=\"210\" y2=\"150\" stroke=\"#bbb\"/><line x1=\"150\" y1=\"30\" x2=\"150\" y2=\"210\" stroke=\"#bbb\"/><text x=\"150\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">4</text><text x=\"14\" y=\"154\" text-anchor=\"middle\" font-size=\"10\">4</text><line x1=\"30\" y1=\"180\" x2=\"210\" y2=\"180\" stroke=\"#bbb\"/><line x1=\"180\" y1=\"30\" x2=\"180\" y2=\"210\" stroke=\"#bbb\"/><text x=\"180\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">5</text><text x=\"14\" y=\"184\" text-anchor=\"middle\" font-size=\"10\">5</text><line x1=\"30\" y1=\"210\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><line x1=\"210\" y1=\"30\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><text x=\"210\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">6</text><text x=\"14\" y=\"214\" text-anchor=\"middle\" font-size=\"10\">6</text><polyline points=\"120,210 120,180 90,180 90,150 90,120 120,120\" fill=\"none\" stroke=\"#3159c7\" stroke-width=\"5\"/><circle cx=\"120\" cy=\"210\" r=\"7\" fill=\"#f3a51b\" stroke=\"#111\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPATH-064": {
+    "id": "W4-NVRPATH-064",
+    "type": "visual",
+    "title": "Wave 4 Route 5",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 240\" role=\"img\" aria-label=\"Original TutoDemy visual\"><line x1=\"30\" y1=\"30\" x2=\"210\" y2=\"30\" stroke=\"#bbb\"/><line x1=\"30\" y1=\"30\" x2=\"30\" y2=\"210\" stroke=\"#bbb\"/><text x=\"30\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">0</text><text x=\"14\" y=\"34\" text-anchor=\"middle\" font-size=\"10\">0</text><line x1=\"30\" y1=\"60\" x2=\"210\" y2=\"60\" stroke=\"#bbb\"/><line x1=\"60\" y1=\"30\" x2=\"60\" y2=\"210\" stroke=\"#bbb\"/><text x=\"60\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">1</text><text x=\"14\" y=\"64\" text-anchor=\"middle\" font-size=\"10\">1</text><line x1=\"30\" y1=\"90\" x2=\"210\" y2=\"90\" stroke=\"#bbb\"/><line x1=\"90\" y1=\"30\" x2=\"90\" y2=\"210\" stroke=\"#bbb\"/><text x=\"90\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">2</text><text x=\"14\" y=\"94\" text-anchor=\"middle\" font-size=\"10\">2</text><line x1=\"30\" y1=\"120\" x2=\"210\" y2=\"120\" stroke=\"#bbb\"/><line x1=\"120\" y1=\"30\" x2=\"120\" y2=\"210\" stroke=\"#bbb\"/><text x=\"120\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">3</text><text x=\"14\" y=\"124\" text-anchor=\"middle\" font-size=\"10\">3</text><line x1=\"30\" y1=\"150\" x2=\"210\" y2=\"150\" stroke=\"#bbb\"/><line x1=\"150\" y1=\"30\" x2=\"150\" y2=\"210\" stroke=\"#bbb\"/><text x=\"150\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">4</text><text x=\"14\" y=\"154\" text-anchor=\"middle\" font-size=\"10\">4</text><line x1=\"30\" y1=\"180\" x2=\"210\" y2=\"180\" stroke=\"#bbb\"/><line x1=\"180\" y1=\"30\" x2=\"180\" y2=\"210\" stroke=\"#bbb\"/><text x=\"180\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">5</text><text x=\"14\" y=\"184\" text-anchor=\"middle\" font-size=\"10\">5</text><line x1=\"30\" y1=\"210\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><line x1=\"210\" y1=\"30\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><text x=\"210\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">6</text><text x=\"14\" y=\"214\" text-anchor=\"middle\" font-size=\"10\">6</text><polyline points=\"180,30 180,60 180,90 150,90 120,90 120,120\" fill=\"none\" stroke=\"#3159c7\" stroke-width=\"5\"/><circle cx=\"180\" cy=\"30\" r=\"7\" fill=\"#f3a51b\" stroke=\"#111\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRPATH-065": {
+    "id": "W4-NVRPATH-065",
+    "type": "visual",
+    "title": "Wave 4 Route 6",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 240 240\" role=\"img\" aria-label=\"Original TutoDemy visual\"><line x1=\"30\" y1=\"30\" x2=\"210\" y2=\"30\" stroke=\"#bbb\"/><line x1=\"30\" y1=\"30\" x2=\"30\" y2=\"210\" stroke=\"#bbb\"/><text x=\"30\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">0</text><text x=\"14\" y=\"34\" text-anchor=\"middle\" font-size=\"10\">0</text><line x1=\"30\" y1=\"60\" x2=\"210\" y2=\"60\" stroke=\"#bbb\"/><line x1=\"60\" y1=\"30\" x2=\"60\" y2=\"210\" stroke=\"#bbb\"/><text x=\"60\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">1</text><text x=\"14\" y=\"64\" text-anchor=\"middle\" font-size=\"10\">1</text><line x1=\"30\" y1=\"90\" x2=\"210\" y2=\"90\" stroke=\"#bbb\"/><line x1=\"90\" y1=\"30\" x2=\"90\" y2=\"210\" stroke=\"#bbb\"/><text x=\"90\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">2</text><text x=\"14\" y=\"94\" text-anchor=\"middle\" font-size=\"10\">2</text><line x1=\"30\" y1=\"120\" x2=\"210\" y2=\"120\" stroke=\"#bbb\"/><line x1=\"120\" y1=\"30\" x2=\"120\" y2=\"210\" stroke=\"#bbb\"/><text x=\"120\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">3</text><text x=\"14\" y=\"124\" text-anchor=\"middle\" font-size=\"10\">3</text><line x1=\"30\" y1=\"150\" x2=\"210\" y2=\"150\" stroke=\"#bbb\"/><line x1=\"150\" y1=\"30\" x2=\"150\" y2=\"210\" stroke=\"#bbb\"/><text x=\"150\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">4</text><text x=\"14\" y=\"154\" text-anchor=\"middle\" font-size=\"10\">4</text><line x1=\"30\" y1=\"180\" x2=\"210\" y2=\"180\" stroke=\"#bbb\"/><line x1=\"180\" y1=\"30\" x2=\"180\" y2=\"210\" stroke=\"#bbb\"/><text x=\"180\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">5</text><text x=\"14\" y=\"184\" text-anchor=\"middle\" font-size=\"10\">5</text><line x1=\"30\" y1=\"210\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><line x1=\"210\" y1=\"30\" x2=\"210\" y2=\"210\" stroke=\"#bbb\"/><text x=\"210\" y=\"18\" text-anchor=\"middle\" font-size=\"10\">6</text><text x=\"14\" y=\"214\" text-anchor=\"middle\" font-size=\"10\">6</text><polyline points=\"30,150 60,150 90,150 90,120 90,90 90,120 120,120\" fill=\"none\" stroke=\"#3159c7\" stroke-width=\"5\"/><circle cx=\"30\" cy=\"150\" r=\"7\" fill=\"#f3a51b\" stroke=\"#111\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRHIDDEN-066": {
+    "id": "W4-NVRHIDDEN-066",
+    "type": "visual",
+    "title": "Wave 4 Hidden Reference 1",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 135 115\" role=\"img\" aria-label=\"Original TutoDemy visual\"><path d=\"M20 90 L50 35 L80 90 L110 35 M50 35 V105 M80 90 H120\" fill=\"none\" stroke=\"#111\" stroke-width=\"6\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRHIDDEN-067": {
+    "id": "W4-NVRHIDDEN-067",
+    "type": "visual",
+    "title": "Wave 4 Hidden Reference 2",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 135 115\" role=\"img\" aria-label=\"Original TutoDemy visual\"><path d=\"M20 25 H110 L65 95 Z M65 25 V95 M42 60 H88\" fill=\"none\" stroke=\"#111\" stroke-width=\"6\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRHIDDEN-068": {
+    "id": "W4-NVRHIDDEN-068",
+    "type": "visual",
+    "title": "Wave 4 Hidden Reference 3",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 135 115\" role=\"img\" aria-label=\"Original TutoDemy visual\"><path d=\"M25 20 V95 H105 V50 H60 V75\" fill=\"none\" stroke=\"#111\" stroke-width=\"6\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRHIDDEN-069": {
+    "id": "W4-NVRHIDDEN-069",
+    "type": "visual",
+    "title": "Wave 4 Hidden Reference 4",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 135 115\" role=\"img\" aria-label=\"Original TutoDemy visual\"><path d=\"M20 90 L50 35 L80 90 L110 35 M50 35 V105 M80 90 H120\" fill=\"none\" stroke=\"#111\" stroke-width=\"6\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRHIDDEN-070": {
+    "id": "W4-NVRHIDDEN-070",
+    "type": "visual",
+    "title": "Wave 4 Hidden Reference 5",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 135 115\" role=\"img\" aria-label=\"Original TutoDemy visual\"><path d=\"M20 25 H110 L65 95 Z M65 25 V95 M42 60 H88\" fill=\"none\" stroke=\"#111\" stroke-width=\"6\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-NVRHIDDEN-071": {
+    "id": "W4-NVRHIDDEN-071",
+    "type": "visual",
+    "title": "Wave 4 Hidden Reference 6",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 135 115\" role=\"img\" aria-label=\"Original TutoDemy visual\"><path d=\"M25 20 V95 H105 V50 H60 V75\" fill=\"none\" stroke=\"#111\" stroke-width=\"6\"/></svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-ENG-P1": {
+    "id": "W4-ENG-P1",
+    "type": "passage",
+    "title": "River Temperature Sensors",
+    "content": "A student team placed temperature sensors at three points along a small river. The downstream sensor showed unusually high midday readings. At first, the team suspected warm discharge from nearby buildings.\n\nA site visit revealed that the downstream sensor was in shallow water exposed to direct sunlight, while the other sensors were shaded. After the sensors were installed at similar depths and with comparable shielding, the downstream site remained slightly warmer but the extreme difference disappeared. The investigation showed that environmental measurements must distinguish site effects from instrument placement effects.",
+    "html": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy passage."
+  },
+  "W4-ENG-P2": {
+    "id": "W4-ENG-P2",
+    "type": "passage",
+    "title": "Tool-Lending Library",
+    "content": "A community opened a tool-lending library so residents could borrow equipment used only occasionally. Early membership grew quickly, but several tools were returned damaged because borrowers lacked experience.\n\nThe organizers responded by adding short safety orientations, illustrated instructions, and maintenance checks. Borrowing slowed slightly, yet the tools lasted longer and injury reports declined. The program's success therefore depended not only on access, but also on guidance and upkeep.",
+    "html": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy passage."
+  },
+  "W4-ENG-P3": {
+    "id": "W4-ENG-P3",
+    "type": "passage",
+    "title": "Cool Pavement Trial",
+    "content": "Two parking areas of similar size were resurfaced with different materials. One used a light-colored coating, while the other retained dark asphalt. During sunny afternoons, the coated surface was cooler, but nighttime temperatures became similar.\n\nThe investigators concluded that the coating reduced daytime solar heating. They did not claim it lowered temperature at all hours, and they recommended studying glare, durability, and maintenance before wider installation.",
+    "html": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy passage."
+  },
+  "W4-ENG-P4": {
+    "id": "W4-ENG-P4",
+    "type": "passage",
+    "title": "Reusable Packaging",
+    "content": "A food cooperative compared disposable containers with reusable ones. Reusable containers required more material and washing, but they could be used many times. Disposable containers required little washing but generated more solid waste.\n\nThe cooperative concluded that reuse is not automatically better under every condition. The result depends on how many times a container is actually reused, how it is washed, and how far it is transported.",
+    "html": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy passage."
+  },
+  "W4-ENG-P5": {
+    "id": "W4-ENG-P5",
+    "type": "passage",
+    "title": "Hillside Footpath",
+    "content": "A park planned a footpath across a steep hillside. The shortest route climbed directly upward, but it would have required extensive steps and erosion control. A longer route followed the contour and passed through more stable ground.\n\nThe final route was longer in distance but gentler in slope. It reduced construction difficulty and runoff risk while remaining accessible to more visitors. The choice illustrates that the shortest route is not always the most practical route.",
+    "html": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy passage."
+  },
+  "W4-BIOENZ-077": {
+    "id": "W4-BIOENZ-077",
+    "type": "table",
+    "title": "Enzyme Activity at Different Temperatures",
+    "html": "\n    <table style=\"border-collapse:collapse;margin:auto\">\n      <tr><th style=\"border:1px solid #999;padding:6px\">Temperature (°C)</th><th style=\"border:1px solid #999;padding:6px\">Product Formed in 5 min (mg)</th></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">10</td><td style=\"border:1px solid #999;padding:6px\">4</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">25</td><td style=\"border:1px solid #999;padding:6px\">11</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">40</td><td style=\"border:1px solid #999;padding:6px\">18</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">60</td><td style=\"border:1px solid #999;padding:6px\">3</td></tr>\n    </table>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-BIOPOP-078": {
+    "id": "W4-BIOPOP-078",
+    "type": "table",
+    "title": "Island Lizard Population",
+    "html": "\n    <table style=\"border-collapse:collapse;margin:auto\">\n      <tr><th style=\"border:1px solid #999;padding:6px\">Year</th><th style=\"border:1px solid #999;padding:6px\">Population</th></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">1</td><td style=\"border:1px solid #999;padding:6px\">120</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">2</td><td style=\"border:1px solid #999;padding:6px\">190</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">3</td><td style=\"border:1px solid #999;padding:6px\">250</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">4</td><td style=\"border:1px solid #999;padding:6px\">275</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">5</td><td style=\"border:1px solid #999;padding:6px\">278</td></tr>\n    </table>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-CHEMTIT-079": {
+    "id": "W4-CHEMTIT-079",
+    "type": "table",
+    "title": "Titration Trials",
+    "html": "\n    <table style=\"border-collapse:collapse;margin:auto\">\n      <tr><th style=\"border:1px solid #999;padding:6px\">Trial</th><th style=\"border:1px solid #999;padding:6px\">Acid Volume (mL)</th><th style=\"border:1px solid #999;padding:6px\">Base Volume to Endpoint (mL)</th></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">1</td><td style=\"border:1px solid #999;padding:6px\">25.0</td><td style=\"border:1px solid #999;padding:6px\">24.8</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">2</td><td style=\"border:1px solid #999;padding:6px\">25.0</td><td style=\"border:1px solid #999;padding:6px\">25.1</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">3</td><td style=\"border:1px solid #999;padding:6px\">25.0</td><td style=\"border:1px solid #999;padding:6px\">25.0</td></tr>\n    </table>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-CHEMEQ-080": {
+    "id": "W4-CHEMEQ-080",
+    "type": "table",
+    "title": "Equilibrium Mixture",
+    "html": "\n    <table style=\"border-collapse:collapse;margin:auto\">\n      <tr><th style=\"border:1px solid #999;padding:6px\">Condition</th><th style=\"border:1px solid #999;padding:6px\">Relative Product Amount</th></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">Initial equilibrium</td><td style=\"border:1px solid #999;padding:6px\">50</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">Reactant added</td><td style=\"border:1px solid #999;padding:6px\">68</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">Product removed</td><td style=\"border:1px solid #999;padding:6px\">74</td></tr>\n    </table>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-PHYMOTION-081": {
+    "id": "W4-PHYMOTION-081",
+    "type": "visual",
+    "title": "Position-Time Graph",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 260 175\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <line x1=\"40\" y1=\"135\" x2=\"230\" y2=\"135\" stroke=\"#111\" stroke-width=\"3\"/>\n    <line x1=\"40\" y1=\"135\" x2=\"40\" y2=\"20\" stroke=\"#111\" stroke-width=\"3\"/>\n    <polyline points=\"40,135 90,85 145,85 210,35\" fill=\"none\" stroke=\"#3159c7\" stroke-width=\"5\"/>\n    <text x=\"135\" y=\"163\" text-anchor=\"middle\" font-size=\"14\">time (s)</text>\n    <text x=\"12\" y=\"82\" transform=\"rotate(-90 12 82)\" text-anchor=\"middle\" font-size=\"14\">position (m)</text>\n    <text x=\"38\" y=\"151\" font-size=\"11\">0</text><text x=\"87\" y=\"151\" font-size=\"11\">2</text><text x=\"142\" y=\"151\" font-size=\"11\">5</text><text x=\"207\" y=\"151\" font-size=\"11\">8</text>\n    <text x=\"20\" y=\"90\" font-size=\"11\">10</text><text x=\"20\" y=\"40\" font-size=\"11\">20</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-PHYLENS-082": {
+    "id": "W4-PHYLENS-082",
+    "type": "visual",
+    "title": "Converging Lens Setup",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 260 170\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <line x1=\"20\" y1=\"85\" x2=\"240\" y2=\"85\" stroke=\"#999\" stroke-width=\"2\"/>\n    <line x1=\"130\" y1=\"20\" x2=\"130\" y2=\"150\" stroke=\"#3159c7\" stroke-width=\"5\"/>\n    <path d=\"M130 20 C112 50,112 120,130 150 M130 20 C148 50,148 120,130 150\" fill=\"none\" stroke=\"#3159c7\" stroke-width=\"3\"/>\n    <line x1=\"75\" y1=\"85\" x2=\"75\" y2=\"35\" stroke=\"#111\" stroke-width=\"4\"/>\n    <path d=\"M69 45 L75 33 L81 45 Z\" fill=\"#111\"/>\n    <text x=\"71\" y=\"28\" font-size=\"12\">object</text>\n    <circle cx=\"95\" cy=\"85\" r=\"4\" fill=\"#d14b4b\"/><text x=\"91\" y=\"103\" font-size=\"11\">F</text>\n    <circle cx=\"165\" cy=\"85\" r=\"4\" fill=\"#d14b4b\"/><text x=\"161\" y=\"103\" font-size=\"11\">F</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-PHYCIR-083": {
+    "id": "W4-PHYCIR-083",
+    "type": "visual",
+    "title": "Series Circuit",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 250 170\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <line x1=\"30\" y1=\"35\" x2=\"220\" y2=\"35\" stroke=\"#111\" stroke-width=\"4\"/>\n    <line x1=\"30\" y1=\"135\" x2=\"220\" y2=\"135\" stroke=\"#111\" stroke-width=\"4\"/>\n    <line x1=\"30\" y1=\"35\" x2=\"30\" y2=\"65\" stroke=\"#111\" stroke-width=\"4\"/>\n    <line x1=\"30\" y1=\"105\" x2=\"30\" y2=\"135\" stroke=\"#111\" stroke-width=\"4\"/>\n    <line x1=\"24\" y1=\"68\" x2=\"36\" y2=\"68\" stroke=\"#111\" stroke-width=\"3\"/>\n    <line x1=\"20\" y1=\"82\" x2=\"40\" y2=\"82\" stroke=\"#111\" stroke-width=\"5\"/>\n    <line x1=\"24\" y1=\"96\" x2=\"36\" y2=\"96\" stroke=\"#111\" stroke-width=\"3\"/>\n    <text x=\"5\" y=\"86\" font-size=\"12\">18 V</text>\n    <rect x=\"80\" y=\"23\" width=\"46\" height=\"24\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <text x=\"103\" y=\"40\" text-anchor=\"middle\" font-size=\"11\">3Ω</text>\n    <rect x=\"160\" y=\"123\" width=\"46\" height=\"24\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <text x=\"183\" y=\"140\" text-anchor=\"middle\" font-size=\"11\">6Ω</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-EARTHRAIN-084": {
+    "id": "W4-EARTHRAIN-084",
+    "type": "table",
+    "title": "Watershed Rainfall and Stream Level",
+    "html": "\n    <table style=\"border-collapse:collapse;margin:auto\">\n      <tr><th style=\"border:1px solid #999;padding:6px\">Hour</th><th style=\"border:1px solid #999;padding:6px\">Rainfall (mm)</th><th style=\"border:1px solid #999;padding:6px\">Stream Level (m)</th></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">1</td><td style=\"border:1px solid #999;padding:6px\">0</td><td style=\"border:1px solid #999;padding:6px\">1.2</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">2</td><td style=\"border:1px solid #999;padding:6px\">18</td><td style=\"border:1px solid #999;padding:6px\">1.3</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">3</td><td style=\"border:1px solid #999;padding:6px\">32</td><td style=\"border:1px solid #999;padding:6px\">1.8</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">4</td><td style=\"border:1px solid #999;padding:6px\">10</td><td style=\"border:1px solid #999;padding:6px\">2.4</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">5</td><td style=\"border:1px solid #999;padding:6px\">0</td><td style=\"border:1px solid #999;padding:6px\">2.1</td></tr>\n    </table>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-EARTHFAULT-085": {
+    "id": "W4-EARTHFAULT-085",
+    "type": "visual",
+    "title": "Faulted Rock Layers",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 250 145\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <path d=\"M20 30 H230 V55 H20 Z\" fill=\"#f2d59e\" stroke=\"#111\" stroke-width=\"2\"/>\n    <path d=\"M20 55 H230 V82 H20 Z\" fill=\"#c4d8ee\" stroke=\"#111\" stroke-width=\"2\"/>\n    <path d=\"M20 82 H230 V115 H20 Z\" fill=\"#d8c2a3\" stroke=\"#111\" stroke-width=\"2\"/>\n    <path d=\"M135 20 L105 125\" stroke=\"#d14b4b\" stroke-width=\"5\"/>\n    <path d=\"M20 30 H125 M145 42 H230\" stroke=\"#111\" stroke-width=\"2\"/>\n    <path d=\"M20 55 H118 M138 67 H230\" stroke=\"#111\" stroke-width=\"2\"/>\n    <path d=\"M20 82 H110 M130 94 H230\" stroke=\"#111\" stroke-width=\"2\"/>\n    <text x=\"146\" y=\"22\" font-size=\"12\">fault</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-MATHTRAN-086": {
+    "id": "W4-MATHTRAN-086",
+    "type": "table",
+    "title": "Public Transport Ridership",
+    "html": "\n    <table style=\"border-collapse:collapse;margin:auto\">\n      <tr><th style=\"border:1px solid #999;padding:6px\">Route</th><th style=\"border:1px solid #999;padding:6px\">Passengers</th><th style=\"border:1px solid #999;padding:6px\">Trips</th></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">A</td><td style=\"border:1px solid #999;padding:6px\">1,200</td><td style=\"border:1px solid #999;padding:6px\">40</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">B</td><td style=\"border:1px solid #999;padding:6px\">1,500</td><td style=\"border:1px solid #999;padding:6px\">50</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">C</td><td style=\"border:1px solid #999;padding:6px\">1,080</td><td style=\"border:1px solid #999;padding:6px\">30</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">D</td><td style=\"border:1px solid #999;padding:6px\">1,760</td><td style=\"border:1px solid #999;padding:6px\">55</td></tr>\n    </table>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-MATHWATER-087": {
+    "id": "W4-MATHWATER-087",
+    "type": "table",
+    "title": "Monthly Household Water Use",
+    "html": "\n    <table style=\"border-collapse:collapse;margin:auto\">\n      <tr><th style=\"border:1px solid #999;padding:6px\">Month</th><th style=\"border:1px solid #999;padding:6px\">Use (m³)</th><th style=\"border:1px solid #999;padding:6px\">Bill (₱)</th></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">May</td><td style=\"border:1px solid #999;padding:6px\">24</td><td style=\"border:1px solid #999;padding:6px\">720</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">June</td><td style=\"border:1px solid #999;padding:6px\">21</td><td style=\"border:1px solid #999;padding:6px\">651</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">July</td><td style=\"border:1px solid #999;padding:6px\">27</td><td style=\"border:1px solid #999;padding:6px\">837</td></tr>\n      <tr><td style=\"border:1px solid #999;padding:6px\">August</td><td style=\"border:1px solid #999;padding:6px\">30</td><td style=\"border:1px solid #999;padding:6px\">960</td></tr>\n    </table>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-MECHGEAR-088": {
+    "id": "W4-MECHGEAR-088",
+    "type": "visual",
+    "title": "Compound Gear Train",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 235 155\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <circle cx=\"45\" cy=\"82\" r=\"28\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/>\n    <circle cx=\"102\" cy=\"82\" r=\"22\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/>\n    <circle cx=\"150\" cy=\"82\" r=\"18\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/>\n    <circle cx=\"193\" cy=\"82\" r=\"14\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/>\n    <text x=\"45\" y=\"88\" text-anchor=\"middle\" font-size=\"16\">A</text>\n    <text x=\"102\" y=\"88\" text-anchor=\"middle\" font-size=\"16\">B</text>\n    <text x=\"150\" y=\"88\" text-anchor=\"middle\" font-size=\"16\">C</text>\n    <text x=\"193\" y=\"88\" text-anchor=\"middle\" font-size=\"16\">D</text>\n    <path d=\"M25 33 C10 48,10 75,22 94\" fill=\"none\" stroke=\"#3159c7\" stroke-width=\"4\"/>\n    <path d=\"M20 88 L22 101 L32 93 Z\" fill=\"#3159c7\"/>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-MECHLEV-089": {
+    "id": "W4-MECHLEV-089",
+    "type": "visual",
+    "title": "Lever in Equilibrium",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 255 150\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <line x1=\"25\" y1=\"90\" x2=\"230\" y2=\"90\" stroke=\"#111\" stroke-width=\"7\"/>\n    <polygon points=\"120,90 100,132 140,132\" fill=\"#ddd\" stroke=\"#111\" stroke-width=\"3\"/>\n    <path d=\"M50 35 V85\" stroke=\"#3159c7\" stroke-width=\"5\"/>\n    <path d=\"M44 73 L50 87 L56 73 Z\" fill=\"#3159c7\"/>\n    <text x=\"32\" y=\"25\" font-size=\"13\">24 N</text>\n    <path d=\"M200 35 V85\" stroke=\"#d14b4b\" stroke-width=\"5\"/>\n    <path d=\"M194 73 L200 87 L206 73 Z\" fill=\"#d14b4b\"/>\n    <text x=\"193\" y=\"25\" font-size=\"13\">?</text>\n    <text x=\"57\" y=\"112\" font-size=\"12\">2.5 m</text>\n    <text x=\"165\" y=\"112\" font-size=\"12\">1.5 m</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-MECHHYD-090": {
+    "id": "W4-MECHHYD-090",
+    "type": "visual",
+    "title": "Hydraulic Press",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 275 175\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <rect x=\"35\" y=\"50\" width=\"45\" height=\"85\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/>\n    <rect x=\"165\" y=\"25\" width=\"70\" height=\"110\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/>\n    <rect x=\"35\" y=\"110\" width=\"200\" height=\"25\" fill=\"#d8ecff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <line x1=\"57\" y1=\"15\" x2=\"57\" y2=\"50\" stroke=\"#3159c7\" stroke-width=\"5\"/>\n    <path d=\"M51 37 L57 50 L63 37 Z\" fill=\"#3159c7\"/>\n    <text x=\"14\" y=\"20\" font-size=\"12\">120 N</text>\n    <text x=\"34\" y=\"155\" font-size=\"12\">12 cm²</text>\n    <text x=\"168\" y=\"155\" font-size=\"12\">72 cm²</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-MECHENG-091": {
+    "id": "W4-MECHENG-091",
+    "type": "visual",
+    "title": "Four-Stroke Engine Sequence",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 270 145\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <rect x=\"16\" y=\"24\" width=\"48\" height=\"98\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <rect x=\"78\" y=\"24\" width=\"48\" height=\"98\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <rect x=\"140\" y=\"24\" width=\"48\" height=\"98\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <rect x=\"202\" y=\"24\" width=\"48\" height=\"98\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <text x=\"40\" y=\"17\" text-anchor=\"middle\" font-size=\"11\">A</text>\n    <text x=\"102\" y=\"17\" text-anchor=\"middle\" font-size=\"11\">B</text>\n    <text x=\"164\" y=\"17\" text-anchor=\"middle\" font-size=\"11\">C</text>\n    <text x=\"226\" y=\"17\" text-anchor=\"middle\" font-size=\"11\">D</text>\n    <rect x=\"25\" y=\"82\" width=\"30\" height=\"23\" fill=\"#ddd\" stroke=\"#111\"/>\n    <path d=\"M40 76 V42\" stroke=\"#3159c7\" stroke-width=\"4\"/>\n    <rect x=\"87\" y=\"45\" width=\"30\" height=\"23\" fill=\"#ddd\" stroke=\"#111\"/>\n    <path d=\"M102 73 V106\" stroke=\"#3159c7\" stroke-width=\"4\"/>\n    <rect x=\"149\" y=\"45\" width=\"30\" height=\"23\" fill=\"#ddd\" stroke=\"#111\"/>\n    <path d=\"M164 73 V106\" stroke=\"#d14b4b\" stroke-width=\"4\"/>\n    <rect x=\"211\" y=\"82\" width=\"30\" height=\"23\" fill=\"#ddd\" stroke=\"#111\"/>\n    <path d=\"M226 76 V42\" stroke=\"#d14b4b\" stroke-width=\"4\"/>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-MECHELEC-092": {
+    "id": "W4-MECHELEC-092",
+    "type": "visual",
+    "title": "Parallel Lamp Circuit",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 250 170\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <line x1=\"25\" y1=\"35\" x2=\"225\" y2=\"35\" stroke=\"#111\" stroke-width=\"4\"/>\n    <line x1=\"25\" y1=\"135\" x2=\"225\" y2=\"135\" stroke=\"#111\" stroke-width=\"4\"/>\n    <line x1=\"25\" y1=\"35\" x2=\"25\" y2=\"65\" stroke=\"#111\" stroke-width=\"4\"/>\n    <line x1=\"25\" y1=\"105\" x2=\"25\" y2=\"135\" stroke=\"#111\" stroke-width=\"4\"/>\n    <line x1=\"19\" y1=\"68\" x2=\"31\" y2=\"68\" stroke=\"#111\" stroke-width=\"3\"/>\n    <line x1=\"15\" y1=\"82\" x2=\"35\" y2=\"82\" stroke=\"#111\" stroke-width=\"5\"/>\n    <line x1=\"19\" y1=\"96\" x2=\"31\" y2=\"96\" stroke=\"#111\" stroke-width=\"3\"/>\n    <text x=\"3\" y=\"87\" font-size=\"12\">12 V</text>\n    <line x1=\"90\" y1=\"35\" x2=\"90\" y2=\"135\" stroke=\"#111\" stroke-width=\"4\"/>\n    <circle cx=\"90\" cy=\"84\" r=\"18\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <text x=\"90\" y=\"89\" text-anchor=\"middle\" font-size=\"12\">6Ω</text>\n    <line x1=\"175\" y1=\"35\" x2=\"175\" y2=\"135\" stroke=\"#111\" stroke-width=\"4\"/>\n    <circle cx=\"175\" cy=\"84\" r=\"18\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"3\"/>\n    <text x=\"175\" y=\"89\" text-anchor=\"middle\" font-size=\"12\">4Ω</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "W4-MECHSCH-093": {
+    "id": "W4-MECHSCH-093",
+    "type": "visual",
+    "title": "Tank, Pump, and Control Valve",
+    "html": "<svg class=\"\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 285 125\" role=\"img\" aria-label=\"Original TutoDemy visual\">\n    <rect x=\"20\" y=\"35\" width=\"75\" height=\"65\" fill=\"#d8ecff\" stroke=\"#111\" stroke-width=\"4\"/>\n    <text x=\"57\" y=\"70\" text-anchor=\"middle\" font-size=\"13\">TANK A</text>\n    <path d=\"M95 68 H135\" stroke=\"#111\" stroke-width=\"5\"/>\n    <circle cx=\"157\" cy=\"68\" r=\"20\" fill=\"#fff\" stroke=\"#111\" stroke-width=\"4\"/>\n    <path d=\"M147 68 L167 58 L167 78 Z\" fill=\"#3159c7\"/>\n    <text x=\"157\" y=\"103\" text-anchor=\"middle\" font-size=\"12\">PUMP</text>\n    <path d=\"M177 68 H220 V35\" stroke=\"#111\" stroke-width=\"5\"/>\n    <path d=\"M200 56 L212 68 L200 80 L188 68 Z\" fill=\"#fff\" stroke=\"#d14b4b\" stroke-width=\"3\"/>\n    <text x=\"202\" y=\"98\" text-anchor=\"middle\" font-size=\"11\">VALVE V</text>\n    <rect x=\"210\" y=\"10\" width=\"55\" height=\"45\" fill=\"#eef1ff\" stroke=\"#111\" stroke-width=\"4\"/>\n    <text x=\"237\" y=\"37\" text-anchor=\"middle\" font-size=\"12\">TANK B</text>\n    <path d=\"M118 58 V30 H137\" stroke=\"#777\" stroke-width=\"4\"/>\n    <path d=\"M137 24 L150 30 L137 36 Z\" fill=\"#777\"/>\n    <text x=\"112\" y=\"20\" font-size=\"10\">bypass</text>\n    </svg>",
+    "content": null,
+    "metadata": {},
+    "source_note": "Original TutoDemy stimulus; not copied or traced from a protected source."
+  },
+  "TD-VR-PI-P2-07": {
+    "id": "TD-VR-PI-P2-07",
+    "type": "visual",
+    "title": "Perceptual Acuity & Inductive Reasoning — upgraded visual",
+    "html": "<div class=\"dost-vr-stimulus\"><button type=\"button\" class=\"dost-vr-zoom-trigger\" data-src=\"assets/visual-reasoning/pi-07.svg\" aria-label=\"Enlarge visual reasoning figure\"><img src=\"assets/visual-reasoning/pi-07.svg\" alt=\"Perceptual Acuity & Inductive Reasoning visual reasoning figure\" loading=\"eager\"></button><small>Tap or click the figure to enlarge.</small></div>",
+    "content": null,
+    "metadata": {
+      "content_revision": "2026-08-16-vr3",
+      "original_source_id": "dost-pi-p2-07",
+      "responsive_svg": true
+    },
+    "source_note": "Original TutoDemy SVG practice figure; upgraded using multi-rule reasoning mechanics from user-provided reference materials."
+  },
+  "TD-VR-PI-P2-08": {
+    "id": "TD-VR-PI-P2-08",
+    "type": "visual",
+    "title": "Perceptual Acuity & Inductive Reasoning — upgraded visual",
+    "html": "<div class=\"dost-vr-stimulus\"><button type=\"button\" class=\"dost-vr-zoom-trigger\" data-src=\"assets/visual-reasoning/pi-08.svg\" aria-label=\"Enlarge visual reasoning figure\"><img src=\"assets/visual-reasoning/pi-08.svg\" alt=\"Perceptual Acuity & Inductive Reasoning visual reasoning figure\" loading=\"eager\"></button><small>Tap or click the figure to enlarge.</small></div>",
+    "content": null,
+    "metadata": {
+      "content_revision": "2026-08-16-vr3",
+      "original_source_id": "dost-pi-p2-08",
+      "responsive_svg": true
+    },
+    "source_note": "Original TutoDemy SVG practice figure; upgraded using multi-rule reasoning mechanics from user-provided reference materials."
+  },
+  "TD-VR-PI-P2-09": {
+    "id": "TD-VR-PI-P2-09",
+    "type": "visual",
+    "title": "Perceptual Acuity & Inductive Reasoning — upgraded visual",
+    "html": "<div class=\"dost-vr-stimulus\"><button type=\"button\" class=\"dost-vr-zoom-trigger\" data-src=\"assets/visual-reasoning/pi-09.svg\" aria-label=\"Enlarge visual reasoning figure\"><img src=\"assets/visual-reasoning/pi-09.svg\" alt=\"Perceptual Acuity & Inductive Reasoning visual reasoning figure\" loading=\"eager\"></button><small>Tap or click the figure to enlarge.</small></div>",
+    "content": null,
+    "metadata": {
+      "content_revision": "2026-08-16-vr3",
+      "original_source_id": "dost-pi-p2-09",
+      "responsive_svg": true
+    },
+    "source_note": "Original TutoDemy SVG practice figure; upgraded using multi-rule reasoning mechanics from user-provided reference materials."
+  },
+  "TD-VR-PI-P2-10": {
+    "id": "TD-VR-PI-P2-10",
+    "type": "visual",
+    "title": "Perceptual Acuity & Inductive Reasoning — upgraded visual",
+    "html": "<div class=\"dost-vr-stimulus\"><button type=\"button\" class=\"dost-vr-zoom-trigger\" data-src=\"assets/visual-reasoning/pi-10.svg\" aria-label=\"Enlarge visual reasoning figure\"><img src=\"assets/visual-reasoning/pi-10.svg\" alt=\"Perceptual Acuity & Inductive Reasoning visual reasoning figure\" loading=\"eager\"></button><small>Tap or click the figure to enlarge.</small></div>",
+    "content": null,
+    "metadata": {
+      "content_revision": "2026-08-16-vr3",
+      "original_source_id": "dost-pi-p2-10",
+      "responsive_svg": true
+    },
+    "source_note": "Original TutoDemy SVG practice figure; upgraded using multi-rule reasoning mechanics from user-provided reference materials."
+  },
+  "TD-VR-PI-P2-11": {
+    "id": "TD-VR-PI-P2-11",
+    "type": "visual",
+    "title": "Perceptual Acuity & Inductive Reasoning — upgraded visual",
+    "html": "<div class=\"dost-vr-stimulus\"><button type=\"button\" class=\"dost-vr-zoom-trigger\" data-src=\"assets/visual-reasoning/pi-11.svg\" aria-label=\"Enlarge visual reasoning figure\"><img src=\"assets/visual-reasoning/pi-11.svg\" alt=\"Perceptual Acuity & Inductive Reasoning visual reasoning figure\" loading=\"eager\"></button><small>Tap or click the figure to enlarge.</small></div>",
+    "content": null,
+    "metadata": {
+      "content_revision": "2026-08-16-vr3",
+      "original_source_id": "dost-pi-p2-11",
+      "responsive_svg": true
+    },
+    "source_note": "Original TutoDemy SVG practice figure; upgraded using multi-rule reasoning mechanics from user-provided reference materials."
+  },
+  "TD-VR-PI-P2-12": {
+    "id": "TD-VR-PI-P2-12",
+    "type": "visual",
+    "title": "Perceptual Acuity & Inductive Reasoning — upgraded visual",
+    "html": "<div class=\"dost-vr-stimulus\"><button type=\"button\" class=\"dost-vr-zoom-trigger\" data-src=\"assets/visual-reasoning/pi-12.svg\" aria-label=\"Enlarge visual reasoning figure\"><img src=\"assets/visual-reasoning/pi-12.svg\" alt=\"Perceptual Acuity & Inductive Reasoning visual reasoning figure\" loading=\"eager\"></button><small>Tap or click the figure to enlarge.</small></div>",
+    "content": null,
+    "metadata": {
+      "content_revision": "2026-08-16-vr3",
+      "original_source_id": "dost-pi-p2-12",
+      "responsive_svg": true
+    },
+    "source_note": "Original TutoDemy SVG practice figure; upgraded using multi-rule reasoning mechanics from user-provided reference materials."
+  },
+  "TD-VR-AR-P1-09": {
+    "id": "TD-VR-AR-P1-09",
+    "type": "visual",
+    "title": "Abstract Reasoning — upgraded visual",
+    "html": "<div class=\"dost-vr-stimulus\"><button type=\"button\" class=\"dost-vr-zoom-trigger\" data-src=\"assets/visual-reasoning/ar-09.svg\" aria-label=\"Enlarge visual reasoning figure\"><img src=\"assets/visual-reasoning/ar-09.svg\" alt=\"Abstract Reasoning visual reasoning figure\" loading=\"eager\"></button><small>Tap or click the figure to enlarge.</small></div>",
+    "content": null,
+    "metadata": {
+      "content_revision": "2026-08-16-vr3",
+      "original_source_id": "dost-ar-p1-09",
+      "responsive_svg": true
+    },
+    "source_note": "Original TutoDemy SVG practice figure; upgraded using multi-rule reasoning mechanics from user-provided reference materials."
+  },
+  "TD-VR-AR-P1-10": {
+    "id": "TD-VR-AR-P1-10",
+    "type": "visual",
+    "title": "Abstract Reasoning — upgraded visual",
+    "html": "<div class=\"dost-vr-stimulus\"><button type=\"button\" class=\"dost-vr-zoom-trigger\" data-src=\"assets/visual-reasoning/ar-10.svg\" aria-label=\"Enlarge visual reasoning figure\"><img src=\"assets/visual-reasoning/ar-10.svg\" alt=\"Abstract Reasoning visual reasoning figure\" loading=\"eager\"></button><small>Tap or click the figure to enlarge.</small></div>",
+    "content": null,
+    "metadata": {
+      "content_revision": "2026-08-16-vr3",
+      "original_source_id": "dost-ar-p1-10",
+      "responsive_svg": true
+    },
+    "source_note": "Original TutoDemy SVG practice figure; upgraded using multi-rule reasoning mechanics from user-provided reference materials."
+  },
+  "TD-VR-AR-P1-11": {
+    "id": "TD-VR-AR-P1-11",
+    "type": "visual",
+    "title": "Abstract Reasoning — upgraded visual",
+    "html": "<div class=\"dost-vr-stimulus\"><button type=\"button\" class=\"dost-vr-zoom-trigger\" data-src=\"assets/visual-reasoning/ar-11.svg\" aria-label=\"Enlarge visual reasoning figure\"><img src=\"assets/visual-reasoning/ar-11.svg\" alt=\"Abstract Reasoning visual reasoning figure\" loading=\"eager\"></button><small>Tap or click the figure to enlarge.</small></div>",
+    "content": null,
+    "metadata": {
+      "content_revision": "2026-08-16-vr3",
+      "original_source_id": "dost-ar-p1-11",
+      "responsive_svg": true
+    },
+    "source_note": "Original TutoDemy SVG practice figure; upgraded using multi-rule reasoning mechanics from user-provided reference materials."
+  },
+  "TD-VR-AR-P1-12": {
+    "id": "TD-VR-AR-P1-12",
+    "type": "visual",
+    "title": "Abstract Reasoning — upgraded visual",
+    "html": "<div class=\"dost-vr-stimulus\"><button type=\"button\" class=\"dost-vr-zoom-trigger\" data-src=\"assets/visual-reasoning/ar-12.svg\" aria-label=\"Enlarge visual reasoning figure\"><img src=\"assets/visual-reasoning/ar-12.svg\" alt=\"Abstract Reasoning visual reasoning figure\" loading=\"eager\"></button><small>Tap or click the figure to enlarge.</small></div>",
+    "content": null,
+    "metadata": {
+      "content_revision": "2026-08-16-vr3",
+      "original_source_id": "dost-ar-p1-12",
+      "responsive_svg": true
+    },
+    "source_note": "Original TutoDemy SVG practice figure; upgraded using multi-rule reasoning mechanics from user-provided reference materials."
+  },
+  "TD-VR-PI-P2-03": {
+    "id": "TD-VR-PI-P2-03",
+    "type": "visual",
+    "title": "Perceptual Acuity & Inductive Reasoning — upgraded visual",
+    "html": "<div class=\"dost-vr-stimulus\"><button type=\"button\" class=\"dost-vr-zoom-trigger\" data-src=\"assets/visual-reasoning/pi-03.svg\" aria-label=\"Enlarge visual reasoning figure\"><img src=\"assets/visual-reasoning/pi-03.svg\" alt=\"Perceptual Acuity & Inductive Reasoning visual reasoning figure\" loading=\"eager\"></button><small>Tap or click the figure to enlarge.</small></div>",
+    "content": null,
+    "metadata": {
+      "content_revision": "2026-08-16-vr3",
+      "original_source_id": "dost-pi-p2-03",
+      "responsive_svg": true
+    },
+    "source_note": "Original TutoDemy SVG practice figure; upgraded using multi-rule reasoning mechanics from user-provided reference materials."
+  }
+}
