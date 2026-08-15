@@ -102,8 +102,43 @@ function choiceDisplayLetter(item, originalChoiceId){
 function buildItems(selected, rng){
   return selected.map(q => ({
     qid: q.id,
-    choiceOrder: shuffle(q.choices.map(c => c.id), rng)
+    choiceOrder: q.fixed_choice_order
+      ? q.choices.map(c => c.id)
+      : shuffle(q.choices.map(c => c.id), rng)
   }));
+}
+
+function ensureVisualZoom(){
+  let dialog = document.querySelector("#dostVisualZoom");
+  if(dialog) return dialog;
+  dialog = document.createElement("dialog");
+  dialog.id = "dostVisualZoom";
+  dialog.className = "dost-vr-modal";
+  dialog.innerHTML = `
+    <div class="dost-vr-modal-head">
+      <b>Visual reasoning figure</b>
+      <button type="button" class="dost-vr-modal-close" aria-label="Close enlarged figure">×</button>
+    </div>
+    <div class="dost-vr-modal-stage"><img alt="Enlarged visual reasoning figure"></div>`;
+  document.body.appendChild(dialog);
+  dialog.querySelector(".dost-vr-modal-close").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", event => {
+    if(event.target === dialog) dialog.close();
+  });
+  return dialog;
+}
+
+function bindVisualZoom(){
+  document.querySelectorAll(".dost-vr-zoom-trigger").forEach(button => {
+    button.addEventListener("click", event => {
+      event.preventDefault();
+      const dialog = ensureVisualZoom();
+      const image = dialog.querySelector("img");
+      image.src = button.dataset.src || button.querySelector("img")?.src || "";
+      if(typeof dialog.showModal === "function") dialog.showModal();
+      else window.open(image.src, "_blank", "noopener");
+    });
+  });
 }
 
 function balancedDraw(pool, count, rng){
@@ -296,6 +331,7 @@ function renderQuestion(){
     $("#stimulus").classList.add("hidden");
     $("#stimulus").innerHTML = "";
   }
+  bindVisualZoom();
 
   const choiceMap = Object.fromEntries(q.choices.map(c => [c.id, c]));
   const selected = state.answers[q.id];
