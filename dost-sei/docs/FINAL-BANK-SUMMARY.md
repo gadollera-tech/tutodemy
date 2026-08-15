@@ -31,10 +31,10 @@ The planned cumulative question-bank target is complete.
 
 - Free-labelled questions: 340
 - Premium-labelled questions: 1360
-- Easy: 425
-- Moderate: 850
-- Difficult: 425
-- Original stimuli: 300
+- Easy: 412
+- Moderate: 846
+- Difficult: 442
+- Original stimuli: 300 (24 visual stimuli upgraded in place)
 
 ## Production caution
 

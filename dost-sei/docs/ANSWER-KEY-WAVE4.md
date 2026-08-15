@@ -62,21 +62,21 @@
 
 ## Non-Verbal Reasoning
 
-- **DOST-W4-056 — D**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
-- **DOST-W4-057 — A**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
-- **DOST-W4-058 — B**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
-- **DOST-W4-059 — C**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
-- **DOST-W4-060 — D**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
-- **DOST-W4-061 — A**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
+- **DOST-W4-056 — E**: A–D contain a reflection or a marker relationship that cannot be obtained by rotation alone. E preserves the handedness, both marker positions, and the asymmetric outline under rotation.
+- **DOST-W4-057 — B**: Track the outline's handedness, the filled dot, and the tiny square notch. B is a pure rotation of the target; the other options move or mirror at least one subtle feature.
+- **DOST-W4-058 — D**: No row or column repeats a line orientation. The missing cell must therefore be horizontal, which is option D.
+- **DOST-W4-059 — A**: Invert the two colors, rotate the figure 90° clockwise, then swap the two resulting halves. The final arrangement is a horizontal pair with the left half open and the right half filled.
+- **DOST-W4-060 — C**: Compare the overlap order of the circle, triangle and square, then use the small black marker to reject near-matches. C preserves all of those relationships; the others alter either layering or the marker.
+- **DOST-W4-061 — D**: Group 1 fills a diagonal pair of positions. Group 2 fills a vertical pair. D fills a horizontal pair, so it belongs in neither group.
 - **DOST-W4-062 — B**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
 - **DOST-W4-063 — C**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
 - **DOST-W4-064 — D**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
 - **DOST-W4-065 — A**: The correct option preserves the same handed arrangement of the tail, circle, diamond, and internal line.
-- **DOST-W4-066 — B**: Each step adds one side, rotates the figure, alternates shading, and advances the marker.
-- **DOST-W4-067 — C**: Each step adds one side, rotates the figure, alternates shading, and advances the marker.
-- **DOST-W4-068 — D**: Each step adds one side, rotates the figure, alternates shading, and advances the marker.
-- **DOST-W4-069 — A**: Each step adds one side, rotates the figure, alternates shading, and advances the marker.
-- **DOST-W4-070 — B**: Each step adds one side, rotates the figure, alternates shading, and advances the marker.
+- **DOST-W4-066 — D**: Treat the vertical lines, horizontal lines and centre marker as separate features. The last cell combines the vertical component from the first panel and horizontal component from the second, while following the row's centre-marker change. This gives D.
+- **DOST-W4-067 — B**: The filled triangle moves clockwise through the corners, the open diamond moves counterclockwise, the diagonal alternates direction, and the centre alternates open/filled. All four rules point to B.
+- **DOST-W4-068 — C**: Each frame adds one small shape and increases the polygon by one side. The number of filled shapes follows 1, 2, 2, 3, then 3, while the corner marker moves clockwise. The next figure therefore uses six heptagons, three filled, with the marker back at top-left.
+- **DOST-W4-069 — C**: Group 1 pairs matching shapes across opposite diagonals. Group 2 pairs matching shapes vertically by column. Choice C satisfies neither organizing relation.
+- **DOST-W4-070 — D**: The left L rotates 90° clockwise, while the middle and right L shapes rotate 90° counterclockwise. The shaded L also shifts one position to the right each step. Only D satisfies all three rules.
 - **DOST-W4-071 — C**: The same side-count, line-count, rotation, and fill progression occurs across rows and down columns.
 - **DOST-W4-072 — D**: The same side-count, line-count, rotation, and fill progression occurs across rows and down columns.
 - **DOST-W4-073 — A**: The same side-count, line-count, rotation, and fill progression occurs across rows and down columns.

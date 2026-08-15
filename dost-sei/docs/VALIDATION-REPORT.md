@@ -5,8 +5,8 @@
 - Questions: 500
 - Unique IDs: 500
 - Original Wave 4 stimuli: 93
-- Four choices per question: passed
-- Valid A–D keyed answer: passed
+- Choice structure: 493 four-choice items + 7 upgraded five-choice visual items
+- Valid keyed answer (A–E where applicable): passed
 - Missing rationale scan: passed
 - Missing stimulus-reference scan: passed
 - Duplicate visible-choice scan: passed
@@ -16,8 +16,8 @@
 ## Wave 4 distribution
 
 - Free / Premium: 100 / 400
-- Easy / Moderate / Difficult: 125 / 250 / 125
-- Stored correct-answer positions: 125 A, 125 B, 125 C, 125 D
+- Easy / Moderate / Difficult: 121 / 245 / 134
+- Stored correct-answer positions: Counter({'C': 126, 'D': 126, 'B': 124, 'A': 123, 'E': 1})
 
 ## Content and answer checks
 
@@ -38,7 +38,7 @@
 ## Limitations
 
 - The bank is not psychometrically calibrated.
-- Original spatial and mechanical visuals still require independent manual review.
+- Upgraded spatial and mechanical visuals still require independent manual review and device testing.
 - Subject and language rationales completed the documented content review.
 - No official passing score or qualification probability is provided.
 - Every question is marked `Approved for Distribution`.
