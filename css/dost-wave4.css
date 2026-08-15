@@ -68,3 +68,14 @@ button,input[type="button"],input[type="submit"],.button{min-height:44px;touch-a
   .answer{grid-template-columns:38px minmax(0,1fr)}
   .answer .visual-choice svg{width:100%;max-width:220px;height:auto;max-height:none}
 }
+
+
+/* UI4: reduce non-interactive number boxes */
+.bank-summary-line{
+  margin:18px 0 0;color:#dfe4ff;font-size:.78rem;font-weight:800;letter-spacing:.01em;line-height:1.6
+}
+.hero .stat-grid{display:none!important}
+.hero .cumulative-badges{display:none!important}
+@media(max-width:700px){
+  .bank-summary-line{font-size:.74rem}
+}
