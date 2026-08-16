@@ -1890,3 +1890,72 @@ code{background:rgba(116,132,194,.12);color:#0C046D}
     min-height:46px;
   }
 }
+
+
+/* =========================================================
+   TutoDemy UI8 — Confirm Password + hCaptcha
+   2026-08-16
+   ========================================================= */
+
+.password-match-hint{
+  display:block;
+  margin-top:2px;
+  color:#7d7b7c;
+  font-size:.68rem;
+  font-weight:700;
+  line-height:1.35;
+}
+
+.password-match-hint.match{
+  color:#24745a;
+}
+
+.password-match-hint.mismatch{
+  color:#b4233c;
+}
+
+.tuto-captcha-shell{
+  width:100%;
+  min-width:0;
+  padding:8px 0 2px;
+}
+
+.tuto-captcha-widget{
+  min-height:0;
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+
+.tuto-captcha-widget iframe{
+  max-width:100%;
+}
+
+.tuto-captcha-loading,
+.tuto-captcha-error{
+  margin:0;
+  padding:11px 12px;
+  border-radius:10px;
+  font-size:.72rem;
+  line-height:1.45;
+}
+
+.tuto-captcha-loading{
+  color:#68666a;
+  background:rgba(116,132,194,.10);
+}
+
+.tuto-captcha-error{
+  color:#8c2232;
+  background:rgba(180,35,60,.08);
+}
+
+.auth-panel .tuto-captcha-shell.full{
+  grid-column:1/-1;
+}
+
+@media(max-width:420px){
+  .tuto-captcha-widget{
+    transform-origin:left top;
+  }
+}
