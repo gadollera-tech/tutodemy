@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Tutor Dashboard | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-bookexpiry1">
+  <link rel="stylesheet" href="css/style.css?v=20260816-compactworkspace1">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
@@ -35,15 +35,23 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div id="site-header"></div>
   <main id="main-content">
-    <section class="page-hero tutor-dashboard-hero">
-      <div class="container page-hero-grid">
-        <div><span class="eyebrow light">TUTOR DASHBOARD</span><h1 id="tutor-dashboard-title">Manage your profile, bookings, and earnings.</h1><p id="tutor-dashboard-intro">Respond to schedule requests, track payment confirmation, mark delivered sessions, and see the commission applied only after successful completion.</p><div class="button-row"><a class="button button-light" href="tutor-onboarding.html">Edit tutor profile</a><button class="button button-ghost" id="toggle-bookings" type="button" hidden>Pause new bookings</button><a class="button button-ghost" href="tutor-terms.html">Tutor guidelines</a></div></div>
-        <div class="tutor-dashboard-status"><span>PROFILE STATUS</span><b id="dash-profile-status">Loading…</b><small id="dash-profile-message">Checking your account.</small></div>
-      </div>
-    </section>
-
-    <section class="section">
+<section class="section workspace-first-section">
       <div class="container">
+        <div class="workspace-compact-head workspace-compact-head-wrap">
+          <div class="workspace-compact-title-group">
+            <h1>Tutor Dashboard</h1>
+            <div class="workspace-status-line">
+              <span>Profile</span>
+              <b id="dash-profile-status">Loading…</b>
+              <small id="dash-profile-message">Checking your account.</small>
+            </div>
+          </div>
+          <div class="workspace-compact-actions">
+            <a class="button button-small" href="tutor-onboarding.html">Edit profile</a>
+            <button class="button button-outline button-small" id="toggle-bookings" type="button" hidden>Pause new bookings</button>
+            <a class="button button-outline button-small" href="tutor-terms.html">Guidelines</a>
+          </div>
+        </div>
         <div class="marketplace-alert" id="dashboard-alert" hidden></div>
         <div class="tutor-metric-grid" id="private-tutor-metrics" hidden>
           <article><span>Current tier</span><b id="metric-tier">—</b><small id="metric-rate">—</small></article>

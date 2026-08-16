@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>My Bookings | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-bookexpiry1">
+  <link rel="stylesheet" href="css/style.css?v=20260816-compactworkspace1">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
@@ -35,14 +35,15 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div id="site-header"></div>
   <main id="main-content">
-    <section class="page-hero bookings-hero">
-      <div class="container page-hero-grid">
-        <div><span class="eyebrow">MY TUTORING BOOKINGS</span><h1>Track every request from schedule to completion.</h1><p>See tutor responses, payment-confirmation status, completed sessions, and verified review options.</p><div class="button-row"><a class="button" href="tutoring.html">Find another tutor</a><a class="button button-outline" href="tutor-terms.html">Booking policy</a></div></div>
-        <div class="booking-process-card"><span>REQUESTED</span><i>→</i><span>ACCEPTED</span><i>→</i><span>PAID</span><i>→</i><span>DELIVERED</span><i>→</i><span>COMPLETED</span></div>
-      </div>
-    </section>
-    <section class="section">
+<section class="section workspace-first-section">
       <div class="container">
+        <div class="workspace-compact-head">
+          <h1>My Bookings</h1>
+          <div class="workspace-compact-actions">
+            <a class="button button-small" href="tutoring.html">Find a tutor</a>
+            <a class="button button-outline button-small" href="tutor-terms.html">Booking policy</a>
+          </div>
+        </div>
         <div class="marketplace-alert" id="bookings-alert" hidden></div>
         <div class="booking-tabs"><button class="active" data-booking-filter="active">Active</button><button data-booking-filter="completed">Completed</button><button data-booking-filter="closed">Cancelled or declined</button><button data-booking-filter="all">All</button></div>
         <div class="booking-list" id="booking-list" aria-live="polite"></div>

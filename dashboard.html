@@ -21,7 +21,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <title>Student Progress | TutoDemy Learning PH</title>
 <link href="assets/images/owl-mark.png" rel="icon"/>
-<link href="css/style.css?v=20260816-podium2" rel="stylesheet"/>
+<link href="css/style.css?v=20260816-compactworkspace1" rel="stylesheet"/>
 <script defer="" src="js/config.js"></script>
 <script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script defer="" src="js/supabase-client.js"></script>
@@ -40,24 +40,16 @@
 <div id="site-header"></div>
 
 <main id="main-content">
-  <section class="dashboard-hero-flat">
-    <div class="container dashboard-hero-flat-grid">
-      <div>
-        <span class="eyebrow light">STUDENT DASHBOARD</span>
-        <h1>Your learning dashboard</h1>
-        <p>See your study activity, accuracy, subject performance, and recent progress in one compact view.</p>
-      </div>
-      <div class="dashboard-week-inline">
-        <small>CURRENT STUDY WEEK</small>
-        <b id="progress-week-label">Loading…</b>
-        <span id="progress-week-detail">Your summary uses completed practice and mock attempts.</span>
-        <a href="practice.html">Continue reviewing →</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section dashboard-chart-section">
+<section class="section workspace-first-section dashboard-chart-section">
     <div class="container">
+      <div class="workspace-compact-head workspace-compact-head-wrap">
+        <h1>Dashboard</h1>
+        <div class="workspace-week-compact">
+          <span id="progress-week-label">Loading…</span>
+          <small id="progress-week-detail">Your current study week</small>
+          <a href="practice.html">Continue reviewing →</a>
+        </div>
+      </div>
       <div class="cloud-account-note dashboard-account-flat" id="dashboard-account-note">
         <span aria-hidden="true">☁</span>
         <div>
