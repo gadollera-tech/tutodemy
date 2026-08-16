@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260816-booknotif1";
+const CACHE_VERSION = "tutodemy-20260816-webpush2";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -6,11 +6,11 @@ const CORE_ASSETS = [
   "./index.html",
   "./offline.html",
   "./manifest.webmanifest",
-  "./css/style.css?v=20260816-booknotif1",
-  "./js/marketplace-api.js?v=20260816-booknotif1",
+  "./css/style.css?v=20260816-webpush2",
+  "./js/marketplace-api.js?v=20260816-webpush2",
   "./js/captcha.js?v=20260816-ui10",
   "./js/home-auth.js?v=20260816-ui10",
-  "./js/main.js?v=20260816-booknotif1",
+  "./js/main.js?v=20260816-webpush2",
   "./tutor-dashboard.html",
   "./tutor-onboarding.html",
   "./js/tutor-dashboard.js?v=20260809-tutorfix1",
@@ -19,7 +19,7 @@ const CORE_ASSETS = [
   "./dashboard.html",
   "./js/dashboard.js?v=20260816-podium2",
   "./js/admin.js?v=20260809-finance3",
-  "./js/notifications.js?v=20260816-booknotif1",
+  "./js/notifications.js?v=20260816-webpush2",
   "./js/pwa.js?v=20260809-pwa1",
   "./assets/images/icon-192.png",
   "./assets/images/icon-512.png",
@@ -82,6 +82,39 @@ self.addEventListener("fetch", event => {
   }
 });
 
+
+
+self.addEventListener("push", event => {
+  let item = {};
+
+  try {
+    item = event.data ? event.data.json() : {};
+  } catch {
+    item = {
+      title: "TutoDemy update",
+      body: event.data ? event.data.text() : "You have a new TutoDemy notification."
+    };
+  }
+
+  const title = item.title || "TutoDemy update";
+  const link = item.link || item.url || "dashboard.html";
+
+  event.waitUntil(
+    self.registration.showNotification(title, {
+      body: item.body || "Open TutoDemy to view the update.",
+      icon: "./assets/images/icon-192.png",
+      badge: "./assets/images/icon-192.png",
+      tag: item.tag || `tutodemy-push-${item.notificationId || item.bookingId || Date.now()}`,
+      renotify: true,
+      data: {
+        link,
+        notificationId: item.notificationId || null,
+        bookingId: item.bookingId || null,
+        notificationType: item.notificationType || null
+      }
+    })
+  );
+});
 
 self.addEventListener("message", event => {
   const data = event.data || {};
