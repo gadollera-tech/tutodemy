@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260816-paymongo1";
+const CACHE_VERSION = "tutodemy-20260816-paymongo2";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -6,8 +6,8 @@ const CORE_ASSETS = [
   "./index.html",
   "./offline.html",
   "./manifest.webmanifest",
-  "./css/style.css?v=20260816-paymongo1",
-  "./js/marketplace-api.js?v=20260816-paymongo1",
+  "./css/style.css?v=20260816-paymongo2",
+  "./js/marketplace-api.js?v=20260816-paymongo2",
   "./js/captcha.js?v=20260816-ui10",
   "./js/home-auth.js?v=20260816-ui10",
   "./js/main.js?v=20260816-webpush2",
@@ -18,7 +18,7 @@ const CORE_ASSETS = [
   "./admin.html",
   "./dashboard.html",
   "./js/dashboard.js?v=20260816-podium2",
-  "./js/admin.js?v=20260809-finance3",
+  "./js/admin.js?v=20260816-paymongo2",
   "./js/notifications.js?v=20260816-webpush2",
   "./js/pwa.js?v=20260809-pwa1",
   "./assets/images/icon-192.png",

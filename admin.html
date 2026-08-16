@@ -20,15 +20,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Admin Console | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-payoutwide1">
+  <link rel="stylesheet" href="css/style.css?v=20260816-paymongo2">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-finance3"></script>
+  <script defer src="js/marketplace-api.js?v=20260816-paymongo2"></script>
   <script defer src="js/main.js?v=20260816-ui12"></script>
-  <script defer src="js/admin.js?v=20260816-payoutwide1"></script>
+  <script defer src="js/admin.js?v=20260816-paymongo2"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="admin">
@@ -201,8 +201,9 @@
           <section id="admin-bookings-panel" class="admin-panel" role="tabpanel" hidden>
             <div class="workspace-section-bar workspace-section-bar-admin">
               <h2>Bookings & Payments</h2>
-              <small>Review payment status and complete delivered sessions</small>
+              <small>PayMongo payments, legacy payment review, and booking completion</small>
             </div>
+            <div id="admin-paymongo-alerts" class="paymongo-admin-alerts" aria-live="polite"></div>
             <div class="admin-list" id="admin-booking-list"></div>
           </section>
 

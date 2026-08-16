@@ -1,0 +1,35 @@
+TutoDemy PayMongo Phase 5 — Production Polish
+Build: 20260816-paymongo2
+
+LEARNER UX
+- Clear processing banner after returning from PayMongo.
+- Green confirmed state once verified webhook marks booking paid.
+- Cancelled checkout clearly says the booking remains unpaid.
+- Manual "Check status" action if webhook confirmation takes longer.
+- Auto-refresh/polling for up to ~20 seconds after a success return.
+- Confirmed card explicitly says no receipt/admin payment approval is needed.
+- Accidental rapid double taps are locally guarded.
+
+CHECKOUT RELIABILITY
+The private create-paymongo-checkout function update:
+- Adds PayMongo Idempotency-Key per booking.
+- Retries temporary network/5xx/409 processing failures using same key.
+- Keeps QR Ph as default.
+- Future optional Supabase secret: PAYMONGO_PAYMENT_METHODS
+  Example only after methods are enabled in PayMongo:
+    qrph,gcash,card
+
+ADMIN OPERATIONS
+After the private Phase 5 SQL:
+- Bookings & Payments displays unresolved duplicate-payment warnings.
+- Failed PayMongo webhook processing appears as an admin warning.
+- Admin can mark warnings reviewed after handling them.
+- Mark reviewed does NOT refund money or replay a webhook.
+
+SECURITY
+- No PayMongo secret key is in this public site.
+- No webhook signing secret is in this public site.
+- No private SQL is included in public ZIPs.
+
+CACHE
+tutodemy-20260816-paymongo2
