@@ -210,7 +210,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (header) {
       header.innerHTML = `
         ${context.publicPreview ? `<div class="admin-preview-bar"><span>Administrator previewing the public website</span><a href="admin.html">Return to Admin Console</a></div>` : ""}
-        <div class="site-note">${presentation.note}</div>
         <header class="site-header">
           <div class="container nav-wrap">
             <a class="brand" href="${context.view === "admin" ? "admin.html" : context.view === "tutor" ? "tutor-dashboard.html" : context.view === "learner" ? "dashboard.html" : "index.html"}" aria-label="TutoDemy home">
