@@ -3834,3 +3834,16 @@ body[data-page="dashboard"] .section{padding:34px 0 54px}
     justify-self: start;
   }
 }
+
+
+
+/* TutoDemy Web Push Phase 2 — real device subscription state */
+#enable-browser-notifications[data-push-state="enabled"] {
+  border-color: var(--green);
+  color: var(--green);
+  background: #f1fbf6;
+}
+#enable-browser-notifications[data-push-state="blocked"],
+#enable-browser-notifications[data-push-state="unavailable"] {
+  opacity: .72;
+}
