@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Tutor Dashboard | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-compactworkspace1">
+  <link rel="stylesheet" href="css/style.css?v=20260816-workspacefix2">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
@@ -28,7 +28,7 @@
   <script defer src="js/cloud-sync.js"></script>
   <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
   <script defer src="js/main.js?v=20260816-ui12"></script>
-  <script defer src="js/tutor-dashboard.js?v=20260816-bookexpiry1"></script>
+  <script defer src="js/tutor-dashboard.js?v=20260816-workspacefix2"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="tutor-dashboard">
@@ -95,7 +95,10 @@
 
     <section class="section section-cream" id="booking-requests">
       <div class="container">
-        <div class="section-heading"><span class="eyebrow">BOOKING REQUESTS</span><h2>Respond and deliver sessions on-platform.</h2><p>Only admin-confirmed paid bookings can be marked delivered. TutoDemy administration completes the booking and records the commission after delivery.</p></div>
+        <div class="workspace-section-bar">
+          <h2>Booking Requests</h2>
+          <small>Requests, accepted sessions, and completed bookings</small>
+        </div>
         <div class="booking-tabs"><button class="active" data-tutor-filter="action">Needs action</button><button data-tutor-filter="upcoming">Accepted and paid</button><button data-tutor-filter="completed">Completed</button><button data-tutor-filter="all">All</button></div>
         <div class="booking-list" id="tutor-booking-list"></div>
       </div>
@@ -103,9 +106,9 @@
 
     <section class="section" id="private-ledger-section" hidden>
       <div class="container">
-        <div class="section-heading"><span class="eyebrow">EARNINGS LEDGER</span><h2>Completed booking and payout records</h2></div>
+        <div class="workspace-section-bar"><h2>Earnings Ledger</h2><small>Completed sessions and payout records</small></div>
         <div class="ledger-table" id="commission-ledger"></div>
-        <div class="section-heading payout-history-heading"><span class="eyebrow">WEEKLY PAYOUT HISTORY</span><h2>Recorded GCash releases</h2></div>
+        <div class="workspace-section-bar payout-history-heading"><h2>Weekly Payout History</h2><small>Recorded payout releases</small></div>
         <div class="ledger-table" id="payout-history"></div>
       </div>
     </section>

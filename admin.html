@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Admin Console | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-compactworkspace1">
+  <link rel="stylesheet" href="css/style.css?v=20260816-workspacefix2">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
@@ -197,8 +197,14 @@
             </div>
           </section>
 
-          <section id="admin-tutors-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">TUTOR REVIEW</span><h2>Applications and public-profile status</h2></div><div class="admin-list" id="admin-tutor-list"></div></section>
-          <section id="admin-bookings-panel" class="admin-panel" role="tabpanel" hidden><div class="section-heading"><span class="eyebrow">BOOKING OPERATIONS</span><h2>Client payment verification and booking completion</h2><p>Open each uploaded receipt, independently confirm the LANDBANK transaction, then approve or return the payment submission.</p></div><div class="admin-list" id="admin-booking-list"></div></section>
+          <section id="admin-tutors-panel" class="admin-panel" role="tabpanel" hidden><div class="workspace-section-bar workspace-section-bar-admin"><h2>Tutor Applications</h2><small>Review and manage public-profile status</small></div><div class="admin-list" id="admin-tutor-list"></div></section>
+          <section id="admin-bookings-panel" class="admin-panel" role="tabpanel" hidden>
+            <div class="workspace-section-bar workspace-section-bar-admin">
+              <h2>Bookings & Payments</h2>
+              <small>Review payment status and complete delivered sessions</small>
+            </div>
+            <div class="admin-list" id="admin-booking-list"></div>
+          </section>
 
           <section id="admin-finance-panel" class="admin-panel" role="tabpanel" hidden>
             <div class="admin-finance-header">
