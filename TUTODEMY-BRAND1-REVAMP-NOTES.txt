@@ -1,0 +1,63 @@
+TutoDemy Learning PH — Brand Guide Revamp
+Build: BRAND1 / 2026-08-16
+
+BRAND PALETTE APPLIED
+- Deep Navy: #0C046D
+- Warm Orange: #E5922E
+- Charcoal Gray: #4F4D4E
+- Muted Periwinkle: #7484C2
+- Warm Cream Background: #FCF9F2
+
+TYPOGRAPHY
+Brand guide names:
+- Glacial Indifference — body/interface text
+- Siffon / Sifonn — headings/display text
+
+The current website source does not contain font files, so the CSS now requests those
+font-family names first and uses safe fallbacks when unavailable. Upload the actual
+font files later if pixel-exact web typography is required.
+
+SITE-WIDE CHANGES
+- Main site background changed from white/blue-gray to warm cream #FCF9F2.
+- Header/navigation changed to warm cream with navy/orange interaction accents.
+- Primary buttons use deep navy.
+- Secondary/important practice accents use warm orange.
+- Periwinkle is used for softer interface states, panels, progress, and supporting accents.
+- Main text and footer neutral tone use charcoal gray.
+- Page heroes, landing page, forms, cards, inputs, filters, and focus states were re-themed.
+- Public pages, student dashboard, tutor dashboard, admin/finance pages, auth pages,
+  reviewer/practice pages, and DOST-SEI pages inherit the new branding.
+- Footer changed to charcoal with cream text and orange hover accents.
+- PWA manifest background and theme colors updated.
+- Browser theme-color updated across the HTML pages.
+- Notification UI colors updated.
+- Offline page and DOST preview/practice surfaces updated.
+- Existing logo/image assets were retained.
+- Main CSS version bumped to 20260816-brand1.
+- Service-worker cache bumped to tutodemy-20260816-brand1.
+
+FILES CHANGED
+33 website files, including:
+- css/style.css
+- style.css
+- dost-sei/css/dost-wave4.css
+- service-worker.js
+- manifest.webmanifest
+- js/notifications.js
+- all main public/dashboard/admin HTML pages that reference the global stylesheet/theme
+- DOST practice/preview pages
+
+VALIDATION
+- Modified JavaScript syntax checks passed.
+- CSS block/comment counts are balanced.
+- No missing local href/src references were found.
+- ZIP integrity checked.
+- No Supabase SQL is included.
+
+UPLOAD
+For GitHub Pages:
+1. Extract the Patch ZIP.
+2. Upload/replace its contents at the root of the existing TutoDemy repository,
+   keeping the included folder structure.
+3. Wait for GitHub Pages to deploy.
+4. Hard-refresh once because the service worker and CSS cache versions changed.
