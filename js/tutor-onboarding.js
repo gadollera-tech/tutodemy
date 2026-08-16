@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const statusLabels = { draft:"Draft",pending:"Pending admin review",approved:"Approved and public",rejected:"Needs revision",suspended:"Suspended" };
     heading.textContent = current ? statusLabels[current.status] || current.status : "Not started";
     if (!current) message.textContent = "Complete the form and save your first draft.";
-    else if (current.status === "pending") message.textContent = "Your profile is locked to the current application status while admin review is ongoing. You may still save factual corrections.";
+    else if (current.status === "pending") message.textContent = "Your profile is under review. You can still save factual corrections.";
     else if (current.status === "approved") message.innerHTML = `Your public tutor profile is active. <a href="tutor-profile.html?id=${encodeURIComponent(current.user_id)}">View profile</a>`;
     else if (current.status === "rejected") message.textContent = current.rejection_reason || "Review the application and submit again.";
     else if (current.status === "suspended") message.textContent = "Contact TutoDemy administration for next steps.";

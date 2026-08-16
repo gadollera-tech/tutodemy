@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     if (Notification.permission === "denied") {
-      browserNotificationStatus.textContent = "Phone alerts are recommended ON, but this browser is blocking them. Allow notifications for tutodemy.net, then reload.";
+      browserNotificationStatus.textContent = "Notifications are blocked. Allow them for tutodemy.net, then reload.";
       enableBrowserNotifications.textContent = "Blocked by browser";
       enableBrowserNotifications.disabled = true;
       enableBrowserNotifications.dataset.pushState = "blocked";
@@ -101,8 +101,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       browserNotificationStatus.textContent = Notification.permission === "granted"
-        ? "Recommended ON — tap once to finish activating push on this device."
-        : "Recommended ON — one tap is required to activate push on this device.";
+        ? "Tap once to activate phone alerts."
+        : "Activate phone alerts on this device.";
       enableBrowserNotifications.textContent = "Turn on phone alerts";
       enableBrowserNotifications.disabled = false;
       enableBrowserNotifications.dataset.pushState = "disabled";
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       } else {
         await enableTrueWebPush();
         if (notificationPrefStatus) {
-          notificationPrefStatus.textContent = "True phone/browser push is enabled on this device.";
+          notificationPrefStatus.textContent = "Phone alerts are on for this device.";
           notificationPrefStatus.classList.remove("error");
         }
         window.Tuto?.toast?.("Phone alerts are ON for this device.");

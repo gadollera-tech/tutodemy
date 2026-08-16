@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const isActive = (...pages) => pages.includes(active) ? "active" : "";
   const currentAdminTab = () => params.get("tab") || "overview";
 
-  function practiceDropdown(label = "Practice & Reviewers") {
+  function practiceDropdown(label = "Practice") {
     const practiceActive = ["exams", "practice", "dost", "reviewers", "reviewer"].includes(active);
     return `
       <div class="nav-dropdown ${practiceActive ? "active" : ""}">
@@ -26,10 +26,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           ${label} <span aria-hidden="true">⌄</span>
         </button>
         <div class="nav-submenu" aria-label="${label} submenu">
-          <a href="exams.html" class="${isActive("exams")}">All Practice Hubs</a>
-          <a href="practice.html" class="${isActive("practice")}">UPCAT & CET Practice</a>
-          <a href="dost-sei.html" class="${isActive("dost")}">DOST-SEI Practice</a>
-          <a href="reviewers.html" class="${isActive("reviewers", "reviewer")}">Academic Reviewers</a>
+          <a href="exams.html" class="${isActive("exams")}">Practice Hub</a>
+          <a href="practice.html" class="${isActive("practice")}">CET Practice</a>
+          <a href="dost-sei.html" class="${isActive("dost")}">DOST-SEI</a>
+          <a href="reviewers.html" class="${isActive("reviewers", "reviewer")}">Reviewers</a>
         </div>
       </div>`;
   }
@@ -38,48 +38,52 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tutorActive = ["tutoring", "for-tutors", "tutor-profile", "tutor-terms"].includes(active);
     return [
       `<a href="index.html" class="${isActive("home")}">Home</a>`,
-      practiceDropdown("Exam Preparation"),
-      `<a href="tutoring.html" class="${isActive("tutoring", "tutor-profile")}">Find a Tutor</a>`,
-      `<a href="for-tutors.html" class="${isActive("for-tutors")}">Become a Tutor</a>`,
+      practiceDropdown("Practice"),
+      `<a href="tutoring.html" class="${isActive("tutoring", "tutor-profile")}">Tutors</a>`,
+      `<a href="for-tutors.html" class="${isActive("for-tutors")}">For Tutors</a>`,
       `<a href="about.html" class="${isActive("about")}">About</a>`
     ].join("");
   }
 
   function learnerNavigation() {
     return [
-      `<a href="dashboard.html" class="${isActive("dashboard")}">Dashboard</a>`,
-      practiceDropdown(),
-      `<a href="tutoring.html" class="${isActive("tutoring", "tutor-profile")}">Find a Tutor</a>`,
-      `<a href="bookings.html?role=learner" class="${isActive("bookings")}">My Bookings</a>`,
+      `<a href="dashboard.html" class="workspace-nav-home ${isActive("dashboard")}">Tutee Dashboard</a>`,
+      practiceDropdown("Practice"),
+      `<a href="tutoring.html" class="${isActive("tutoring", "tutor-profile")}">Tutors</a>`,
+      `<a href="bookings.html?role=learner" class="${isActive("bookings")}">Bookings</a>`,
       `<a href="messages.html" class="${isActive("messages")}">Messages</a>`
     ].join("");
   }
 
   function tutorNavigation(context = roleContext) {
     const approved = context.tutorStatus === "approved";
+
     if (!approved) {
       return [
-        `<a href="tutor-dashboard.html" class="${isActive("tutor-dashboard")}">Application Status</a>`,
-        `<a href="tutor-onboarding.html" class="${isActive("tutor-onboarding")}">Edit Application</a>`,
-        `<a href="tutor-terms.html" class="${isActive("tutor-terms")}">Tutor Guidelines</a>`
+        `<a href="tutor-dashboard.html" class="workspace-nav-home ${isActive("tutor-dashboard")}">Tutor Dashboard</a>`,
+        `<a href="tutor-onboarding.html" class="${isActive("tutor-onboarding")}">Profile</a>`,
+        `<a href="tutor-terms.html" class="${isActive("tutor-terms")}">Guidelines</a>`
       ].join("");
     }
+
     return [
-      `<a href="tutor-dashboard.html" class="${isActive("tutor-dashboard")}">Tutor Dashboard</a>`,
-      `<a href="tutor-onboarding.html" class="${isActive("tutor-onboarding")}">Profile & Availability</a>`,
-      `<a href="tutor-dashboard.html#booking-requests">Booking Requests</a>`,
+      `<a href="tutor-dashboard.html" class="workspace-nav-home ${isActive("tutor-dashboard")}">Tutor Dashboard</a>`,
+      `<a href="tutor-onboarding.html" class="${isActive("tutor-onboarding")}">Profile</a>`,
+      `<a href="tutor-dashboard.html#booking-requests">Bookings</a>`,
       `<a href="messages.html" class="${isActive("messages")}">Messages</a>`,
-      `<a href="tutor-dashboard.html#private-ledger-section">Earnings & Payouts</a>`,
-      `<a href="tutor-terms.html" class="${isActive("tutor-terms")}">Tutor Guidelines</a>`
+      `<a href="tutor-dashboard.html#private-ledger-section">Payouts</a>`
     ].join("");
   }
 
   function adminNavigation() {
     const tab = currentAdminTab();
+
     return [
-      `<a href="admin.html" class="${active === "admin" && currentAdminTab() === "overview" ? "active" : ""}">Overview</a>`,
-      `<a href="admin.html?tab=tutors" class="${active === "admin" && params.has("tab") && tab === "tutors" ? "active" : ""}">Tutor Applications</a>`,
-      `<a href="admin.html?tab=bookings" class="${active === "admin" && tab === "bookings" ? "active" : ""}">Bookings & Payments</a>`,
+      `<a href="admin.html" class="workspace-nav-home ${active === "admin" && tab === "overview" ? "active" : ""}">Admin Dashboard</a>`,
+      `<a href="admin.html?tab=users" class="${active === "admin" && tab === "users" ? "active" : ""}">Users</a>`,
+      `<a href="admin.html?tab=tutors" class="${active === "admin" && tab === "tutors" ? "active" : ""}">Tutors</a>`,
+      `<a href="admin.html?tab=bookings" class="${active === "admin" && tab === "bookings" ? "active" : ""}">Payments</a>`,
+      `<a href="admin.html?tab=finance" class="${active === "admin" && tab === "finance" ? "active" : ""}">Finance</a>`,
       `<a href="admin.html?tab=payouts" class="${active === "admin" && tab === "payouts" ? "active" : ""}">Payouts</a>`,
       `<a href="admin.html?tab=reports" class="${active === "admin" && tab === "reports" ? "active" : ""}">Reports</a>`
     ].join("");
@@ -89,11 +93,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (context.publicPreview) {
       return {
         bodyClass: "role-public role-admin-preview",
-        badge: "PUBLIC PREVIEW",
-        note: "PUBLIC SITE PREVIEW • You are still signed in as an administrator",
+        badge: "PREVIEW",
+        note: "Public site preview",
         navigation: publicNavigation(),
         planVisible: true,
-        switchLabel: "Return to Admin",
+        switchLabel: "Admin Dashboard",
         switchKind: "admin-return"
       };
     }
@@ -101,10 +105,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       return {
         bodyClass: "role-admin",
         badge: "ADMIN",
-        note: "ADMIN CONSOLE • Restricted operational workspace",
+        note: "Admin workspace",
         navigation: adminNavigation(),
         planVisible: false,
-        switchLabel: "View public site",
+        switchLabel: "Public Site",
         switchKind: "admin-preview"
       };
     }
@@ -112,31 +116,29 @@ document.addEventListener("DOMContentLoaded", async () => {
       const approved = context.tutorStatus === "approved";
       return {
         bodyClass: approved ? "role-tutor" : "role-tutor role-tutor-applicant",
-        badge: approved ? "TUTOR" : "TUTOR APPLICANT",
-        note: approved
-          ? "TUTOR WORKSPACE • Manage your profile, requests, sessions, messages, and payouts"
-          : "TUTOR APPLICATION • Review your status, complete your profile, and submit required information",
+        badge: "TUTOR",
+        note: approved ? "Tutor workspace" : "Tutor application",
         navigation: tutorNavigation(context),
         planVisible: false,
-        switchLabel: "Switch to Learner View",
+        switchLabel: "Tutee View",
         switchKind: "learner"
       };
     }
     if (context.view === "learner") {
       return {
         bodyClass: context.isTutorAccount ? "role-learner role-dual-account" : "role-learner",
-        badge: context.isTutorAccount ? "LEARNER VIEW" : "LEARNER",
-        note: "LEARNER WORKSPACE • Practice, find tutors, and manage your sessions",
+        badge: "TUTEE",
+        note: "Tutee workspace",
         navigation: learnerNavigation(),
         planVisible: true,
-        switchLabel: context.isTutorAccount ? "Switch to Tutor View" : "",
+        switchLabel: context.isTutorAccount ? "Tutor View" : "",
         switchKind: context.isTutorAccount ? "tutor" : ""
       };
     }
     return {
       bodyClass: "role-public",
       badge: "",
-      note: "UPCAT & CET preparation • DOST-SEI preparation • Admin-approved tutor marketplace",
+      note: "Practice and tutoring",
       navigation: publicNavigation(),
       planVisible: true,
       switchLabel: "",
@@ -147,7 +149,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function notificationFooter(context) {
     if (context.view === "admin") return `<a href="admin.html?tab=bookings">Admin bookings</a><a href="admin.html?tab=reports">Reports</a>`;
     if (context.view === "tutor") return `<a href="tutor-dashboard.html#booking-requests">Booking requests</a><a href="messages.html">Messages</a>`;
-    return `<a href="bookings.html?role=learner">My bookings</a><a href="messages.html">Messages</a>`;
+    return `<a href="bookings.html?role=learner">Bookings</a><a href="messages.html">Messages</a>`;
   }
 
   function footerMarkup(context) {
@@ -155,33 +157,33 @@ document.addEventListener("DOMContentLoaded", async () => {
       return `
         <footer class="site-footer role-footer admin-role-footer">
           <div class="container role-footer-grid">
-            <div class="footer-brand"><img src="assets/images/wordmark.png" alt="TutoDemy Learning PH"><p>Restricted administrative workspace for tutor approvals, bookings, payments, payouts, and safety reports.</p></div>
-            <div><h3>Operations</h3><a href="admin.html?tab=tutors">Tutor applications</a><a href="admin.html?tab=bookings">Bookings & payments</a><a href="admin.html?tab=payouts">Weekly payouts</a><a href="admin.html?tab=reports">Message reports</a></div>
-            <div><h3>Account</h3><a href="profile.html">Admin profile</a><a href="index.html?public=1">View public site</a><a href="privacy.html">Privacy notice</a><a href="terms.html">Terms of use</a></div>
+            <div class="footer-brand"><img src="assets/images/wordmark.png" alt="TutoDemy Learning PH"><p>Users, tutors, payments, payouts, and reports.</p></div>
+            <div><h3>Admin</h3><a href="admin.html?tab=tutors">Tutors</a><a href="admin.html?tab=bookings">Payments</a><a href="admin.html?tab=payouts">Payouts</a><a href="admin.html?tab=reports">Reports</a></div>
+            <div><h3>Account</h3><a href="profile.html">Profile</a><a href="index.html?public=1">View public site</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
           </div>
-          <div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Authorized access only.</span></div>
+          <div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Admin workspace.</span></div>
         </footer>`;
     }
     if (context.view === "tutor") {
       return `
         <footer class="site-footer role-footer tutor-role-footer">
           <div class="container role-footer-grid">
-            <div class="footer-brand"><img src="assets/images/wordmark.png" alt="TutoDemy Learning PH"><p>Your tutor workspace for applications, availability, booking requests, private messages, sessions, and payout records.</p></div>
-            <div><h3>Tutor workspace</h3><a href="tutor-dashboard.html">Tutor dashboard</a><a href="tutor-onboarding.html">Profile & availability</a><a href="messages.html">Messages</a><a href="tutor-dashboard.html#private-ledger-section">Earnings & payouts</a></div>
-            <div><h3>Support</h3><a href="tutor-terms.html">Tutor guidelines</a><a href="profile.html">Account profile</a><a href="privacy.html">Privacy notice</a><a href="terms.html">Terms of use</a></div>
+            <div class="footer-brand"><img src="assets/images/wordmark.png" alt="TutoDemy Learning PH"><p>Profile, bookings, messages, and payouts.</p></div>
+            <div><h3>Tutor</h3><a href="tutor-dashboard.html">Dashboard</a><a href="tutor-onboarding.html">Profile</a><a href="messages.html">Messages</a><a href="tutor-dashboard.html#private-ledger-section">Payouts</a></div>
+            <div><h3>Support</h3><a href="tutor-terms.html">Tutor guidelines</a><a href="profile.html">Account profile</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
           </div>
-          <div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Tutor workspace.</span></div>
+          <div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Tutor account.</span></div>
         </footer>`;
     }
     if (context.view === "learner") {
       return `
         <footer class="site-footer role-footer learner-role-footer">
           <div class="container role-footer-grid">
-            <div class="footer-brand"><img src="assets/images/wordmark.png" alt="TutoDemy Learning PH"><p>Practice for major examinations, use academic reviewers, and connect with admin-approved tutors.</p></div>
-            <div><h3>Learn</h3><a href="dashboard.html">Learner dashboard</a><a href="practice.html">UPCAT & CET practice</a><a href="dost-sei.html">DOST-SEI practice</a><a href="reviewers.html">Reviewers</a></div>
-            <div><h3>Tutoring</h3><a href="tutoring.html">Find a tutor</a><a href="bookings.html?role=learner">My bookings</a><a href="messages.html">Messages</a><a href="profile.html">My profile</a></div>
+            <div class="footer-brand"><img src="assets/images/wordmark.png" alt="TutoDemy Learning PH"><p>Practice, reviewers, tutors, and bookings.</p></div>
+            <div><h3>Tutee</h3><a href="dashboard.html">Dashboard</a><a href="practice.html">CET Practice</a><a href="dost-sei.html">DOST-SEI</a><a href="reviewers.html">Reviewers</a></div>
+            <div><h3>Tutoring</h3><a href="tutoring.html">Tutors</a><a href="bookings.html?role=learner">Bookings</a><a href="messages.html">Messages</a><a href="profile.html">Profile</a></div>
           </div>
-          <div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Learner workspace.</span></div>
+          <div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Tutee account.</span></div>
         </footer>`;
     }
     return `
@@ -189,15 +191,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="container footer-grid">
           <div class="footer-brand">
             <img src="assets/images/wordmark.png" alt="TutoDemy Learning PH">
-            <p>Original exam preparation, academic reviewers, and an admin-approved tutor marketplace for Filipino learners.</p>
-            <div class="footer-badges"><span>Reviewed content</span><span>Supabase accounts</span><span>Approved tutors only</span></div>
+            <p>Exam practice, reviewers, and tutor booking.</p>
+            <div class="footer-badges"><span>Practice</span><span>Accounts</span><span>Approved tutors</span></div>
           </div>
-          <div><h3>Practice</h3><a href="exams.html">CET exam hub</a><a href="practice.html">CET set builder</a><a href="dost-sei.html">DOST-SEI preparation</a><a href="dashboard.html">Dashboard</a></div>
-          <div><h3>Tutoring</h3><a href="tutoring.html">Find a tutor</a><a href="for-tutors.html">Become a tutor</a><a href="bookings.html">My bookings</a><a href="messages.html">Booking messages</a><a href="tutor-terms.html">Tutor guidelines</a></div>
-          <div><h3>Account</h3><a href="auth.html">Log in or sign up</a><a href="profile.html">My profile</a><a href="privacy.html">Privacy notice</a><a href="terms.html">Terms of use</a></div>
-          <div><h3>Project</h3><a href="reviewers.html">Reviewers</a><a href="resources.html">Source policy</a><a href="pricing.html">Access</a><a href="about.html">About</a></div>
+          <div><h3>Practice</h3><a href="exams.html">Practice Hub</a><a href="practice.html">CET Practice</a><a href="dost-sei.html">DOST-SEI</a><a href="dashboard.html">Dashboard</a></div>
+          <div><h3>Tutoring</h3><a href="tutoring.html">Tutors</a><a href="for-tutors.html">For Tutors</a><a href="bookings.html">Bookings</a><a href="messages.html">Messages</a><a href="tutor-terms.html">Tutor guidelines</a></div>
+          <div><h3>Account</h3><a href="auth.html">Log in</a><a href="profile.html">Profile</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+          <div><h3>Project</h3><a href="reviewers.html">Reviewers</a><a href="resources.html">Sources</a><a href="pricing.html">Access</a><a href="about.html">About</a></div>
         </div>
-        <div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Study smarter. Grow with guidance.</span></div>
+        <div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>TutoDemy Learning PH.</span></div>
       </footer>`;
   }
 
@@ -228,10 +230,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                 </button>
                 <section class="notification-popover" id="notification-popover" aria-label="Notifications" hidden>
                   <header class="notification-popover-head">
-                    <div><span>ACCOUNT UPDATES</span><h2>Notifications</h2></div>
-                    <button class="notification-mark-all" id="notification-mark-all" type="button">Mark all as read</button>
+                    <div><h2>Notifications</h2></div>
+                    <button class="notification-mark-all" id="notification-mark-all" type="button">Mark all read</button>
                   </header>
-                  <p class="notification-status" id="notification-status" role="status" aria-live="polite">Loading notifications…</p>
+                  <p class="notification-status" id="notification-status" role="status" aria-live="polite">Loading…</p>
                   <div class="notification-list" id="notification-list"></div>
                   <footer class="notification-popover-foot">${notificationFooter(context)}</footer>
                 </section>

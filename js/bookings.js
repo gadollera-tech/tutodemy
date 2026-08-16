@@ -254,7 +254,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div>
               <span>PAYMENT CONFIRMED</span>
               <b>${money(payment.amount)}</b>
-              <p>PayMongo verified this payment. No receipt upload or admin payment approval is needed.</p>
+              <p>PayMongo verified this payment. No receipt upload is needed.</p>
             </div>
           </div>`;
         return;
@@ -266,7 +266,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="paymongo-checkout-copy">
               <span class="eyebrow">SECURE CHECKOUT</span>
               <h3>Pay ${money(payment.amount)} with PayMongo</h3>
-              <p>Complete your booking using TutoDemy's secure PayMongo checkout. Your booking will be marked paid automatically only after PayMongo confirms the successful payment.</p>
+              <p>Pay through PayMongo. Booking status updates automatically after confirmation.</p>
 
               <dl class="paymongo-payment-summary">
                 <div>
@@ -286,7 +286,7 @@ document.addEventListener("DOMContentLoaded", async () => {
               </button>
 
               <p class="paymongo-checkout-status form-status" role="status" aria-live="polite"></p>
-              <small class="paymongo-trust-note">Checkout retries are safe. PayMongo verification—not a screenshot or return page—marks the booking paid.</small>
+              <small class="paymongo-trust-note">PayMongo confirmation marks the booking paid.</small>
             </div>
           </section>`;
 

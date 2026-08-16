@@ -276,7 +276,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const card = button.closest(".admin-user-card");
       const reason = prompt("Reason for suspending this account:");
       if (!reason?.trim()) return window.Tuto.toast("A suspension reason is required.");
-      if (!confirm("Suspend this account? The user will be signed out and prevented from signing in until restored.")) return;
+      if (!confirm("Suspend this account? The user will be signed out until restored.")) return;
       try {
         button.disabled = true;
         await api.adminSetUserAccountStatus(card.dataset.userId, "suspended", reason.trim());
@@ -826,7 +826,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div><dt>Mode</dt><dd>${item.livemode ? "LIVE" : "TEST"}</dd></div>
         </dl>
 
-        <p>A different successful PayMongo payment reached a booking that was already paid. The booking was not fulfilled twice, but the extra payment needs financial review.</p>
+        <p>A second successful payment was received for an already-paid booking. Review the extra payment.</p>
 
         <button
           class="button button-outline button-small review-paymongo-alert"
@@ -854,7 +854,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div class="wide"><dt>Error</dt><dd>${esc(item.error_message || "Unknown processing error")}</dd></div>
         </dl>
 
-        <p>Review the booking/payment before acknowledging this alert. Marking it reviewed does not replay the webhook.</p>
+        <p>Review the booking before marking this alert reviewed.</p>
 
         <button
           class="button button-outline button-small review-paymongo-alert"
@@ -869,7 +869,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     host.innerHTML = `
       <div class="paymongo-admin-alert-summary">
         <b>${total} PayMongo alert${total === 1 ? "" : "s"} need review</b>
-        <small>These alerts never automatically refund, charge, or change a booking.</small>
+        <small>Alerts do not automatically change payments or bookings.</small>
       </div>
       <div class="paymongo-admin-alert-list">
         ${duplicateCards}${failedCards}

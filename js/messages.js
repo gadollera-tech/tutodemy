@@ -251,7 +251,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!activeBookingId) return;
     const reason = prompt("Brief reason for the report:", "Safety or conduct concern");
     if (!reason) return;
-    const details = prompt("Add details for the TutoDemy administrator. Do not include passwords or financial credentials.", "") || "";
+    const details = prompt("Add details for the administrator. Do not include passwords or payment credentials.", "") || "";
     try {
       reportButton.disabled = true;
       await api.reportConversation(activeBookingId, null, reason, details);

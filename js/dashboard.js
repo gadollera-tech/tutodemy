@@ -485,7 +485,7 @@
 
   function renderPercentileLocked() {
     clearPercentiles(); setText("#percentile-track-label", "Account required");
-    percentileStatus("Log in to unlock private comparisons", "Percentiles require synchronized account data and cannot be calculated from one browser alone.", "locked");
+    percentileStatus("Log in to unlock private comparisons", "Percentiles require synced account data.", "locked");
   }
 
   function renderPercentileUnavailable(title, description) {
@@ -569,7 +569,7 @@
     const content = document.querySelector("#leaderboard-content"); if (content) content.hidden = true;
     const method = document.querySelector("#leaderboard-methodology"); if (method) method.hidden = true;
     setText("#leaderboard-track-label", "Account required");
-    leaderboardStatus("Log in to view or join weekly leaderboards", "Leaderboard participation is optional. Your local progress remains private and usable without joining.", "locked");
+    leaderboardStatus("Log in to view or join weekly leaderboards", "Leaderboard participation is optional.", "locked");
   }
 
   function renderLeaderboardUnavailable(title, description) {
@@ -739,7 +739,7 @@
     catch (error) {
       console.error("Weekly leaderboard could not be loaded:", error);
       const missing = /get_weekly_learning_leaderboard|learner_weekly_leaderboard_snapshots|does not exist|schema cache|could not find the function/i.test(String(error?.message || error || ""));
-      renderLeaderboardUnavailable(missing ? "Phase 4C database setup is not installed yet" : "Weekly leaderboard could not be refreshed", missing ? "Run the private Phase 4C SQL in Supabase. Phase 4A progress and Phase 4B percentiles remain usable." : "The leaderboard service is temporarily unavailable. No private learner records were exposed.");
+      renderLeaderboardUnavailable(missing ? "Phase 4C database setup is not installed yet" : "Weekly leaderboard could not be refreshed", missing ? "Run the private Phase 4C SQL in Supabase. Phase 4A progress and Phase 4B percentiles remain usable." : "Leaderboard is temporarily unavailable.");
     }
   }
 
@@ -860,12 +860,12 @@
         showSourceNote(
           missingFunction
             ? "Phase 4A database setup has not been installed yet. Showing synchronized progress available on this device."
-            : "The cloud summary could not be refreshed. Showing the latest progress available on this device.",
+            : "Could not refresh cloud progress. Showing the latest device data.",
           "warning"
         );
       }
     } else if (!account.user) {
-      showSourceNote("Device-only summary: log in to synchronize completed attempts and use this progress on another device.", "info");
+      showSourceNote("Log in to sync completed attempts across devices.", "info");
     }
 
     renderSummary(summary);

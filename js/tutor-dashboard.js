@@ -230,7 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!profile) {
         setApprovedWorkspace(false);
         setTextIfPresent("#tutor-dashboard-title", "Start your tutor application.");
-        setTextIfPresent("#tutor-dashboard-intro", "Create your tutor profile and submit the required details for administrator review.");
+        setTextIfPresent("#tutor-dashboard-intro", "Create your tutor profile and submit it for review.");
         profileStatus();
         alertBox.hidden = false;
         alertBox.innerHTML = `<b>Your tutor workspace is not active yet.</b> Complete your profile and submit your application to unlock booking, session, earnings, and payout tools. <a href="tutor-onboarding.html">Start application →</a>`;
@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (profile.status !== "approved") {
         setApprovedWorkspace(false);
         const copy = {
-          draft: ["Complete your tutor application.", "Finish your profile, availability, credentials, and payout details, then submit them for review."],
+          draft: ["Complete your tutor application.", "Complete your tutor profile and submit it for review."],
           pending: ["Your application is under review.", "You can update your profile while TutoDemy reviews your application. Booking and payout tools will open after approval."],
           rejected: ["Your application needs revision.", profile.rejection_reason || "Review the administrator note, update your application, and submit it again."],
           suspended: ["Your tutor access is currently suspended.", "Contact TutoDemy support before accepting or managing tutoring sessions."]
@@ -253,8 +253,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      setTextIfPresent("#tutor-dashboard-title", "Manage your profile, bookings, and earnings.");
-      setTextIfPresent("#tutor-dashboard-intro", "Respond to schedule requests, track payment confirmation, mark delivered sessions, and review your payout records.");
+      setTextIfPresent("#tutor-dashboard-title", "Tutor Dashboard");
+      setTextIfPresent("#tutor-dashboard-intro", "Manage bookings, delivered sessions, and payouts.");
       [bookings, ledger, feePolicy, payouts] = await Promise.all([
         api.getMyBookings("tutor"),
         api.getMyLedger(),

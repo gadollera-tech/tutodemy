@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const redirectTo = new URL(redirectPage, location.href).href;
     createAccountButton.disabled = true;
     createAccountButton.textContent = "Creating account…";
-    setStatus("Creating your account… Keep this page open. When it is ready, check your email to confirm your account.");
+    setStatus("Creating your account… Then check your email to confirm it.");
 
     const { data, error } = await client.auth.signUp({
       email: values.email,
@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (window.TUTODEMY_CONFIG.googleOAuthEnabled) {
     googleButton.disabled = false;
-    googleHelper.textContent = "Google login is enabled. It starts as a learner account; tutor applications can be opened after login.";
+    googleHelper.textContent = "Google login starts with a tutee account. Tutor applications are available after login.";
     googleButton.addEventListener("click", async () => {
       setStatus("Opening Google login…");
       const { error } = await client.auth.signInWithOAuth({ provider: "google", options: { redirectTo: new URL("dashboard.html", location.href).href } });
