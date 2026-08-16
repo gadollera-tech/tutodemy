@@ -1959,3 +1959,118 @@ code{background:rgba(116,132,194,.12);color:#0C046D}
     transform-origin:left top;
   }
 }
+
+
+/* =========================================================
+   TutoDemy UI11 — Short, direct DOST-SEI landing page
+   2026-08-16
+   ========================================================= */
+
+.dost-direct-hero{
+  padding:clamp(42px,6vw,72px) 0;
+  background:var(--cream,#FCF9F2);
+  border-bottom:1px solid var(--line);
+}
+
+.dost-direct-hero-inner{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:34px;
+  align-items:end;
+}
+
+.dost-direct-hero h1{
+  max-width:780px;
+  margin:8px 0 12px;
+  color:var(--navy);
+  font-size:clamp(2.5rem,5.5vw,4.7rem);
+  line-height:.98;
+  letter-spacing:-.05em;
+}
+
+.dost-direct-hero p{
+  max-width:690px;
+  margin:0;
+  color:var(--muted);
+  font-size:.98rem;
+  line-height:1.65;
+}
+
+.dost-direct-hero .button-row{
+  margin:0;
+  justify-content:flex-end;
+}
+
+.dost-direct-heading{
+  max-width:720px;
+  margin-bottom:26px;
+}
+
+.dost-direct-heading h2{
+  margin:7px 0 8px;
+  font-size:clamp(1.8rem,3vw,2.6rem);
+  color:var(--navy);
+}
+
+.dost-direct-heading p{
+  margin:0;
+  color:var(--muted);
+}
+
+.dost-direct-section{
+  padding-top:clamp(44px,6vw,70px);
+  padding-bottom:clamp(44px,6vw,70px);
+}
+
+.dost-practice-modes{
+  margin-top:8px;
+}
+
+.dost-direct-action{
+  margin-top:28px;
+}
+
+.dost-direct-notice{
+  padding-top:0;
+  padding-bottom:44px;
+}
+
+@media(max-width:900px){
+  .dost-direct-hero-inner{
+    grid-template-columns:1fr;
+    align-items:start;
+  }
+
+  .dost-direct-hero .button-row{
+    justify-content:flex-start;
+  }
+}
+
+@media(max-width:560px){
+  .dost-direct-hero{
+    padding:38px 0 42px;
+  }
+
+  .dost-direct-hero h1{
+    font-size:clamp(2.35rem,12vw,3.45rem);
+  }
+
+  .dost-direct-hero .button-row{
+    display:grid;
+    grid-template-columns:1fr;
+    width:100%;
+  }
+
+  .dost-direct-hero .button-row .button{
+    width:100%;
+  }
+
+  .dost-direct-section{
+    padding-top:38px;
+    padding-bottom:38px;
+  }
+
+  .dost-direct-action .button{
+    width:100%;
+  }
+}
