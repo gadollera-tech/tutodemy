@@ -21,6 +21,34 @@ document.addEventListener("DOMContentLoaded", async () => {
   const money = value => window.Tuto.money(value);
   const activeStatuses = new Set(["requested", "accepted", "paid", "session_delivered", "disputed"]);
 
+
+  const returnParams = new URLSearchParams(location.search);
+  const payMongoReturnState = returnParams.get("payment");
+  const payMongoReturnBookingId = returnParams.get("booking");
+
+  function clearPaymentReturnQuery() {
+    if (!payMongoReturnState) return;
+    const url = new URL(location.href);
+    url.searchParams.delete("payment");
+    url.searchParams.delete("booking");
+    history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
+  }
+
+  function showPayMongoReturnMessage() {
+    if (!payMongoReturnState || !alertBox) return;
+
+    alertBox.hidden = false;
+    alertBox.classList.remove("error");
+
+    if (payMongoReturnState === "success") {
+      alertBox.textContent =
+        "PayMongo checkout completed. Confirming the payment securely…";
+    } else if (payMongoReturnState === "cancelled") {
+      alertBox.textContent =
+        "PayMongo checkout was cancelled. No booking payment was confirmed.";
+    }
+  }
+
   function isExpiredRequest(booking) {
     const time = new Date(booking?.requested_start || "").getTime();
     return booking?.status === "requested" && Number.isFinite(time) && time <= Date.now();
@@ -112,101 +140,107 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
       const payment = await api.getBookingPaymentInstructions(booking.id);
-      if (!payment) throw new Error("Payment instructions are unavailable.");
+      if (!payment) throw new Error("Payment details are unavailable.");
 
-      const isPaid = ["paid", "session_delivered", "completed"].includes(booking.status) || payment.payment_status === "paid";
-      const isPending = payment.payment_status === "pending";
-      const canSubmit = booking.status === "accepted" && payment.payment_status === "unpaid";
-      let paymentQrUrl = "";
-      if (payment.payment_qr_path) {
-        try {
-          paymentQrUrl = await api.signedPlatformPaymentQrUrl(payment.payment_qr_path);
-        } catch (qrError) {
-          console.warn("Private payment QR could not be loaded:", qrError);
-        }
-      }
+      const isPaid =
+        ["paid", "session_delivered", "completed"].includes(booking.status) ||
+        payment.payment_status === "paid";
+
+      const isLegacyPending = payment.payment_status === "pending";
+
+      const canPayWithPayMongo =
+        booking.status === "accepted" &&
+        payment.payment_status === "unpaid";
 
       if (isPaid) {
-        panel.innerHTML = `<div class="payment-confirmed-card"><span>PAYMENT CONFIRMED</span><b>${money(payment.amount)}</b><p>Your payment has been verified. Keep all schedule and lesson coordination inside the private booking messages.</p></div>`;
+        panel.innerHTML = `
+          <div class="payment-confirmed-card paymongo-confirmed-card">
+            <span>PAYMENT CONFIRMED</span>
+            <b>${money(payment.amount)}</b>
+            <p>Your booking payment is confirmed. Keep schedule and lesson coordination inside the private booking messages.</p>
+          </div>`;
         return;
       }
 
-      panel.innerHTML = `<div class="payment-panel-heading">
-          <div><span class="eyebrow">PRIVATE PAYMENT INSTRUCTIONS</span><h3>Pay the exact booking amount</h3></div>
-          <span class="status-pill status-${isPending ? "pending" : "accepted"}">${isPending ? "Awaiting verification" : "Payment required"}</span>
-        </div>
-        ${payment.review_note ? `<div class="payment-review-note"><b>Payment submission returned:</b><span>${esc(payment.review_note)}</span></div>` : ""}
-        <div class="payment-instruction-grid">
-          <div><span>Bank</span><b>${esc(payment.bank_name)}</b></div>
-          <div><span>Account name</span><b>${esc(payment.account_name)}</b>${copyButton("name", payment.account_name)}</div>
-          <div><span>Account number</span><b class="payment-account-number">${esc(payment.account_number)}</b>${copyButton("number", payment.account_number)}</div>
-          <div><span>Amount</span><b>${money(payment.amount)}</b></div>
-          <div class="full"><span>Booking reference</span><b>${esc(payment.booking_reference)}</b>${copyButton("reference", payment.booking_reference)}</div>
-        </div>
-        <p class="payment-instructions-copy">${esc(payment.instructions)}</p>
-        ${paymentQrUrl ? `<section class="payment-qr-card" aria-label="Private LANDBANK payment QR">
-          <div class="payment-qr-copy">
-            <span class="eyebrow">SCAN TO PAY</span>
-            <h4>LANDBANK InstaPay QR</h4>
-            <p>Scan this QR using a participating banking or e-wallet app. Check the recipient name and amount before confirming the transfer.</p>
-            <a class="button button-outline" href="${esc(paymentQrUrl)}" target="_blank" rel="noopener">Open payment QR</a>
-          </div>
-          <img src="${esc(paymentQrUrl)}" alt="Private LANDBANK InstaPay QR for this booking payment" loading="lazy" decoding="async">
-        </section>` : ""}
-        <div class="payment-warning"><b>Important:</b><span>Do not pay the tutor directly. Your booking becomes paid only after a TutoDemy administrator verifies the bank transaction.</span></div>
-        ${isPending ? `<div class="payment-pending-message"><b>Receipt submitted.</b><p>The administrator will compare your receipt with the actual LANDBANK transaction before confirming the booking.</p></div>` : ""}
-        ${canSubmit ? `<form class="payment-proof-form">
-          <div class="form-grid">
-            <label>Payer name<input name="payer_name" maxlength="120" required placeholder="Name used for the bank transfer"></label>
-            <label>Transaction reference<input name="payment_reference" maxlength="120" required placeholder="Reference from your bank receipt"></label>
-            <label class="full">Payment receipt<input type="file" name="payment_proof" accept="application/pdf,image/jpeg,image/png,image/webp" required><small>PDF, JPG, PNG, or WebP; maximum 10 MB.</small></label>
-          </div>
-          <button class="button" type="submit">Submit payment receipt</button>
-          <p class="form-status" role="status" aria-live="polite"></p>
-        </form>` : ""}`;
+      if (canPayWithPayMongo) {
+        panel.innerHTML = `
+          <section class="paymongo-checkout-card">
+            <div class="paymongo-checkout-copy">
+              <span class="eyebrow">SECURE CHECKOUT</span>
+              <h3>Pay ${money(payment.amount)} with PayMongo</h3>
+              <p>Complete your booking using TutoDemy's secure PayMongo checkout. Your booking will be marked paid automatically only after PayMongo confirms the successful payment.</p>
 
-      panel.querySelectorAll(".copy-payment-value").forEach(button => {
-        button.addEventListener("click", async () => {
-          try {
-            await navigator.clipboard.writeText(button.dataset.copyValue || "");
-            window.Tuto.toast("Copied.");
-          } catch {
-            window.Tuto.toast("Copy was not available. Select the value manually.");
-          }
-        });
-      });
+              <dl class="paymongo-payment-summary">
+                <div>
+                  <dt>Booking amount</dt>
+                  <dd>${money(payment.amount)}</dd>
+                </div>
+                <div>
+                  <dt>Booking reference</dt>
+                  <dd>${esc(payment.booking_reference || `TD-${booking.id}`)}</dd>
+                </div>
+              </dl>
 
-      const form = panel.querySelector(".payment-proof-form");
-      if (form) {
-        form.addEventListener("submit", async event => {
-          event.preventDefault();
-          const status = form.querySelector(".form-status");
-          const submitButton = form.querySelector("button[type='submit']");
-          const file = form.elements.payment_proof.files[0];
-          if (!file) return;
+              ${payment.review_note ? `<p class="payment-review-note"><b>Previous payment submission:</b> ${esc(payment.review_note)}</p>` : ""}
+
+              <button class="button paymongo-checkout-button" type="button">
+                Pay securely with PayMongo
+              </button>
+
+              <p class="paymongo-checkout-status form-status" role="status" aria-live="polite"></p>
+              <small class="paymongo-trust-note">Payment status comes from PayMongo's verified server webhook—not from a screenshot or browser redirect.</small>
+            </div>
+          </section>`;
+
+        const button = panel.querySelector(".paymongo-checkout-button");
+        const status = panel.querySelector(".paymongo-checkout-status");
+
+        button?.addEventListener("click", async () => {
           try {
-            submitButton.disabled = true;
-            status.textContent = "Uploading receipt securely…";
-            const proofPath = await api.uploadPaymentProof(booking.id, file);
-            status.textContent = "Submitting payment details…";
-            await api.submitPaymentProof(
-              booking.id,
-              form.elements.payer_name.value.trim(),
-              form.elements.payment_reference.value.trim(),
-              proofPath,
-              file.name
-            );
-            window.Tuto.toast("Payment receipt submitted for verification.");
-            await load();
+            button.disabled = true;
+            status.classList.remove("error");
+            status.textContent = "Opening secure PayMongo checkout…";
+
+            const checkout = await api.createPayMongoCheckout(booking.id);
+
+            status.textContent = "Redirecting to PayMongo…";
+            location.assign(checkout.checkoutUrl);
           } catch (error) {
-            status.textContent = error.message || "The payment receipt could not be submitted.";
+            status.textContent =
+              error?.message ||
+              "PayMongo checkout could not be opened. Please try again.";
             status.classList.add("error");
-            submitButton.disabled = false;
+            button.disabled = false;
           }
         });
+
+        return;
       }
+
+      // Compatibility only for payment receipts already submitted before
+      // PayMongo rollout. New accepted/unpaid bookings use PayMongo above.
+      if (isLegacyPending) {
+        panel.innerHTML = `
+          <section class="payment-legacy-pending-card">
+            <span class="status-pill status-pending">Legacy payment pending</span>
+            <h3>Existing receipt is awaiting verification</h3>
+            <p>This payment was submitted before PayMongo checkout was enabled. The administrator can finish reviewing this existing submission; no second payment is required.</p>
+            ${payment.review_note ? `<div class="payment-review-note"><b>Admin note:</b><span>${esc(payment.review_note)}</span></div>` : ""}
+          </section>`;
+        return;
+      }
+
+      panel.innerHTML = `
+        <div class="payment-panel-error">
+          <b>Payment is not available for this booking.</b>
+          <span>Please refresh the booking or contact TutoDemy support if the status looks incorrect.</span>
+        </div>`;
     } catch (error) {
-      panel.innerHTML = `<div class="payment-panel-error"><b>Payment instructions could not be loaded.</b><span>${esc(error.message || "Please try again later.")}</span></div>`;
+      panel.innerHTML = `
+        <div class="payment-panel-error">
+          <b>Payment details could not be loaded.</b>
+          <span>${esc(error.message || "Please try again later.")}</span>
+        </div>`;
     }
   }
 
@@ -265,7 +299,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       ]);
       tutorMap = new Map(tutors.map(tutor => [tutor.user_id, tutor]));
       reviewed = new Set(reviews.map(review => review.booking_id));
-      alertBox.hidden = true;
+
+      if (!payMongoReturnState) {
+        alertBox.hidden = true;
+      }
+
       await render();
     } catch (error) {
       if (!quiet) {
@@ -295,5 +333,38 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 
   window.addEventListener("beforeunload", () => clearTimeout(realtimeRefreshTimer));
+
+  showPayMongoReturnMessage();
   await load();
+
+  if (payMongoReturnState === "success") {
+    // Webhook processing can finish a moment after PayMongo redirects back.
+    // Refresh a few times without forcing the learner to reload manually.
+    [1200, 3000, 6500].forEach(delay => {
+      setTimeout(() => load({ quiet: true }), delay);
+    });
+
+    setTimeout(() => {
+      const returnedBooking = bookings.find(
+        item => String(item.id) === String(payMongoReturnBookingId || "")
+      );
+
+      if (
+        returnedBooking &&
+        ["paid", "session_delivered", "completed"].includes(returnedBooking.status)
+      ) {
+        alertBox.hidden = false;
+        alertBox.textContent = "Payment confirmed by PayMongo. Your booking is paid.";
+        window.Tuto?.toast?.("Payment confirmed by PayMongo.");
+      } else {
+        alertBox.hidden = false;
+        alertBox.textContent =
+          "PayMongo checkout returned successfully. Payment confirmation may still be processing; this page will update automatically when the webhook is received.";
+      }
+
+      clearPaymentReturnQuery();
+    }, 7200);
+  } else if (payMongoReturnState === "cancelled") {
+    setTimeout(clearPaymentReturnQuery, 800);
+  }
 });

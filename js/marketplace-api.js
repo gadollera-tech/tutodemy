@@ -501,6 +501,62 @@
     return Array.isArray(data) ? (data[0] || null) : data;
   }
 
+  async function createPayMongoCheckout(bookingId) {
+    requireUser();
+
+    const { data, error } = await client().functions.invoke(
+      "create-paymongo-checkout",
+      {
+        body: { bookingId: String(bookingId || "") }
+      }
+    );
+
+    if (error) {
+      let message = error?.message || "PayMongo checkout could not be created.";
+
+      try {
+        const response = error?.context;
+        if (response && typeof response.clone === "function") {
+          const payload = await response.clone().json();
+          if (payload?.error) message = String(payload.error);
+        }
+      } catch {
+        // Keep the safe fallback message above.
+      }
+
+      throw new Error(message);
+    }
+
+    if (!data?.ok || !data?.checkoutUrl) {
+      throw new Error(
+        data?.error ||
+        "PayMongo returned an incomplete checkout session."
+      );
+    }
+
+    let checkoutUrl;
+    try {
+      checkoutUrl = new URL(String(data.checkoutUrl));
+    } catch {
+      throw new Error("PayMongo returned an invalid checkout URL.");
+    }
+
+    if (
+      checkoutUrl.protocol !== "https:" ||
+      !(
+        checkoutUrl.hostname === "paymongo.com" ||
+        checkoutUrl.hostname.endsWith(".paymongo.com")
+      )
+    ) {
+      throw new Error("Unexpected PayMongo checkout destination.");
+    }
+
+    return {
+      ...data,
+      checkoutUrl: checkoutUrl.href
+    };
+  }
+
   async function signedPlatformPaymentQrUrl(path) {
     requireUser();
     if (!path) return "";
@@ -854,6 +910,7 @@
     adminCompleteBooking,
     getMyTutorFeePolicy,
     getBookingPaymentInstructions,
+    createPayMongoCheckout,
     signedPlatformPaymentQrUrl,
     uploadPaymentProof,
     submitPaymentProof,
