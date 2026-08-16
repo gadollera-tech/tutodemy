@@ -4992,3 +4992,426 @@ body[data-page="admin"] #main-content{
     display:grid;
   }
 }
+
+
+
+/* =========================================================
+   TutoDemy Professional UI Pass
+   Clean copy, clear workspaces, restrained forms/cards.
+   ========================================================= */
+
+:root{
+  --ui-border:#dfe2ea;
+  --ui-border-strong:#cbd0dc;
+  --ui-surface:#ffffff;
+  --ui-surface-soft:#f8f9fc;
+  --ui-focus:rgba(116,132,194,.18);
+}
+
+/* Clear workspace navigation */
+.main-nav{
+  gap:14px;
+}
+
+.main-nav a,
+.nav-dropdown-toggle{
+  font-weight:760;
+  letter-spacing:-.005em;
+}
+
+.main-nav a.workspace-nav-home{
+  align-self:center;
+  padding:9px 12px;
+  margin:0;
+  border:1px solid rgba(12,4,109,.13);
+  border-radius:10px;
+  background:#f7f7fb;
+  color:var(--navy);
+  line-height:1;
+}
+
+.main-nav a.workspace-nav-home:hover,
+.main-nav a.workspace-nav-home.active{
+  background:var(--navy);
+  border-color:var(--navy);
+  color:#fff;
+}
+
+body.role-tutor .main-nav a.workspace-nav-home{
+  border-color:rgba(122,82,0,.18);
+  background:#fff9ea;
+  color:#704900;
+}
+
+body.role-tutor .main-nav a.workspace-nav-home:hover,
+body.role-tutor .main-nav a.workspace-nav-home.active{
+  background:#704900;
+  border-color:#704900;
+  color:#fff;
+}
+
+body.role-admin .main-nav{
+  gap:11px;
+}
+
+body.role-admin .main-nav a.workspace-nav-home{
+  background:rgba(255,255,255,.11);
+  border-color:rgba(255,255,255,.24);
+  color:#fff;
+}
+
+body.role-admin .main-nav a.workspace-nav-home:hover,
+body.role-admin .main-nav a.workspace-nav-home.active{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:#2f2308;
+}
+
+.workspace-badge{
+  min-height:22px;
+  padding:4px 8px;
+  font-size:.58rem;
+  letter-spacing:.06em;
+}
+
+.role-view-switch{
+  border-radius:10px;
+  font-size:.7rem;
+  font-weight:760;
+}
+
+/* Remove decorative micro-copy that does not help navigation */
+.page-hero .eyebrow,
+.section-heading > .eyebrow,
+.hero-copy > .eyebrow,
+.workspace-section-bar > .eyebrow,
+.profile-content > .eyebrow{
+  display:none !important;
+}
+
+/* Tighter page hierarchy */
+body:not([data-page="home"]) .section{
+  padding-top:46px;
+  padding-bottom:46px;
+}
+
+body:not([data-page="home"]) .page-hero{
+  padding-top:44px !important;
+  padding-bottom:38px !important;
+}
+
+body:not([data-page="home"]) .page-hero h1{
+  font-size:clamp(2rem,4.8vw,3.6rem) !important;
+  line-height:1.02;
+  letter-spacing:-.045em;
+  margin-bottom:12px;
+}
+
+.section-heading{
+  max-width:720px;
+  margin-bottom:24px;
+}
+
+.section-heading h2,
+.split-feature h2,
+.tutor-teaser h2,
+.founder-note h2,
+.quality-workflow h2,
+.architecture h2,
+.vision-grid h2,
+.reader-content h2,
+.profile-content h2{
+  font-size:clamp(1.45rem,3vw,2.15rem);
+  line-height:1.08;
+  letter-spacing:-.035em;
+  margin:0 0 9px;
+}
+
+.section-heading p,
+.split-feature p,
+.tutor-teaser p,
+.vision-grid p{
+  line-height:1.55;
+}
+
+.workspace-compact-head h1,
+.workspace-section-bar h2{
+  letter-spacing:-.025em;
+}
+
+/* More restrained cards */
+.booking-item,
+.admin-card,
+.tutor-card,
+.reviewer-card,
+.metric-card,
+.dashboard-card,
+.profile-card,
+.auth-panel,
+.builder-form,
+.marketplace-form fieldset{
+  border-color:var(--ui-border);
+  border-radius:14px;
+  box-shadow:none;
+}
+
+/* Professional buttons */
+.button{
+  border-radius:10px;
+  padding:11px 16px;
+  font-weight:780;
+  box-shadow:none;
+}
+
+.button:hover:not(:disabled){
+  transform:none;
+  box-shadow:0 7px 18px rgba(12,4,109,.10);
+}
+
+.button-outline{
+  background:#fff;
+}
+
+.text-button,
+.link-button{
+  font-weight:760;
+}
+
+/* Form system */
+:where(
+  .auth-panel,
+  .account-profile-form,
+  .marketplace-form,
+  .admin-card,
+  .builder-form,
+  .commission-calculator,
+  .inline-review-form,
+  .admin-payout-form,
+  .leaderboard-preferences-grid,
+  .compact-leaderboard-toolbar,
+  .booking-request-form,
+  .message-composer
+) label{
+  color:#3f4250;
+  font-weight:730;
+  letter-spacing:0;
+}
+
+:where(
+  .auth-panel,
+  .account-profile-form,
+  .marketplace-form,
+  .admin-card,
+  .builder-form,
+  .commission-calculator,
+  .inline-review-form,
+  .admin-payout-form,
+  .leaderboard-preferences-grid,
+  .compact-leaderboard-toolbar,
+  .booking-request-form,
+  .message-composer
+) input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+:where(
+  .auth-panel,
+  .account-profile-form,
+  .marketplace-form,
+  .admin-card,
+  .builder-form,
+  .commission-calculator,
+  .inline-review-form,
+  .admin-payout-form,
+  .leaderboard-preferences-grid,
+  .compact-leaderboard-toolbar,
+  .booking-request-form,
+  .message-composer
+) select,
+:where(
+  .auth-panel,
+  .account-profile-form,
+  .marketplace-form,
+  .admin-card,
+  .builder-form,
+  .commission-calculator,
+  .inline-review-form,
+  .admin-payout-form,
+  .leaderboard-preferences-grid,
+  .compact-leaderboard-toolbar,
+  .booking-request-form,
+  .message-composer
+) textarea{
+  width:100%;
+  min-height:43px;
+  border:1px solid var(--ui-border);
+  border-radius:9px;
+  background:var(--ui-surface);
+  color:var(--ink);
+  padding:10px 12px;
+  font:inherit;
+  font-size:.86rem;
+  box-shadow:0 1px 1px rgba(12,4,109,.015);
+  transition:border-color .15s, box-shadow .15s, background .15s;
+}
+
+:where(
+  .auth-panel,
+  .account-profile-form,
+  .marketplace-form,
+  .admin-card,
+  .builder-form,
+  .commission-calculator,
+  .inline-review-form,
+  .admin-payout-form,
+  .leaderboard-preferences-grid,
+  .compact-leaderboard-toolbar,
+  .booking-request-form,
+  .message-composer
+) textarea{
+  min-height:96px;
+  line-height:1.5;
+  resize:vertical;
+}
+
+:where(
+  .auth-panel,
+  .account-profile-form,
+  .marketplace-form,
+  .admin-card,
+  .builder-form,
+  .commission-calculator,
+  .inline-review-form,
+  .admin-payout-form,
+  .leaderboard-preferences-grid,
+  .compact-leaderboard-toolbar,
+  .booking-request-form,
+  .message-composer
+) input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
+:where(
+  .auth-panel,
+  .account-profile-form,
+  .marketplace-form,
+  .admin-card,
+  .builder-form,
+  .commission-calculator,
+  .inline-review-form,
+  .admin-payout-form,
+  .leaderboard-preferences-grid,
+  .compact-leaderboard-toolbar,
+  .booking-request-form,
+  .message-composer
+) select:focus,
+:where(
+  .auth-panel,
+  .account-profile-form,
+  .marketplace-form,
+  .admin-card,
+  .builder-form,
+  .commission-calculator,
+  .inline-review-form,
+  .admin-payout-form,
+  .leaderboard-preferences-grid,
+  .compact-leaderboard-toolbar,
+  .booking-request-form,
+  .message-composer
+) textarea:focus{
+  outline:none;
+  border-color:var(--periwinkle);
+  box-shadow:0 0 0 3px var(--ui-focus);
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#9a9da7;
+  opacity:1;
+}
+
+.marketplace-form fieldset{
+  padding:16px;
+  margin-bottom:14px;
+}
+
+.marketplace-form legend{
+  font-weight:780;
+  font-size:.86rem;
+}
+
+.checkbox-grid label,
+.role-card,
+.leaderboard-optin-row{
+  border:1px solid var(--ui-border);
+  background:#fff;
+  border-radius:10px;
+}
+
+/* Tabs should read like app controls, not marketing chips */
+.booking-tabs,
+.admin-tabs{
+  gap:6px;
+  margin-bottom:16px;
+}
+
+.booking-tabs button,
+.admin-tabs button{
+  border-radius:9px;
+  padding:8px 11px;
+  font-weight:740;
+  font-size:.78rem;
+}
+
+/* Functional status copy */
+.status-pill{
+  font-weight:780;
+  letter-spacing:.02em;
+}
+
+/* Home is simpler too */
+.home-hero-copy h1,
+.hero-copy h1{
+  letter-spacing:-.055em;
+}
+
+.home-hero-copy > p,
+.hero-copy > p{
+  max-width:660px;
+  line-height:1.55;
+}
+
+.footer-brand p{
+  max-width:500px;
+  line-height:1.5;
+}
+
+/* Tablet/mobile navigation */
+@media(max-width:1180px){
+  .main-nav{
+    gap:10px;
+  }
+  .main-nav a{
+    font-size:.76rem;
+  }
+  body.role-admin .main-nav a{
+    font-size:.7rem;
+  }
+}
+
+@media(max-width:900px){
+  .main-nav.open a.workspace-nav-home{
+    width:100%;
+    padding:10px 12px;
+    margin-bottom:2px;
+  }
+}
+
+@media(max-width:640px){
+  body:not([data-page="home"]) .section{
+    padding-top:32px;
+    padding-bottom:32px;
+  }
+
+  .section-heading{
+    margin-bottom:18px;
+  }
+
+  .workspace-compact-actions .button{
+    min-height:40px;
+  }
+}
