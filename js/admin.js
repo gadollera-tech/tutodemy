@@ -715,15 +715,31 @@ document.addEventListener("DOMContentLoaded", async () => {
     const canComplete = booking.status === "session_delivered" && booking.payment_status === "paid";
 
     return `<article class="admin-card booking-admin-card" data-booking-id="${esc(booking.id)}">
-      <div class="admin-card-head">
-        <div>
+      <div class="booking-admin-head">
+        <div class="booking-admin-head-top">
           <span class="status-pill status-${esc(booking.status)}">${esc(adminBookingStatusLabel(booking))}</span>
-          <h3>${esc(booking.tutor_name_snapshot || "Tutor")} <span class="booking-party-arrow">↔</span> ${esc(booking.learner_name_snapshot || "Learner")}</h3>
-          <p>${new Date(booking.requested_start).toLocaleString()} • ${esc(booking.subject)} • ${esc(booking.mode)}</p>
+          <b class="booking-admin-amount">${money(booking.gross_amount)}</b>
         </div>
-        <b>${money(booking.gross_amount)}</b>
+
+        <div class="booking-admin-parties">
+          <div class="booking-admin-party">
+            <span>Tutor</span>
+            <strong>${esc(booking.tutor_name_snapshot || "Tutor")}</strong>
+          </div>
+          <span class="booking-admin-arrow" aria-hidden="true">↔</span>
+          <div class="booking-admin-party">
+            <span>Learner</span>
+            <strong>${esc(booking.learner_name_snapshot || "Learner")}</strong>
+          </div>
+        </div>
+
+        <div class="booking-admin-session">
+          <span>${new Date(booking.requested_start).toLocaleString()}</span>
+          <span>${esc(booking.subject)}</span>
+          <span>${esc(booking.mode)}</span>
+        </div>
       </div>
-      <dl class="booking-details">
+      <dl class="booking-details booking-admin-details">
         <div><dt>Payment</dt><dd>${esc(booking.payment_status)}</dd></div>
         <div><dt>Duration</dt><dd>${booking.duration_minutes} minutes</dd></div>
         ${booking.payer_name ? `<div><dt>Payer</dt><dd>${esc(booking.payer_name)}</dd></div>` : ""}
@@ -806,18 +822,51 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function payoutCard(payout) {
     const payoutReady = Boolean(payout.payout_account_name && payout.payout_account_number);
+    const sessionLabel = `${payout.session_count} completed session${Number(payout.session_count) === 1 ? "" : "s"}`;
+    const periodLabel = `${new Date(`${payout.period_start}T00:00:00`).toLocaleDateString()}–${new Date(`${payout.period_end}T00:00:00`).toLocaleDateString()}`;
+
     return `<article class="admin-card payout-admin-card" data-tutor-id="${esc(payout.tutor_id)}">
-      <div class="admin-card-head">
-        <div><span class="status-pill status-pending">WEEKLY PAYOUT DUE</span><h3>${esc(payout.display_name || "Tutor")}</h3><p>${payout.session_count} completed session${Number(payout.session_count) === 1 ? "" : "s"} • ${new Date(`${payout.period_start}T00:00:00`).toLocaleDateString()}–${new Date(`${payout.period_end}T00:00:00`).toLocaleDateString()}</p></div>
-        <b>${money(payout.amount_due)}</b>
+      <div class="payout-admin-head">
+        <div class="payout-admin-head-top">
+          <span class="status-pill status-pending">Weekly payout due</span>
+          <b class="payout-admin-amount">${money(payout.amount_due)}</b>
+        </div>
+
+        <div class="payout-admin-summary">
+          <div class="payout-admin-tutor">
+            <span>Tutor</span>
+            <strong>${esc(payout.display_name || "Tutor")}</strong>
+          </div>
+          <div class="payout-admin-stat">
+            <span>Sessions</span>
+            <strong>${esc(sessionLabel)}</strong>
+          </div>
+          <div class="payout-admin-stat">
+            <span>Payout period</span>
+            <strong>${esc(periodLabel)}</strong>
+          </div>
+        </div>
       </div>
-      <div class="payout-destination-card ${payoutReady ? "ready" : "incomplete"}">
-        <span>PRIVATE GCASH DESTINATION</span>
-        <b>${esc(payout.payout_account_name || "Payout details incomplete")}</b>
-        <p>${esc(payout.payout_account_number || "Ask the tutor to update their private payout profile.")}</p>
+
+      <div class="payout-destination-card payout-destination-wide ${payoutReady ? "ready" : "incomplete"}">
+        <div class="payout-destination-copy">
+          <span>PRIVATE GCASH DESTINATION</span>
+          <b>${esc(payout.payout_account_name || "Payout details incomplete")}</b>
+          <p>${esc(payout.payout_account_number || "Ask the tutor to update their private payout profile.")}</p>
+        </div>
         ${payout.payout_qr_path ? `<button class="button button-outline open-payout-qr" data-path="${esc(payout.payout_qr_path)}" type="button">Open private GCash QR</button>` : ""}
       </div>
-      ${payoutReady ? `<div class="admin-payout-form"><label>Successful GCash transaction reference<input data-payout-reference maxlength="120" placeholder="Reference after sending the full amount"></label><label>Admin note<input data-payout-note maxlength="300" placeholder="Optional payout note"></label><button class="button record-payout" type="button">Record weekly payout as paid</button><p class="muted">Send the money in GCash first. This button records the completed transfer; it does not move money automatically.</p></div>` : ""}
+
+      ${payoutReady ? `<div class="admin-payout-form admin-payout-form-wide">
+        <label>Successful GCash transaction reference
+          <input data-payout-reference maxlength="120" placeholder="Reference after sending the full amount">
+        </label>
+        <label>Admin note
+          <input data-payout-note maxlength="300" placeholder="Optional payout note">
+        </label>
+        <button class="button record-payout" type="button">Record payout as paid</button>
+        <p class="muted payout-record-note">Send the money in GCash first. This button only records the completed transfer.</p>
+      </div>` : ""}
     </article>`;
   }
 
