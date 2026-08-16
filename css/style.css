@@ -1508,3 +1508,75 @@ code{background:rgba(116,132,194,.12);color:#0C046D}
 .admin-tabs a.active,.dashboard-tabs a.active,.tab-button.active,.filter-chip.active{color:#0C046D;border-color:#E5922E}
 .badge,.chip,.tag{border-color:rgba(79,77,78,.18)}
 .progress-bar>span,.progress-fill{background:#7484C2}
+
+
+/* =========================================================
+   TutoDemy UI6 — Public Header + Hero Balance
+   2026-08-16
+   ========================================================= */
+
+/* Remove the thin public announcement strip above the main navigation.
+   Learner/tutor/admin workspace notes remain available on signed-in views. */
+.role-public .site-note{
+  display:none !important;
+}
+
+/* Give the right-side account card a little more visual weight on desktop/tablet. */
+@media (min-width:901px){
+  .home-v4 .lp4-hero-grid{
+    grid-template-columns:minmax(0,1fr) minmax(430px,.96fr);
+    gap:clamp(34px,5vw,70px);
+  }
+
+  .home-v4 .lp4-hub{
+    width:100%;
+    max-width:650px;
+    justify-self:end;
+    padding:18px;
+    border-radius:30px;
+  }
+
+  .home-v4 .lp4-hub-head{
+    gap:15px;
+    padding:17px 16px 22px;
+  }
+
+  .home-v4 .lp4-hub-head img{
+    width:56px;
+    height:56px;
+  }
+
+  .home-v4 .lp4-hub-head b{
+    font-size:clamp(1.2rem,1.45vw,1.38rem);
+    line-height:1.25;
+  }
+
+  .home-v4 .lp4-hub-link{
+    grid-template-columns:48px minmax(0,1fr) auto;
+    gap:14px;
+    padding:20px 18px;
+  }
+
+  .home-v4 .lp4-icon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+  }
+
+  .home-v4 .lp4-hub-link b{
+    font-size:1.02rem;
+  }
+
+  .home-v4 .lp4-hub-link small{
+    font-size:.82rem;
+    line-height:1.55;
+  }
+}
+
+/* When the hero stacks, keep the account card comfortably wide instead of tiny. */
+@media (max-width:900px){
+  .home-v4 .lp4-hub{
+    width:100%;
+    max-width:760px;
+  }
+}
