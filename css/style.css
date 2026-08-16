@@ -5415,3 +5415,23 @@ textarea::placeholder{
     min-height:40px;
   }
 }
+
+
+
+/* TutoDemy Landing Hero — concise value proposition */
+.lp4-hero-copy .lp4-lead{
+  max-width:680px;
+}
+.lp4-hero-copy .lp4-made-for{
+  margin-top:14px;
+  color:#6f7078;
+  font-size:.88rem;
+  font-weight:650;
+  letter-spacing:.005em;
+}
+@media(max-width:640px){
+  .lp4-hero-copy .lp4-made-for{
+    margin-top:12px;
+    font-size:.82rem;
+  }
+}
