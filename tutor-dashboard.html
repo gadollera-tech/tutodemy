@@ -1,119 +1,115 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="Tutor application, booking, commission, and earnings dashboard.">
-  <meta name="theme-color" content="#0C046D">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="TutoDemy">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="robots" content="noindex,nofollow">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Tutor Dashboard | TutoDemy Learning PH">
-  <meta property="og:description" content="Tutor application, booking, commission, and earnings dashboard.">
-  <meta property="og:url" content="https://tutodemy.net/tutor-dashboard.html">
-  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <title>Tutor Dashboard | TutoDemy Learning PH</title>
-  <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-workspacefix2">
-  <script defer src="js/config.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="js/supabase-client.js"></script>
-  <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
-  <script defer src="js/main.js?v=20260816-ui12"></script>
-  <script defer src="js/tutor-dashboard.js?v=20260816-workspacefix2"></script>
-  <script defer src="js/pwa.js?v=20260809-pwa1"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="Tutor application, booking, commission, and earnings dashboard." name="description"/>
+<meta content="#0C046D" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="TutoDemy" name="apple-mobile-web-app-title"/>
+<link href="assets/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="manifest.webmanifest" rel="manifest"/>
+<meta content="noindex,nofollow" name="robots"/>
+<meta content="website" property="og:type"/>
+<meta content="Tutor Dashboard | TutoDemy Learning PH" property="og:title"/>
+<meta content="Tutor application, booking, commission, and earnings dashboard." property="og:description"/>
+<meta content="https://tutodemy.net/tutor-dashboard.html" property="og:url"/>
+<meta content="https://tutodemy.net/assets/images/tutodemy-logo.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<title>Tutor Dashboard | TutoDemy Learning PH</title>
+<link href="assets/images/owl-mark.png" rel="icon"/>
+<link href="css/style.css?v=20260816-professional1" rel="stylesheet"/>
+<script defer="" src="js/config.js"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer="" src="js/supabase-client.js"></script>
+<script defer="" src="js/auth-core.js"></script>
+<script defer="" src="js/cloud-sync.js"></script>
+<script defer="" src="js/marketplace-api.js?v=20260816-professional1"></script>
+<script defer="" src="js/main.js?v=20260816-professional1"></script>
+<script defer="" src="js/tutor-dashboard.js?v=20260816-professional1"></script>
+<script defer="" src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="tutor-dashboard">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div id="site-header"></div>
-  <main id="main-content">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div id="site-header"></div>
+<main id="main-content">
 <section class="section workspace-first-section">
-      <div class="container">
-        <div class="workspace-compact-head workspace-compact-head-wrap">
-          <div class="workspace-compact-title-group">
-            <h1>Tutor Dashboard</h1>
-            <div class="workspace-status-line">
-              <span>Profile</span>
-              <b id="dash-profile-status">Loading…</b>
-              <small id="dash-profile-message">Checking your account.</small>
-            </div>
-          </div>
-          <div class="workspace-compact-actions">
-            <a class="button button-small" href="tutor-onboarding.html">Edit profile</a>
-            <button class="button button-outline button-small" id="toggle-bookings" type="button" hidden>Pause new bookings</button>
-            <a class="button button-outline button-small" href="tutor-terms.html">Guidelines</a>
-          </div>
-        </div>
-        <div class="marketplace-alert" id="dashboard-alert" hidden></div>
-        <div class="tutor-metric-grid" id="private-tutor-metrics" hidden>
-          <article><span>Current tier</span><b id="metric-tier">—</b><small id="metric-rate">—</small></article>
-          <article><span>Completed sessions</span><b id="metric-completed">0</b><small id="metric-progress">Milestone progress</small></article>
-          <article><span>Verified rating</span><b id="metric-rating">New</b><small id="metric-reviews">0 reviews</small></article>
-          <article><span>Recorded tutor earnings</span><b id="metric-earnings">₱0.00</b><small>Completed paid bookings</small></article><article><span>Awaiting weekly payout</span><b id="metric-pending-payout">₱0.00</b><small>Completed earnings not yet released</small></article><article><span>Total paid out</span><b id="metric-paid-out">₱0.00</b><small>Recorded weekly GCash payouts</small></article>
-        </div>
-
-        <div class="dashboard-two-column" id="private-compensation-panel" hidden>
-          <section class="panel commission-calculator">
-            <span class="eyebrow">COMMISSION ESTIMATOR</span><h2>Estimate the split for a session</h2>
-            <label>Session amount (₱)<input id="commission-gross" type="number" min="0" value="500"></label>
-            <div class="commission-result"><div><span>TutoDemy commission</span><b id="commission-fee">—</b></div><div><span>Your estimated net</span><b id="commission-net">—</b></div></div>
-            <p id="commission-description" class="muted"></p>
-          </section>
-          <section class="panel">
-            <span class="eyebrow">TIER RULES</span><h2>How your rate changes</h2>
-            <div class="tier-mini-list" id="private-tier-rules"></div>
-          </section>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="section" id="private-payout-section" hidden>
-      <div class="container">
-        <div class="dashboard-two-column">
-          <section class="panel">
-            <span class="eyebrow">PRIVATE PAYOUT DESTINATION</span><h2>Your weekly GCash payout</h2>
-            <div class="private-payout-account" id="private-payout-account"></div>
-            <p class="muted">Update incorrect payout details before the weekly batch is processed. Students and parents cannot see this information.</p>
-            <a class="button button-outline" href="tutor-onboarding.html#payout-details">Update payout details</a>
-          </section>
-          <section class="panel">
-            <span class="eyebrow">PAYOUT SCHEDULE</span><h2>How weekly payouts work</h2>
-            <ol class="simple-steps"><li>A paid session is delivered and completed by the administrator.</li><li>Your net earning is added to the pending payout ledger.</li><li>TutoDemy sends the weekly batch to your registered GCash destination.</li><li>The completed payout and transaction reference appear below.</li></ol>
-          </section>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-cream" id="booking-requests">
-      <div class="container">
-        <div class="workspace-section-bar">
-          <h2>Booking Requests</h2>
-          <small>Requests, accepted sessions, and completed bookings</small>
-        </div>
-        <div class="booking-tabs"><button class="active" data-tutor-filter="action">Needs action</button><button data-tutor-filter="upcoming">Accepted and paid</button><button data-tutor-filter="completed">Completed</button><button data-tutor-filter="all">All</button></div>
-        <div class="booking-list" id="tutor-booking-list"></div>
-      </div>
-    </section>
-
-    <section class="section" id="private-ledger-section" hidden>
-      <div class="container">
-        <div class="workspace-section-bar"><h2>Earnings Ledger</h2><small>Completed sessions and payout records</small></div>
-        <div class="ledger-table" id="commission-ledger"></div>
-        <div class="workspace-section-bar payout-history-heading"><h2>Weekly Payout History</h2><small>Recorded payout releases</small></div>
-        <div class="ledger-table" id="payout-history"></div>
-      </div>
-    </section>
-  </main>
-  <div id="site-footer"></div>
-  <div class="toast" role="status" aria-live="polite"></div>
+<div class="container">
+<div class="workspace-compact-head workspace-compact-head-wrap">
+<div class="workspace-compact-title-group">
+<h1>Tutor Dashboard</h1>
+<div class="workspace-status-line">
+<span>Profile</span>
+<b id="dash-profile-status">Loading…</b>
+<small id="dash-profile-message">Checking your account.</small>
+</div>
+</div>
+<div class="workspace-compact-actions">
+<a class="button button-small" href="tutor-onboarding.html">Edit profile</a>
+<button class="button button-outline button-small" hidden="" id="toggle-bookings" type="button">Pause new bookings</button>
+<a class="button button-outline button-small" href="tutor-terms.html">Guidelines</a>
+</div>
+</div>
+<div class="marketplace-alert" hidden="" id="dashboard-alert"></div>
+<div class="tutor-metric-grid" hidden="" id="private-tutor-metrics">
+<article><span>Current tier</span><b id="metric-tier">—</b><small id="metric-rate">—</small></article>
+<article><span>Completed sessions</span><b id="metric-completed">0</b><small id="metric-progress">Milestone progress</small></article>
+<article><span>Verified rating</span><b id="metric-rating">New</b><small id="metric-reviews">0 reviews</small></article>
+<article><span>Recorded tutor earnings</span><b id="metric-earnings">₱0.00</b><small>Completed paid bookings</small></article><article><span>Awaiting weekly payout</span><b id="metric-pending-payout">₱0.00</b><small>Completed earnings not yet released</small></article><article><span>Total paid out</span><b id="metric-paid-out">₱0.00</b><small>Recorded weekly GCash payouts</small></article>
+</div>
+<div class="dashboard-two-column" hidden="" id="private-compensation-panel">
+<section class="panel commission-calculator">
+<span class="eyebrow">COMMISSION ESTIMATOR</span><h2>Session earnings estimate</h2>
+<label>Session amount<input id="commission-gross" min="0" type="number" value="500"/></label>
+<div class="commission-result"><div><span>TutoDemy commission</span><b id="commission-fee">—</b></div><div><span>Your estimated net</span><b id="commission-net">—</b></div></div>
+<p class="muted" id="commission-description"></p>
+</section>
+<section class="panel">
+<span class="eyebrow">TIER RULES</span><h2>Commission rate</h2>
+<div class="tier-mini-list" id="private-tier-rules"></div>
+</section>
+</div>
+</div>
+</section>
+<section class="section" hidden="" id="private-payout-section">
+<div class="container">
+<div class="dashboard-two-column">
+<section class="panel">
+<span class="eyebrow">PRIVATE PAYOUT DESTINATION</span><h2>Payout account</h2>
+<div class="private-payout-account" id="private-payout-account"></div>
+<p class="muted">Update payout details before processing. This information is private.</p>
+<a class="button button-outline" href="tutor-onboarding.html#payout-details">Update payout details</a>
+</section>
+<section class="panel">
+<span class="eyebrow">PAYOUT SCHEDULE</span><h2>Payout schedule</h2>
+<ol class="simple-steps"><li>A paid session is delivered and completed by the administrator.</li><li>Your net earning is added to the pending payout ledger.</li><li>TutoDemy sends the weekly batch to your registered GCash destination.</li><li>The completed payout and transaction reference appear below.</li></ol>
+</section>
+</div>
+</div>
+</section>
+<section class="section section-cream" id="booking-requests">
+<div class="container">
+<div class="workspace-section-bar">
+<h2>Bookings</h2>
+<small>Requests, accepted sessions, and completed bookings</small>
+</div>
+<div class="booking-tabs"><button class="active" data-tutor-filter="action">Needs action</button><button data-tutor-filter="upcoming">Accepted and paid</button><button data-tutor-filter="completed">Completed</button><button data-tutor-filter="all">All</button></div>
+<div class="booking-list" id="tutor-booking-list"></div>
+</div>
+</section>
+<section class="section" hidden="" id="private-ledger-section">
+<div class="container">
+<div class="workspace-section-bar"><h2>Earnings Ledger</h2><small>Completed sessions and payout records</small></div>
+<div class="ledger-table" id="commission-ledger"></div>
+<div class="workspace-section-bar payout-history-heading"><h2>Weekly Payout History</h2><small>Recorded payout releases</small></div>
+<div class="ledger-table" id="payout-history"></div>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<div aria-live="polite" class="toast" role="status"></div>
 </body>
 </html>

@@ -1,129 +1,122 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="TutoDemy learner profile and cloud sync settings.">
-  <meta name="theme-color" content="#0C046D">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="TutoDemy">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="robots" content="noindex,nofollow">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Learner Profile | TutoDemy Learning PH">
-  <meta property="og:description" content="TutoDemy learner profile and cloud sync settings.">
-  <meta property="og:url" content="https://tutodemy.net/profile.html">
-  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <title>Learner Profile | TutoDemy Learning PH</title>
-  <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-compactworkspace1">
-  <script defer src="js/config.js?v=20260816-webpush2"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="js/supabase-client.js"></script>
-  <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260816-webpush2"></script>
-  <script defer src="data/taxonomy.js"></script>
-  <script defer src="data/philippines-locations.js"></script>
-  <script defer src="js/main.js?v=20260816-ui12"></script>
-  <script defer src="js/profile.js?v=20260816-notifydefault1"></script>
-  <script defer src="js/pwa.js?v=20260809-pwa1"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="TutoDemy learner profile and cloud sync settings." name="description"/>
+<meta content="#0C046D" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="TutoDemy" name="apple-mobile-web-app-title"/>
+<link href="assets/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="manifest.webmanifest" rel="manifest"/>
+<meta content="noindex,nofollow" name="robots"/>
+<meta content="website" property="og:type"/>
+<meta content="Learner Profile | TutoDemy Learning PH" property="og:title"/>
+<meta content="TutoDemy learner profile and cloud sync settings." property="og:description"/>
+<meta content="https://tutodemy.net/profile.html" property="og:url"/>
+<meta content="https://tutodemy.net/assets/images/tutodemy-logo.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<title>Learner Profile | TutoDemy Learning PH</title>
+<link href="assets/images/owl-mark.png" rel="icon"/>
+<link href="css/style.css?v=20260816-professional1" rel="stylesheet"/>
+<script defer="" src="js/config.js?v=20260816-webpush2"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer="" src="js/supabase-client.js"></script>
+<script defer="" src="js/auth-core.js"></script>
+<script defer="" src="js/cloud-sync.js"></script>
+<script defer="" src="js/marketplace-api.js?v=20260816-professional1"></script>
+<script defer="" src="data/taxonomy.js"></script>
+<script defer="" src="data/philippines-locations.js"></script>
+<script defer="" src="js/main.js?v=20260816-professional1"></script>
+<script defer="" src="js/profile.js?v=20260816-professional1"></script>
+<script defer="" src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="account">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div id="site-header"></div>
-  <main id="main-content">
-    <section class="profile-account-hero profile-account-hero-compact">
-      <div class="container profile-account-heading">
-        <div class="account-avatar" id="account-avatar">U</div>
-        <div><h1 id="account-heading">My TutoDemy account</h1><p id="account-email">Loading account…</p></div>
-        <button class="button button-ghost" id="logout-button" type="button">Log out</button>
-      </div>
-    </section>
-
-    <section class="section workspace-first-section">
-      <div class="container account-grid">
-        <section class="panel account-profile-panel">
-          <div class="panel-heading"><div><span class="eyebrow">PROFILE</span><h2>Learning information</h2></div><span class="cloud-badge" id="profile-cloud-badge">Checking…</span></div>
-          <form class="account-profile-form" id="profile-form">
-            <label>Full name<input name="full_name" maxlength="100" required></label>
-            <label>Student level<select name="student_level"><option value="">Not specified</option><option>Elementary</option><option>Junior High</option><option>Senior High</option><option>College</option><option>CET Applicant</option></select></label>
-            <label>Target exam<select name="target_exam"><option value="">General academic support</option><option>UPCAT</option><option>DCAT</option><option>Other CET</option><option>DOST-SEI Scholarship Exam</option><option>School subjects</option></select></label>
-            <label>School or learning institution<input name="school" maxlength="150" placeholder="Optional"></label>
-            <label>Province<select name="province" id="profile-province"><option value="">Select province (optional)</option></select></label>
-            <label>City or municipality<input name="city" maxlength="100" placeholder="Optional"></label>
-            <label class="consent-label full location-consent"><input type="checkbox" name="share_location_insights"><span>Include my province in anonymous regional learner-demand insights. My name, exact address, and contact information will not appear on the map.</span></label>
-            <label class="full">Avatar image URL<input type="url" name="avatar_url" placeholder="Optional public image URL"></label>
-            <button class="button full" type="submit">Save profile</button>
-            <p class="form-status" id="profile-status"></p>
-          </form>
-        </section>
-
-        <aside class="account-sidebar">
-          <section class="panel account-role-panel">
-            <span class="eyebrow">ACCOUNT PATH</span><h2 id="account-role-heading">Learner / Parent</h2><p id="account-role-description">Book tutors and save learning progress.</p>
-            <div class="role-action-list" id="account-role-actions"><a class="button full" href="bookings.html">My tutor bookings</a><a class="button button-outline full" href="tutor-onboarding.html">Apply as a tutor</a></div>
-          </section>
-          <section class="panel sync-panel">
-            <span class="eyebrow">CLOUD SYNC</span><h2 id="sync-heading">Checking connection…</h2><p id="sync-description">Local data remains available while the account service is loading.</p>
-            <div class="sync-facts"><span><b id="sync-attempts">0</b> attempts</span><span><b id="sync-reviewers">0</b> saved reviewers</span><span><b id="sync-active">No</b> active exam</span></div>
-            <button class="button full" id="sync-now" type="button">Sync now</button>
-            <small id="last-sync">Not synced yet</small>
-          </section>
-          
-    <section class="panel notification-preferences-panel">
-      <span class="eyebrow">NOTIFICATIONS</span>
-      <h2>Important booking updates</h2>
-      <p>Email booking alerts are on by default. Phone push is also recommended by default, but each phone/browser must be activated once because the device controls notification permission.</p>
-
-      <div class="notification-pref-list">
-        <label class="notification-pref-row">
-          <span>
-            <span class="notification-label-line"><b>Email booking updates</b><span class="notification-default-badge">ON by default</span></span>
-            <small>Important tutor and learner booking changes are emailed automatically unless you turn this off.</small>
-          </span>
-          <input id="pref-email-bookings" type="checkbox" checked>
-        </label>
-
-        <label class="notification-pref-row">
-          <span>
-            <b>Email new messages</b>
-            <small>Optional. Booking messages still appear in the notification bell.</small>
-          </span>
-          <input id="pref-email-messages" type="checkbox">
-        </label>
-
-        <div class="notification-device-row notification-device-default-on" id="push-device-card">
-          <div class="notification-device-copy">
-            <span class="notification-label-line">
-              <b>Phone / browser alerts</b>
-              <span class="notification-default-badge">Recommended ON</span>
-            </span>
-            <small id="browser-notification-status">One tap is required to activate push on this device.</small>
-          </div>
-          <button class="button" id="enable-browser-notifications" type="button">Turn on phone alerts</button>
-        </div>
-      </div>
-
-      <button class="button full" id="save-notification-preferences" type="button">Save notification preferences</button>
-      <p class="form-status" id="notification-preference-status" role="status" aria-live="polite"></p>
-      <small class="notification-pref-note">Email booking updates start ON for every account. Phone/browser push is recommended ON, but the browser requires one explicit tap on each device before it can actually send notifications. You can turn either channel off anytime.</small>
-    </section>
-
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div id="site-header"></div>
+<main id="main-content">
+<section class="profile-account-hero profile-account-hero-compact">
+<div class="container profile-account-heading">
+<div class="account-avatar" id="account-avatar">U</div>
+<div><h1 id="account-heading">Account</h1><p id="account-email">Loading account…</p></div>
+<button class="button button-ghost" id="logout-button" type="button">Log out</button>
+</div>
+</section>
+<section class="section workspace-first-section">
+<div class="container account-grid">
+<section class="panel account-profile-panel">
+<div class="panel-heading"><div><span class="eyebrow">PROFILE</span><h2>Learning profile</h2></div><span class="cloud-badge" id="profile-cloud-badge">Checking…</span></div>
+<form class="account-profile-form" id="profile-form">
+<label>Full name<input maxlength="100" name="full_name" required=""/></label>
+<label>Level<select name="student_level"><option value="">Not specified</option><option>Elementary</option><option>Junior High</option><option>Senior High</option><option>College</option><option>CET Applicant</option></select></label>
+<label>Goal<select name="target_exam"><option value="">General academic support</option><option>UPCAT</option><option>DCAT</option><option>Other CET</option><option>DOST-SEI Scholarship Exam</option><option>School subjects</option></select></label>
+<label>School<input maxlength="150" name="school" placeholder="Optional"/></label>
+<label>Province<select id="profile-province" name="province"><option value="">Select province (optional)</option></select></label>
+<label>City / municipality<input maxlength="100" name="city" placeholder="Optional"/></label>
+<label class="consent-label full location-consent"><input name="share_location_insights" type="checkbox"/><span>Include my province in anonymous demand statistics.</span></label>
+<label class="full">Profile image URL<input name="avatar_url" placeholder="Image URL (optional)" type="url"/></label>
+<button class="button full" type="submit">Save profile</button>
+<p class="form-status" id="profile-status"></p>
+</form>
+</section>
+<aside class="account-sidebar">
+<section class="panel account-role-panel">
+<span class="eyebrow">ACCOUNT PATH</span><h2 id="account-role-heading">Learner / Parent</h2><p id="account-role-description">Book tutors and save learning progress.</p>
+<div class="role-action-list" id="account-role-actions"><a class="button full" href="bookings.html">My tutor bookings</a><a class="button button-outline full" href="tutor-onboarding.html">Apply as a tutor</a></div>
+</section>
+<section class="panel sync-panel">
+<span class="eyebrow">CLOUD SYNC</span><h2 id="sync-heading">Checking connection…</h2><p id="sync-description">Local data remains available while the account loads.</p>
+<div class="sync-facts"><span><b id="sync-attempts">0</b> attempts</span><span><b id="sync-reviewers">0</b> saved reviewers</span><span><b id="sync-active">No</b> active exam</span></div>
+<button class="button full" id="sync-now" type="button">Sync now</button>
+<small id="last-sync">Not synced yet</small>
+</section>
+<section class="panel notification-preferences-panel">
+<span class="eyebrow">NOTIFICATIONS</span>
+<h2>Notifications</h2>
+<p>Booking emails are on by default. Phone alerts require one activation per device.</p>
+<div class="notification-pref-list">
+<label class="notification-pref-row">
+<span>
+<span class="notification-label-line"><b>Booking emails</b><span class="notification-default-badge">Default on</span></span>
+<small>Receive booking status emails.</small>
+</span>
+<input checked="" id="pref-email-bookings" type="checkbox"/>
+</label>
+<label class="notification-pref-row">
+<span>
+<b>Message emails</b>
+<small>Optional email alerts for new messages.</small>
+</span>
+<input id="pref-email-messages" type="checkbox"/>
+</label>
+<div class="notification-device-row notification-device-default-on" id="push-device-card">
+<div class="notification-device-copy">
+<span class="notification-label-line">
+<b>Phone / browser alerts</b>
+<span class="notification-default-badge">Recommended ON</span>
+</span>
+<small id="browser-notification-status">Activate alerts on this device.</small>
+</div>
+<button class="button" id="enable-browser-notifications" type="button">Turn on phone alerts</button>
+</div>
+</div>
+<button class="button full" id="save-notification-preferences" type="button">Save notification preferences</button>
+<p aria-live="polite" class="form-status" id="notification-preference-status" role="status"></p>
+<small class="notification-pref-note">Email booking updates start ON for every account. Phone alerts require one activation per device. You can turn either channel off anytime.</small>
+</section>
 <section class="panel data-panel">
-            <span class="eyebrow">YOUR DATA</span><h2>Local copy and export</h2><p>A local copy is kept for resilience. On a shared device, log out after use.</p>
-            <button class="button button-outline full" id="export-data" type="button">Export my local data</button>
-            <a class="button button-outline full" href="dashboard.html">Open dashboard</a>
-          </section>
-        </aside>
-      </div>
-    </section>
-  </main>
-  <div id="site-footer"></div>
-  <div class="toast" role="status" aria-live="polite"></div>
+<span class="eyebrow">YOUR DATA</span><h2>Data</h2><p>A local copy is kept on this device. Log out on shared devices.</p>
+<button class="button button-outline full" id="export-data" type="button">Export my local data</button>
+<a class="button button-outline full" href="dashboard.html">Open dashboard</a>
+</section>
+</aside>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<div aria-live="polite" class="toast" role="status"></div>
 </body>
 </html>

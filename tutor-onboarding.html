@@ -1,142 +1,136 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="Create and submit a TutoDemy tutor profile for admin approval.">
-  <meta name="theme-color" content="#0C046D">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="TutoDemy">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="robots" content="noindex,nofollow">
-  <link rel="canonical" href="https://tutodemy.net/tutor-onboarding.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Become a Tutor | TutoDemy Learning PH">
-  <meta property="og:description" content="Create and submit a TutoDemy tutor profile for admin approval.">
-  <meta property="og:url" content="https://tutodemy.net/tutor-onboarding.html">
-  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <title>Become a Tutor | TutoDemy Learning PH</title>
-  <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-compactworkspace1">
-  <script defer src="js/config.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="js/supabase-client.js"></script>
-  <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
-  <script defer src="js/main.js?v=20260816-ui12"></script>
-  <script defer src="js/tutor-onboarding.js?v=20260809-tutorfix1"></script>
-  <script defer src="js/pwa.js?v=20260809-pwa1"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="Create and submit a TutoDemy tutor profile for admin approval." name="description"/>
+<meta content="#0C046D" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="TutoDemy" name="apple-mobile-web-app-title"/>
+<link href="assets/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="manifest.webmanifest" rel="manifest"/>
+<meta content="noindex,nofollow" name="robots"/>
+<link href="https://tutodemy.net/tutor-onboarding.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Become a Tutor | TutoDemy Learning PH" property="og:title"/>
+<meta content="Create and submit a TutoDemy tutor profile for admin approval." property="og:description"/>
+<meta content="https://tutodemy.net/tutor-onboarding.html" property="og:url"/>
+<meta content="https://tutodemy.net/assets/images/tutodemy-logo.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<title>Become a Tutor | TutoDemy Learning PH</title>
+<link href="assets/images/owl-mark.png" rel="icon"/>
+<link href="css/style.css?v=20260816-professional1" rel="stylesheet"/>
+<script defer="" src="js/config.js"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer="" src="js/supabase-client.js"></script>
+<script defer="" src="js/auth-core.js"></script>
+<script defer="" src="js/cloud-sync.js"></script>
+<script defer="" src="js/marketplace-api.js?v=20260816-professional1"></script>
+<script defer="" src="js/main.js?v=20260816-professional1"></script>
+<script defer="" src="js/tutor-onboarding.js?v=20260816-professional1"></script>
+<script defer="" src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="tutor-onboarding">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div id="site-header"></div>
-  <main id="main-content">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div id="site-header"></div>
+<main id="main-content">
 <section class="section workspace-first-section">
-      <div class="container">
-        <div class="workspace-compact-head">
-          <h1>Tutor Profile Setup</h1>
-          <div class="workspace-compact-actions">
-            <a class="button button-outline button-small" href="tutor-terms.html">Tutor guidelines</a>
-          </div>
-        </div>
-      </div>
-      <div class="container onboarding-layout">
-        <aside class="onboarding-sidebar">
-          <div class="status-card"><span class="eyebrow">APPLICATION STATUS</span><h2 id="application-status">Loading…</h2><p id="application-message">Checking your tutor profile.</p></div>
-          <nav class="onboarding-nav"><a href="#public-profile">Public profile</a><a href="#teaching-details">Teaching details</a><a href="#availability">Availability</a><a href="#payout-details">Private payout details</a><a href="#verification">Private verification</a><a href="#submit-review">Submit for review</a></nav>
-          <div class="security-note"><b>Private files</b><p>IDs and credential files use a private Supabase Storage bucket. Only you and authorized TutoDemy administrators can access them.</p></div>
-        </aside>
-
-        <div>
-          <div class="marketplace-alert" id="marketplace-alert" hidden></div>
-          <form class="marketplace-form" id="tutor-application-form">
-            <section class="panel form-section" id="public-profile">
-              <div class="panel-heading"><div><span class="eyebrow">PUBLIC PROFILE</span><h2>How learners will see you</h2></div><span>Step 1</span></div>
-              <div class="form-grid">
-                <label>Public display name<input name="display_name" maxlength="100" required></label>
-                <label>Contact email<input type="email" name="contact_email" required></label>
-                <label class="full">Professional headline<input name="headline" maxlength="140" placeholder="Example: Mathematics and Physics tutor for SHS and CET applicants"></label>
-                <label class="full">Tutor biography<textarea name="bio" rows="6" maxlength="1800" required placeholder="Describe your teaching approach, learner support, and experience."></textarea></label>
-                <label>City or municipality<input name="city" maxlength="100"></label>
-                <label>Province<input name="province" maxlength="100"></label>
-                <label class="full">In-person service area<input name="service_area" maxlength="220" placeholder="Optional: areas you can serve for face-to-face sessions"></label>
-                <label>Years of tutoring experience<input type="number" name="years_experience" min="0" max="80" step="0.5" value="0"></label>
-                <label>Languages<input name="languages" placeholder="English, Filipino, Waray"></label>
-                <label class="full">Profile photo<input type="file" id="profile-photo-file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG, or WebP; maximum 5 MB. This photo becomes public only when your profile is approved.</small></label>
-                <div class="photo-preview full" id="photo-preview"><img src="assets/images/owl-mark.png" alt="Profile preview"><span>No profile photo uploaded yet.</span></div>
-              </div>
-            </section>
-
-            <section class="panel form-section" id="teaching-details">
-              <div class="panel-heading"><div><span class="eyebrow">TEACHING DETAILS</span><h2>What and how you teach</h2></div><span>Step 2</span></div>
-              <fieldset><legend>Subjects</legend><div class="checkbox-grid" data-checkbox-group="subjects">
-                <label><input type="checkbox" value="Mathematics"> Mathematics</label><label><input type="checkbox" value="Physics"> Physics</label><label><input type="checkbox" value="Chemistry"> Chemistry</label><label><input type="checkbox" value="Biology"> Biology</label><label><input type="checkbox" value="Science"> General Science</label><label><input type="checkbox" value="English"> English</label><label><input type="checkbox" value="Filipino"> Filipino</label><label><input type="checkbox" value="Reading Comprehension"> Reading Comprehension</label><label><input type="checkbox" value="Abstract Reasoning"> Abstract Reasoning</label><label><input type="checkbox" value="General Academic Support"> General Academic Support</label>
-              </div></fieldset>
-              <fieldset><legend>Entrance-exam specialization</legend><div class="checkbox-grid" data-checkbox-group="exam_specializations">
-                <label><input type="checkbox" value="UPCAT"> UPCAT</label><label><input type="checkbox" value="DCAT"> DCAT</label><label><input type="checkbox" value="DOST-SEI"> DOST-SEI</label><label><input type="checkbox" value="Other CETs"> Other CETs</label><label><input type="checkbox" value="None"> School subjects only</label>
-              </div></fieldset>
-              <fieldset><legend>Learner levels</legend><div class="checkbox-grid" data-checkbox-group="grade_levels">
-                <label><input type="checkbox" value="Elementary"> Elementary</label><label><input type="checkbox" value="Junior High"> Junior High</label><label><input type="checkbox" value="Senior High"> Senior High</label><label><input type="checkbox" value="College"> College</label><label><input type="checkbox" value="CET Applicant"> CET Applicant</label>
-              </div></fieldset>
-              <fieldset><legend>Teaching mode</legend><div class="checkbox-grid" data-checkbox-group="teaching_modes">
-                <label><input type="checkbox" value="Online"> Online</label><label><input type="checkbox" value="In-person"> In-person</label><label><input type="checkbox" value="Either"> Both / Either</label>
-              </div></fieldset>
-              <div class="form-grid">
-                <label>Public hourly rate (₱)<input type="number" name="hourly_rate" min="1" step="1" required></label>
-                <label>Default session duration<select name="session_duration_minutes"><option value="30">30 minutes</option><option value="60" selected>60 minutes</option><option value="90">90 minutes</option><option value="120">120 minutes</option></select></label>
-                <label class="full">Education<input name="education" maxlength="500" placeholder="Degree, school, current academic level, or relevant training"></label>
-                <label class="full">Credentials summary<textarea name="credentials_summary" rows="4" maxlength="1000" placeholder="Licenses, awards, certifications, teaching roles, or relevant achievements"></textarea></label>
-              </div>
-            </section>
-
-            <section class="panel form-section" id="availability">
-              <div class="panel-heading"><div><span class="eyebrow">AVAILABILITY</span><h2>When learners may request sessions</h2></div><span>Step 3</span></div>
-              <label>Public availability summary<textarea name="availability_summary" rows="3" maxlength="500" placeholder="Example: Weekdays 6–9 PM and Saturdays 9 AM–4 PM"></textarea></label>
-              <div class="availability-builder" id="availability-builder"></div>
-              <button class="button button-outline" id="add-availability" type="button">+ Add schedule row</button>
-            </section>
-
-
-            <section class="panel form-section" id="payout-details">
-              <div class="panel-heading"><div><span class="eyebrow">PRIVATE PAYOUT DETAILS</span><h2>Where your weekly earnings will be sent</h2></div><span>Step 4</span></div>
-              <div class="private-field-notice"><b>Visible only to you and authorized TutoDemy administrators.</b><span>Students and parents cannot see your GCash number, registered name, payout QR, commission tier, or net earnings.</span></div>
-              <div class="form-grid">
-                <label>Payout method<select name="payout_method"><option value="GCash" selected>GCash</option></select></label>
-                <label>GCash registered name<input name="payout_account_name" maxlength="120" autocomplete="name" placeholder="Name shown in your GCash account"></label>
-                <label class="full">GCash mobile number<input name="payout_account_number" inputmode="numeric" maxlength="13" autocomplete="tel" placeholder="09XXXXXXXXX"><small>Use an active 11-digit GCash number. Double-check this before submitting your tutor application.</small></label>
-                <label class="full">GCash QR code (optional)<input type="file" id="payout-qr-file" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG, or WebP; maximum 5 MB. Stored privately and used only by authorized administrators for tutor payouts.</small></label>
-                <div class="payout-qr-preview full" id="payout-qr-preview"><span>No private payout QR uploaded yet.</span><button class="text-button" id="view-payout-qr" type="button" hidden>View current QR</button></div>
-              </div>
-              <p class="muted">TutoDemy records eligible completed-session earnings and processes tutor payouts in a weekly batch. Actual release timing may vary because of verification, weekends, holidays, or GCash service availability.</p>
-            </section>
-
-            <section class="panel form-section" id="verification">
-              <div class="panel-heading"><div><span class="eyebrow">PRIVATE VERIFICATION</span><h2>Upload documents for admin review</h2></div><span>Step 5</span></div>
-              <div class="form-grid">
-                <label>Document type<select id="document-type"><option value="Valid ID">Valid ID</option><option value="Education credential">Education credential</option><option value="Teaching credential">Teaching credential</option><option value="Reference or clearance">Reference or clearance</option><option value="Other supporting document">Other supporting document</option></select></label>
-                <label>PDF, JPG, or PNG<input type="file" id="verification-file" accept="application/pdf,image/jpeg,image/png"></label>
-                <button class="button full" id="upload-document" type="button">Upload private document</button>
-              </div>
-              <div class="document-list" id="document-list"></div>
-            </section>
-
-            <section class="panel form-section" id="submit-review">
-              <div class="panel-heading"><div><span class="eyebrow">SAVE AND SUBMIT</span><h2>Review your information</h2></div><span>Step 6</span></div>
-              <label class="consent-label"><input id="tutor-declaration" type="checkbox"><span>I confirm that the information, verification documents, and private payout details are accurate; that I will follow the TutoDemy tutor standards; and that my public profile may be displayed after approval.</span></label>
-              <div class="button-row"><button class="button button-outline" id="save-draft" type="submit">Save draft</button><button class="button" id="submit-application" type="button">Submit for admin review</button></div>
-              <p class="form-status" id="application-form-status" role="status" aria-live="polite"></p>
-            </section>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-  <div id="site-footer"></div>
-  <div class="toast" role="status" aria-live="polite"></div>
+<div class="container">
+<div class="workspace-compact-head">
+<h1>Tutor Profile</h1>
+<div class="workspace-compact-actions">
+<a class="button button-outline button-small" href="tutor-terms.html">Tutor guidelines</a>
+</div>
+</div>
+</div>
+<div class="container onboarding-layout">
+<aside class="onboarding-sidebar">
+<div class="status-card"><span class="eyebrow">APPLICATION STATUS</span><h2 id="application-status">Loading…</h2><p id="application-message">Checking your tutor profile.</p></div>
+<nav class="onboarding-nav"><a href="#public-profile">Public profile</a><a href="#teaching-details">Teaching details</a><a href="#availability">Availability</a><a href="#payout-details">Private payout details</a><a href="#verification">Private verification</a><a href="#submit-review">Submit for review</a></nav>
+<div class="security-note"><b>Private files</b><p>IDs and credential files are private to you and authorized administrators.</p></div>
+</aside>
+<div>
+<div class="marketplace-alert" hidden="" id="marketplace-alert"></div>
+<form class="marketplace-form" id="tutor-application-form">
+<section class="panel form-section" id="public-profile">
+<div class="panel-heading"><div><span class="eyebrow">PUBLIC PROFILE</span><h2>Public profile</h2></div><span>Step 1</span></div>
+<div class="form-grid">
+<label>Display name<input maxlength="100" name="display_name" required=""/></label>
+<label>Email<input name="contact_email" required="" type="email"/></label>
+<label class="full">Headline<input maxlength="140" name="headline" placeholder="e.g., SHS Math &amp; Physics tutor"/></label>
+<label class="full">About<textarea maxlength="1800" name="bio" placeholder="Teaching approach and experience" required="" rows="6"></textarea></label>
+<label>City / municipality<input maxlength="100" name="city"/></label>
+<label>Province<input maxlength="100" name="province"/></label>
+<label class="full">Service area<input maxlength="220" name="service_area" placeholder="e.g., Tacloban City"/></label>
+<label>Years of experience<input max="80" min="0" name="years_experience" step="0.5" type="number" value="0"/></label>
+<label>Languages<input name="languages" placeholder="e.g., English, Filipino"/></label>
+<label class="full">Profile photo<input accept="image/jpeg,image/png,image/webp" id="profile-photo-file" type="file"/><small>JPG, PNG, or WebP. Max 5 MB.</small></label>
+<div class="photo-preview full" id="photo-preview"><img alt="Profile preview" src="assets/images/owl-mark.png"/><span>No profile photo uploaded yet.</span></div>
+</div>
+</section>
+<section class="panel form-section" id="teaching-details">
+<div class="panel-heading"><div><span class="eyebrow">TEACHING DETAILS</span><h2>Subjects &amp; teaching</h2></div><span>Step 2</span></div>
+<fieldset><legend>Subjects</legend><div class="checkbox-grid" data-checkbox-group="subjects">
+<label><input type="checkbox" value="Mathematics"/> Mathematics</label><label><input type="checkbox" value="Physics"/> Physics</label><label><input type="checkbox" value="Chemistry"/> Chemistry</label><label><input type="checkbox" value="Biology"/> Biology</label><label><input type="checkbox" value="Science"/> General Science</label><label><input type="checkbox" value="English"/> English</label><label><input type="checkbox" value="Filipino"/> Filipino</label><label><input type="checkbox" value="Reading Comprehension"/> Reading Comprehension</label><label><input type="checkbox" value="Abstract Reasoning"/> Abstract Reasoning</label><label><input type="checkbox" value="General Academic Support"/> General Academic Support</label>
+</div></fieldset>
+<fieldset><legend>Entrance-exam specialization</legend><div class="checkbox-grid" data-checkbox-group="exam_specializations">
+<label><input type="checkbox" value="UPCAT"/> UPCAT</label><label><input type="checkbox" value="DCAT"/> DCAT</label><label><input type="checkbox" value="DOST-SEI"/> DOST-SEI</label><label><input type="checkbox" value="Other CETs"/> Other CETs</label><label><input type="checkbox" value="None"/> School subjects only</label>
+</div></fieldset>
+<fieldset><legend>Learner levels</legend><div class="checkbox-grid" data-checkbox-group="grade_levels">
+<label><input type="checkbox" value="Elementary"/> Elementary</label><label><input type="checkbox" value="Junior High"/> Junior High</label><label><input type="checkbox" value="Senior High"/> Senior High</label><label><input type="checkbox" value="College"/> College</label><label><input type="checkbox" value="CET Applicant"/> CET Applicant</label>
+</div></fieldset>
+<fieldset><legend>Teaching mode</legend><div class="checkbox-grid" data-checkbox-group="teaching_modes">
+<label><input type="checkbox" value="Online"/> Online</label><label><input type="checkbox" value="In-person"/> In-person</label><label><input type="checkbox" value="Either"/> Both / Either</label>
+</div></fieldset>
+<div class="form-grid">
+<label>Hourly rate (₱)<input min="1" name="hourly_rate" required="" step="1" type="number"/></label>
+<label>Session length<select name="session_duration_minutes"><option value="30">30 minutes</option><option selected="" value="60">60 minutes</option><option value="90">90 minutes</option><option value="120">120 minutes</option></select></label>
+<label class="full">Education<input maxlength="500" name="education" placeholder="Degree, school, or training"/></label>
+<label class="full">Credentials<textarea maxlength="1000" name="credentials_summary" placeholder="Licenses, certifications, or teaching roles" rows="4"></textarea></label>
+</div>
+</section>
+<section class="panel form-section" id="availability">
+<div class="panel-heading"><div><span class="eyebrow">AVAILABILITY</span><h2>Availability</h2></div><span>Step 3</span></div>
+<label>Availability<textarea maxlength="500" name="availability_summary" placeholder="e.g., Weekdays 6–9 PM" rows="3"></textarea></label>
+<div class="availability-builder" id="availability-builder"></div>
+<button class="button button-outline" id="add-availability" type="button">+ Add schedule row</button>
+</section>
+<section class="panel form-section" id="payout-details">
+<div class="panel-heading"><div><span class="eyebrow">PRIVATE PAYOUT DETAILS</span><h2>Payout account</h2></div><span>Step 4</span></div>
+<div class="private-field-notice"><b>Visible only to you and authorized TutoDemy administrators.</b><span>Students and parents cannot see your GCash number, registered name, payout QR, commission tier, or net earnings.</span></div>
+<div class="form-grid">
+<label>Payout method<select name="payout_method"><option selected="" value="GCash">GCash</option></select></label>
+<label>GCash name<input autocomplete="name" maxlength="120" name="payout_account_name" placeholder="GCash account name"/></label>
+<label class="full">GCash mobile number<input autocomplete="tel" inputmode="numeric" maxlength="13" name="payout_account_number" placeholder="09XXXXXXXXX"/><small>Use an active 11-digit GCash number.</small></label>
+<label class="full">GCash QR (optional)<input accept="image/jpeg,image/png,image/webp" id="payout-qr-file" type="file"/><small>JPG, PNG, or WebP. Max 5 MB. Private.</small></label>
+<div class="payout-qr-preview full" id="payout-qr-preview"><span>No private payout QR uploaded yet.</span><button class="text-button" hidden="" id="view-payout-qr" type="button">View current QR</button></div>
+</div>
+<p class="muted">Eligible completed sessions are included in the weekly payout batch.</p>
+</section>
+<section class="panel form-section" id="verification">
+<div class="panel-heading"><div><span class="eyebrow">PRIVATE VERIFICATION</span><h2>Upload documents for admin review</h2></div><span>Step 5</span></div>
+<div class="form-grid">
+<label>Document type<select id="document-type"><option value="Valid ID">Valid ID</option><option value="Education credential">Education credential</option><option value="Teaching credential">Teaching credential</option><option value="Reference or clearance">Reference or clearance</option><option value="Other supporting document">Other supporting document</option></select></label>
+<label>PDF, JPG, or PNG<input accept="application/pdf,image/jpeg,image/png" id="verification-file" type="file"/></label>
+<button class="button full" id="upload-document" type="button">Upload private document</button>
+</div>
+<div class="document-list" id="document-list"></div>
+</section>
+<section class="panel form-section" id="submit-review">
+<div class="panel-heading"><div><span class="eyebrow">SAVE AND SUBMIT</span><h2>Review your information</h2></div><span>Step 6</span></div>
+<label class="consent-label"><input id="tutor-declaration" type="checkbox"/><span>I confirm that the information, verification documents, and private payout details are accurate; that I will follow the TutoDemy tutor standards; and that my public profile may be displayed after approval.</span></label>
+<div class="button-row"><button class="button button-outline" id="save-draft" type="submit">Save draft</button><button class="button" id="submit-application" type="button">Submit for admin review</button></div>
+<p aria-live="polite" class="form-status" id="application-form-status" role="status"></p>
+</section>
+</form>
+</div>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<div aria-live="polite" class="toast" role="status"></div>
 </body>
 </html>

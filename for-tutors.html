@@ -1,150 +1,145 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="Learn how to become an approved tutor on TutoDemy Learning PH, create a public teaching profile, set availability, and receive booking requests.">
-  <meta name="theme-color" content="#0C046D">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="TutoDemy">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="canonical" href="https://tutodemy.net/for-tutors.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Teach with TutoDemy Learning PH">
-  <meta property="og:description" content="Create a tutor profile, set your subjects and availability, and submit your application for review.">
-  <meta property="og:url" content="https://tutodemy.net/for-tutors.html">
-  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <title>Teach with TutoDemy | Tutor Opportunities in the Philippines</title>
-  <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-ui12">
-  <script defer src="js/config.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="js/supabase-client.js"></script>
-  <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
-  <script defer src="data/philippines-locations.js"></script>
-  <script defer src="data/philippines-map.js?v=20260808-mapfix2"></script>
-  <script defer src="js/main.js?v=20260816-ui12"></script>
-  <script defer src="js/location-map.js?v=20260809-yellowmap1"></script>
-  <script defer src="js/for-tutors.js?v=20260808-mapfix2"></script>
-  <script defer src="js/pwa.js?v=20260809-pwa1"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="Learn how to become an approved tutor on TutoDemy Learning PH, create a public teaching profile, set availability, and receive booking requests." name="description"/>
+<meta content="#0C046D" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="TutoDemy" name="apple-mobile-web-app-title"/>
+<link href="assets/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="manifest.webmanifest" rel="manifest"/>
+<link href="https://tutodemy.net/for-tutors.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Teach with TutoDemy Learning PH" property="og:title"/>
+<meta content="Create a tutor profile, set your subjects and availability, and submit your application for review." property="og:description"/>
+<meta content="https://tutodemy.net/for-tutors.html" property="og:url"/>
+<meta content="https://tutodemy.net/assets/images/tutodemy-logo.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<title>Teach with TutoDemy | Tutor Opportunities in the Philippines</title>
+<link href="assets/images/owl-mark.png" rel="icon"/>
+<link href="css/style.css?v=20260816-professional1" rel="stylesheet"/>
+<script defer="" src="js/config.js"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer="" src="js/supabase-client.js"></script>
+<script defer="" src="js/auth-core.js"></script>
+<script defer="" src="js/cloud-sync.js"></script>
+<script defer="" src="js/marketplace-api.js?v=20260816-professional1"></script>
+<script defer="" src="data/philippines-locations.js"></script>
+<script defer="" src="data/philippines-map.js?v=20260808-mapfix2"></script>
+<script defer="" src="js/main.js?v=20260816-professional1"></script>
+<script defer="" src="js/location-map.js?v=20260809-yellowmap1"></script>
+<script defer="" src="js/for-tutors.js?v=20260808-mapfix2"></script>
+<script defer="" src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
-<body data-page="for-tutors" class="tutor-marketing-page">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div id="site-header"></div>
-  <main id="main-content">
-    <section class="tutor-marketing-hero">
-      <div class="container tutor-marketing-hero-grid">
-        <div>
-          <span class="eyebrow light">TEACH WITH TUTODEMY</span>
-          <h1>Build a tutor profile that helps learners find the right support.</h1>
-          <p>Teach online, face-to-face, or both. Set your subjects, public rate, location, and availability, then submit your profile for admin review.</p>
-          <div class="button-row tutor-hero-actions">
-            <a class="button button-light" href="auth.html?tab=signup&role=tutor">Create a tutor account</a>
-            <a class="button button-ghost" href="auth.html?tab=signin">Tutor log in</a>
-          </div>
-        </div>
-        <aside class="tutor-hero-summary" aria-label="Tutor profile overview">
-          <span>YOUR PUBLIC PROFILE CAN SHOW</span>
-          <dl>
-            <div><dt>Subjects</dt><dd>School subjects and exam specializations</dd></div>
-            <div><dt>Teaching mode</dt><dd>Online, face-to-face, or either</dd></div>
-            <div><dt>Availability</dt><dd>Days and times you are open for requests</dd></div>
-            <div><dt>Public rate</dt><dd>Your published session rate for learners</dd></div>
-          </dl>
-          <small>Verification files, payout details, and internal platform information remain private.</small>
-        </aside>
-      </div>
-    </section>
-
-    <section class="section tutor-benefits-section">
-      <div class="container">
-        <div class="section-heading compact-heading">
-          <span class="eyebrow">BUILT FOR A CLEAR TUTOR WORKFLOW</span>
-          <h2>Your tutor experience is separate from the learner journey.</h2>
-          <p>This page explains the teaching side of TutoDemy, while the main homepage remains focused on students and parents.</p>
-        </div>
-        <div class="tutor-benefit-grid">
-          <article><h3>Present your strengths clearly</h3><p>Create a profile around your subjects, credentials, learner levels, teaching approach, and service area.</p></article>
-          <article><h3>Control your availability</h3><p>Choose the days, times, session length, and teaching modes that work for you.</p></article>
-          <article><h3>Keep booking details organized</h3><p>Review requests, accept or decline schedules, and communicate through booking-specific messages.</p></article>
-          <article><h3>See private earnings records</h3><p>Your applicable platform fee, estimated net earnings, and payout records stay inside your tutor account.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section tutor-process-section">
-      <div class="container tutor-process-layout">
-        <div>
-          <span class="eyebrow">HOW TO JOIN</span>
-          <h2>A straightforward application and review process.</h2>
-          <p>You may save a draft before submitting. Your public tutor profile appears only after admin approval.</p>
-          <a class="button" href="auth.html?tab=signup&role=tutor">Start your application</a>
-        </div>
-        <ol class="tutor-process-list tutor-process-list-clean">
-          <li><div><h3>Create a tutor account</h3><p>Confirm your email, then continue to the tutor application.</p></div></li>
-          <li><div><h3>Complete your profile</h3><p>Add teaching details, location, availability, public rate, and private payout information.</p></div></li>
-          <li><div><h3>Upload verification documents</h3><p>Supporting documents stay private and are reviewed only by authorized administrators.</p></div></li>
-          <li><div><h3>Submit for approval</h3><p>Once approved, your public profile can appear in the tutor directory.</p></div></li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="section tutor-demand-section" id="learner-demand">
-      <div class="container location-layout tutor-demand-layout">
-        <div class="location-copy">
-          <span class="eyebrow">WHERE LEARNERS ARE LOOKING FOR SUPPORT</span>
-          <h2>See anonymous demand across the Philippines.</h2>
-          <p>This view is designed for tutors. It shows aggregated learner-interest signals by region only when users voluntarily share their province and the privacy threshold is met.</p>
-          <div class="location-summary" id="tutor-demand-summary" aria-live="polite">
-            <b>Loading learner demand…</b>
-            <span>Anonymous regional totals will appear here when available.</span>
-          </div>
-          <div class="location-region-list" id="tutor-demand-list"></div>
-          <p class="location-privacy-note">No learner names, exact addresses, contact details, or individual map pins are displayed.</p>
-        </div>
-
-        <div class="philippines-map-card tutor-demand-map-card">
-          <div class="map-card-heading"><span>Philippines</span><b>Anonymous learner demand</b></div>
-          <svg id="tutor-demand-map" class="philippines-map" viewBox="0 0 560 720" preserveAspectRatio="xMidYMid meet" style="background:#fffaf0;border-radius:28px" role="img" aria-labelledby="tutor-map-title tutor-map-desc">
-            <title id="tutor-map-title">Map of the Philippines showing anonymous learner demand</title>
-            <desc id="tutor-map-desc">A recognizable outline of the Philippine islands with regional markers for anonymous learner-interest totals.</desc>
-            <rect class="map-sea" x="0" y="0" width="560" height="720" rx="28" fill="#fffaf0" stroke="#efd99c" stroke-width="1.6"></rect>
-            <g class="ph-map-shapes" data-map-shapes aria-hidden="true"></g>
-            <g class="map-group-labels" aria-hidden="true" fill="#6b4b0a" font-size="12" font-weight="900" text-anchor="middle">
-              <text x="244" y="164">LUZON</text>
-              <text x="322" y="427">VISAYAS</text>
-              <text x="365" y="592">MINDANAO</text>
-              <text x="126" y="480" transform="rotate(-29 126 480)">PALAWAN</text>
-            </g>
-            <g class="location-map-markers learner-map-markers" data-map-markers></g>
-          </svg>
-          <div class="map-legend"><span><i></i> Learner demand</span><span>Bubble size reflects the aggregated signal</span></div>
-          <small>Only regional, privacy-protected totals are shown.</small>
-        </div>
-      </div>
-    </section>
-
-    <section class="section tutor-standards-section">
-      <div class="container tutor-standards-layout">
-        <div><span class="eyebrow">TRUST AND RESPONSIBILITY</span><h2>Profiles are reviewed before they appear publicly.</h2></div>
-        <div><p>Tutors are expected to provide accurate information, protect learner privacy, keep bookings on-platform, and follow the rules for working with minors and guardians.</p><div class="button-row"><a class="button button-outline" href="tutor-terms.html">Read tutor guidelines</a><a class="button button-outline" href="privacy.html">Read privacy notice</a></div></div>
-      </div>
-    </section>
-
-    <section class="section tutor-marketing-final">
-      <div class="container tutor-marketing-final-inner">
-        <div><span class="eyebrow light">READY TO TEACH?</span><h2>Create your tutor account and build your profile.</h2></div>
-        <div class="button-row"><a class="button button-light" href="auth.html?tab=signup&role=tutor">Become a tutor</a><a class="button button-ghost" href="auth.html?tab=signin">Log in</a></div>
-      </div>
-    </section>
-  </main>
-  <div id="site-footer"></div>
-  <div class="toast" role="status" aria-live="polite"></div>
+<body class="tutor-marketing-page" data-page="for-tutors">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div id="site-header"></div>
+<main id="main-content">
+<section class="tutor-marketing-hero">
+<div class="container tutor-marketing-hero-grid">
+<div>
+<span class="eyebrow light">TEACH WITH TUTODEMY</span>
+<h1>Become a Tutor</h1>
+<p>Set your subjects, rate, location, availability, and teaching mode, then submit your profile.</p>
+<div class="button-row tutor-hero-actions">
+<a class="button button-light" href="auth.html?tab=signup&amp;role=tutor">Create a tutor account</a>
+<a class="button button-ghost" href="auth.html?tab=signin">Tutor log in</a>
+</div>
+</div>
+<aside aria-label="Tutor profile overview" class="tutor-hero-summary">
+<span>YOUR PUBLIC PROFILE CAN SHOW</span>
+<dl>
+<div><dt>Subjects</dt><dd>School subjects and exam specializations</dd></div>
+<div><dt>Teaching mode</dt><dd>Online, face-to-face, or either</dd></div>
+<div><dt>Availability</dt><dd>Days and times you are open for requests</dd></div>
+<div><dt>Public rate</dt><dd>Your published session rate for learners</dd></div>
+</dl>
+<small>Verification files, payout details, and internal platform information remain private.</small>
+</aside>
+</div>
+</section>
+<section class="section tutor-benefits-section">
+<div class="container">
+<div class="section-heading compact-heading">
+<span class="eyebrow">BUILT FOR A CLEAR TUTOR WORKFLOW</span>
+<h2>Tutor account</h2>
+<p>Tutor accounts use a separate profile and dashboard.</p>
+</div>
+<div class="tutor-benefit-grid">
+<article><h3>Present your strengths clearly</h3><p>Add your subjects, credentials, levels, and service area.</p></article>
+<article><h3>Control your availability</h3><p>Set your availability, session length, and teaching mode.</p></article>
+<article><h3>Keep booking details organized</h3><p>Accept or decline bookings and use the booking message thread.</p></article>
+<article><h3>See private earnings records</h3><p>Your applicable platform fee, estimated net earnings, and payout records stay inside your tutor account.</p></article>
+</div>
+</div>
+</section>
+<section class="section tutor-process-section">
+<div class="container tutor-process-layout">
+<div>
+<span class="eyebrow">HOW TO JOIN</span>
+<h2>Application process</h2>
+<p>You may save a draft before submitting. Your public tutor profile appears only after admin approval.</p>
+<a class="button" href="auth.html?tab=signup&amp;role=tutor">Start your application</a>
+</div>
+<ol class="tutor-process-list tutor-process-list-clean">
+<li><div><h3>Create a tutor account</h3><p>Confirm your email, then continue to the tutor application.</p></div></li>
+<li><div><h3>Complete your profile</h3><p>Add teaching details, location, availability, public rate, and private payout information.</p></div></li>
+<li><div><h3>Upload verification documents</h3><p>Supporting documents stay private and are reviewed only by authorized administrators.</p></div></li>
+<li><div><h3>Submit for approval</h3><p>Once approved, your public profile can appear in the tutor directory.</p></div></li>
+</ol>
+</div>
+</section>
+<section class="section tutor-demand-section" id="learner-demand">
+<div class="container location-layout tutor-demand-layout">
+<div class="location-copy">
+<span class="eyebrow">WHERE LEARNERS ARE LOOKING FOR SUPPORT</span>
+<h2>Learner demand</h2>
+<p>This view is designed for tutors. It shows aggregated learner-interest signals by region only when users voluntarily share their province and the privacy threshold is met.</p>
+<div aria-live="polite" class="location-summary" id="tutor-demand-summary">
+<b>Loading learner demand…</b>
+<span>Anonymous regional totals will appear here when available.</span>
+</div>
+<div class="location-region-list" id="tutor-demand-list"></div>
+<p class="location-privacy-note">No learner names, exact addresses, contact details, or individual map pins are displayed.</p>
+</div>
+<div class="philippines-map-card tutor-demand-map-card">
+<div class="map-card-heading"><span>Philippines</span><b>Anonymous learner demand</b></div>
+<svg aria-labelledby="tutor-map-title tutor-map-desc" class="philippines-map" id="tutor-demand-map" preserveaspectratio="xMidYMid meet" role="img" style="background:#fffaf0;border-radius:28px" viewbox="0 0 560 720">
+<title id="tutor-map-title">Map of the Philippines showing anonymous learner demand</title>
+<desc id="tutor-map-desc">A recognizable outline of the Philippine islands with regional markers for anonymous learner-interest totals.</desc>
+<rect class="map-sea" fill="#fffaf0" height="720" rx="28" stroke="#efd99c" stroke-width="1.6" width="560" x="0" y="0"></rect>
+<g aria-hidden="true" class="ph-map-shapes" data-map-shapes=""></g>
+<g aria-hidden="true" class="map-group-labels" fill="#6b4b0a" font-size="12" font-weight="900" text-anchor="middle">
+<text x="244" y="164">LUZON</text>
+<text x="322" y="427">VISAYAS</text>
+<text x="365" y="592">MINDANAO</text>
+<text transform="rotate(-29 126 480)" x="126" y="480">PALAWAN</text>
+</g>
+<g class="location-map-markers learner-map-markers" data-map-markers=""></g>
+</svg>
+<div class="map-legend"><span><i></i> Learner demand</span><span>Bubble size reflects the aggregated signal</span></div>
+<small>Only regional, privacy-protected totals are shown.</small>
+</div>
+</div>
+</section>
+<section class="section tutor-standards-section">
+<div class="container tutor-standards-layout">
+<div><span class="eyebrow">TRUST AND RESPONSIBILITY</span><h2>Profile review</h2></div>
+<div><p>Tutors are expected to provide accurate information, protect learner privacy, keep bookings on-platform, and follow the rules for working with minors and guardians.</p><div class="button-row"><a class="button button-outline" href="tutor-terms.html">Read tutor guidelines</a><a class="button button-outline" href="privacy.html">Read privacy notice</a></div></div>
+</div>
+</section>
+<section class="section tutor-marketing-final">
+<div class="container tutor-marketing-final-inner">
+<div><span class="eyebrow light">READY TO TEACH?</span><h2>Create your profile</h2></div>
+<div class="button-row"><a class="button button-light" href="auth.html?tab=signup&amp;role=tutor">Become a tutor</a><a class="button button-ghost" href="auth.html?tab=signin">Log in</a></div>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<div aria-live="polite" class="toast" role="status"></div>
 </body>
 </html>

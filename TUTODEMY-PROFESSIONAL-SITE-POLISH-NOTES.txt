@@ -1,0 +1,45 @@
+TutoDemy Professional Site Polish
+Build: 20260816-professional1
+
+GOAL
+Make the site direct, compact, and professional without changing backend logic.
+
+NAVIGATION
+- Tutee workspace starts with "Tutee Dashboard".
+- Tutor workspace starts with "Tutor Dashboard".
+- Admin workspace starts with "Admin Dashboard".
+- Tutor menu: Dashboard, Profile, Bookings, Messages, Payouts.
+- Tutee menu: Dashboard, Practice, Tutors, Bookings, Messages.
+- Admin menu: Dashboard, Users, Tutors, Payments, Finance, Payouts, Reports.
+- Workspace home tab has a clear filled/outlined treatment.
+
+CONTENT
+- Shortened page heroes, section headings, descriptions, helper text, and placeholders.
+- Removed decorative eyebrow labels from page/section headings.
+- Kept privacy/terms substance; only headings/intros were simplified.
+- Updated tutoring payment copy to PayMongo.
+- Removed unnecessary adjectives and marketing-style wording.
+
+FORMS
+- Consistent input/select/textarea height, radius, border, focus state, and spacing.
+- Reduced heavy font weights and shadows.
+- Cleaner field labels and shorter placeholders.
+- More restrained buttons, tabs, cards, and status pills.
+
+FUNCTIONS PRESERVED
+- PayMongo checkout/webhook flow
+- Booking actions
+- Tutor payouts
+- Email/push notifications
+- Admin tabs
+- Dashboards/progress
+- Messaging
+- Auth/profile/tutor application
+- Practice/reviewer functionality
+
+SECURITY
+- No SQL is included.
+- No PayMongo, Supabase, Resend, webhook, or VAPID private secrets are included.
+
+CACHE
+tutodemy-20260816-professional1

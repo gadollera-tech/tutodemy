@@ -1,79 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="View an approved TutoDemy tutor profile and request a schedule.">
-  <meta name="theme-color" content="#0C046D">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="TutoDemy">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="robots" content="noindex,nofollow">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Tutor Profile | TutoDemy Learning PH">
-  <meta property="og:description" content="View an approved TutoDemy tutor profile and request a schedule.">
-  <meta property="og:url" content="https://tutodemy.net/tutor-profile.html">
-  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <title>Tutor Profile | TutoDemy Learning PH</title>
-  <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-bookexpiry1">
-  <script defer src="js/config.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="js/supabase-client.js"></script>
-  <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
-  <script defer src="js/main.js?v=20260816-ui12"></script>
-  <script defer src="js/tutor-profile.js?v=20260816-bookexpiry1"></script>
-  <script defer src="js/pwa.js?v=20260809-pwa1"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="View an approved TutoDemy tutor profile and request a schedule." name="description"/>
+<meta content="#0C046D" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="TutoDemy" name="apple-mobile-web-app-title"/>
+<link href="assets/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="manifest.webmanifest" rel="manifest"/>
+<meta content="noindex,nofollow" name="robots"/>
+<meta content="website" property="og:type"/>
+<meta content="Tutor Profile | TutoDemy Learning PH" property="og:title"/>
+<meta content="View an approved TutoDemy tutor profile and request a schedule." property="og:description"/>
+<meta content="https://tutodemy.net/tutor-profile.html" property="og:url"/>
+<meta content="https://tutodemy.net/assets/images/tutodemy-logo.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<title>Tutor Profile | TutoDemy Learning PH</title>
+<link href="assets/images/owl-mark.png" rel="icon"/>
+<link href="css/style.css?v=20260816-professional1" rel="stylesheet"/>
+<script defer="" src="js/config.js"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer="" src="js/supabase-client.js"></script>
+<script defer="" src="js/auth-core.js"></script>
+<script defer="" src="js/cloud-sync.js"></script>
+<script defer="" src="js/marketplace-api.js?v=20260816-professional1"></script>
+<script defer="" src="js/main.js?v=20260816-professional1"></script>
+<script defer="" src="js/tutor-profile.js?v=20260816-bookexpiry1"></script>
+<script defer="" src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="tutor-profile">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div id="site-header"></div>
-  <main id="main-content">
-    <section class="tutor-profile-hero">
-      <div class="container tutor-profile-heading">
-        <img id="profile-photo" src="assets/images/owl-mark.png" alt="Tutor profile photo">
-        <div><a class="back-link light-link" href="tutoring.html">← Back to approved tutors</a><span class="eyebrow light">ADMIN-APPROVED TUTOR</span><h1 id="profile-name">Loading tutor…</h1><p id="profile-headline"></p><div class="profile-tags" id="profile-tags"></div></div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container tutor-public-layout">
-        <div>
-          <div class="marketplace-alert" id="profile-alert" hidden></div>
-          <section class="panel tutor-about-panel"><span class="eyebrow">ABOUT THE TUTOR</span><h2>Teaching profile</h2><p id="profile-bio"></p><div class="profile-highlights" id="profile-highlights"></div></section>
-          <section class="panel"><span class="eyebrow">AVAILABILITY</span><h2>Regular schedule windows</h2><p id="availability-summary" class="muted"></p><div class="availability-public-list" id="availability-list"></div></section>
-          <section class="panel"><span class="eyebrow">VERIFIED REVIEWS</span><h2>Learner feedback</h2><div class="review-list" id="review-list"></div></section>
-        </div>
-
-        <aside class="booking-sidebar">
-          <section class="panel booking-card">
-            <span class="eyebrow">REQUEST A SESSION</span>
-            <div class="booking-rate"><b id="profile-rate">—</b><span>per hour</span></div>
-            <div class="rating-summary"><b id="profile-rating">New tutor</b><span id="profile-review-count">No reviews yet</span></div>
-            <form id="booking-form">
-              <label>Subject<select name="subject" id="booking-subject" required></select></label>
-              <label>Preferred start<input type="datetime-local" name="requested_start" required></label>
-              <label>Duration<select name="duration_minutes"><option value="30">30 minutes</option><option value="60" selected>60 minutes</option><option value="90">90 minutes</option><option value="120">120 minutes</option></select></label>
-              <label>Mode<select name="mode" id="booking-mode" required></select></label>
-              <label class="full">Learning goal<textarea name="learning_goal" rows="4" required placeholder="What topic or skill should the session focus on?"></textarea></label>
-              <label class="full" id="location-field" hidden>Meeting-area details<textarea name="location_details" rows="2" placeholder="General meeting area only. Do not post sensitive home-address details."></textarea></label>
-              <div class="booking-estimate"><span>Estimated session amount</span><b id="booking-estimate">—</b></div>
-              <button class="button full" type="submit">Send booking request</button>
-              <p class="form-status" id="booking-status" role="status" aria-live="polite"></p>
-            </form>
-            <p class="booking-note">No payment is collected on the initial request form. After the tutor accepts, TutoDemy provides the official payment instructions and confirms the transaction status.</p>
-          </section>
-        </aside>
-      </div>
-    </section>
-  </main>
-  <div id="site-footer"></div>
-  <div class="toast" role="status" aria-live="polite"></div>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div id="site-header"></div>
+<main id="main-content">
+<section class="tutor-profile-hero">
+<div class="container tutor-profile-heading">
+<img alt="Tutor profile photo" id="profile-photo" src="assets/images/owl-mark.png"/>
+<div><a class="back-link light-link" href="tutoring.html">← Back to approved tutors</a><span class="eyebrow light">ADMIN-APPROVED TUTOR</span><h1 id="profile-name">Loading tutor…</h1><p id="profile-headline"></p><div class="profile-tags" id="profile-tags"></div></div>
+</div>
+</section>
+<section class="section">
+<div class="container tutor-public-layout">
+<div>
+<div class="marketplace-alert" hidden="" id="profile-alert"></div>
+<section class="panel tutor-about-panel"><span class="eyebrow">ABOUT THE TUTOR</span><h2>Profile</h2><p id="profile-bio"></p><div class="profile-highlights" id="profile-highlights"></div></section>
+<section class="panel"><span class="eyebrow">AVAILABILITY</span><h2>Availability</h2><p class="muted" id="availability-summary"></p><div class="availability-public-list" id="availability-list"></div></section>
+<section class="panel"><span class="eyebrow">VERIFIED REVIEWS</span><h2>Reviews</h2><div class="review-list" id="review-list"></div></section>
+</div>
+<aside class="booking-sidebar">
+<section class="panel booking-card">
+<span class="eyebrow">REQUEST A SESSION</span>
+<div class="booking-rate"><b id="profile-rate">—</b><span>per hour</span></div>
+<div class="rating-summary"><b id="profile-rating">New tutor</b><span id="profile-review-count">No reviews yet</span></div>
+<form id="booking-form">
+<label>Subject<select id="booking-subject" name="subject" required=""></select></label>
+<label>Start<input name="requested_start" required="" type="datetime-local"/></label>
+<label>Duration<select name="duration_minutes"><option value="30">30 minutes</option><option selected="" value="60">60 minutes</option><option value="90">90 minutes</option><option value="120">120 minutes</option></select></label>
+<label>Mode<select id="booking-mode" name="mode" required=""></select></label>
+<label class="full">Topic / goal<textarea name="learning_goal" placeholder="Topic or skill" required="" rows="4"></textarea></label>
+<label class="full" hidden="" id="location-field">Meeting area<textarea name="location_details" placeholder="General meeting area only" rows="2"></textarea></label>
+<div class="booking-estimate"><span>Estimated session amount</span><b id="booking-estimate">—</b></div>
+<button class="button full" type="submit">Send booking request</button>
+<p aria-live="polite" class="form-status" id="booking-status" role="status"></p>
+</form>
+<p class="booking-note">Payment starts only after the tutor accepts. Pay through PayMongo; confirmation updates automatically.</p>
+</section>
+</aside>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<div aria-live="polite" class="toast" role="status"></div>
 </body>
 </html>

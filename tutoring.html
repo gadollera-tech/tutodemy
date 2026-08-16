@@ -1,79 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="Find admin-approved tutors by subject, location, schedule, and teaching mode.">
-  <meta name="theme-color" content="#0C046D">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="TutoDemy">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="canonical" href="https://tutodemy.net/tutoring.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Find a Tutor | TutoDemy Learning PH">
-  <meta property="og:description" content="Find admin-approved tutors by subject, location, schedule, and teaching mode.">
-  <meta property="og:url" content="https://tutodemy.net/tutoring.html">
-  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <title>Find a Tutor | TutoDemy Learning PH</title>
-  <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-compactworkspace1">
-  <script defer src="js/config.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="js/supabase-client.js"></script>
-  <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
-  <script defer src="data/taxonomy.js"></script>
-  <script defer src="js/main.js?v=20260816-ui12"></script>
-  <script defer src="js/tutors.js"></script>
-  <script defer src="js/pwa.js?v=20260809-pwa1"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="Find admin-approved tutors by subject, location, schedule, and teaching mode." name="description"/>
+<meta content="#0C046D" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="TutoDemy" name="apple-mobile-web-app-title"/>
+<link href="assets/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="manifest.webmanifest" rel="manifest"/>
+<link href="https://tutodemy.net/tutoring.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Find a Tutor | TutoDemy Learning PH" property="og:title"/>
+<meta content="Find admin-approved tutors by subject, location, schedule, and teaching mode." property="og:description"/>
+<meta content="https://tutodemy.net/tutoring.html" property="og:url"/>
+<meta content="https://tutodemy.net/assets/images/tutodemy-logo.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<title>Find a Tutor | TutoDemy Learning PH</title>
+<link href="assets/images/owl-mark.png" rel="icon"/>
+<link href="css/style.css?v=20260816-professional1" rel="stylesheet"/>
+<script defer="" src="js/config.js"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer="" src="js/supabase-client.js"></script>
+<script defer="" src="js/auth-core.js"></script>
+<script defer="" src="js/cloud-sync.js"></script>
+<script defer="" src="js/marketplace-api.js?v=20260816-professional1"></script>
+<script defer="" src="data/taxonomy.js"></script>
+<script defer="" src="js/main.js?v=20260816-professional1"></script>
+<script defer="" src="js/tutors.js"></script>
+<script defer="" src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="tutoring">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div id="site-header"></div>
-  <main id="main-content">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div id="site-header"></div>
+<main id="main-content">
 <section class="section workspace-first-section" id="directory">
-      <div class="container">
-        <div class="workspace-compact-head">
-          <h1>Find a Tutor</h1>
-          <div class="workspace-compact-actions">
-            <a class="button button-outline button-small" href="for-tutors.html">Become a tutor</a>
-          </div>
-        </div>
-        <div class="section-heading"><span class="eyebrow">APPROVED TUTOR DIRECTORY</span><h2>Search by the support you need.</h2><p>Profiles appear here only after TutoDemy admin approval. Identity and verification documents are never displayed publicly.</p></div>
-        <div class="marketplace-alert" id="marketplace-alert" hidden></div>
-        <div class="tutor-toolbar tutor-toolbar-expanded">
-          <label>Search<input id="tutor-search" type="search" placeholder="Name, subject, exam, or location"></label>
-          <label>Subject<select id="tutor-subject"><option value="">All subjects</option></select></label>
-          <label>Mode<select id="tutor-mode"><option value="">Online or in-person</option><option>Online</option><option>In-person</option></select></label>
-          <label>Province<input id="tutor-province" placeholder="Example: Leyte"></label>
-          <button class="button" id="tutor-filter" type="button">Apply filters</button>
-        </div>
-        <div class="directory-summary"><span id="tutor-count">Loading approved tutors…</span><a href="tutor-terms.html">View booking policy</a></div>
-        <div class="tutor-grid marketplace-tutor-grid" id="tutor-grid" aria-live="polite"></div>
-      </div>
-    </section>
-
-    <section class="section section-cream">
-      <div class="container public-process-list">
-        <article><h3>Choose with confidence</h3><p>Review specializations, location, learning modes, verified ratings, and current rate.</p></article>
-        <article><h3>Request before you pay</h3><p>The tutor first confirms the proposed schedule. Payment instructions are provided after acceptance, and TutoDemy confirms the payment before the session proceeds.</p></article>
-        <article><h3>Keep the booking on-platform</h3><p>Completed, paid bookings create the official session record and make verified reviews available.</p></article>
-      </div>
-    </section>
-
-    <section class="section tutor-join">
-      <div class="container tutor-join-grid">
-        <div><span class="eyebrow light">TEACH WITH TUTODEMY</span><h2>Create a tutor profile and submit it for approval.</h2><p>Tutor compensation and platform-fee details are shown privately to registered tutors after account setup. Learners and parents see only the tutor’s published session rate and the total booking amount.</p></div>
-        <div class="button-row"><a class="button button-light" href="for-tutors.html">Learn about teaching</a><a class="button button-ghost" href="tutor-terms.html">Read tutor guidelines</a></div>
-      </div>
-    </section>
-  </main>
-  <div id="site-footer"></div>
-  <div class="toast" role="status" aria-live="polite"></div>
+<div class="container">
+<div class="workspace-compact-head">
+<h1>Find a Tutor</h1>
+<div class="workspace-compact-actions">
+<a class="button button-outline button-small" href="for-tutors.html">Become a tutor</a>
+</div>
+</div>
+<div class="section-heading"><span class="eyebrow">APPROVED TUTOR DIRECTORY</span><h2>Search tutors</h2><p>Only approved tutor profiles appear here. Verification documents stay private.</p></div>
+<div class="marketplace-alert" hidden="" id="marketplace-alert"></div>
+<div class="tutor-toolbar tutor-toolbar-expanded">
+<label>Search<input id="tutor-search" placeholder="Name, subject, exam, or location" type="search"/></label>
+<label>Subject<select id="tutor-subject"><option value="">All subjects</option></select></label>
+<label>Mode<select id="tutor-mode"><option value="">Online or in-person</option><option>Online</option><option>In-person</option></select></label>
+<label>Province<input id="tutor-province" placeholder="e.g., Leyte"/></label>
+<button class="button" id="tutor-filter" type="button">Apply filters</button>
+</div>
+<div class="directory-summary"><span id="tutor-count">Loading approved tutors…</span><a href="tutor-terms.html">View booking policy</a></div>
+<div aria-live="polite" class="tutor-grid marketplace-tutor-grid" id="tutor-grid"></div>
+</div>
+</section>
+<section class="section section-cream">
+<div class="container public-process-list">
+<article><h3>Choose with confidence</h3><p>Compare subjects, location, teaching mode, ratings, and rate.</p></article>
+<article><h3>Request before you pay</h3><p>The tutor accepts first. Then pay through PayMongo. The session proceeds after payment confirmation.</p></article>
+<article><h3>Keep the booking on-platform</h3><p>Completed paid bookings can receive verified reviews.</p></article>
+</div>
+</section>
+<section class="section tutor-join">
+<div class="container tutor-join-grid">
+<div><span class="eyebrow light">TEACH WITH TUTODEMY</span><h2>Become a tutor</h2><p>Tutees see the published rate and booking total. Tutor payout details remain private.</p></div>
+<div class="button-row"><a class="button button-light" href="for-tutors.html">Learn about teaching</a><a class="button button-ghost" href="tutor-terms.html">Read tutor guidelines</a></div>
+</div>
+</section>
+</main>
+<div id="site-footer"></div>
+<div aria-live="polite" class="toast" role="status"></div>
 </body>
 </html>

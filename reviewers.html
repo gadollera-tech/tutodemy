@@ -1,62 +1,63 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="Searchable original TutoDemy reviewer library.">
-  <meta name="theme-color" content="#0C046D">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="TutoDemy">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="canonical" href="https://tutodemy.net/reviewers.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Reviewers | TutoDemy Learning PH">
-  <meta property="og:description" content="Searchable original TutoDemy reviewer library.">
-  <meta property="og:url" content="https://tutodemy.net/reviewers.html">
-  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <title>Reviewers | TutoDemy Learning PH</title>
-  <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-ui12">
-  <script defer src="js/config.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="js/supabase-client.js"></script>
-  <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-live1"></script><script defer src="data/taxonomy.js"></script><script defer src="js/main.js?v=20260816-ui12"></script><script defer src="data/reviewers.js"></script><script defer src="js/reviewers.js"></script>
-  <script defer src="js/pwa.js?v=20260809-pwa1"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="Searchable original TutoDemy reviewer library." name="description"/>
+<meta content="#0C046D" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="TutoDemy" name="apple-mobile-web-app-title"/>
+<link href="assets/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="manifest.webmanifest" rel="manifest"/>
+<link href="https://tutodemy.net/reviewers.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Reviewers | TutoDemy Learning PH" property="og:title"/>
+<meta content="Searchable original TutoDemy reviewer library." property="og:description"/>
+<meta content="https://tutodemy.net/reviewers.html" property="og:url"/>
+<meta content="https://tutodemy.net/assets/images/tutodemy-logo.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<title>Reviewers | TutoDemy Learning PH</title>
+<link href="assets/images/owl-mark.png" rel="icon"/>
+<link href="css/style.css?v=20260816-professional1" rel="stylesheet"/>
+<script defer="" src="js/config.js"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer="" src="js/supabase-client.js"></script>
+<script defer="" src="js/auth-core.js"></script>
+<script defer="" src="js/cloud-sync.js"></script>
+<script defer="" src="js/marketplace-api.js?v=20260816-professional1"></script><script defer="" src="data/taxonomy.js"></script><script defer="" src="js/main.js?v=20260816-professional1"></script><script defer="" src="data/reviewers.js"></script><script defer="" src="js/reviewers.js"></script>
+<script defer="" src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="reviewers">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div id="site-header"></div>
-  <main id="main-content">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div id="site-header"></div>
+<main id="main-content">
 <section class="page-hero reviewers-hero">
-  <div class="container page-hero-grid">
-    <div><span class="eyebrow">ORIGINAL STUDY REVIEWERS</span><h1>Review the framework, then practise the same domain.</h1><p>These concise, original study guides organize key concepts, active-recall prompts, and linked practice by subject domain.</p></div>
-    <div class="stack-visual"><span>CONCEPT</span><span>EXAMPLE</span><span>ACTIVE RECALL</span><span>PRACTICE</span></div>
-  </div>
+<div class="container page-hero-grid">
+<div><span class="eyebrow">ORIGINAL STUDY REVIEWERS</span><h1>Reviewers</h1><p>Short study notes with linked practice by subject.</p></div>
+<div class="stack-visual"><span>CONCEPT</span><span>EXAMPLE</span><span>ACTIVE RECALL</span><span>PRACTICE</span></div>
+</div>
 </section>
 <section class="section">
-  <div class="container">
-    <div class="library-toolbar">
-      <label class="search-box"><span>⌕</span><input id="reviewer-search" type="search" placeholder="Search reviewers..."></label>
-      <div class="filter-group" id="reviewer-filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="Mathematics">Math</button><button class="filter" data-filter="Language & Reading">Language</button><button class="filter" data-filter="Science">Science</button><button class="filter" data-filter="Reasoning">Reasoning</button></div>
-    </div>
-    <div class="library-meta"><span id="reviewer-count"></span><span>Use the search field and subject filters to find the reviewer you need.</span></div>
-    <div class="reviewer-grid" id="reviewer-grid"></div>
-  </div>
+<div class="container">
+<div class="library-toolbar">
+<label class="search-box"><span>⌕</span><input id="reviewer-search" placeholder="Search reviewers" type="search"/></label>
+<div class="filter-group" id="reviewer-filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="Mathematics">Math</button><button class="filter" data-filter="Language &amp; Reading">Language</button><button class="filter" data-filter="Science">Science</button><button class="filter" data-filter="Reasoning">Reasoning</button></div>
+</div>
+<div class="library-meta"><span id="reviewer-count"></span><span>Use the search field and subject filters to find the reviewer you need.</span></div>
+<div class="reviewer-grid" id="reviewer-grid"></div>
+</div>
 </section>
 <section class="section reviewer-standard">
-  <div class="container split-feature compact">
-    <div><span class="eyebrow light">CONTENT STANDARD</span><h2>Original notes, clear sources, and approved content.</h2></div>
-    <div><p>Uploaded commercial modules and question banks remain private references. Public materials use new wording, new examples, original diagrams, and a documented completed review process.</p><a class="button button-light" href="resources.html">View source policy</a></div>
-  </div>
+<div class="container split-feature compact">
+<div><span class="eyebrow light">CONTENT STANDARD</span><h2>Study notes and sources</h2></div>
+<div><p>Private reference materials are not published. Public notes use original wording and examples.</p><a class="button button-light" href="resources.html">View source policy</a></div>
+</div>
 </section>
 </main>
-  <div id="site-footer"></div>
-  <div class="toast" role="status" aria-live="polite"></div>
+<div id="site-footer"></div>
+<div aria-live="polite" class="toast" role="status"></div>
 </body>
 </html>
