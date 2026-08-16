@@ -3948,3 +3948,178 @@ body[data-page="dashboard"] .section{padding:34px 0 54px}
     justify-content:center;
   }
 }
+
+
+
+/* =========================================================
+   TutoDemy Compact Workspace UI
+   Functional pages open directly to the actual tools/content.
+   ========================================================= */
+.workspace-first-section{
+  padding-top:1rem !important;
+}
+.workspace-compact-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.85rem;
+  margin:0 0 .9rem;
+  min-height:44px;
+}
+.workspace-compact-head h1{
+  margin:0;
+  color:var(--navy, #0C046D);
+  font-size:clamp(1.35rem,2.4vw,1.9rem);
+  line-height:1.05;
+  letter-spacing:-.025em;
+}
+.workspace-compact-head-wrap{
+  flex-wrap:wrap;
+}
+.workspace-compact-title-group{
+  min-width:0;
+}
+.workspace-compact-actions{
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  flex-wrap:wrap;
+}
+.button-small{
+  min-height:38px;
+  padding:.55rem .85rem;
+  font-size:.88rem;
+}
+.workspace-status-line{
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+  flex-wrap:wrap;
+  margin-top:.35rem;
+  color:#777;
+  font-size:.82rem;
+}
+.workspace-status-line > span{
+  text-transform:uppercase;
+  font-size:.7rem;
+  letter-spacing:.05em;
+  font-weight:800;
+}
+.workspace-status-line > b{
+  color:var(--navy, #0C046D);
+}
+.workspace-status-line > small{
+  color:#777;
+}
+.workspace-compact-details{
+  position:relative;
+  font-size:.82rem;
+}
+.workspace-compact-details summary{
+  cursor:pointer;
+  color:var(--navy, #0C046D);
+  font-weight:800;
+  list-style:none;
+  padding:.42rem .68rem;
+  border:1px solid rgba(12,4,109,.16);
+  border-radius:999px;
+  background:#fff;
+}
+.workspace-compact-details summary::-webkit-details-marker{display:none}
+.workspace-compact-details p{
+  position:absolute;
+  z-index:8;
+  right:0;
+  top:calc(100% + .4rem);
+  width:min(330px,80vw);
+  margin:0;
+  padding:.75rem .85rem;
+  border:1px solid rgba(12,4,109,.12);
+  border-radius:12px;
+  background:#fff;
+  box-shadow:0 12px 35px rgba(12,4,109,.12);
+  color:#666;
+  line-height:1.45;
+}
+.workspace-week-compact{
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+  flex-wrap:wrap;
+  color:#777;
+  font-size:.82rem;
+}
+.workspace-week-compact > span{
+  color:var(--navy, #0C046D);
+  font-weight:800;
+}
+.workspace-week-compact > a{
+  color:var(--navy, #0C046D);
+  font-weight:800;
+  text-decoration:none;
+}
+.profile-account-hero-compact{
+  padding:.85rem 0 !important;
+  min-height:0 !important;
+}
+.profile-account-hero-compact .profile-account-heading{
+  min-height:0;
+  gap:.75rem;
+}
+.profile-account-hero-compact .account-avatar{
+  width:46px;
+  height:46px;
+  min-width:46px;
+  font-size:1rem;
+}
+.profile-account-hero-compact h1{
+  margin:0;
+  font-size:clamp(1.2rem,2vw,1.55rem);
+}
+.profile-account-hero-compact p{
+  margin:.15rem 0 0;
+  font-size:.85rem;
+}
+.message-page-section .message-layout{
+  margin-top:0;
+}
+
+/* Reduce redundant vertical gaps on pages that now start with tools. */
+body[data-page="messages"] #main-content,
+body[data-page="bookings"] #main-content,
+body[data-page="tutor-dashboard"] #main-content,
+body[data-page="tutoring"] #main-content,
+body[data-page="dashboard"] #main-content,
+body[data-page="admin"] #main-content{
+  min-height:calc(100vh - 90px);
+}
+
+@media (max-width:720px){
+  .workspace-first-section{
+    padding-top:.65rem !important;
+  }
+  .workspace-compact-head{
+    margin-bottom:.65rem;
+    min-height:38px;
+  }
+  .workspace-compact-head h1{
+    font-size:1.3rem;
+  }
+  .workspace-compact-actions{
+    width:100%;
+  }
+  .workspace-compact-actions .button{
+    flex:1 1 auto;
+    text-align:center;
+    justify-content:center;
+  }
+  .workspace-status-line > small{
+    width:100%;
+  }
+  .workspace-week-compact small{
+    display:none;
+  }
+  .profile-account-hero-compact{
+    padding:.6rem 0 !important;
+  }
+}
