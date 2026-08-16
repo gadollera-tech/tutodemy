@@ -2074,3 +2074,59 @@ code{background:rgba(116,132,194,.12);color:#0C046D}
     width:100%;
   }
 }
+
+
+/* =========================================================
+   TutoDemy UPCAT Reasoning V2 — harder visual reasoning
+   2026-08-16
+   ========================================================= */
+
+.stimulus-box{
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+
+.stimulus-box .reason-seq-hard{
+  width:100%;
+  max-width:760px;
+  height:auto;
+  min-width:0;
+}
+
+.answer-option{
+  grid-template-columns:35px minmax(0,1fr);
+}
+
+.answer-option .visual-choice{
+  min-width:0;
+  overflow:visible;
+}
+
+.answer-option .visual-choice svg{
+  display:block;
+  width:100%;
+  max-width:220px;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain;
+  margin:0;
+}
+
+@media(max-width:560px){
+  .stimulus-box{
+    padding:12px;
+  }
+
+  .stimulus-box svg{
+    width:100%;
+    max-width:none;
+    height:auto;
+  }
+
+  .answer-option .visual-choice svg{
+    width:min(100%,190px);
+    max-width:190px;
+    height:auto !important;
+  }
+}
