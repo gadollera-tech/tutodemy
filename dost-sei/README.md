@@ -47,16 +47,11 @@ Wave 4 access:
 
 Wave 4 difficulty:
 
-- 125 Easy
-- 250 Moderate
-- 125 Difficult
+- 121 Easy
+- 245 Moderate
+- 134 Difficult
 
-Stored Wave 4 answer positions:
-
-- 125 A
-- 125 B
-- 125 C
-- 125 D
+Stored Wave 4 answer positions now include the upgraded five-choice visual items. Runtime answer order remains shuffled for ordinary questions and fixed for figure-labelled A–E visual items.
 
 ## Final cumulative bank
 
@@ -80,9 +75,9 @@ Final cumulative access:
 
 Final cumulative difficulty:
 
-- 425 Easy
-- 850 Moderate
-- 425 Difficult
+- 412 Easy
+- 846 Moderate
+- 442 Difficult
 
 Final cumulative stimuli:
 
@@ -93,7 +88,7 @@ Final cumulative stimuli:
 Wave 4 adds:
 
 - more analogy, coding, syllogism, ordering, argument, and short-passage reasoning
-- new rotation, visual-series, matrix, paper-folding, cube-net, block, route, assembly, and hidden-figure sets
+- upgraded multi-rule rotation, visual-series, matrix, perceptual-matching, paper-folding, cube-net, block, route, assembly, and hidden-figure sets
 - five original English passages with 15 comprehension questions
 - additional cell biology, genetics, ecology, plant biology, chemistry, physics, and Earth-science applications
 - 100 Mathematics questions across all ten established quantitative domains
