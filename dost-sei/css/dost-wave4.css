@@ -1,8 +1,8 @@
 
-:root{--navy:#11156f;--blue:#526fd1;--peri:#e9edff;--gold:#f3a51b;--cream:#fffaf3;--ink:#25263a;--muted:#6d7180;--line:#e3e5ee;--green:#18785f;--red:#a62c4f;--shadow:0 18px 55px rgba(17,21,111,.09)}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#f6f7fb;color:var(--ink);line-height:1.52}
+:root{--navy:#0C046D;--blue:#7484C2;--peri:rgba(116,132,194,.13);--gold:#E5922E;--cream:#FCF9F2;--ink:#4F4D4E;--muted:#6B686A;--line:rgba(79,77,78,.18);--green:#18785f;--red:#a62c4f;--shadow:0 18px 55px rgba(12,4,109,.09)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:"Glacial Indifference","Century Gothic","Avenir Next",system-ui,-apple-system,Segoe UI,sans-serif;background:#FCF9F2;color:var(--ink);line-height:1.52}
 button,input,select{font:inherit}.hidden{display:none!important}.wrap{width:min(1180px,calc(100% - 28px));margin:auto}
-.topbar{background:linear-gradient(135deg,var(--navy),#3246b4);color:#fff;padding:26px 0}.brand{display:flex;align-items:center;gap:14px}.owl{width:52px;height:52px;border-radius:18px;background:#fff;color:var(--navy);display:grid;place-items:center;font-size:28px}.brand h1{font-size:1.35rem;margin:0}.brand p{margin:2px 0 0;color:#dbe0ff;font-size:.82rem}
+.topbar{background:linear-gradient(135deg,var(--navy),#7484C2);color:#fff;padding:26px 0}.brand{display:flex;align-items:center;gap:14px}.owl{width:52px;height:52px;border-radius:18px;background:#fff;color:var(--navy);display:grid;place-items:center;font-size:28px}.brand h1{font-size:1.35rem;margin:0}.brand p{margin:2px 0 0;color:#dbe0ff;font-size:.82rem}
 .hero{padding:42px 0 26px}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}.eyebrow{font-size:.72rem;font-weight:950;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}h2{font-size:clamp(2.5rem,6vw,5rem);line-height:.98;letter-spacing:-.055em;color:var(--navy);margin:10px 0}.hero p{color:var(--muted);max-width:750px}
 .stat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.stat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.stat b{display:block;font-size:2rem;color:var(--navy)}.stat span{font-size:.77rem;color:var(--muted)}
 .card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow)}.builder{margin:22px auto 60px}.builder-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.field label{display:block;font-size:.75rem;font-weight:900;color:var(--navy);margin-bottom:6px}.field select,.field input{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fff}.field small{color:var(--muted)}.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:900;cursor:pointer;background:var(--navy);color:#fff}.btn.secondary{background:#fff;color:var(--navy);border:1px solid var(--navy)}.btn.gold{background:var(--gold);color:#3b2b00}.btn.danger{background:var(--red)}.btn:disabled{opacity:.45;cursor:not-allowed}
@@ -39,8 +39,8 @@ body{min-width:0;overflow-x:hidden}
 img,svg,video,canvas{max-width:100%;height:auto}
 button,input,select,textarea{font:inherit;max-width:100%}
 button,input[type="button"],input[type="submit"],.button{min-height:44px;touch-action:manipulation}
-.pwa-install-card{position:fixed;z-index:9998;right:16px;bottom:max(16px,env(safe-area-inset-bottom));width:min(430px,calc(100vw - 32px));display:grid;grid-template-columns:48px minmax(0,1fr) auto auto;align-items:center;gap:12px;padding:13px;background:#fff;border:1px solid #efd477;border-radius:18px;box-shadow:0 18px 50px rgba(23,26,112,.22);color:#171a70}
-.pwa-install-card>img{width:48px;height:48px;border-radius:13px;background:#fff8e8}.pwa-install-copy{min-width:0;display:grid;gap:3px}.pwa-install-copy strong{font-size:.98rem}.pwa-install-copy span{font-size:.82rem;line-height:1.35;color:#626780}.pwa-install-action{border:0;border-radius:10px;padding:9px 13px;background:#f4b942;color:#2f2506;font-weight:900}.pwa-install-close{width:36px;height:36px;min-height:36px;padding:0;border:0;background:transparent;color:#666b81;border-radius:50%;font-size:1.45rem}.pwa-install-dialog{width:min(92vw,480px);border:0;border-radius:24px;padding:0;color:#171a70;box-shadow:0 24px 80px rgba(15,20,74,.35)}.pwa-install-dialog::backdrop{background:rgba(13,17,53,.58)}.pwa-install-dialog form{position:relative;margin:0;padding:30px;display:grid;justify-items:center;text-align:center}.pwa-install-dialog img{border-radius:20px;background:#fff8e8}.pwa-install-dialog h2{margin:15px 0 8px}.pwa-install-dialog ol{text-align:left;line-height:1.6}.pwa-dialog-close{position:absolute;right:12px;top:10px;width:40px;height:40px;min-height:40px;border:0;border-radius:50%;background:transparent;font-size:1.5rem}.pwa-install-dialog .button{background:#171a70;color:#fff;border:0;border-radius:12px;padding:12px 18px;font-weight:800}
+.pwa-install-card{position:fixed;z-index:9998;right:16px;bottom:max(16px,env(safe-area-inset-bottom));width:min(430px,calc(100vw - 32px));display:grid;grid-template-columns:48px minmax(0,1fr) auto auto;align-items:center;gap:12px;padding:13px;background:#fff;border:1px solid #efd477;border-radius:18px;box-shadow:0 18px 50px rgba(23,26,112,.22);color:#0C046D}
+.pwa-install-card>img{width:48px;height:48px;border-radius:13px;background:#FCF9F2}.pwa-install-copy{min-width:0;display:grid;gap:3px}.pwa-install-copy strong{font-size:.98rem}.pwa-install-copy span{font-size:.82rem;line-height:1.35;color:#626780}.pwa-install-action{border:0;border-radius:10px;padding:9px 13px;background:#f4b942;color:#2f2506;font-weight:900}.pwa-install-close{width:36px;height:36px;min-height:36px;padding:0;border:0;background:transparent;color:#666b81;border-radius:50%;font-size:1.45rem}.pwa-install-dialog{width:min(92vw,480px);border:0;border-radius:24px;padding:0;color:#0C046D;box-shadow:0 24px 80px rgba(15,20,74,.35)}.pwa-install-dialog::backdrop{background:rgba(13,17,53,.58)}.pwa-install-dialog form{position:relative;margin:0;padding:30px;display:grid;justify-items:center;text-align:center}.pwa-install-dialog img{border-radius:20px;background:#FCF9F2}.pwa-install-dialog h2{margin:15px 0 8px}.pwa-install-dialog ol{text-align:left;line-height:1.6}.pwa-dialog-close{position:absolute;right:12px;top:10px;width:40px;height:40px;min-height:40px;border:0;border-radius:50%;background:transparent;font-size:1.5rem}.pwa-install-dialog .button{background:#0C046D;color:#fff;border:0;border-radius:12px;padding:12px 18px;font-weight:800}
 @media(max-width:760px){body{padding-bottom:env(safe-area-inset-bottom)}.wrap{width:min(100% - 28px,1180px)}input,select,textarea{font-size:16px}.pwa-install-card{left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));width:auto;grid-template-columns:44px minmax(0,1fr) auto;padding:11px}.pwa-install-close{position:absolute;right:-4px;top:-13px;background:#fff;border:1px solid #e7dfca}.pwa-install-visible{padding-bottom:calc(92px + env(safe-area-inset-bottom))}}
 @media(max-width:420px){.pwa-install-copy span{display:none}}
 
@@ -79,3 +79,22 @@ button,input[type="button"],input[type="submit"],.button{min-height:44px;touch-a
 @media(max-width:700px){
   .bank-summary-line{font-size:.74rem}
 }
+
+
+/* TutoDemy Brand Guide Theme — BRAND1 */
+h1,h2,h3,h4,.brand h1{font-family:"Sifonn","Siffon","Glacial Indifference","Arial Black","Century Gothic",sans-serif}
+.topbar{background:linear-gradient(125deg,#0C046D 0%,#0C046D 72%,#7484C2 150%);color:#FCF9F2}
+.owl{background:#FCF9F2;color:#0C046D}
+.brand p{color:rgba(252,249,242,.78)}
+.hero{background:#FCF9F2}
+.eyebrow{color:#7484C2}
+h2{color:#0C046D}
+.card,.stat,.panel,.question-card{background:#fff;border-color:rgba(79,77,78,.16)}
+button,.btn,.primary{border-radius:14px}
+.primary,.btn-primary{background:#0C046D!important;border-color:#0C046D!important;color:#FCF9F2!important}
+.secondary,.btn-secondary{background:#E5922E!important;border-color:#E5922E!important;color:#0C046D!important}
+.option:hover,.choice:hover{border-color:#7484C2;background:rgba(116,132,194,.08)}
+.option.selected,.choice.selected{border-color:#0C046D;background:rgba(116,132,194,.12)}
+input,select{background:#fff;border-color:rgba(79,77,78,.2);color:#4F4D4E}
+input:focus,select:focus{border-color:#7484C2;box-shadow:0 0 0 3px rgba(116,132,194,.14)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid rgba(229,146,46,.42);outline-offset:3px}
