@@ -1,266 +1,316 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="description" content="Private TutoDemy learner progress, percentile, and weekly leaderboard summary with activity, accuracy, study streaks, and privacy-safe comparisons.">
-  <meta name="theme-color" content="#0C046D">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="TutoDemy">
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <link rel="canonical" href="https://tutodemy.net/dashboard.html">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Student Progress | TutoDemy Learning PH">
-  <meta property="og:description" content="Private weekly learning progress, percentile comparisons, privacy-safe study leaderboards, accuracy, streaks, and subject performance.">
-  <meta property="og:url" content="https://tutodemy.net/dashboard.html">
-  <meta property="og:image" content="https://tutodemy.net/assets/images/tutodemy-logo.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <title>Student Progress | TutoDemy Learning PH</title>
-  <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-brand1">
-  <script defer src="js/config.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="js/supabase-client.js"></script>
-  <script defer src="js/auth-core.js"></script>
-  <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-finance3"></script>
-  <script defer src="data/taxonomy.js"></script>
-  <script defer src="js/main.js?v=20260809-tutorfix1"></script>
-  <script defer src="data/question-bank.js"></script>
-  <script defer src="data/reviewers.js"></script>
-  <script defer src="js/dashboard.js?v=20260810-progress4c"></script>
-  <script defer src="js/pwa.js?v=20260809-pwa1"></script>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+<meta content="Private TutoDemy learner progress, percentile, and weekly leaderboard summary with activity, accuracy, study streaks, and privacy-safe comparisons." name="description"/>
+<meta content="#0C046D" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="default" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="TutoDemy" name="apple-mobile-web-app-title"/>
+<link href="assets/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<link href="manifest.webmanifest" rel="manifest"/>
+<link href="https://tutodemy.net/dashboard.html" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="Student Progress | TutoDemy Learning PH" property="og:title"/>
+<meta content="Private weekly learning progress, percentile comparisons, privacy-safe study leaderboards, accuracy, streaks, and subject performance." property="og:description"/>
+<meta content="https://tutodemy.net/dashboard.html" property="og:url"/>
+<meta content="https://tutodemy.net/assets/images/tutodemy-logo.png" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<title>Student Progress | TutoDemy Learning PH</title>
+<link href="assets/images/owl-mark.png" rel="icon"/>
+<link href="css/style.css?v=20260816-studentdash1" rel="stylesheet"/>
+<script defer="" src="js/config.js"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer="" src="js/supabase-client.js"></script>
+<script defer="" src="js/auth-core.js"></script>
+<script defer="" src="js/cloud-sync.js"></script>
+<script defer="" src="js/marketplace-api.js?v=20260809-finance3"></script>
+<script defer="" src="data/taxonomy.js"></script>
+<script defer="" src="js/main.js?v=20260809-tutorfix1"></script>
+<script defer="" src="data/question-bank.js"></script>
+<script defer="" src="data/reviewers.js"></script>
+<script defer="" src="js/dashboard.js?v=20260810-progress4c"></script>
+<script defer="" src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="dashboard">
-  <a class="skip-link" href="#main-content">Skip to content</a>
-  <div id="site-header"></div>
-  <main id="main-content">
-    <section class="page-hero dashboard-hero student-progress-hero">
-      <div class="container page-hero-grid">
-        <div>
-          <span class="eyebrow light">PRIVATE STUDENT DASHBOARD</span>
-          <h1>Your weekly learning summary.</h1>
-          <p>See what you reviewed, how accurately you answered, how consistently you studied, and—when enough data exists—how your progress compares with similar learners.</p>
-        </div>
-        <div class="plan-summary progress-week-card">
-          <small>CURRENT STUDY WEEK</small>
-          <b id="progress-week-label">Loading…</b>
-          <p id="progress-week-detail">Your private summary uses completed practice and mock attempts.</p>
-          <a href="practice.html">Continue reviewing →</a>
-        </div>
-      </div>
-    </section>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div id="site-header"></div>
 
-    <section class="section student-progress-section">
-      <div class="container">
-        <div class="cloud-account-note" id="dashboard-account-note">
-          <span aria-hidden="true">☁</span>
-          <div>
-            <b id="dashboard-account-title">Checking account status…</b>
-            <small id="dashboard-account-description">Local progress remains available.</small>
-          </div>
-          <a id="dashboard-account-link" href="auth.html">Account</a>
-        </div>
+<main id="main-content">
+<section class="page-hero dashboard-hero student-progress-hero dashboard-hero-v2">
+<div class="container page-hero-grid dashboard-hero-grid-v2">
+<div class="dashboard-hero-copy">
+<span class="eyebrow light">STUDENT DASHBOARD</span>
+<h1>Your progress, made clearer.</h1>
+<p>Track what you reviewed, how well you answered, and where you are improving—through a cleaner dashboard with charts, color cues, and compact summaries.</p>
+</div>
+<div class="plan-summary progress-week-card dashboard-focus-card">
+<small>CURRENT STUDY WEEK</small>
+<b id="progress-week-label">Loading…</b>
+<p id="progress-week-detail">Your private summary uses completed practice and mock attempts.</p>
+<a href="practice.html">Continue reviewing →</a>
+</div>
+</div>
+</section>
+<section class="section student-progress-section dashboard-v2-section">
+<div class="container">
+<div class="cloud-account-note dashboard-account-banner" id="dashboard-account-note">
+<span aria-hidden="true">☁</span>
+<div>
+<b id="dashboard-account-title">Checking account status…</b>
+<small id="dashboard-account-description">Local progress remains available.</small>
+</div>
+<a href="auth.html" id="dashboard-account-link">Account</a>
+</div>
+<div class="progress-source-note progress-source-banner" id="progress-source-note"></div>
+<div aria-label="This week's learning metrics" class="dashboard-metrics student-week-metrics dashboard-metrics-v2">
+<article class="metric-card metric-questions">
+<div aria-hidden="true" class="metric-icon">✓</div>
+<small>QUESTIONS REVIEWED</small>
+<b id="dash-week-questions">0</b>
+<p id="dash-week-questions-note">This week</p>
+</article>
+<article class="metric-card metric-accuracy">
+<div aria-hidden="true" class="metric-icon">◎</div>
+<small>ACCURACY</small>
+<b id="dash-week-accuracy">—</b>
+<p id="dash-week-accuracy-note">No completed questions yet</p>
+</article>
+<article class="metric-card metric-sessions">
+<div aria-hidden="true" class="metric-icon">▣</div>
+<small>COMPLETED ATTEMPTS</small>
+<b id="dash-week-sessions">0</b>
+<p id="dash-week-sessions-note">Completed attempts this week</p>
+</article>
+<article class="metric-card metric-streak">
+<div aria-hidden="true" class="metric-icon">⚡</div>
+<small>STUDY STREAK</small>
+<b id="dash-current-streak">0 days</b>
+<p id="dash-streak-note">Keep going</p>
+</article>
+</div>
+<div class="dashboard-board-v2">
+<div class="dashboard-main-column">
+<section class="panel dashboard-panel-v2 progress-activity-panel accent-activity">
+<div class="panel-heading">
+<div>
+<span class="eyebrow">ACTIVITY CHART</span>
+<h2>Daily review activity</h2>
+</div>
+<span class="progress-period-label" id="daily-total-label">0 questions</span>
+</div>
+<p class="panel-intro">See how much practice you completed across the current study week.</p>
+<div class="daily-activity-chart chart-surface" id="daily-activity-chart"></div>
+</section>
+<section class="panel dashboard-panel-v2 progress-subject-panel accent-subject">
+<div class="panel-heading">
+<div>
+<span class="eyebrow">SUBJECT BREAKDOWN</span>
+<h2>Accuracy by review bank</h2>
+</div>
+</div>
+<p class="panel-intro">Compare weekly performance across Mathematics, Language &amp; Reading, Science, and Reasoning.</p>
+<div class="subject-progress-list" id="subject-performance"></div>
+</section>
+<div class="dashboard-wide-pair">
+<section class="panel dashboard-panel-v2 progress-percentile-panel accent-percentile" id="progress-percentile-panel">
+<div class="panel-heading">
+<div>
+<span class="eyebrow">LEARNER COMPARISON</span>
+<h2>How your progress compares</h2>
+</div>
+<span class="progress-period-label" id="percentile-track-label">Loading…</span>
+</div>
+<p class="panel-intro">When enough eligible data exists, your dashboard can show percentile-based comparisons while keeping your personal activity private.</p>
+<div aria-live="polite" class="percentile-status" id="percentile-status" role="status">
+<div class="empty-state">
+<b>Loading comparison data…</b>
+<small>Your personal progress remains private.</small>
+</div>
+</div>
+<div class="percentile-card-grid" id="percentile-cards"></div>
+<div class="subject-percentile-section" hidden="" id="subject-percentile-section">
+<div class="subject-percentile-heading">
+<div>
+<span class="eyebrow">BY SUBJECT</span>
+<h3>Subject percentile details</h3>
+</div>
+<small>Minimum activity and cohort rules apply separately.</small>
+</div>
+<div class="subject-percentile-list" id="subject-percentile-list"></div>
+</div>
+<div class="percentile-methodology" hidden="" id="percentile-methodology"></div>
+</section>
+<section class="panel dashboard-panel-v2 progress-leaderboard-panel accent-leaderboard" id="weekly-leaderboard-panel">
+<div class="panel-heading leaderboard-panel-heading">
+<div>
+<span class="eyebrow">WEEKLY LEADERBOARD</span>
+<h2>Weekly study leaders</h2>
+</div>
+<span class="progress-period-label" id="leaderboard-track-label">Sign in to participate</span>
+</div>
+<p class="panel-intro">Top 10 rankings reward meaningful review activity. Participation is optional, and full names are never shown by default.</p>
+<div aria-label="Leaderboard filters" class="leaderboard-toolbar">
+<label>
+<span>Week</span>
+<select id="leaderboard-week-select">
+<option value="0">This week</option>
+<option value="1">Last week</option>
+</select>
+</label>
+<label>
+<span>Review bank</span>
+<select id="leaderboard-subject-select">
+<option value="All subjects">All subjects</option>
+</select>
+</label>
+</div>
+<div class="leaderboard-preferences-card">
+<div class="leaderboard-preferences-grid">
+<label class="leaderboard-toggle">
+<input id="leaderboard-opt-in" type="checkbox"/>
+<span>Join the public weekly leaderboard</span>
+</label>
+<label class="leaderboard-alias">
+<span>Display alias</span>
+<input id="leaderboard-display-name" maxlength="32" placeholder="Your alias" type="text"/>
+</label>
+<button class="button secondary" id="save-leaderboard-preferences" type="button">Save preferences</button>
+</div>
+</div>
+<div aria-live="polite" class="leaderboard-status" id="leaderboard-status" role="status">
+<div class="empty-state">
+<b>Checking leaderboard availability…</b>
+<small>You can still use your private dashboard even if leaderboard data is unavailable.</small>
+</div>
+</div>
+<div class="leaderboard-content" hidden="" id="leaderboard-content">
+<div class="leaderboard-summary-strip">
+<div class="leaderboard-summary-card" id="leaderboard-my-rank"></div>
+<div class="leaderboard-summary-chip"><span class="leaderboard-participant-count" id="leaderboard-participant-count">0 eligible</span></div>
+</div>
+<div class="leaderboard-list" id="leaderboard-list"></div>
+<div class="leaderboard-methodology" hidden="" id="leaderboard-methodology"></div>
+</div>
+</section>
+</div>
+</div>
+<aside class="dashboard-side-column">
+<section class="panel dashboard-panel-v2 progress-comparison-panel accent-compare">
+<div class="panel-heading">
+<div>
+<span class="eyebrow">WEEK-ON-WEEK</span>
+<h2>Compared with last week</h2>
+</div>
+<span class="progress-period-label" id="comparison-period-label">Loading…</span>
+</div>
+<div class="comparison-table">
+<div class="comparison-row">
+<div>
+<b>Questions reviewed</b>
+<small>Current week total</small>
+</div>
+<div class="comparison-values">
+<strong id="compare-questions-value">0</strong>
+<span class="progress-delta neutral" id="compare-questions-delta">—</span>
+</div>
+</div>
+<div class="comparison-row">
+<div>
+<b>Accuracy</b>
+<small>Correct responses this week</small>
+</div>
+<div class="comparison-values">
+<strong id="compare-accuracy-value">—</strong>
+<span class="progress-delta neutral" id="compare-accuracy-delta">—</span>
+</div>
+</div>
+<div class="comparison-row">
+<div>
+<b>Completed attempts</b>
+<small>Finished mock or practice sets</small>
+</div>
+<div class="comparison-values">
+<strong id="compare-sessions-value">0</strong>
+<span class="progress-delta neutral" id="compare-sessions-delta">—</span>
+</div>
+</div>
+<div class="comparison-row">
+<div>
+<b>Active study days</b>
+<small>Days with completed review</small>
+</div>
+<div class="comparison-values">
+<strong id="compare-days-value">0</strong>
+<span class="progress-delta neutral" id="compare-days-delta">—</span>
+</div>
+</div>
+</div>
+</section>
+<section class="panel dashboard-panel-v2 progress-streak-panel accent-streak">
+<div class="panel-heading">
+<div>
+<span class="eyebrow">CONSISTENCY</span>
+<h2>Study streak</h2>
+</div>
+</div>
+<div class="streak-focus-card">
+<div class="streak-ring" id="streak-ring">
+<b id="streak-ring-value">0</b>
+<small>days</small>
+</div>
+<div class="streak-copy">
+<p id="streak-message">Keep your streak alive by reviewing again today.</p>
+<small id="streak-daily-goal">Review a few questions today to stay on track.</small>
+</div>
+</div>
+</section>
+<section class="panel dashboard-panel-v2 progress-all-time-panel accent-record">
+<div class="panel-heading">
+<div>
+<span class="eyebrow">LEARNING RECORD</span>
+<h2>All-time summary</h2>
+</div>
+</div>
+<div class="record-table">
+<div class="record-row"><span>Total questions answered</span><b id="all-time-questions">0</b></div>
+<div class="record-row"><span>Overall accuracy</span><b id="all-time-accuracy">—</b></div>
+<div class="record-row"><span>Total completed attempts</span><b id="all-time-attempts">0</b></div>
+<div class="record-row"><span>Active study days</span><b id="all-time-active-days">0</b></div>
+<div class="record-row"><span>Estimated study time</span><b id="all-time-study-time">0 min</b></div>
+</div>
+</section>
+<section class="panel dashboard-panel-v2 progress-saved-panel accent-saved">
+<div class="panel-heading">
+<div>
+<span class="eyebrow">SAVED REVIEWERS</span>
+<h2>Continue reviewing</h2>
+</div>
+<a href="reviewers.html">Browse</a>
+</div>
+<div class="saved-reviewer-list" id="saved-reviewers"></div>
+</section>
+</aside>
+</div>
+<section class="panel dashboard-panel-v2 dashboard-history-panel accent-history">
+<div class="panel-heading">
+<div>
+<span class="eyebrow">RECENT ATTEMPTS</span>
+<h2>Exam and practice history</h2>
+</div>
+<button class="text-button" id="clear-history" type="button">Clear history</button>
+</div>
+<p class="panel-intro">A compact record of your most recent completed sets.</p>
+<div class="history-list" id="attempt-history"></div>
+</section>
+</div>
+</section>
+</main>
 
-        <div class="progress-source-note" id="progress-source-note" role="status" aria-live="polite" hidden></div>
-
-        <div class="dashboard-metrics student-week-metrics" aria-label="This week's learning metrics">
-          <article>
-            <span aria-hidden="true">✓</span>
-            <small>QUESTIONS REVIEWED</small>
-            <b id="dash-week-questions">0</b>
-            <p id="dash-week-questions-note">This week</p>
-          </article>
-          <article>
-            <span aria-hidden="true">%</span>
-            <small>WEEKLY ACCURACY</small>
-            <b id="dash-week-accuracy">—</b>
-            <p id="dash-week-accuracy-note">No completed questions yet</p>
-          </article>
-          <article>
-            <span aria-hidden="true">▶</span>
-            <small>REVIEW SESSIONS</small>
-            <b id="dash-week-sessions">0</b>
-            <p id="dash-week-sessions-note">Completed attempts this week</p>
-          </article>
-          <article>
-            <span aria-hidden="true">🔥</span>
-            <small>STUDY STREAK</small>
-            <b id="dash-current-streak">0 days</b>
-            <p id="dash-streak-note">Review 10 questions in a day</p>
-          </article>
-        </div>
-
-        <div class="student-progress-grid">
-          <section class="panel progress-comparison-panel">
-            <div class="panel-heading">
-              <div>
-                <span class="eyebrow">WEEK-OVER-WEEK</span>
-                <h2>Compared with last week</h2>
-              </div>
-              <span class="progress-period-label" id="comparison-period-label">Previous week</span>
-            </div>
-            <div class="progress-comparison-list">
-              <div>
-                <span>Questions reviewed</span>
-                <b id="compare-questions-value">0</b>
-                <small id="compare-questions-delta" class="progress-delta neutral">No change</small>
-              </div>
-              <div>
-                <span>Accuracy</span>
-                <b id="compare-accuracy-value">—</b>
-                <small id="compare-accuracy-delta" class="progress-delta neutral">No comparison yet</small>
-              </div>
-              <div>
-                <span>Review sessions</span>
-                <b id="compare-sessions-value">0</b>
-                <small id="compare-sessions-delta" class="progress-delta neutral">No change</small>
-              </div>
-              <div>
-                <span>Active study days</span>
-                <b id="compare-days-value">0</b>
-                <small id="compare-days-delta" class="progress-delta neutral">No change</small>
-              </div>
-            </div>
-          </section>
-
-          <section class="panel progress-streak-panel">
-            <div class="panel-heading">
-              <div>
-                <span class="eyebrow">CONSISTENCY</span>
-                <h2>Study streak</h2>
-              </div>
-            </div>
-            <div class="streak-summary">
-              <div class="streak-ring" id="streak-ring" aria-label="Current study streak">
-                <span>🔥</span>
-                <b id="streak-ring-value">0</b>
-                <small>days</small>
-              </div>
-              <div class="streak-details">
-                <p><b id="streak-message">Start your streak today.</b></p>
-                <p>Complete at least <strong id="streak-daily-goal">10</strong> questions in a day to count it toward your streak.</p>
-                <div class="streak-record"><span>Longest streak</span><b id="dash-longest-streak">0 days</b></div>
-                <div class="streak-record"><span>Last learning activity</span><b id="dash-last-activity">No activity yet</b></div>
-              </div>
-            </div>
-          </section>
-
-          <section class="panel wide progress-percentile-panel" id="progress-percentile-panel">
-            <div class="panel-heading percentile-panel-heading">
-              <div><span class="eyebrow">PRIVATE LEARNER COMPARISON</span><h2>How your progress compares</h2></div>
-              <span class="progress-period-label" id="percentile-track-label">Sign in to compare</span>
-            </div>
-            <p class="panel-intro">Percentiles compare anonymous summary values only. They are relative learning indicators—not official grades, class ranks, or measures of intelligence.</p>
-            <div class="percentile-status" id="percentile-status" role="status" aria-live="polite"><span aria-hidden="true">◌</span><div><b>Checking comparison eligibility…</b><small>Your personal progress remains private.</small></div></div>
-            <div class="percentile-card-grid" id="percentile-cards"></div>
-            <div class="subject-percentile-section" id="subject-percentile-section" hidden>
-              <div class="subject-percentile-heading"><div><span class="eyebrow">BY REVIEW BANK</span><h3>Subject percentiles</h3></div><small>Each subject compares learners in the same preparation track and review bank; minimum activity and cohort rules apply separately.</small></div>
-              <div class="subject-percentile-list" id="subject-percentile-list"></div>
-            </div>
-            <div class="percentile-methodology" id="percentile-methodology" hidden></div>
-          </section>
-
-          <section class="panel wide progress-leaderboard-panel" id="weekly-leaderboard-panel">
-            <div class="panel-heading leaderboard-panel-heading">
-              <div><span class="eyebrow">WEEKLY LEADERBOARD</span><h2>Weekly Study Leaders</h2></div>
-              <span class="progress-period-label" id="leaderboard-track-label">Sign in to participate</span>
-            </div>
-            <p class="panel-intro">Top 10 rankings reward meaningful review activity, consistency, and a small accuracy bonus. Participation is optional, and full names are never shown by default.</p>
-
-            <div class="leaderboard-toolbar" aria-label="Leaderboard filters">
-              <label><span>Week</span><select id="leaderboard-week-select"><option value="0">This week</option><option value="1">Last week</option></select></label>
-              <label><span>Review bank</span><select id="leaderboard-subject-select"><option value="All subjects">All subjects</option></select></label>
-            </div>
-
-            <div class="leaderboard-status locked" id="leaderboard-status" role="status" aria-live="polite"><span aria-hidden="true">🔒</span><div><b>Log in to view the weekly leaderboard</b><small>Your local study progress remains available without joining.</small></div></div>
-
-            <div class="leaderboard-layout" id="leaderboard-content" hidden>
-              <aside class="leaderboard-profile-card">
-                <div class="leaderboard-card-heading"><div><span class="eyebrow">YOUR PUBLIC PROFILE</span><h3>Leaderboard participation</h3></div><span class="leaderboard-privacy-badge">Opt-in only</span></div>
-                <label class="leaderboard-optin-row"><input type="checkbox" id="leaderboard-opt-in"><span><b>Join weekly leaderboards</b><small>Only your alias and weekly summary values can appear.</small></span></label>
-                <label class="leaderboard-name-field"><span>Public alias <small>(optional)</small></span><input id="leaderboard-display-name" type="text" maxlength="28" autocomplete="off" placeholder="Leave blank for a Study Owl alias"><small>3–28 letters/numbers, spaces, periods, underscores, or hyphens.</small></label>
-                <button class="button button-outline full" id="save-leaderboard-preferences" type="button">Save leaderboard settings</button>
-                <div class="leaderboard-my-rank" id="leaderboard-my-rank"></div>
-              </aside>
-
-              <div class="leaderboard-ranking-card">
-                <div class="leaderboard-card-heading"><div><span class="eyebrow">TOP 10</span><h3 id="leaderboard-list-title">This week's leaders</h3></div><span class="leaderboard-participant-count" id="leaderboard-participant-count">0 eligible</span></div>
-                <div class="leaderboard-list" id="leaderboard-list"></div>
-              </div>
-            </div>
-
-            <div class="leaderboard-methodology" id="leaderboard-methodology" hidden></div>
-          </section>
-
-          <section class="panel wide progress-activity-panel">
-            <div class="panel-heading">
-              <div>
-                <span class="eyebrow">LAST SEVEN DAYS</span>
-                <h2>Daily review activity</h2>
-              </div>
-              <span class="progress-period-label" id="daily-total-label">0 questions</span>
-            </div>
-            <div id="daily-activity-chart" class="daily-activity-chart" aria-label="Questions reviewed during the last seven days"></div>
-          </section>
-
-          <section class="panel wide progress-subject-panel">
-            <div class="panel-heading">
-              <div>
-                <span class="eyebrow">SUBJECT PROGRESS</span>
-                <h2>Accuracy by review bank</h2>
-              </div>
-              <a href="practice.html">Start a review</a>
-            </div>
-            <p class="panel-intro">Current-week performance is shown first. The smaller comparison indicates the change from the previous week.</p>
-            <div id="subject-performance" class="subject-progress-list"></div>
-          </section>
-
-          <section class="panel progress-all-time-panel">
-            <div class="panel-heading">
-              <div>
-                <span class="eyebrow">ALL-TIME SUMMARY</span>
-                <h2>Your learning record</h2>
-              </div>
-            </div>
-            <div class="all-time-summary-grid">
-              <div><span>Questions</span><b id="all-time-questions">0</b></div>
-              <div><span>Accuracy</span><b id="all-time-accuracy">—</b></div>
-              <div><span>Attempts</span><b id="all-time-attempts">0</b></div>
-              <div><span>Active days</span><b id="all-time-active-days">0</b></div>
-              <div class="wide"><span>Estimated review time</span><b id="all-time-study-time">0 min</b></div>
-            </div>
-          </section>
-
-          <section class="panel progress-saved-panel">
-            <div class="panel-heading">
-              <div>
-                <span class="eyebrow">SAVED REVIEWERS</span>
-                <h2>Continue reviewing</h2>
-              </div>
-              <a href="reviewers.html">Browse</a>
-            </div>
-            <div id="saved-reviewers" class="saved-reviewer-list"></div>
-          </section>
-
-          <section class="panel wide">
-            <div class="panel-heading">
-              <div>
-                <span class="eyebrow">RECENT ATTEMPTS</span>
-                <h2>Exam and practice history</h2>
-              </div>
-              <button class="text-button" id="clear-history" type="button">Clear history</button>
-            </div>
-            <div id="attempt-history" class="history-list"></div>
-          </section>
-        </div>
-      </div>
-    </section>
-  </main>
-  <div id="site-footer"></div>
-  <div class="toast" role="status" aria-live="polite"></div>
+<div id="site-footer"></div>
+<div aria-live="polite" class="toast" role="status"></div>
 </body>
 </html>
