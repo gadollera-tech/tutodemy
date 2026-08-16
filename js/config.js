@@ -13,6 +13,10 @@ window.TUTODEMY_CONFIG = {
   // Leave blank until hCaptcha is configured in the Supabase Auth dashboard.
   hcaptchaSiteKey: "",
 
+  // Public Web Push application-server key. Safe for client-side use.
+  // The matching PRIVATE VAPID key must stay only in Supabase Secrets.
+  vapidPublicKey: "BEpMtxj5sLxKhFBOjGrMZT1JF2jFq1Lanij6HupXzq9cA77uShNyBQ1gnTk2phOc31rh6QEtKVQBGqHQXsApU_0",
+
   // Optional public integrations.
   googleFormEmbedUrl: "",
   googleAppsScriptEndpoint: "",

@@ -673,6 +673,53 @@
   }
 
 
+
+  async function getMyWebPushStatus() {
+    requireUser();
+    const { data, error } = await client().rpc("get_my_web_push_status");
+    if (error) throw optionalNotificationError(error);
+    return data || { enabled: false, deviceCount: 0 };
+  }
+
+  async function saveMyWebPushSubscription(subscription) {
+    requireUser();
+    const json = subscription?.toJSON?.() || subscription || {};
+    const endpoint = String(json.endpoint || subscription?.endpoint || "").trim();
+    const p256dh = String(json.keys?.p256dh || "").trim();
+    const authKey = String(json.keys?.auth || "").trim();
+
+    if (!endpoint || !p256dh || !authKey) {
+      throw new Error("The browser did not provide a complete Web Push subscription.");
+    }
+
+    const expirationRaw = json.expirationTime ?? subscription?.expirationTime ?? null;
+    const expiration = Number.isFinite(Number(expirationRaw)) ? Math.round(Number(expirationRaw)) : null;
+
+    const { data, error } = await client().rpc("save_my_web_push_subscription", {
+      p_endpoint: endpoint,
+      p_p256dh: p256dh,
+      p_auth_key: authKey,
+      p_expiration_time: expiration,
+      p_user_agent: navigator.userAgent || null
+    });
+
+    if (error) throw optionalNotificationError(error);
+    return data;
+  }
+
+  async function deleteMyWebPushSubscription(endpoint) {
+    requireUser();
+    const value = String(endpoint || "").trim();
+    if (!value) return { deleted: false };
+
+    const { data, error } = await client().rpc("delete_my_web_push_subscription", {
+      p_endpoint: value
+    });
+
+    if (error) throw optionalNotificationError(error);
+    return data || { deleted: false };
+  }
+
   async function getMyNotificationPreferences() {
     requireUser();
     const { data, error } = await client().rpc("get_my_notification_preferences");
@@ -825,6 +872,9 @@
     unsubscribeRealtimeChannel,
     adminMessageReports,
     adminResolveMessageReport,
+    getMyWebPushStatus,
+    saveMyWebPushSubscription,
+    deleteMyWebPushSubscription,
     getMyNotificationPreferences,
     saveMyNotificationPreferences,
     getMyNotifications,

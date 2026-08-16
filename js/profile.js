@@ -18,41 +18,160 @@ document.addEventListener("DOMContentLoaded", async () => {
   const enableBrowserNotifications = document.querySelector("#enable-browser-notifications");
   const saveNotificationPreferences = document.querySelector("#save-notification-preferences");
 
-  function browserAlertsEnabled() {
-    try { return localStorage.getItem("tutodemyBrowserNotifications") === "enabled"; }
-    catch { return false; }
+  const VAPID_PUBLIC_KEY = String(window.TUTODEMY_CONFIG?.vapidPublicKey || "").trim();
+
+  function urlBase64ToUint8Array(value) {
+    const padding = "=".repeat((4 - value.length % 4) % 4);
+    const base64 = (value + padding).replace(/-/g, "+").replace(/_/g, "/");
+    const raw = atob(base64);
+    return Uint8Array.from(raw, character => character.charCodeAt(0));
   }
 
-  function updateBrowserNotificationStatus() {
+  function webPushSupported() {
+    return Boolean(
+      window.isSecureContext &&
+      "Notification" in window &&
+      "serviceWorker" in navigator &&
+      "PushManager" in window
+    );
+  }
+
+  async function currentPushSubscription() {
+    if (!webPushSupported()) return null;
+    const registration = await navigator.serviceWorker.ready;
+    return registration.pushManager.getSubscription();
+  }
+
+  async function syncExistingPushSubscription() {
+    if (!webPushSupported() || Notification.permission !== "granted") return null;
+
+    const subscription = await currentPushSubscription();
+    if (!subscription) return null;
+
+    if (window.TutoMarketplace?.saveMyWebPushSubscription) {
+      await window.TutoMarketplace.saveMyWebPushSubscription(subscription);
+    }
+    return subscription;
+  }
+
+  async function updateBrowserNotificationStatus() {
     if (!browserNotificationStatus || !enableBrowserNotifications) return;
 
-    if (!("Notification" in window) || !("serviceWorker" in navigator)) {
-      browserNotificationStatus.textContent = "This browser does not support TutoDemy device alerts.";
+    if (!webPushSupported()) {
+      browserNotificationStatus.textContent = window.isSecureContext
+        ? "This browser does not support Web Push notifications."
+        : "Web Push requires a secure HTTPS connection.";
+      enableBrowserNotifications.textContent = "Unavailable";
       enableBrowserNotifications.disabled = true;
+      enableBrowserNotifications.dataset.pushState = "unavailable";
       return;
     }
 
-    if (Notification.permission === "granted" && browserAlertsEnabled()) {
-      browserNotificationStatus.textContent = "Enabled on this device.";
-      enableBrowserNotifications.textContent = "Enabled";
+    if (!VAPID_PUBLIC_KEY) {
+      browserNotificationStatus.textContent = "TutoDemy Web Push is not configured yet.";
+      enableBrowserNotifications.textContent = "Unavailable";
       enableBrowserNotifications.disabled = true;
+      enableBrowserNotifications.dataset.pushState = "unavailable";
       return;
     }
 
     if (Notification.permission === "denied") {
-      browserNotificationStatus.textContent = "Blocked in your browser settings. Allow notifications for tutodemy.net to enable them.";
+      browserNotificationStatus.textContent = "Blocked in browser settings. Allow notifications for tutodemy.net, then reload this page.";
       enableBrowserNotifications.textContent = "Blocked";
       enableBrowserNotifications.disabled = true;
+      enableBrowserNotifications.dataset.pushState = "blocked";
       return;
     }
 
-    browserNotificationStatus.textContent = "Not enabled on this device yet.";
-    enableBrowserNotifications.textContent = "Enable on this device";
-    enableBrowserNotifications.disabled = false;
+    try {
+      const subscription = await currentPushSubscription();
+
+      if (Notification.permission === "granted" && subscription) {
+        browserNotificationStatus.textContent = "True phone/browser push is enabled on this device.";
+        enableBrowserNotifications.textContent = "Disable on this device";
+        enableBrowserNotifications.disabled = false;
+        enableBrowserNotifications.dataset.pushState = "enabled";
+        return;
+      }
+
+      browserNotificationStatus.textContent = Notification.permission === "granted"
+        ? "Permission granted. Tap to finish enabling push on this device."
+        : "Not enabled on this device yet.";
+      enableBrowserNotifications.textContent = "Enable on this device";
+      enableBrowserNotifications.disabled = false;
+      enableBrowserNotifications.dataset.pushState = "disabled";
+    } catch (error) {
+      console.warn("Could not inspect Web Push subscription:", error);
+      browserNotificationStatus.textContent = "Could not check this device's push subscription.";
+      enableBrowserNotifications.textContent = "Try again";
+      enableBrowserNotifications.disabled = false;
+      enableBrowserNotifications.dataset.pushState = "disabled";
+    }
+  }
+
+  async function enableTrueWebPush() {
+    if (!webPushSupported()) throw new Error("Web Push is not supported on this device.");
+    if (!VAPID_PUBLIC_KEY) throw new Error("The TutoDemy Web Push public key is missing.");
+
+    const permission = Notification.permission === "granted"
+      ? "granted"
+      : await Notification.requestPermission();
+
+    if (permission !== "granted") {
+      throw new Error(
+        permission === "denied"
+          ? "Notifications were blocked. Allow them for tutodemy.net in browser settings."
+          : "Notification permission was not granted."
+      );
+    }
+
+    const registration = await navigator.serviceWorker.ready;
+    let subscription = await registration.pushManager.getSubscription();
+
+    if (!subscription) {
+      subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+      });
+    }
+
+    if (!window.TutoMarketplace?.saveMyWebPushSubscription) {
+      throw new Error("The TutoDemy push subscription service is unavailable.");
+    }
+
+    await window.TutoMarketplace.saveMyWebPushSubscription(subscription);
+    return subscription;
+  }
+
+  async function disableTrueWebPush() {
+    if (!webPushSupported()) return;
+
+    const registration = await navigator.serviceWorker.ready;
+    const subscription = await registration.pushManager.getSubscription();
+    if (!subscription) return;
+
+    const endpoint = subscription.endpoint;
+
+    if (window.TutoMarketplace?.deleteMyWebPushSubscription) {
+      await window.TutoMarketplace.deleteMyWebPushSubscription(endpoint);
+    }
+
+    const unsubscribed = await subscription.unsubscribe();
+    if (!unsubscribed) throw new Error("The browser could not remove this push subscription.");
   }
 
   async function loadNotificationPreferences() {
-    updateBrowserNotificationStatus();
+    await updateBrowserNotificationStatus();
+
+    if (Notification.permission === "granted") {
+      try {
+        await syncExistingPushSubscription();
+        await updateBrowserNotificationStatus();
+      } catch (error) {
+        console.warn("Existing Web Push subscription could not be synced:", error);
+      }
+    }
+
     if (!window.TutoMarketplace?.getMyNotificationPreferences) return;
     try {
       const prefs = await window.TutoMarketplace.getMyNotificationPreferences();
@@ -68,18 +187,34 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   enableBrowserNotifications?.addEventListener("click", async () => {
+    const currentState = enableBrowserNotifications.dataset.pushState;
+    enableBrowserNotifications.disabled = true;
+
     try {
-      const permission = await Notification.requestPermission();
-      if (permission === "granted") {
-        localStorage.setItem("tutodemyBrowserNotifications", "enabled");
-        const registration = await navigator.serviceWorker.ready;
-        registration.active?.postMessage({ type: "TUTODEMY_NOTIFICATION_PERMISSION_READY" });
-        window.Tuto?.toast?.("Phone/browser alerts enabled on this device.");
+      if (currentState === "enabled") {
+        await disableTrueWebPush();
+        if (notificationPrefStatus) {
+          notificationPrefStatus.textContent = "Phone/browser push disabled on this device.";
+          notificationPrefStatus.classList.remove("error");
+        }
+        window.Tuto?.toast?.("Phone/browser push disabled on this device.");
+      } else {
+        await enableTrueWebPush();
+        if (notificationPrefStatus) {
+          notificationPrefStatus.textContent = "True phone/browser push is enabled on this device.";
+          notificationPrefStatus.classList.remove("error");
+        }
+        window.Tuto?.toast?.("Phone/browser push enabled.");
       }
     } catch (error) {
-      window.Tuto?.toast?.(error?.message || "Browser notifications could not be enabled.");
+      if (notificationPrefStatus) {
+        notificationPrefStatus.textContent = error?.message || "Phone/browser push could not be updated.";
+        notificationPrefStatus.classList.add("error");
+      }
+      window.Tuto?.toast?.(error?.message || "Phone/browser push could not be updated.");
+    } finally {
+      await updateBrowserNotificationStatus();
     }
-    updateBrowserNotificationStatus();
   });
 
   saveNotificationPreferences?.addEventListener("click", async () => {
