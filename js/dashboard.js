@@ -580,11 +580,19 @@
   }
 
   
+  
   function leaderboardPlaceMeta(rank) {
-    if (rank === 1) return { emoji: "🏆", label: "Champion", short: "#1" };
-    if (rank === 2) return { emoji: "🥈", label: "Second place", short: "#2" };
-    if (rank === 3) return { emoji: "🥉", label: "Third place", short: "#3" };
-    return { emoji: "🎓", label: `Rank #${rank}`, short: `#${rank}` };
+    if (rank === 1) return { emoji: "🏆", crown: "👑", label: "Champion", short: "#1", tier: "Gold" };
+    if (rank === 2) return { emoji: "🥈", crown: "", label: "Second place", short: "#2", tier: "Silver" };
+    if (rank === 3) return { emoji: "🥉", crown: "", label: "Third place", short: "#3", tier: "Bronze" };
+    return { emoji: "🎓", crown: "", label: `Rank #${rank}`, short: `#${rank}`, tier: "Ranked" };
+  }
+
+  function leaderboardInitials(name) {
+    const safe = String(name || "Study Owl").trim().replace(/\s+/g, " ");
+    const parts = safe.split(" ").filter(Boolean).slice(0, 2);
+    const initials = parts.map(part => part.charAt(0).toUpperCase()).join("");
+    return initials || "SO";
   }
 
   function renderLeaderboard(payload) {
@@ -596,8 +604,10 @@
     leaderboardState.loaded = true;
 
     setText("#leaderboard-track-label", `${data.trackLabel} · ${data.subject}`);
-    const status = document.querySelector("#leaderboard-status"); if (status) status.hidden = true;
-    const content = document.querySelector("#leaderboard-content"); if (content) content.hidden = false;
+    const status = document.querySelector("#leaderboard-status");
+    if (status) status.hidden = true;
+    const content = document.querySelector("#leaderboard-content");
+    if (content) content.hidden = false;
 
     const weekSelect = document.querySelector("#leaderboard-week-select");
     if (weekSelect) weekSelect.value = String(data.weekOffset);
@@ -617,7 +627,9 @@
     const nameInput = document.querySelector("#leaderboard-display-name");
     if (nameInput && document.activeElement !== nameInput) nameInput.value = data.me.customName;
 
-    const range = data.weekStart && data.weekEnd ? displayDateRange(data.weekStart, data.weekEnd) : (data.weekOffset ? "Last week" : "This week");
+    const range = data.weekStart && data.weekEnd
+      ? displayDateRange(data.weekStart, data.weekEnd)
+      : (data.weekOffset ? "Last week" : "This week");
     setText("#leaderboard-list-title", `${range} · ${data.subject}`);
     setText("#leaderboard-participant-count", `${data.participantCount.toLocaleString("en-PH")} eligible`);
 
@@ -644,6 +656,7 @@
     if (podium) {
       if (data.leaderboardVisible && data.topTen.length) {
         podium.hidden = false;
+
         const podiumRows = data.topTen
           .filter(row => row.rank <= 3)
           .sort((a, b) => {
@@ -653,17 +666,24 @@
 
         podium.innerHTML = podiumRows.map(row => {
           const meta = leaderboardPlaceMeta(row.rank);
+          const stars = row.rank === 1 ? "★★★" : row.rank === 2 ? "★★" : "★";
           return `<article class="leaderboard-podium-card place-${row.rank}${row.isMe ? ' is-me' : ''}">
-            <div class="leaderboard-podium-top">
-              <span class="leaderboard-podium-rank">${escapeHtml(meta.short)}</span>
-            </div>
+            ${meta.crown ? `<div class="leaderboard-podium-crown" aria-hidden="true">${meta.crown}</div>` : ``}
+            <div class="leaderboard-podium-rank">${escapeHtml(meta.short)}</div>
+            <div class="leaderboard-podium-avatar">${escapeHtml(leaderboardInitials(row.displayName))}</div>
             <div class="leaderboard-podium-medal" aria-hidden="true">${meta.emoji}</div>
-            <div class="leaderboard-podium-name">${escapeHtml(row.displayName)}${row.isMe ? ' <small>(You)</small>' : ''}</div>
+            <div class="leaderboard-podium-title">${escapeHtml(meta.label)}</div>
+            <div class="leaderboard-podium-name">${escapeHtml(row.displayName)}${row.isMe ? ` <small>(You)</small>` : ``}</div>
+            <div class="leaderboard-podium-stars" aria-hidden="true">${stars}</div>
             <div class="leaderboard-podium-score">
               <b>${row.points.toLocaleString("en-PH")}</b>
               <span>study points</span>
             </div>
-            <div class="leaderboard-podium-meta">${row.questions.toLocaleString("en-PH")} questions · ${formatPercent(row.accuracy, row.questions > 0)} accuracy</div>
+            <div class="leaderboard-podium-meta">${row.questions.toLocaleString("en-PH")} questions · ${formatPercent(row.accuracy, row.questions > 0)} accuracy · ${row.activeDays} active day${row.activeDays === 1 ? "" : "s"}</div>
+            <div class="leaderboard-podium-stage">
+              <b>${escapeHtml(meta.tier)} podium</b>
+              <small>${row.attempts} attempt${row.attempts === 1 ? "" : "s"} this week</small>
+            </div>
           </article>`;
         }).join("");
       } else {
@@ -676,24 +696,22 @@
     if (list) {
       if (!data.leaderboardVisible) {
         const needed = Math.max(0, data.minimumParticipants - data.participantCount);
-        list.innerHTML = `<div class="leaderboard-cohort-building">
-          <div><b>Public leaderboard is warming up</b><small>${needed > 0 ? `${needed} more eligible opted-in learner${needed === 1 ? "" : "s"} needed for the podium and rankings.` : "More eligible opt-in activity is needed."}</small></div>
-        </div>`;
+        list.innerHTML = `<div class="leaderboard-cohort-building"><div><b>Public leaderboard is warming up</b><small>${needed > 0 ? `${needed} more eligible opted-in learner${needed === 1 ? "" : "s"} needed for the podium and rankings.` : "More eligible opt-in activity is needed."}</small></div></div>`;
       } else {
         list.innerHTML = data.topTen.map(row => {
           const meta = leaderboardPlaceMeta(row.rank);
           const badge = row.rank <= 3
-            ? `<span class="leaderboard-rank-badge top-${row.rank}">${meta.emoji}&nbsp;${escapeHtml(meta.short)}</span>`
+            ? `<span class="leaderboard-rank-badge top-${row.rank}">${meta.emoji} ${escapeHtml(meta.short)}</span>`
             : `<span class="leaderboard-rank-badge">${escapeHtml(meta.short)}</span>`;
           return `<article class="leaderboard-row ${row.isMe ? 'is-me' : ''} ${row.rank <= 3 ? 'is-top-three' : ''}">
             <div class="leaderboard-rank">${badge}</div>
             <div class="leaderboard-learner">
-              <b>${escapeHtml(row.displayName)}${row.isMe ? ' <small>(You)</small>' : ''}</b>
-              <small>${row.questions.toLocaleString("en-PH")} questions · ${formatPercent(row.accuracy, row.questions > 0)} accuracy · ${row.activeDays} active day${row.activeDays === 1 ? '' : 's'}</small>
+              <b>${escapeHtml(row.displayName)}${row.isMe ? ` <small>(You)</small>` : ``}</b>
+              <small>${row.questions.toLocaleString("en-PH")} questions · ${formatPercent(row.accuracy, row.questions > 0)} accuracy · ${row.activeDays} active day${row.activeDays === 1 ? "" : "s"}</small>
             </div>
             <div class="leaderboard-points">
               <b>${row.points.toLocaleString("en-PH")} pts</b>
-              <small>${row.attempts} attempt${row.attempts === 1 ? '' : 's'}</small>
+              <small>${row.attempts} attempt${row.attempts === 1 ? "" : "s"}</small>
             </div>
           </article>`;
         }).join("") || `<div class="empty-state">No eligible learners yet.</div>`;
