@@ -136,6 +136,27 @@
     }
   }
 
+
+  async function maybeShowDeviceNotification(item) {
+    if (!item?.title || !("Notification" in window) || !("serviceWorker" in navigator)) return;
+    if (Notification.permission !== "granted") return;
+    try {
+      if (localStorage.getItem("tutodemyBrowserNotifications") !== "enabled") return;
+      const registration = await navigator.serviceWorker.ready;
+      registration.active?.postMessage({
+        type: "TUTODEMY_SHOW_NOTIFICATION",
+        notification: {
+          title: item.title,
+          body: item.body || "Open TutoDemy to view the update.",
+          link: item.link || "dashboard.html",
+          tag: `tutodemy-${item.notification_type || "update"}-${item.booking_id || item.id || Date.now()}`
+        }
+      });
+    } catch (error) {
+      console.warn("Device notification could not be shown:", error);
+    }
+  }
+
   function relativeTime(value) {
     const date = new Date(value);
     if (Number.isNaN(date.getTime())) return "";
@@ -303,7 +324,10 @@
       && activeBooking === incoming.booking_id
       && incoming.notification_type === "new_message";
 
-    if (!alreadyHandled && isRecentUnread(incoming) && !viewingConversation) showLiveAlert(incoming);
+    if (!alreadyHandled && isRecentUnread(incoming) && !viewingConversation) {
+      showLiveAlert(incoming);
+      maybeShowDeviceNotification(incoming);
+    }
     await refresh({ quiet: true });
   }
 

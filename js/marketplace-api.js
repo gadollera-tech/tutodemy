@@ -672,6 +672,27 @@
     return error instanceof Error ? error : new Error(message);
   }
 
+
+  async function getMyNotificationPreferences() {
+    requireUser();
+    const { data, error } = await client().rpc("get_my_notification_preferences");
+    if (error) throw optionalNotificationError(error);
+    return data || {
+      email_booking_updates: true,
+      email_message_updates: false
+    };
+  }
+
+  async function saveMyNotificationPreferences(values = {}) {
+    requireUser();
+    const { data, error } = await client().rpc("set_my_notification_preferences", {
+      p_email_booking_updates: values.email_booking_updates !== false,
+      p_email_message_updates: Boolean(values.email_message_updates)
+    });
+    if (error) throw optionalNotificationError(error);
+    return data;
+  }
+
   async function getMyNotifications(limit = 30) {
     requireUser();
     const safeLimit = Math.max(1, Math.min(Number(limit) || 30, 100));
@@ -804,6 +825,8 @@
     unsubscribeRealtimeChannel,
     adminMessageReports,
     adminResolveMessageReport,
+    getMyNotificationPreferences,
+    saveMyNotificationPreferences,
     getMyNotifications,
     getUnreadNotificationCount,
     markNotificationRead,

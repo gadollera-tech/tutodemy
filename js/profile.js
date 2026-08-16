@@ -10,6 +10,102 @@ document.addEventListener("DOMContentLoaded", async () => {
   const cloudBadge = document.querySelector("#profile-cloud-badge");
   const lastSync = document.querySelector("#last-sync");
 
+
+  const notificationPrefStatus = document.querySelector("#notification-preference-status");
+  const emailBookingPref = document.querySelector("#pref-email-bookings");
+  const emailMessagePref = document.querySelector("#pref-email-messages");
+  const browserNotificationStatus = document.querySelector("#browser-notification-status");
+  const enableBrowserNotifications = document.querySelector("#enable-browser-notifications");
+  const saveNotificationPreferences = document.querySelector("#save-notification-preferences");
+
+  function browserAlertsEnabled() {
+    try { return localStorage.getItem("tutodemyBrowserNotifications") === "enabled"; }
+    catch { return false; }
+  }
+
+  function updateBrowserNotificationStatus() {
+    if (!browserNotificationStatus || !enableBrowserNotifications) return;
+
+    if (!("Notification" in window) || !("serviceWorker" in navigator)) {
+      browserNotificationStatus.textContent = "This browser does not support TutoDemy device alerts.";
+      enableBrowserNotifications.disabled = true;
+      return;
+    }
+
+    if (Notification.permission === "granted" && browserAlertsEnabled()) {
+      browserNotificationStatus.textContent = "Enabled on this device.";
+      enableBrowserNotifications.textContent = "Enabled";
+      enableBrowserNotifications.disabled = true;
+      return;
+    }
+
+    if (Notification.permission === "denied") {
+      browserNotificationStatus.textContent = "Blocked in your browser settings. Allow notifications for tutodemy.net to enable them.";
+      enableBrowserNotifications.textContent = "Blocked";
+      enableBrowserNotifications.disabled = true;
+      return;
+    }
+
+    browserNotificationStatus.textContent = "Not enabled on this device yet.";
+    enableBrowserNotifications.textContent = "Enable on this device";
+    enableBrowserNotifications.disabled = false;
+  }
+
+  async function loadNotificationPreferences() {
+    updateBrowserNotificationStatus();
+    if (!window.TutoMarketplace?.getMyNotificationPreferences) return;
+    try {
+      const prefs = await window.TutoMarketplace.getMyNotificationPreferences();
+      if (emailBookingPref) emailBookingPref.checked = prefs?.email_booking_updates !== false;
+      if (emailMessagePref) emailMessagePref.checked = Boolean(prefs?.email_message_updates);
+    } catch (error) {
+      console.warn("Notification preferences could not be loaded:", error);
+      if (notificationPrefStatus) {
+        notificationPrefStatus.textContent = error?.message || "Notification preferences are not enabled yet.";
+        notificationPrefStatus.classList.add("error");
+      }
+    }
+  }
+
+  enableBrowserNotifications?.addEventListener("click", async () => {
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        localStorage.setItem("tutodemyBrowserNotifications", "enabled");
+        const registration = await navigator.serviceWorker.ready;
+        registration.active?.postMessage({ type: "TUTODEMY_NOTIFICATION_PERMISSION_READY" });
+        window.Tuto?.toast?.("Phone/browser alerts enabled on this device.");
+      }
+    } catch (error) {
+      window.Tuto?.toast?.(error?.message || "Browser notifications could not be enabled.");
+    }
+    updateBrowserNotificationStatus();
+  });
+
+  saveNotificationPreferences?.addEventListener("click", async () => {
+    if (!window.TutoMarketplace?.saveMyNotificationPreferences) return;
+    try {
+      saveNotificationPreferences.disabled = true;
+      if (notificationPrefStatus) {
+        notificationPrefStatus.textContent = "Saving notification preferences…";
+        notificationPrefStatus.classList.remove("error");
+      }
+      await window.TutoMarketplace.saveMyNotificationPreferences({
+        email_booking_updates: Boolean(emailBookingPref?.checked),
+        email_message_updates: Boolean(emailMessagePref?.checked)
+      });
+      if (notificationPrefStatus) notificationPrefStatus.textContent = "Notification preferences saved.";
+      window.Tuto?.toast?.("Notification preferences saved.");
+    } catch (error) {
+      if (notificationPrefStatus) {
+        notificationPrefStatus.textContent = error?.message || "Notification preferences could not be saved.";
+        notificationPrefStatus.classList.add("error");
+      }
+    } finally {
+      saveNotificationPreferences.disabled = false;
+    }
+  });
+
   const configured = window.TutoAuth?.isConfigured?.();
   const user = window.TutoAuth?.getUser?.();
 
@@ -182,6 +278,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   window.addEventListener("tutodemy-sync-change", event => updateSyncStatus(event.detail));
 
   await loadProfile();
+  await loadNotificationPreferences();
   updateSyncStatus(window.TutoCloud.getStatus());
   refreshStats();
 });

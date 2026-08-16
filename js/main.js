@@ -510,7 +510,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
       const script = document.createElement("script");
-      script.src = "js/notifications.js?v=20260809-role1";
+      script.src = "js/notifications.js?v=20260816-booknotif1";
       script.async = true;
       script.dataset.tutodemyNotifications = "true";
       script.addEventListener("load", resolve, { once: true });
