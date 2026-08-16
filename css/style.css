@@ -2410,3 +2410,54 @@ code{background:rgba(116,132,194,.12);color:#0C046D}
     padding:40px 0;
   }
 }
+
+
+/* =========================================================
+   TutoDemy Practice Mobile Fix — restore text wrapping
+   2026-08-16
+   ========================================================= */
+
+/* Previous broad stimulus rules could force reading passages wider than the card.
+   Restore normal wrapping for text-based question stimuli while keeping SVG fixes available. */
+.stimulus-box{
+  overflow-y:visible;
+}
+
+.stimulus-box > :not(svg):not(img):not(canvas):not(.reason-seq):not(.reason-seq-hard){
+  min-width:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+}
+
+/* Reading passages / textual stimulus blocks */
+.stimulus-box p,
+.stimulus-box div,
+.stimulus-box section,
+.stimulus-box article,
+.stimulus-box span,
+.stimulus-box li{
+  max-width:100%;
+  white-space:normal !important;
+  overflow-wrap:anywhere;
+  word-break:normal;
+}
+
+/* Keep long passages comfortably readable on mobile */
+@media (max-width:560px){
+  .stimulus-box{
+    overflow-x:visible !important;
+  }
+
+  .stimulus-box > :not(svg):not(img):not(canvas):not(.reason-seq):not(.reason-seq-hard){
+    min-width:0 !important;
+    width:100% !important;
+  }
+
+  .stimulus-box p,
+  .stimulus-box div,
+  .stimulus-box section,
+  .stimulus-box article{
+    font-size:inherit;
+    line-height:1.7;
+  }
+}
