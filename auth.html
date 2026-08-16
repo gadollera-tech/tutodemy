@@ -20,17 +20,18 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Log In or Sign Up | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-brand1">
+  <link rel="stylesheet" href="css/style.css?v=20260816-ui8">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
   <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
+  <script defer src="js/captcha.js?v=20260816-ui8"></script>
   <script defer src="data/taxonomy.js"></script>
   <script defer src="data/philippines-locations.js"></script>
   <script defer src="js/main.js?v=20260809-tutorfix1"></script>
-  <script defer src="js/auth-page.js"></script>
+  <script defer src="js/auth-page.js?v=20260816-ui8"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="account">
@@ -72,6 +73,7 @@
               <form id="signin-form">
                 <label>Email<input type="email" name="email" autocomplete="email" required></label>
                 <label>Password<input type="password" name="password" autocomplete="current-password" minlength="8" required></label>
+                <div class="tuto-captcha-shell full" id="signin-captcha-shell" hidden><div class="tuto-captcha-widget" id="signin-captcha"></div></div>
                 <button class="button full" type="submit">Log in</button>
               </form>
               <button class="link-button" type="button" id="show-forgot">Forgot password?</button>
@@ -87,6 +89,8 @@
                 <label>Full name<input name="full_name" autocomplete="name" maxlength="100" required></label>
                 <label>Email<input type="email" name="email" autocomplete="email" required></label>
                 <label>Password<input type="password" name="password" autocomplete="new-password" minlength="8" required></label>
+                <label>Confirm password<input type="password" name="confirm_password" autocomplete="new-password" minlength="8" aria-describedby="signup-password-match" required><small class="password-match-hint" id="signup-password-match">Type the same password again.</small></label>
+                <div class="tuto-captcha-shell full" id="signup-captcha-shell" hidden><div class="tuto-captcha-widget" id="signup-captcha"></div></div>
                 <div id="learner-signup-fields" class="auth-subfields full">
                   <label>Student level<select name="student_level"><option value="">Prefer not to say yet</option><option>Elementary</option><option>Junior High</option><option>Senior High</option><option>College</option><option>CET Applicant</option></select></label>
                   <label>Target exam<select name="target_exam"><option value="">General academic support</option><option>UPCAT</option><option>DCAT</option><option>Other CET</option><option>DOST-SEI Scholarship Exam</option><option>School subjects</option></select></label>
@@ -108,7 +112,7 @@
 
             <div class="auth-panel" id="forgot-panel">
               <span class="eyebrow">PASSWORD RESET</span><h2>Send a recovery link.</h2>
-              <form id="forgot-form"><label>Email<input type="email" name="email" autocomplete="email" required></label><button class="button full" type="submit">Send recovery link</button></form>
+              <form id="forgot-form"><label>Email<input type="email" name="email" autocomplete="email" required></label><div class="tuto-captcha-shell full" id="forgot-captcha-shell" hidden><div class="tuto-captcha-widget" id="forgot-captcha"></div></div><button class="button full" type="submit">Send recovery link</button></form>
               <button class="link-button" type="button" id="back-signin">Back to login</button>
             </div>
 

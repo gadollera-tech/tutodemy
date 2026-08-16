@@ -20,14 +20,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>TutoDemy Learning PH | Tutors, Exam Prep &amp; Learning Resources</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-ui7">
+  <link rel="stylesheet" href="css/style.css?v=20260816-ui8">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
   <script defer src="js/marketplace-api.js?v=20260809-finance3"></script>
-  <script defer src="js/home-auth.js?v=20260816-ui7"></script>
+  <script defer src="js/captcha.js?v=20260816-ui8"></script>
+  <script defer src="js/home-auth.js?v=20260816-ui8"></script>
   <script defer src="js/main.js?v=20260809-tutorfix1"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
@@ -91,6 +92,14 @@
                   Password
                   <input type="password" name="password" autocomplete="new-password" minlength="8" required>
                 </label>
+                <label>
+                  Confirm password
+                  <input type="password" name="confirm_password" autocomplete="new-password" minlength="8" aria-describedby="home-password-match" required>
+                  <small class="password-match-hint" id="home-password-match">Type the same password again.</small>
+                </label>
+                <div class="tuto-captcha-shell" id="home-signup-captcha-shell" hidden>
+                  <div class="tuto-captcha-widget" id="home-signup-captcha"></div>
+                </div>
                 <label class="lp4-auth-consent">
                   <input type="checkbox" required>
                   <span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms of Use</a> and have read the <a href="privacy.html" target="_blank" rel="noopener">Privacy Notice</a>.</span>
@@ -117,6 +126,9 @@
                   Password
                   <input type="password" name="password" autocomplete="current-password" minlength="8" required>
                 </label>
+                <div class="tuto-captcha-shell" id="home-signin-captcha-shell" hidden>
+                  <div class="tuto-captcha-widget" id="home-signin-captcha"></div>
+                </div>
                 <button class="button full" type="submit" id="home-login-button">Log in</button>
               </form>
               <a class="lp4-auth-forgot" href="auth.html?tab=signin">Forgot password?</a>
