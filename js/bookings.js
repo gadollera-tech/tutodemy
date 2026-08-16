@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const list = document.querySelector("#booking-list");
   const alertBox = document.querySelector("#bookings-alert");
+  const payMongoReturnBanner = document.querySelector("#paymongo-return-banner");
   let bookings = [];
   let tutorMap = new Map();
   let reviewed = new Set();
@@ -34,18 +35,112 @@ document.addEventListener("DOMContentLoaded", async () => {
     history.replaceState({}, "", `${url.pathname}${url.search}${url.hash}`);
   }
 
-  function showPayMongoReturnMessage() {
-    if (!payMongoReturnState || !alertBox) return;
+  function returnedBooking() {
+    return bookings.find(
+      item =>
+        String(item.id) ===
+        String(payMongoReturnBookingId || "")
+    ) || null;
+  }
 
-    alertBox.hidden = false;
-    alertBox.classList.remove("error");
+  function renderPayMongoReturnBanner(
+    state = payMongoReturnState,
+    booking = returnedBooking()
+  ) {
+    if (!payMongoReturnBanner || !state) return;
 
-    if (payMongoReturnState === "success") {
-      alertBox.textContent =
-        "PayMongo checkout completed. Confirming the payment securely…";
-    } else if (payMongoReturnState === "cancelled") {
-      alertBox.textContent =
-        "PayMongo checkout was cancelled. No booking payment was confirmed.";
+    payMongoReturnBanner.hidden = false;
+    payMongoReturnBanner.className =
+      "paymongo-return-banner";
+
+    if (state === "success") {
+      const confirmed =
+        booking &&
+        ["paid", "session_delivered", "completed"].includes(
+          booking.status
+        );
+
+      if (confirmed) {
+        payMongoReturnBanner.classList.add(
+          "is-confirmed"
+        );
+
+        payMongoReturnBanner.innerHTML = `
+          <div class="paymongo-return-icon" aria-hidden="true">✓</div>
+          <div class="paymongo-return-copy">
+            <b>Payment confirmed by PayMongo</b>
+            <span>Your booking is paid and secured. You can coordinate the session with your tutor in Messages.</span>
+          </div>
+          ${booking ? `<a class="button button-small" href="messages.html?booking=${encodeURIComponent(booking.id)}">Open messages</a>` : ""}
+        `;
+        return;
+      }
+
+      payMongoReturnBanner.classList.add(
+        "is-processing"
+      );
+
+      payMongoReturnBanner.innerHTML = `
+        <div class="paymongo-return-spinner" aria-hidden="true"></div>
+        <div class="paymongo-return-copy">
+          <b>Payment completed — confirming securely</b>
+          <span>PayMongo is sending the verified payment webhook to TutoDemy. This usually takes only a moment.</span>
+        </div>
+        <button class="button button-outline button-small" id="check-paymongo-payment" type="button">Check status</button>
+      `;
+
+      payMongoReturnBanner
+        .querySelector("#check-paymongo-payment")
+        ?.addEventListener("click", async event => {
+          const button = event.currentTarget;
+          try {
+            button.disabled = true;
+            button.textContent = "Checking…";
+            await load({ quiet: true });
+            renderPayMongoReturnBanner(
+              "success",
+              returnedBooking()
+            );
+          } finally {
+            if (button.isConnected) {
+              button.disabled = false;
+              button.textContent = "Check status";
+            }
+          }
+        });
+
+      return;
+    }
+
+    if (state === "cancelled") {
+      payMongoReturnBanner.classList.add(
+        "is-cancelled"
+      );
+
+      payMongoReturnBanner.innerHTML = `
+        <div class="paymongo-return-icon" aria-hidden="true">↩</div>
+        <div class="paymongo-return-copy">
+          <b>Payment was not completed</b>
+          <span>Your booking remains unpaid. You can reopen PayMongo checkout whenever you're ready.</span>
+        </div>
+        ${booking ? `<button class="button button-outline button-small paymongo-scroll-to-booking" type="button" data-booking-id="${esc(booking.id)}">Return to payment</button>` : ""}
+      `;
+
+      payMongoReturnBanner
+        .querySelector(".paymongo-scroll-to-booking")
+        ?.addEventListener("click", event => {
+          const id =
+            event.currentTarget.dataset.bookingId;
+
+          document
+            .querySelector(
+              `.booking-item[data-id="${CSS.escape(id)}"]`
+            )
+            ?.scrollIntoView({
+              behavior: "smooth",
+              block: "center"
+            });
+        });
     }
   }
 
@@ -155,9 +250,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (isPaid) {
         panel.innerHTML = `
           <div class="payment-confirmed-card paymongo-confirmed-card">
-            <span>PAYMENT CONFIRMED</span>
-            <b>${money(payment.amount)}</b>
-            <p>Your booking payment is confirmed. Keep schedule and lesson coordination inside the private booking messages.</p>
+            <div class="paymongo-confirmed-mark" aria-hidden="true">✓</div>
+            <div>
+              <span>PAYMENT CONFIRMED</span>
+              <b>${money(payment.amount)}</b>
+              <p>PayMongo verified this payment. No receipt upload or admin payment approval is needed.</p>
+            </div>
           </div>`;
         return;
       }
@@ -184,11 +282,11 @@ document.addEventListener("DOMContentLoaded", async () => {
               ${payment.review_note ? `<p class="payment-review-note"><b>Previous payment submission:</b> ${esc(payment.review_note)}</p>` : ""}
 
               <button class="button paymongo-checkout-button" type="button">
-                Pay securely with PayMongo
+                Pay ${money(payment.amount)} securely
               </button>
 
               <p class="paymongo-checkout-status form-status" role="status" aria-live="polite"></p>
-              <small class="paymongo-trust-note">Payment status comes from PayMongo's verified server webhook—not from a screenshot or browser redirect.</small>
+              <small class="paymongo-trust-note">Checkout retries are safe. PayMongo verification—not a screenshot or return page—marks the booking paid.</small>
             </div>
           </section>`;
 
@@ -196,19 +294,49 @@ document.addEventListener("DOMContentLoaded", async () => {
         const status = panel.querySelector(".paymongo-checkout-status");
 
         button?.addEventListener("click", async () => {
+          const lockKey =
+            `tutodemy-paymongo-open:${booking.id}`;
+
+          const lastAttempt = Number(
+            sessionStorage.getItem(lockKey) || 0
+          );
+
+          if (
+            Number.isFinite(lastAttempt) &&
+            Date.now() - lastAttempt < 3500
+          ) {
+            status.textContent =
+              "Checkout is already opening. Please wait a moment.";
+            return;
+          }
+
           try {
+            sessionStorage.setItem(
+              lockKey,
+              String(Date.now())
+            );
+
             button.disabled = true;
             status.classList.remove("error");
-            status.textContent = "Opening secure PayMongo checkout…";
+            status.textContent =
+              "Creating secure PayMongo checkout…";
 
-            const checkout = await api.createPayMongoCheckout(booking.id);
+            const checkout =
+              await api.createPayMongoCheckout(
+                booking.id
+              );
 
-            status.textContent = "Redirecting to PayMongo…";
+            status.textContent =
+              "Redirecting to PayMongo…";
+
             location.assign(checkout.checkoutUrl);
           } catch (error) {
+            sessionStorage.removeItem(lockKey);
+
             status.textContent =
               error?.message ||
               "PayMongo checkout could not be opened. Please try again.";
+
             status.classList.add("error");
             button.disabled = false;
           }
@@ -305,6 +433,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       await render();
+
+      if (payMongoReturnState) {
+        renderPayMongoReturnBanner(
+          payMongoReturnState,
+          returnedBooking()
+        );
+      }
     } catch (error) {
       if (!quiet) {
         alertBox.hidden = false;
@@ -334,37 +469,73 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   window.addEventListener("beforeunload", () => clearTimeout(realtimeRefreshTimer));
 
-  showPayMongoReturnMessage();
   await load();
 
   if (payMongoReturnState === "success") {
-    // Webhook processing can finish a moment after PayMongo redirects back.
-    // Refresh a few times without forcing the learner to reload manually.
-    [1200, 3000, 6500].forEach(delay => {
-      setTimeout(() => load({ quiet: true }), delay);
-    });
+    const delays = [
+      1200,
+      2600,
+      4800,
+      8000,
+      12000,
+      18000
+    ];
+
+    for (const delay of delays) {
+      setTimeout(async () => {
+        await load({ quiet: true });
+
+        const booking = returnedBooking();
+        renderPayMongoReturnBanner(
+          "success",
+          booking
+        );
+
+        if (
+          booking &&
+          ["paid", "session_delivered", "completed"]
+            .includes(booking.status)
+        ) {
+          window.Tuto?.toast?.(
+            "Payment confirmed by PayMongo."
+          );
+          clearPaymentReturnQuery();
+        }
+      }, delay);
+    }
 
     setTimeout(() => {
-      const returnedBooking = bookings.find(
-        item => String(item.id) === String(payMongoReturnBookingId || "")
-      );
+      const booking = returnedBooking();
 
       if (
-        returnedBooking &&
-        ["paid", "session_delivered", "completed"].includes(returnedBooking.status)
+        booking &&
+        ["paid", "session_delivered", "completed"]
+          .includes(booking.status)
       ) {
-        alertBox.hidden = false;
-        alertBox.textContent = "Payment confirmed by PayMongo. Your booking is paid.";
-        window.Tuto?.toast?.("Payment confirmed by PayMongo.");
+        renderPayMongoReturnBanner(
+          "success",
+          booking
+        );
       } else {
-        alertBox.hidden = false;
-        alertBox.textContent =
-          "PayMongo checkout returned successfully. Payment confirmation may still be processing; this page will update automatically when the webhook is received.";
+        renderPayMongoReturnBanner(
+          "success",
+          booking
+        );
       }
 
       clearPaymentReturnQuery();
-    }, 7200);
-  } else if (payMongoReturnState === "cancelled") {
-    setTimeout(clearPaymentReturnQuery, 800);
+    }, 20000);
+  } else if (
+    payMongoReturnState === "cancelled"
+  ) {
+    renderPayMongoReturnBanner(
+      "cancelled",
+      returnedBooking()
+    );
+
+    setTimeout(
+      clearPaymentReturnQuery,
+      1200
+    );
   }
 });

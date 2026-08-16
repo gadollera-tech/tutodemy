@@ -8,6 +8,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   let bookings = [];
   let reports = [];
   let payouts = [];
+  let payMongoAlerts = {
+    duplicatePayments: [],
+    failedWebhooks: [],
+    counts: {
+      duplicatePayments: 0,
+      failedWebhooks: 0,
+      total: 0
+    }
+  };
   let overview = null;
   let overviewLoadedAt = null;
   let overviewLoading = false;
@@ -759,6 +768,149 @@ document.addEventListener("DOMContentLoaded", async () => {
     </article>`;
   }
 
+  function renderPayMongoAlerts() {
+    const host = document.querySelector(
+      "#admin-paymongo-alerts"
+    );
+
+    if (!host) return;
+
+    if (payMongoAlerts?.unavailable) {
+      host.innerHTML = `
+        <div class="paymongo-admin-setup-note">
+          PayMongo operational alerts are not installed yet.
+        </div>`;
+      return;
+    }
+
+    const duplicates = Array.isArray(
+      payMongoAlerts?.duplicatePayments
+    )
+      ? payMongoAlerts.duplicatePayments
+      : [];
+
+    const failed = Array.isArray(
+      payMongoAlerts?.failedWebhooks
+    )
+      ? payMongoAlerts.failedWebhooks
+      : [];
+
+    const total = duplicates.length + failed.length;
+
+    if (!total) {
+      host.innerHTML = `
+        <div class="paymongo-admin-healthy">
+          <span aria-hidden="true">✓</span>
+          <div>
+            <b>PayMongo operational status: clear</b>
+            <small>No unresolved duplicate-payment or failed-webhook alerts.</small>
+          </div>
+        </div>`;
+      return;
+    }
+
+    const duplicateCards = duplicates.map(item => `
+      <article class="paymongo-admin-alert paymongo-admin-alert-critical">
+        <div class="paymongo-admin-alert-head">
+          <div>
+            <span class="paymongo-admin-alert-label">Possible duplicate payment</span>
+            <b>${esc(item.learner_name_snapshot || "Learner")} → ${esc(item.tutor_name_snapshot || "Tutor")}</b>
+          </div>
+          <strong>${money(Number(item.amount_centavos || 0) / 100)}</strong>
+        </div>
+
+        <dl class="paymongo-admin-alert-meta">
+          <div><dt>Booking</dt><dd>${esc(item.booking_id)}</dd></div>
+          <div><dt>Reference</dt><dd>${esc(item.reference_number || "—")}</dd></div>
+          <div><dt>Payment ID</dt><dd>${esc(item.payment_id || "—")}</dd></div>
+          <div><dt>Mode</dt><dd>${item.livemode ? "LIVE" : "TEST"}</dd></div>
+        </dl>
+
+        <p>A different successful PayMongo payment reached a booking that was already paid. The booking was not fulfilled twice, but the extra payment needs financial review.</p>
+
+        <button
+          class="button button-outline button-small review-paymongo-alert"
+          type="button"
+          data-alert-kind="duplicate_payment"
+          data-alert-id="${esc(item.id)}">
+          Mark reviewed
+        </button>
+      </article>
+    `).join("");
+
+    const failedCards = failed.map(item => `
+      <article class="paymongo-admin-alert paymongo-admin-alert-warning">
+        <div class="paymongo-admin-alert-head">
+          <div>
+            <span class="paymongo-admin-alert-label">Webhook processing failed</span>
+            <b>${esc(item.event_type || "PayMongo webhook")}</b>
+          </div>
+          <strong>${item.livemode ? "LIVE" : "TEST"}</strong>
+        </div>
+
+        <dl class="paymongo-admin-alert-meta">
+          <div><dt>Reference</dt><dd>${esc(item.reference_number || "—")}</dd></div>
+          <div><dt>Checkout</dt><dd>${esc(item.checkout_session_id || "—")}</dd></div>
+          <div class="wide"><dt>Error</dt><dd>${esc(item.error_message || "Unknown processing error")}</dd></div>
+        </dl>
+
+        <p>Review the booking/payment before acknowledging this alert. Marking it reviewed does not replay the webhook.</p>
+
+        <button
+          class="button button-outline button-small review-paymongo-alert"
+          type="button"
+          data-alert-kind="failed_webhook"
+          data-alert-id="${esc(item.event_id)}">
+          Mark reviewed
+        </button>
+      </article>
+    `).join("");
+
+    host.innerHTML = `
+      <div class="paymongo-admin-alert-summary">
+        <b>${total} PayMongo alert${total === 1 ? "" : "s"} need review</b>
+        <small>These alerts never automatically refund, charge, or change a booking.</small>
+      </div>
+      <div class="paymongo-admin-alert-list">
+        ${duplicateCards}${failedCards}
+      </div>`;
+
+    host.querySelectorAll(
+      ".review-paymongo-alert"
+    ).forEach(button => button.addEventListener(
+      "click",
+      async () => {
+        const note = prompt(
+          "Optional admin note after reviewing this PayMongo alert:",
+          "Reviewed in PayMongo and TutoDemy."
+        );
+
+        if (note === null) return;
+
+        try {
+          button.disabled = true;
+          button.textContent = "Saving…";
+
+          await api.adminReviewPayMongoAlert(
+            button.dataset.alertKind,
+            button.dataset.alertId,
+            note
+          );
+
+          window.Tuto.toast("PayMongo alert marked reviewed.");
+          await loadAll({ manual: true });
+        } catch (error) {
+          showAdminAlert(
+            error?.message ||
+            "The PayMongo alert could not be updated."
+          );
+          button.disabled = false;
+          button.textContent = "Mark reviewed";
+        }
+      }
+    ));
+  }
+
   function renderBookings() {
     const list = document.querySelector("#admin-booking-list");
     list.innerHTML = bookings.map(bookingCard).join("") || `<div class="empty-state"><h3>No booking records yet.</h3></div>`;
@@ -946,6 +1098,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       ["Platform overview", () => api.adminPlatformOverview ? api.adminPlatformOverview() : Promise.reject(new Error("Admin Overview client method is unavailable."))],
       ["Tutor applications", () => api.adminPendingTutors?.()],
       ["Bookings and payments", () => api.adminBookings?.()],
+      ["PayMongo operational alerts", () => api.adminPayMongoAlerts?.()],
       ["Message reports", () => api.adminMessageReports?.()],
       ["Weekly payouts", () => api.adminWeeklyPayoutSummary?.()]
     ];
@@ -954,13 +1107,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     overview = results[0].status === "fulfilled" && results[0].value && typeof results[0].value === "object" ? results[0].value : null;
     tutors = results[1].status === "fulfilled" && Array.isArray(results[1].value) ? results[1].value : [];
     bookings = results[2].status === "fulfilled" && Array.isArray(results[2].value) ? results[2].value : [];
-    reports = results[3].status === "fulfilled" && Array.isArray(results[3].value) ? results[3].value : [];
-    payouts = results[4].status === "fulfilled" && Array.isArray(results[4].value) ? results[4].value : [];
+    payMongoAlerts = results[3].status === "fulfilled" && results[3].value && typeof results[3].value === "object"
+      ? results[3].value
+      : {
+          duplicatePayments: [],
+          failedWebhooks: [],
+          counts: { duplicatePayments: 0, failedWebhooks: 0, total: 0 }
+        };
+    reports = results[4].status === "fulfilled" && Array.isArray(results[4].value) ? results[4].value : [];
+    payouts = results[5].status === "fulfilled" && Array.isArray(results[5].value) ? results[5].value : [];
     overviewLoadedAt = overview ? new Date(overview.generated_at || Date.now()) : null;
     overviewLoading = false;
 
     renderOverview();
     renderTutors();
+    renderPayMongoAlerts();
     renderBookings();
     renderPayouts();
     renderReports();

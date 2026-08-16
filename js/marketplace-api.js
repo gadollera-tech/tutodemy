@@ -470,6 +470,79 @@
     return data || [];
   }
 
+  async function adminPayMongoAlerts(limit = 20) {
+    if (!state.admin && !await checkAdmin()) {
+      throw new Error("Administrator access required.");
+    }
+
+    const { data, error } = await client().rpc(
+      "admin_get_paymongo_payment_alerts",
+      {
+        p_limit: Math.min(
+          Math.max(Number(limit) || 20, 1),
+          100
+        )
+      }
+    );
+
+    if (error) {
+      const message = String(
+        error?.message || error?.details || ""
+      );
+
+      if (
+        /admin_get_paymongo_payment_alerts|schema cache|could not find the function|does not exist/i.test(
+          message
+        )
+      ) {
+        return {
+          duplicatePayments: [],
+          failedWebhooks: [],
+          counts: {
+            duplicatePayments: 0,
+            failedWebhooks: 0,
+            total: 0
+          },
+          unavailable: true
+        };
+      }
+
+      throw friendlyError(error);
+    }
+
+    return data || {
+      duplicatePayments: [],
+      failedWebhooks: [],
+      counts: {
+        duplicatePayments: 0,
+        failedWebhooks: 0,
+        total: 0
+      }
+    };
+  }
+
+  async function adminReviewPayMongoAlert(
+    kind,
+    alertId,
+    note = ""
+  ) {
+    if (!state.admin && !await checkAdmin()) {
+      throw new Error("Administrator access required.");
+    }
+
+    const { data, error } = await client().rpc(
+      "admin_review_paymongo_alert",
+      {
+        p_kind: String(kind || ""),
+        p_alert_id: String(alertId || ""),
+        p_note: String(note || "").trim()
+      }
+    );
+
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
   async function adminConfirmPayment(bookingId, method, reference) {
     const { data, error } = await client().rpc("admin_confirm_payment", {
       p_booking_id: bookingId,
@@ -906,6 +979,8 @@
     signedDocumentUrl,
     adminSetTutorStatus,
     adminBookings,
+    adminPayMongoAlerts,
+    adminReviewPayMongoAlert,
     adminConfirmPayment,
     adminCompleteBooking,
     getMyTutorFeePolicy,
