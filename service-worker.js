@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260816-podium1";
+const CACHE_VERSION = "tutodemy-20260816-podium2";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -6,7 +6,7 @@ const CORE_ASSETS = [
   "./index.html",
   "./offline.html",
   "./manifest.webmanifest",
-  "./css/style.css?v=20260816-podium1",
+  "./css/style.css?v=20260816-podium2",
   "./js/marketplace-api.js?v=20260809-finance3",
   "./js/captcha.js?v=20260816-ui10",
   "./js/home-auth.js?v=20260816-ui10",
@@ -17,7 +17,7 @@ const CORE_ASSETS = [
   "./js/tutor-onboarding.js?v=20260809-tutorfix1",
   "./admin.html",
   "./dashboard.html",
-  "./js/dashboard.js?v=20260816-podium1",
+  "./js/dashboard.js?v=20260816-podium2",
   "./js/admin.js?v=20260809-finance3",
   "./js/notifications.js?v=20260809-live1",
   "./js/pwa.js?v=20260809-pwa1",
