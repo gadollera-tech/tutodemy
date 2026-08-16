@@ -56,6 +56,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   async function updateBrowserNotificationStatus() {
     if (!browserNotificationStatus || !enableBrowserNotifications) return;
+    const pushDeviceCard = document.querySelector("#push-device-card");
+    pushDeviceCard?.classList.remove("is-active", "needs-activation", "is-blocked", "is-unavailable");
 
     if (!webPushSupported()) {
       browserNotificationStatus.textContent = window.isSecureContext
@@ -64,6 +66,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       enableBrowserNotifications.textContent = "Unavailable";
       enableBrowserNotifications.disabled = true;
       enableBrowserNotifications.dataset.pushState = "unavailable";
+      pushDeviceCard?.classList.add("is-unavailable");
       return;
     }
 
@@ -72,14 +75,16 @@ document.addEventListener("DOMContentLoaded", async () => {
       enableBrowserNotifications.textContent = "Unavailable";
       enableBrowserNotifications.disabled = true;
       enableBrowserNotifications.dataset.pushState = "unavailable";
+      pushDeviceCard?.classList.add("is-unavailable");
       return;
     }
 
     if (Notification.permission === "denied") {
-      browserNotificationStatus.textContent = "Blocked in browser settings. Allow notifications for tutodemy.net, then reload this page.";
-      enableBrowserNotifications.textContent = "Blocked";
+      browserNotificationStatus.textContent = "Phone alerts are recommended ON, but this browser is blocking them. Allow notifications for tutodemy.net, then reload.";
+      enableBrowserNotifications.textContent = "Blocked by browser";
       enableBrowserNotifications.disabled = true;
       enableBrowserNotifications.dataset.pushState = "blocked";
+      pushDeviceCard?.classList.add("is-blocked");
       return;
     }
 
@@ -87,25 +92,28 @@ document.addEventListener("DOMContentLoaded", async () => {
       const subscription = await currentPushSubscription();
 
       if (Notification.permission === "granted" && subscription) {
-        browserNotificationStatus.textContent = "True phone/browser push is enabled on this device.";
-        enableBrowserNotifications.textContent = "Disable on this device";
+        browserNotificationStatus.textContent = "ON — true phone/browser push is active on this device.";
+        enableBrowserNotifications.textContent = "Turn off on this device";
         enableBrowserNotifications.disabled = false;
         enableBrowserNotifications.dataset.pushState = "enabled";
+        pushDeviceCard?.classList.add("is-active");
         return;
       }
 
       browserNotificationStatus.textContent = Notification.permission === "granted"
-        ? "Permission granted. Tap to finish enabling push on this device."
-        : "Not enabled on this device yet.";
-      enableBrowserNotifications.textContent = "Enable on this device";
+        ? "Recommended ON — tap once to finish activating push on this device."
+        : "Recommended ON — one tap is required to activate push on this device.";
+      enableBrowserNotifications.textContent = "Turn on phone alerts";
       enableBrowserNotifications.disabled = false;
       enableBrowserNotifications.dataset.pushState = "disabled";
+      pushDeviceCard?.classList.add("needs-activation");
     } catch (error) {
       console.warn("Could not inspect Web Push subscription:", error);
-      browserNotificationStatus.textContent = "Could not check this device's push subscription.";
-      enableBrowserNotifications.textContent = "Try again";
+      browserNotificationStatus.textContent = "Could not confirm this device's push subscription.";
+      enableBrowserNotifications.textContent = "Try turning on";
       enableBrowserNotifications.disabled = false;
       enableBrowserNotifications.dataset.pushState = "disabled";
+      pushDeviceCard?.classList.add("needs-activation");
     }
   }
 
@@ -161,6 +169,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   async function loadNotificationPreferences() {
+    // Booking email is the account default. The backend also treats a missing
+    // preference row as email_booking_updates = true.
+    if (emailBookingPref && !emailBookingPref.dataset.loadedFromServer) {
+      emailBookingPref.checked = true;
+    }
+
     await updateBrowserNotificationStatus();
 
     if (Notification.permission === "granted") {
@@ -175,7 +189,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!window.TutoMarketplace?.getMyNotificationPreferences) return;
     try {
       const prefs = await window.TutoMarketplace.getMyNotificationPreferences();
-      if (emailBookingPref) emailBookingPref.checked = prefs?.email_booking_updates !== false;
+      if (emailBookingPref) {
+        emailBookingPref.checked = prefs?.email_booking_updates !== false;
+        emailBookingPref.dataset.loadedFromServer = "true";
+      }
       if (emailMessagePref) emailMessagePref.checked = Boolean(prefs?.email_message_updates);
     } catch (error) {
       console.warn("Notification preferences could not be loaded:", error);
@@ -197,14 +214,14 @@ document.addEventListener("DOMContentLoaded", async () => {
           notificationPrefStatus.textContent = "Phone/browser push disabled on this device.";
           notificationPrefStatus.classList.remove("error");
         }
-        window.Tuto?.toast?.("Phone/browser push disabled on this device.");
+        window.Tuto?.toast?.("Phone alerts turned off on this device.");
       } else {
         await enableTrueWebPush();
         if (notificationPrefStatus) {
           notificationPrefStatus.textContent = "True phone/browser push is enabled on this device.";
           notificationPrefStatus.classList.remove("error");
         }
-        window.Tuto?.toast?.("Phone/browser push enabled.");
+        window.Tuto?.toast?.("Phone alerts are ON for this device.");
       }
     } catch (error) {
       if (notificationPrefStatus) {
