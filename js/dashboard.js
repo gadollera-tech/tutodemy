@@ -342,6 +342,11 @@
     setText("#dash-week-questions", current.questions.toLocaleString("en-PH"));
     setText("#dash-week-questions-note", `${current.correct.toLocaleString("en-PH")} correct answer${current.correct === 1 ? "" : "s"}`);
     setText("#dash-week-accuracy", formatPercent(current.accuracy, current.questions > 0));
+    const accuracyRing = document.querySelector("#accuracy-ring");
+    if (accuracyRing) {
+      const accuracyValue = current.questions > 0 ? clamp(current.accuracy, 0, 100) : 0;
+      accuracyRing.style.setProperty("--ring-value", `${accuracyValue}%`);
+    }
     setText("#dash-week-accuracy-note", current.questions ? `${current.correct} of ${current.questions} answered correctly` : "No completed questions yet");
     setText("#dash-week-sessions", current.attempts.toLocaleString("en-PH"));
     setText("#dash-week-sessions-note", `${current.activeDays} active study day${current.activeDays === 1 ? "" : "s"}`);
@@ -368,7 +373,7 @@
         : "Start your streak by reviewing today.");
 
     const ring = document.querySelector("#streak-ring");
-    if (ring) ring.style.setProperty("--streak-progress", `${Math.min(100, summary.currentStreak * 14)}%`);
+    if (ring) ring.style.setProperty("--ring-value", `${Math.min(100, summary.currentStreak * 14)}%`);
 
     setText("#all-time-questions", summary.allTime.questions.toLocaleString("en-PH"));
     setText("#all-time-accuracy", formatPercent(summary.allTime.accuracy, summary.allTime.questions > 0));
