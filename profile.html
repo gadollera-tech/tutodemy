@@ -20,17 +20,17 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>Learner Profile | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-ui12">
+  <link rel="stylesheet" href="css/style.css?v=20260816-booknotif1">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
-  <script defer src="js/marketplace-api.js?v=20260809-live1"></script>
+  <script defer src="js/marketplace-api.js?v=20260816-booknotif1"></script>
   <script defer src="data/taxonomy.js"></script>
   <script defer src="data/philippines-locations.js"></script>
   <script defer src="js/main.js?v=20260816-ui12"></script>
-  <script defer src="js/profile.js"></script>
+  <script defer src="js/profile.js?v=20260816-booknotif1"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="account">
@@ -74,7 +74,44 @@
             <button class="button full" id="sync-now" type="button">Sync now</button>
             <small id="last-sync">Not synced yet</small>
           </section>
-          <section class="panel data-panel">
+          
+    <section class="panel notification-preferences-panel">
+      <span class="eyebrow">NOTIFICATIONS</span>
+      <h2>Important booking updates</h2>
+      <p>Choose how TutoDemy should alert you about booking requests, confirmations, cancellations, payments, and completed sessions.</p>
+
+      <div class="notification-pref-list">
+        <label class="notification-pref-row">
+          <span>
+            <b>Email booking updates</b>
+            <small>Recommended for important tutor and learner booking changes.</small>
+          </span>
+          <input id="pref-email-bookings" type="checkbox" checked>
+        </label>
+
+        <label class="notification-pref-row">
+          <span>
+            <b>Email new messages</b>
+            <small>Optional. Booking messages still appear in the notification bell.</small>
+          </span>
+          <input id="pref-email-messages" type="checkbox">
+        </label>
+
+        <div class="notification-device-row">
+          <div>
+            <b>Phone / browser alerts</b>
+            <small id="browser-notification-status">Check whether this device can show notifications.</small>
+          </div>
+          <button class="button button-outline" id="enable-browser-notifications" type="button">Enable on this device</button>
+        </div>
+      </div>
+
+      <button class="button full" id="save-notification-preferences" type="button">Save notification preferences</button>
+      <p class="form-status" id="notification-preference-status" role="status" aria-live="polite"></p>
+      <small class="notification-pref-note">Browser alerts need your device permission. Email delivery is handled securely from Supabase and never exposes the email-provider API key in the website.</small>
+    </section>
+
+<section class="panel data-panel">
             <span class="eyebrow">YOUR DATA</span><h2>Local copy and export</h2><p>A local copy is kept for resilience. On a shared device, log out after use.</p>
             <button class="button button-outline full" id="export-data" type="button">Export my local data</button>
             <a class="button button-outline full" href="dashboard.html">Open dashboard</a>

@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260816-podium2";
+const CACHE_VERSION = "tutodemy-20260816-booknotif1";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -6,11 +6,11 @@ const CORE_ASSETS = [
   "./index.html",
   "./offline.html",
   "./manifest.webmanifest",
-  "./css/style.css?v=20260816-podium2",
-  "./js/marketplace-api.js?v=20260809-finance3",
+  "./css/style.css?v=20260816-booknotif1",
+  "./js/marketplace-api.js?v=20260816-booknotif1",
   "./js/captcha.js?v=20260816-ui10",
   "./js/home-auth.js?v=20260816-ui10",
-  "./js/main.js?v=20260816-ui12",
+  "./js/main.js?v=20260816-booknotif1",
   "./tutor-dashboard.html",
   "./tutor-onboarding.html",
   "./js/tutor-dashboard.js?v=20260809-tutorfix1",
@@ -19,7 +19,7 @@ const CORE_ASSETS = [
   "./dashboard.html",
   "./js/dashboard.js?v=20260816-podium2",
   "./js/admin.js?v=20260809-finance3",
-  "./js/notifications.js?v=20260809-live1",
+  "./js/notifications.js?v=20260816-booknotif1",
   "./js/pwa.js?v=20260809-pwa1",
   "./assets/images/icon-192.png",
   "./assets/images/icon-512.png",
@@ -80,4 +80,41 @@ self.addEventListener("fetch", event => {
   if (["style", "script", "image", "font"].includes(destination) || /\.(?:css|js|png|jpg|jpeg|webp|svg|ico|woff2?|json)$/i.test(url.pathname)) {
     event.respondWith(staleWhileRevalidate(request));
   }
+});
+
+
+self.addEventListener("message", event => {
+  const data = event.data || {};
+  if (data.type !== "TUTODEMY_SHOW_NOTIFICATION") return;
+  const item = data.notification || {};
+  if (!item.title) return;
+
+  event.waitUntil(
+    self.registration.showNotification(item.title, {
+      body: item.body || "Open TutoDemy to view the update.",
+      icon: "./assets/images/icon-192.png",
+      badge: "./assets/images/icon-192.png",
+      tag: item.tag || "tutodemy-update",
+      renotify: true,
+      data: { link: item.link || "dashboard.html" }
+    })
+  );
+});
+
+self.addEventListener("notificationclick", event => {
+  event.notification.close();
+  const link = event.notification?.data?.link || "dashboard.html";
+  const target = new URL(link, self.location.origin).href;
+
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(clients => {
+      for (const client of clients) {
+        if (client.url.startsWith(self.location.origin) && "focus" in client) {
+          client.navigate(target);
+          return client.focus();
+        }
+      }
+      return self.clients.openWindow ? self.clients.openWindow(target) : undefined;
+    })
+  );
 });
