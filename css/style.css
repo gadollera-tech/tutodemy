@@ -2232,3 +2232,90 @@ code{background:rgba(116,132,194,.12);color:#0C046D}
     width:min(100%, 190px);
   }
 }
+
+
+/* =========================================================
+   TutoDemy UPCAT Reasoning V4 — fit full stimulus to width
+   2026-08-16
+   ========================================================= */
+
+/* The main reasoning stimulus should be fully visible at once.
+   Scale the top-level figure to the available card width. */
+.stimulus-box{
+  overflow-x:visible !important;
+  overflow-y:visible !important;
+  padding-bottom:0 !important;
+}
+
+.stimulus-box > *{
+  min-width:0 !important;
+}
+
+.stimulus-box > svg,
+.stimulus-box > img,
+.stimulus-box > canvas,
+.stimulus-box > .reason-seq,
+.stimulus-box > .reason-seq-hard{
+  display:block;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  height:auto !important;
+  max-height:none !important;
+  margin:0 auto;
+}
+
+/* Explicitly cancel the previous wide minimum that caused partial cutoff. */
+.stimulus-box .reason-seq-hard{
+  min-width:0 !important;
+}
+
+/* Keep inner nested SVG figures using their natural proportions. */
+.stimulus-box > svg svg{
+  width:auto !important;
+  height:auto !important;
+  max-width:none !important;
+}
+
+/* Bring answer visuals back to a balanced size. */
+.answer-option{
+  min-height:112px !important;
+}
+
+.answer-option .visual-choice{
+  overflow:visible !important;
+}
+
+.answer-option .visual-choice svg,
+.answer-option .visual-choice img,
+.answer-option .visual-choice canvas{
+  width:100% !important;
+  max-width:150px !important;
+  height:auto !important;
+  max-height:none !important;
+  margin:0;
+}
+
+@media (max-width:900px){
+  .answer-option .visual-choice svg,
+  .answer-option .visual-choice img,
+  .answer-option .visual-choice canvas{
+    max-width:140px !important;
+  }
+}
+
+@media (max-width:560px){
+  .stimulus-box{
+    padding:10px 8px !important;
+  }
+
+  .answer-option{
+    min-height:104px !important;
+  }
+
+  .answer-option .visual-choice svg,
+  .answer-option .visual-choice img,
+  .answer-option .visual-choice canvas{
+    max-width:128px !important;
+  }
+}
