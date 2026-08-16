@@ -1580,3 +1580,313 @@ code{background:rgba(116,132,194,.12);color:#0C046D}
     max-width:760px;
   }
 }
+
+
+/* =========================================================
+   TutoDemy UI7 — Inline landing-page account form
+   2026-08-16
+   ========================================================= */
+
+.home-v4 .lp4-hero-grid{
+  align-items:start;
+}
+
+.lp4-auth-card{
+  position:relative;
+  z-index:1;
+  width:100%;
+  max-width:660px;
+  justify-self:end;
+  background:rgba(255,255,255,.96);
+  border:1px solid rgba(12,4,109,.12);
+  border-radius:30px;
+  padding:clamp(18px,2vw,26px);
+  box-shadow:0 30px 90px rgba(12,4,109,.13);
+  backdrop-filter:blur(18px);
+}
+
+.lp4-auth-intro{
+  padding:2px 3px 18px;
+  border-bottom:1px solid rgba(79,77,78,.12);
+  margin-bottom:18px;
+}
+
+.lp4-auth-brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.lp4-auth-brand img{
+  width:54px;
+  height:54px;
+  flex:0 0 auto;
+  object-fit:contain;
+}
+
+.lp4-auth-brand h2,
+.lp4-auth-signed-in h2{
+  margin:4px 0 0;
+  color:var(--navy);
+  font-size:clamp(1.35rem,2vw,1.8rem);
+  line-height:1.12;
+  letter-spacing:-.025em;
+}
+
+.lp4-auth-intro>p{
+  margin:12px 0 0;
+  color:var(--muted);
+  line-height:1.58;
+  font-size:.88rem;
+}
+
+.lp4-auth-tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4px;
+  padding:5px;
+  margin-bottom:18px;
+  background:rgba(116,132,194,.12);
+  border:1px solid rgba(116,132,194,.13);
+  border-radius:14px;
+}
+
+.lp4-auth-tabs button{
+  min-height:46px;
+  border:0;
+  border-radius:10px;
+  background:transparent;
+  color:#6b6b78;
+  font:inherit;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.lp4-auth-tabs button.active{
+  background:#fff;
+  color:var(--navy);
+  box-shadow:0 5px 18px rgba(12,4,109,.09);
+}
+
+.lp4-auth-form{
+  display:grid;
+  gap:12px;
+}
+
+.lp4-auth-form>label:not(.lp4-auth-consent){
+  display:grid;
+  gap:6px;
+  color:var(--charcoal,#4F4D4E);
+  font-size:.76rem;
+  font-weight:900;
+}
+
+.lp4-auth-form input[type="text"],
+.lp4-auth-form input[type="email"],
+.lp4-auth-form input[type="password"],
+.lp4-auth-form input:not([type]){
+  width:100%;
+  min-height:48px;
+  padding:11px 13px;
+  border:1px solid rgba(79,77,78,.22);
+  border-radius:12px;
+  background:#fff;
+  color:var(--ink);
+  font:inherit;
+  outline:none;
+  transition:border-color .18s, box-shadow .18s;
+}
+
+.lp4-auth-form input:focus{
+  border-color:var(--periwinkle,#7484C2);
+  box-shadow:0 0 0 4px rgba(116,132,194,.16);
+}
+
+.lp4-auth-consent{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:9px;
+  align-items:start;
+  color:var(--muted);
+  font-size:.69rem;
+  line-height:1.5;
+}
+
+.lp4-auth-consent input{
+  width:17px;
+  height:17px;
+  margin-top:2px;
+  accent-color:var(--navy);
+}
+
+.lp4-auth-consent a,
+.lp4-auth-small a,
+.lp4-auth-forgot{
+  color:var(--navy);
+  font-weight:850;
+}
+
+.lp4-auth-small{
+  margin:12px 0 0;
+  color:var(--muted);
+  font-size:.7rem;
+  line-height:1.5;
+  text-align:center;
+}
+
+.lp4-auth-forgot{
+  display:inline-block;
+  margin-top:12px;
+  text-decoration:none;
+}
+
+.lp4-auth-status{
+  min-height:22px;
+  margin:12px 0 0;
+  color:var(--muted);
+  text-align:center;
+  font-size:.72rem;
+  line-height:1.45;
+}
+
+.lp4-auth-status.error{
+  color:var(--rose,#b4233c);
+}
+
+.lp4-auth-divider{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:16px 0 12px;
+  color:#999;
+  font-size:.68rem;
+}
+
+.lp4-auth-divider::before,
+.lp4-auth-divider::after{
+  content:"";
+  height:1px;
+  background:rgba(79,77,78,.16);
+  flex:1;
+}
+
+.lp4-auth-google{
+  width:100%;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  border:1px solid rgba(79,77,78,.18);
+  border-radius:12px;
+  background:#fff;
+  color:var(--navy);
+  font:inherit;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.lp4-auth-google b{
+  display:grid;
+  place-items:center;
+  width:25px;
+  height:25px;
+  border-radius:50%;
+  background:rgba(116,132,194,.12);
+}
+
+.lp4-auth-success,
+.lp4-auth-signed-in,
+.lp4-auth-unavailable{
+  text-align:center;
+}
+
+.lp4-auth-success{
+  padding:20px 10px 8px;
+}
+
+.lp4-auth-success-mark{
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  margin:0 auto 10px;
+  border-radius:50%;
+  background:rgba(229,146,46,.14);
+  color:var(--orange,#E5922E);
+  font-size:1.25rem;
+  font-weight:950;
+}
+
+.lp4-auth-success h3{
+  margin:0 0 7px;
+  color:var(--navy);
+  font-size:1.28rem;
+}
+
+.lp4-auth-success p,
+.lp4-auth-signed-in p,
+.lp4-auth-unavailable p{
+  color:var(--muted);
+  line-height:1.55;
+}
+
+.lp4-auth-signed-in{
+  padding:28px 8px 10px;
+}
+
+.lp4-auth-signed-in .button{
+  margin-top:8px;
+}
+
+.lp4-auth-unavailable{
+  padding:18px;
+  border-radius:14px;
+  background:rgba(229,146,46,.09);
+  color:var(--charcoal,#4F4D4E);
+}
+
+.lp4-auth-unavailable p{
+  margin-bottom:0;
+}
+
+@media (min-width:901px){
+  .home-v4 .lp4-hero-grid{
+    grid-template-columns:minmax(0,1fr) minmax(470px,1fr);
+    gap:clamp(38px,5vw,72px);
+  }
+}
+
+@media (max-width:900px){
+  .lp4-auth-card{
+    max-width:760px;
+    justify-self:stretch;
+  }
+}
+
+@media (max-width:560px){
+  .lp4-auth-card{
+    padding:15px;
+    border-radius:20px;
+  }
+
+  .lp4-auth-brand{
+    align-items:flex-start;
+  }
+
+  .lp4-auth-brand img{
+    width:46px;
+    height:46px;
+  }
+
+  .lp4-auth-tabs button{
+    min-height:44px;
+    font-size:.84rem;
+  }
+
+  .lp4-auth-form input[type="email"],
+  .lp4-auth-form input[type="password"],
+  .lp4-auth-form input:not([type]){
+    min-height:46px;
+  }
+}
