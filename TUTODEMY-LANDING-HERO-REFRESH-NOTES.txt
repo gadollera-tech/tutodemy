@@ -1,0 +1,28 @@
+TutoDemy Landing Hero Refresh
+Build: 20260816-landinghero1
+
+Headline:
+Prepare smarter.
+Learn with the right support.
+
+Body:
+Practice for UPCAT, DOST-SEI, and other exams with mock tests, track your progress,
+and connect with tutors when you need extra help.
+
+Buttons:
+Start Practicing Free
+Find a Tutor
+
+Support line:
+For students preparing for what’s next.
+
+Removed from the hero:
+- Explore reviewers sublink
+- Teach on TutoDemy sublink
+- Previous "Made for Filipino learners" line
+
+No backend or SQL changes.
+No private secrets included.
+
+Cache:
+tutodemy-20260816-landinghero1
