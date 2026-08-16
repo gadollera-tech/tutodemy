@@ -1,0 +1,19 @@
+TutoDemy UI6 — Public Header + Hero Balance
+
+Requested changes:
+- Removed the thin public announcement strip above the main navigation
+  ("UPCAT & CET preparation • DOST-SEI preparation • Admin-approved tutor marketplace").
+- The removal applies to public-facing pages only.
+- Learner, tutor, and admin workspace/status notes remain intact.
+- Enlarged the landing-page account/progress card on desktop and tablet.
+- Rebalanced the hero columns so the right side is more proportional to the large left headline.
+- Increased the account card padding, icon size, heading size, and row spacing slightly.
+- Kept the existing mobile stack behavior and made the stacked account card use more available width.
+- Main landing CSS cache version: 20260816-ui6
+- Service worker cache: tutodemy-20260816-ui6
+
+No Supabase SQL changes are required.
+
+GitHub upload:
+Extract the patch ZIP and upload/replace the included files using the same paths.
+After GitHub Pages deploys, hard-refresh once.
