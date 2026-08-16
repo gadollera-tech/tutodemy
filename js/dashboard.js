@@ -579,9 +579,18 @@
     leaderboardStatus(title, description, "warning");
   }
 
+  
+  function leaderboardPlaceMeta(rank) {
+    if (rank === 1) return { emoji: "🏆", label: "Champion", short: "#1" };
+    if (rank === 2) return { emoji: "🥈", label: "Second place", short: "#2" };
+    if (rank === 3) return { emoji: "🥉", label: "Third place", short: "#3" };
+    return { emoji: "🎓", label: `Rank #${rank}`, short: `#${rank}` };
+  }
+
   function renderLeaderboard(payload) {
     const data = normalizeLeaderboard(payload);
-    if (!data) return renderLeaderboardUnavailable("Leaderboard data could not be read", "Your Phase 4A progress and Phase 4B percentiles remain available.");
+    if (!data) return renderLeaderboardUnavailable("Leaderboard data could not be loaded.", "Please try refreshing this page again.");
+
     leaderboardState.weekOffset = data.weekOffset;
     leaderboardState.subject = data.subject;
     leaderboardState.loaded = true;
@@ -590,19 +599,25 @@
     const status = document.querySelector("#leaderboard-status"); if (status) status.hidden = true;
     const content = document.querySelector("#leaderboard-content"); if (content) content.hidden = false;
 
-    const weekSelect = document.querySelector("#leaderboard-week-select"); if (weekSelect) weekSelect.value = String(data.weekOffset);
+    const weekSelect = document.querySelector("#leaderboard-week-select");
+    if (weekSelect) weekSelect.value = String(data.weekOffset);
+
     const subjectSelect = document.querySelector("#leaderboard-subject-select");
     if (subjectSelect) {
       subjectSelect.innerHTML = data.subjectOptions.map(option => `<option value="${escapeHtml(option)}">${escapeHtml(option)}</option>`).join("");
-      if (![...subjectSelect.options].some(option => option.value === data.subject)) subjectSelect.insertAdjacentHTML("beforeend", `<option value="${escapeHtml(data.subject)}">${escapeHtml(data.subject)}</option>`);
+      if (![...subjectSelect.options].some(option => option.value === data.subject)) {
+        subjectSelect.insertAdjacentHTML("beforeend", `<option value="${escapeHtml(data.subject)}">${escapeHtml(data.subject)}</option>`);
+      }
       subjectSelect.value = data.subject;
     }
 
-    const optIn = document.querySelector("#leaderboard-opt-in"); if (optIn) optIn.checked = data.me.optIn;
+    const optIn = document.querySelector("#leaderboard-opt-in");
+    if (optIn) optIn.checked = data.me.optIn;
+
     const nameInput = document.querySelector("#leaderboard-display-name");
     if (nameInput && document.activeElement !== nameInput) nameInput.value = data.me.customName;
 
-    const range = data.weekStart && data.weekEnd ? displayDateRange(data.weekStart,data.weekEnd) : (data.weekOffset ? "Last week" : "This week");
+    const range = data.weekStart && data.weekEnd ? displayDateRange(data.weekStart, data.weekEnd) : (data.weekOffset ? "Last week" : "This week");
     setText("#leaderboard-list-title", `${range} · ${data.subject}`);
     setText("#leaderboard-participant-count", `${data.participantCount.toLocaleString("en-PH")} eligible`);
 
@@ -610,26 +625,78 @@
     if (myRank) {
       let headline = "Leaderboard is off";
       let copy = `Turn on participation if you want the alias ${data.me.displayName} to be eligible for public ranking.`;
+
       if (data.me.optIn && !data.me.eligible) {
-        headline = `${data.me.questions.toLocaleString("en-PH")} counted questions`;
-        copy = `Review ${data.me.questionsNeeded.toLocaleString("en-PH")} more question${data.me.questionsNeeded === 1 ? "" : "s"} this week to qualify.`;
-      } else if (data.me.optIn && data.me.eligible && data.me.rank != null) {
-        headline = `Your rank: #${data.me.rank}`;
-        copy = `${data.me.points.toLocaleString("en-PH")} points · ${data.me.questions.toLocaleString("en-PH")} counted questions · ${formatPercent(data.me.accuracy,true)} accuracy · ${data.me.activeDays} active day${data.me.activeDays === 1 ? "" : "s"}.`;
-      } else if (data.me.optIn && data.me.eligible) {
-        headline = "You qualify this week";
-        copy = `${data.me.points.toLocaleString("en-PH")} points. Your rank will appear once the minimum public cohort is available.`;
+        headline = "Keep reviewing to qualify";
+        copy = `${data.me.questionsNeeded.toLocaleString("en-PH")} more question${data.me.questionsNeeded === 1 ? "" : "s"} needed this week.`;
+      } else if (data.me.optIn && data.me.eligible && data.me.rank) {
+        headline = `You are ranked #${data.me.rank}`;
+        copy = `${data.me.points.toLocaleString("en-PH")} points · ${data.me.questions.toLocaleString("en-PH")} counted questions · ${formatPercent(data.me.accuracy, data.me.questions > 0)} accuracy`;
+      } else if (data.me.optIn && data.me.eligible && !data.leaderboardVisible) {
+        headline = "You're eligible";
+        copy = `${data.me.points.toLocaleString("en-PH")} points so far. Your public rank will appear once enough learners qualify.`;
       }
+
       myRank.innerHTML = `<span>${escapeHtml(data.me.displayName)}</span><b>${escapeHtml(headline)}</b><small>${escapeHtml(copy)}</small>`;
+    }
+
+    const podium = document.querySelector("#leaderboard-podium");
+    if (podium) {
+      if (data.leaderboardVisible && data.topTen.length) {
+        podium.hidden = false;
+        const podiumRows = data.topTen
+          .filter(row => row.rank <= 3)
+          .sort((a, b) => {
+            const order = {2: 1, 1: 2, 3: 3};
+            return (order[a.rank] || 99) - (order[b.rank] || 99);
+          });
+
+        podium.innerHTML = podiumRows.map(row => {
+          const meta = leaderboardPlaceMeta(row.rank);
+          return `<article class="leaderboard-podium-card place-${row.rank}${row.isMe ? ' is-me' : ''}">
+            <div class="leaderboard-podium-top">
+              <span class="leaderboard-podium-rank">${escapeHtml(meta.short)}</span>
+            </div>
+            <div class="leaderboard-podium-medal" aria-hidden="true">${meta.emoji}</div>
+            <div class="leaderboard-podium-name">${escapeHtml(row.displayName)}${row.isMe ? ' <small>(You)</small>' : ''}</div>
+            <div class="leaderboard-podium-score">
+              <b>${row.points.toLocaleString("en-PH")}</b>
+              <span>study points</span>
+            </div>
+            <div class="leaderboard-podium-meta">${row.questions.toLocaleString("en-PH")} questions · ${formatPercent(row.accuracy, row.questions > 0)} accuracy</div>
+          </article>`;
+        }).join("");
+      } else {
+        podium.hidden = true;
+        podium.innerHTML = "";
+      }
     }
 
     const list = document.querySelector("#leaderboard-list");
     if (list) {
       if (!data.leaderboardVisible) {
-        const needed = Math.max(0,data.minimumParticipants-data.participantCount);
-        list.innerHTML = `<div class="leaderboard-cohort-building"><span aria-hidden="true">◌</span><div><b>Leaderboard cohort is still building</b><small>${needed ? `${needed} more eligible opt-in learner${needed === 1 ? " is" : "s are"} needed before public ranks appear.` : "More eligible opt-in activity is needed."}</small></div></div>`;
+        const needed = Math.max(0, data.minimumParticipants - data.participantCount);
+        list.innerHTML = `<div class="leaderboard-cohort-building">
+          <div><b>Public leaderboard is warming up</b><small>${needed > 0 ? `${needed} more eligible opted-in learner${needed === 1 ? "" : "s"} needed for the podium and rankings.` : "More eligible opt-in activity is needed."}</small></div>
+        </div>`;
       } else {
-        list.innerHTML = data.topTen.map(row => `<article class="leaderboard-row ${row.isMe ? "is-me" : ""}"><span class="leaderboard-rank">${row.rank <= 3 ? ["🥇","🥈","🥉"][row.rank-1] : `#${row.rank}`}</span><div class="leaderboard-learner"><b>${escapeHtml(row.displayName)}${row.isMe ? " · You" : ""}</b><small>${row.questions.toLocaleString("en-PH")} questions · ${formatPercent(row.accuracy,true)} · ${row.activeDays} active day${row.activeDays === 1 ? "" : "s"}</small></div><div class="leaderboard-points"><b>${row.points.toLocaleString("en-PH")}</b><small>points</small></div></article>`).join("") || `<div class="empty-state">No eligible learners yet.</div>`;
+        list.innerHTML = data.topTen.map(row => {
+          const meta = leaderboardPlaceMeta(row.rank);
+          const badge = row.rank <= 3
+            ? `<span class="leaderboard-rank-badge top-${row.rank}">${meta.emoji}&nbsp;${escapeHtml(meta.short)}</span>`
+            : `<span class="leaderboard-rank-badge">${escapeHtml(meta.short)}</span>`;
+          return `<article class="leaderboard-row ${row.isMe ? 'is-me' : ''} ${row.rank <= 3 ? 'is-top-three' : ''}">
+            <div class="leaderboard-rank">${badge}</div>
+            <div class="leaderboard-learner">
+              <b>${escapeHtml(row.displayName)}${row.isMe ? ' <small>(You)</small>' : ''}</b>
+              <small>${row.questions.toLocaleString("en-PH")} questions · ${formatPercent(row.accuracy, row.questions > 0)} accuracy · ${row.activeDays} active day${row.activeDays === 1 ? '' : 's'}</small>
+            </div>
+            <div class="leaderboard-points">
+              <b>${row.points.toLocaleString("en-PH")} pts</b>
+              <small>${row.attempts} attempt${row.attempts === 1 ? '' : 's'}</small>
+            </div>
+          </article>`;
+        }).join("") || `<div class="empty-state">No eligible learners yet.</div>`;
       }
     }
 
@@ -637,9 +704,10 @@
     if (method) {
       method.hidden = false;
       const scoring = data.scoring || {};
-      method.innerHTML = `<b>How weekly study points work</b><p>${escapeHtml(scoring.description || "Points reward capped review activity, consistency, and a small accuracy bonus.")} Up to ${number(scoring.dailyQuestionCap || 75)} questions/day and ${number(scoring.weeklyQuestionCap || 350)} questions/week count toward points; a consistency day requires ${number(scoring.consistencyDayMinimum || 10)} questions. ${escapeHtml(data.privacyNote)}</p>`;
+      method.innerHTML = `<b>How weekly study points work</b><p>${escapeHtml(scoring.description || "Points reward capped review activity, consistency, and a small accuracy bonus.")} Up to ${Math.max(1, Math.round(number(scoring.dailyQuestionCap || 75))).toLocaleString("en-PH")} questions per day and ${Math.max(1, Math.round(number(scoring.weeklyQuestionCap || 350))).toLocaleString("en-PH")} per week count toward points. A consistency day needs at least ${Math.max(1, Math.round(number(scoring.consistencyDayMinimum || 10))).toLocaleString("en-PH")} questions. ${escapeHtml(data.privacyNote)}</p>`;
     }
   }
+
 
   async function loadCloudLeaderboard() {
     const client = window.TutoSupabase?.client; if (!client) throw new Error("Supabase client is unavailable.");
