@@ -99,6 +99,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   tabs.forEach(tab => tab.addEventListener("click", () => showPanel(tab.dataset.homeAuthTab)));
 
+  // Homepage defaults to Log in. Any "Create Free Account" CTA that points to
+  // #home-auth-card opens the signup tab before scrolling to the form.
+  document.querySelectorAll('a[href="#home-auth-card"]').forEach(link => {
+    link.addEventListener("click", () => showPanel("signup"));
+  });
+
+  // Keep Log in as the default state on a normal homepage visit.
+  showPanel("signin");
+
   signupForm?.addEventListener("submit", async event => {
     event.preventDefault();
     if (!signupButton) return;
