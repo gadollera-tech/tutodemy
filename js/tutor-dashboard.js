@@ -17,6 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const esc = value => window.Tuto.escape(value);
   const money = value => window.Tuto.money(value);
+
+  function setTextIfPresent(selector, value) {
+    const element = document.querySelector(selector);
+    if (element) element.textContent = value ?? "";
+  }
   const labels = {
     requested: "New request",
     accepted: "Accepted — awaiting payment",
@@ -224,8 +229,8 @@ document.addEventListener("DOMContentLoaded", () => {
       profile = await api.getMyTutorProfile();
       if (!profile) {
         setApprovedWorkspace(false);
-        document.querySelector("#tutor-dashboard-title").textContent = "Start your tutor application.";
-        document.querySelector("#tutor-dashboard-intro").textContent = "Create your tutor profile and submit the required details for administrator review.";
+        setTextIfPresent("#tutor-dashboard-title", "Start your tutor application.");
+        setTextIfPresent("#tutor-dashboard-intro", "Create your tutor profile and submit the required details for administrator review.");
         profileStatus();
         alertBox.hidden = false;
         alertBox.innerHTML = `<b>Your tutor workspace is not active yet.</b> Complete your profile and submit your application to unlock booking, session, earnings, and payout tools. <a href="tutor-onboarding.html">Start application →</a>`;
@@ -241,15 +246,15 @@ document.addEventListener("DOMContentLoaded", () => {
           rejected: ["Your application needs revision.", profile.rejection_reason || "Review the administrator note, update your application, and submit it again."],
           suspended: ["Your tutor access is currently suspended.", "Contact TutoDemy support before accepting or managing tutoring sessions."]
         }[profile.status] || ["Your tutor workspace is not active yet.", "Complete the required application steps to continue."];
-        document.querySelector("#tutor-dashboard-title").textContent = copy[0];
-        document.querySelector("#tutor-dashboard-intro").textContent = copy[1];
+        setTextIfPresent("#tutor-dashboard-title", copy[0]);
+        setTextIfPresent("#tutor-dashboard-intro", copy[1]);
         alertBox.hidden = false;
         alertBox.innerHTML = `<b>${esc(copy[0])}</b> ${esc(copy[1])} <a href="tutor-onboarding.html">Open tutor profile →</a>`;
         return;
       }
 
-      document.querySelector("#tutor-dashboard-title").textContent = "Manage your profile, bookings, and earnings.";
-      document.querySelector("#tutor-dashboard-intro").textContent = "Respond to schedule requests, track payment confirmation, mark delivered sessions, and review your payout records.";
+      setTextIfPresent("#tutor-dashboard-title", "Manage your profile, bookings, and earnings.");
+      setTextIfPresent("#tutor-dashboard-intro", "Respond to schedule requests, track payment confirmation, mark delivered sessions, and review your payout records.");
       [bookings, ledger, feePolicy, payouts] = await Promise.all([
         api.getMyBookings("tutor"),
         api.getMyLedger(),

@@ -692,6 +692,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     list.querySelectorAll(".set-pending").forEach(button => button.addEventListener("click", () => action(button.closest(".admin-card"), "pending")));
   }
 
+  function adminBookingStatusLabel(booking) {
+    const status = String(booking?.status || "").toLowerCase();
+    const payment = String(booking?.payment_status || "").toLowerCase();
+
+    if (status === "completed") return "Completed";
+    if (status === "session_delivered") return "Delivered";
+    if (status === "cancelled") return "Cancelled";
+    if (status === "declined") return "Declined";
+    if (status === "refunded") return "Refunded";
+    if (status === "disputed") return "Under review";
+    if (payment === "paid" || status === "paid") return "Paid";
+    if (payment === "pending") return "Payment pending";
+    if (status === "accepted") return "Accepted";
+    if (status === "requested") return "Requested";
+    return status ? status.replaceAll("_", " ") : "Booking";
+  }
+
   function bookingCard(booking) {
     const hasProof = Boolean(booking.payment_proof_path);
     const pending = booking.status === "accepted" && booking.payment_status === "pending";
@@ -700,8 +717,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     return `<article class="admin-card booking-admin-card" data-booking-id="${esc(booking.id)}">
       <div class="admin-card-head">
         <div>
-          <span class="status-pill status-${esc(booking.status)}">${esc(booking.status)}</span>
-          <h3>${esc(booking.tutor_name_snapshot || "Tutor")} ↔ ${esc(booking.learner_name_snapshot || "Learner")}</h3>
+          <span class="status-pill status-${esc(booking.status)}">${esc(adminBookingStatusLabel(booking))}</span>
+          <h3>${esc(booking.tutor_name_snapshot || "Tutor")} <span class="booking-party-arrow">↔</span> ${esc(booking.learner_name_snapshot || "Learner")}</h3>
           <p>${new Date(booking.requested_start).toLocaleString()} • ${esc(booking.subject)} • ${esc(booking.mode)}</p>
         </div>
         <b>${money(booking.gross_amount)}</b>
