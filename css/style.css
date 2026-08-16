@@ -4677,3 +4677,318 @@ body[data-page="admin"] #main-content{
     width:100%;
   }
 }
+
+
+
+/* =========================================================
+   TutoDemy PayMongo Phase 5 — Production Polish
+   ========================================================= */
+
+.paymongo-return-banner{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  align-items:center;
+  gap:.8rem;
+  margin:0 0 .9rem;
+  padding:.85rem 1rem;
+  border:1px solid rgba(12,4,109,.14);
+  border-radius:15px;
+  background:#fff;
+}
+
+.paymongo-return-banner[hidden]{
+  display:none !important;
+}
+
+.paymongo-return-banner.is-processing{
+  background:#f7f6ff;
+  border-color:rgba(116,132,194,.34);
+}
+
+.paymongo-return-banner.is-confirmed{
+  background:#f0faf5;
+  border-color:rgba(42,143,91,.28);
+}
+
+.paymongo-return-banner.is-cancelled{
+  background:#fff9ef;
+  border-color:rgba(229,146,46,.32);
+}
+
+.paymongo-return-copy{
+  min-width:0;
+  display:grid;
+  gap:.16rem;
+}
+
+.paymongo-return-copy b{
+  color:var(--navy, #0C046D);
+  font-size:.95rem;
+}
+
+.paymongo-return-copy span{
+  color:var(--muted, #6e6b6c);
+  font-size:.82rem;
+  line-height:1.4;
+}
+
+.paymongo-return-icon{
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(12,4,109,.08);
+  color:var(--navy, #0C046D);
+  font-weight:900;
+}
+
+.is-confirmed .paymongo-return-icon{
+  background:rgba(42,143,91,.12);
+  color:#1f754a;
+}
+
+.is-cancelled .paymongo-return-icon{
+  background:rgba(229,146,46,.13);
+  color:#94590b;
+}
+
+.paymongo-return-spinner{
+  width:30px;
+  height:30px;
+  border:3px solid rgba(12,4,109,.13);
+  border-top-color:var(--navy, #0C046D);
+  border-radius:50%;
+  animation:tutodemy-paymongo-spin .8s linear infinite;
+}
+
+@keyframes tutodemy-paymongo-spin{
+  to{transform:rotate(360deg)}
+}
+
+.paymongo-confirmed-card{
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+}
+
+.paymongo-confirmed-mark{
+  display:grid;
+  place-items:center;
+  flex:0 0 auto;
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:rgba(42,143,91,.12);
+  color:#1f754a;
+  font-size:1.05rem;
+  font-weight:900;
+}
+
+.paymongo-confirmed-card > div:last-child{
+  min-width:0;
+  display:grid;
+  gap:.16rem;
+}
+
+.paymongo-confirmed-card b{
+  display:block;
+  color:var(--navy, #0C046D);
+  font-size:1.05rem;
+}
+
+/* Admin operational alerts */
+.paymongo-admin-alerts{
+  display:grid;
+  gap:.7rem;
+  margin:0 0 .9rem;
+}
+
+.paymongo-admin-healthy,
+.paymongo-admin-setup-note{
+  display:flex;
+  align-items:center;
+  gap:.65rem;
+  padding:.7rem .8rem;
+  border-radius:12px;
+  font-size:.82rem;
+}
+
+.paymongo-admin-healthy{
+  border:1px solid rgba(42,143,91,.18);
+  background:#f3faf6;
+}
+
+.paymongo-admin-healthy > span{
+  display:grid;
+  place-items:center;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:rgba(42,143,91,.12);
+  color:#1f754a;
+  font-weight:900;
+}
+
+.paymongo-admin-healthy > div{
+  display:grid;
+  gap:.08rem;
+}
+
+.paymongo-admin-healthy b{
+  color:#1f754a;
+}
+
+.paymongo-admin-healthy small{
+  color:#65736b;
+}
+
+.paymongo-admin-setup-note{
+  border:1px dashed rgba(116,132,194,.4);
+  background:#fafafe;
+  color:#666;
+}
+
+.paymongo-admin-alert-summary{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:.6rem;
+  flex-wrap:wrap;
+}
+
+.paymongo-admin-alert-summary b{
+  color:#8b3e29;
+}
+
+.paymongo-admin-alert-summary small{
+  color:#777;
+}
+
+.paymongo-admin-alert-list{
+  display:grid;
+  gap:.65rem;
+}
+
+.paymongo-admin-alert{
+  display:grid;
+  gap:.65rem;
+  padding:.85rem;
+  border-radius:14px;
+  background:#fff;
+}
+
+.paymongo-admin-alert-critical{
+  border:1px solid rgba(183,69,55,.3);
+  background:#fff7f5;
+}
+
+.paymongo-admin-alert-warning{
+  border:1px solid rgba(229,146,46,.33);
+  background:#fffaf1;
+}
+
+.paymongo-admin-alert-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:.8rem;
+}
+
+.paymongo-admin-alert-head > div{
+  min-width:0;
+  display:grid;
+  gap:.12rem;
+}
+
+.paymongo-admin-alert-head b{
+  color:var(--navy, #0C046D);
+  overflow-wrap:anywhere;
+}
+
+.paymongo-admin-alert-head > strong{
+  white-space:nowrap;
+  color:var(--ink, #4F4D4E);
+}
+
+.paymongo-admin-alert-label{
+  font-size:.67rem;
+  font-weight:900;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:#9a4d32;
+}
+
+.paymongo-admin-alert-meta{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:.45rem;
+  margin:0;
+}
+
+.paymongo-admin-alert-meta > div{
+  min-width:0;
+  padding:.5rem .58rem;
+  border-radius:9px;
+  background:rgba(255,255,255,.7);
+}
+
+.paymongo-admin-alert-meta .wide{
+  grid-column:span 2;
+}
+
+.paymongo-admin-alert-meta dt{
+  margin-bottom:.12rem;
+  color:#777;
+  font-size:.62rem;
+  font-weight:900;
+  text-transform:uppercase;
+}
+
+.paymongo-admin-alert-meta dd{
+  margin:0;
+  font-size:.78rem;
+  color:var(--navy, #0C046D);
+  overflow-wrap:anywhere;
+}
+
+.paymongo-admin-alert > p{
+  margin:0;
+  color:#6a625c;
+  font-size:.8rem;
+  line-height:1.45;
+}
+
+.paymongo-admin-alert .review-paymongo-alert{
+  width:max-content;
+}
+
+@media(max-width:760px){
+  .paymongo-return-banner{
+    grid-template-columns:auto minmax(0,1fr);
+  }
+
+  .paymongo-return-banner > .button{
+    grid-column:1 / -1;
+    width:100%;
+    justify-content:center;
+  }
+
+  .paymongo-admin-alert-meta{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:520px){
+  .paymongo-admin-alert-meta{
+    grid-template-columns:1fr;
+  }
+
+  .paymongo-admin-alert-meta .wide{
+    grid-column:auto;
+  }
+
+  .paymongo-admin-alert-head{
+    display:grid;
+  }
+}
