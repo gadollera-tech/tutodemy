@@ -20,15 +20,15 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>TutoDemy Learning PH | Tutors, Exam Prep &amp; Learning Resources</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-ui8">
+  <link rel="stylesheet" href="css/style.css?v=20260816-ui9">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
   <script defer src="js/marketplace-api.js?v=20260809-finance3"></script>
-  <script defer src="js/captcha.js?v=20260816-ui8"></script>
-  <script defer src="js/home-auth.js?v=20260816-ui8"></script>
+  <script defer src="js/captcha.js?v=20260816-ui9"></script>
+  <script defer src="js/home-auth.js?v=20260816-ui9"></script>
   <script defer src="js/main.js?v=20260809-tutorfix1"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
@@ -74,11 +74,11 @@
 
           <div class="lp4-auth-forms" id="home-auth-forms">
             <div class="lp4-auth-tabs" role="tablist" aria-label="Account actions">
-              <button class="active" type="button" data-home-auth-tab="signup" role="tab" aria-selected="true">Create account</button>
-              <button type="button" data-home-auth-tab="signin" role="tab" aria-selected="false">Log in</button>
+              <button class="active" type="button" data-home-auth-tab="signin" role="tab" aria-selected="true">Log in</button>
+              <button type="button" data-home-auth-tab="signup" role="tab" aria-selected="false">Create account</button>
             </div>
 
-            <section class="lp4-auth-panel active" id="home-signup-panel" data-home-auth-panel="signup">
+            <section class="lp4-auth-panel" id="home-signup-panel" data-home-auth-panel="signup" hidden>
               <form class="lp4-auth-form" id="home-signup-form">
                 <label>
                   Full name
@@ -116,7 +116,7 @@
               <p class="lp4-auth-small">This quick sign-up creates a learner account. Want to teach? <a href="for-tutors.html">Become a tutor</a>.</p>
             </section>
 
-            <section class="lp4-auth-panel" id="home-signin-panel" data-home-auth-panel="signin" hidden>
+            <section class="lp4-auth-panel active" id="home-signin-panel" data-home-auth-panel="signin">
               <form class="lp4-auth-form" id="home-signin-form">
                 <label>
                   Email
