@@ -2130,3 +2130,105 @@ code{background:rgba(116,132,194,.12);color:#0C046D}
     height:auto !important;
   }
 }
+
+
+/* =========================================================
+   TutoDemy UPCAT Reasoning V3 — full-figure render fix
+   2026-08-16
+   ========================================================= */
+
+/* Never clip reasoning stimuli; allow horizontal scroll when the figure strip is wider than the card. */
+.stimulus-box{
+  overflow-x:auto !important;
+  overflow-y:visible !important;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-gutter:stable both-edges;
+  padding-bottom:8px;
+}
+
+/* Let the inner visual content keep its natural width instead of shrinking and cutting the last figure. */
+.stimulus-box > *{
+  min-width:max-content;
+}
+
+/* Generic protection for SVG / image based reasoning stimuli. */
+.stimulus-box svg,
+.stimulus-box img,
+.stimulus-box canvas{
+  display:block;
+  width:auto !important;
+  max-width:none !important;
+  height:auto !important;
+  max-height:none !important;
+  overflow:visible !important;
+}
+
+/* Keep custom hard-sequence visuals large and fully visible. */
+.stimulus-box .reason-seq-hard{
+  width:auto !important;
+  max-width:none !important;
+  min-width:640px;
+  height:auto !important;
+}
+
+/* Answer choices should fit fully inside their cards and never be vertically cropped. */
+.answer-option{
+  align-items:center;
+  overflow:visible;
+  min-height:136px;
+}
+
+.answer-option .visual-choice{
+  width:100%;
+  min-width:0;
+  overflow-x:auto;
+  overflow-y:visible;
+  -webkit-overflow-scrolling:touch;
+}
+
+.answer-option .visual-choice svg,
+.answer-option .visual-choice img,
+.answer-option .visual-choice canvas{
+  display:block;
+  width:auto !important;
+  max-width:100% !important;
+  height:auto !important;
+  max-height:none !important;
+  object-fit:contain;
+  margin:0;
+}
+
+/* Prevent grid/flex wrappers inside options from clipping figure edges. */
+.answer-option .visual-choice > *{
+  overflow:visible !important;
+}
+
+@media (max-width:900px){
+  .stimulus-box{
+    padding:10px 10px 12px;
+  }
+
+  .stimulus-box .reason-seq-hard{
+    min-width:580px;
+  }
+}
+
+@media (max-width:560px){
+  .stimulus-box{
+    padding:10px 8px 12px;
+  }
+
+  .stimulus-box .reason-seq-hard{
+    min-width:520px;
+  }
+
+  .answer-option{
+    min-height:122px;
+  }
+
+  .answer-option .visual-choice svg,
+  .answer-option .visual-choice img,
+  .answer-option .visual-choice canvas{
+    width:min(100%, 190px);
+  }
+}
