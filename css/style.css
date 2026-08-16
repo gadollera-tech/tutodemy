@@ -3317,3 +3317,10 @@ body[data-page="dashboard"] .section{padding:34px 0 54px}
   .dashboard-bar-chart{min-height:210px}
   .accuracy-ring,.streak-ring{width:132px;height:132px}
 }
+
+
+
+/* TutoDemy UI12 — workspace announcement strip removed site-wide */
+.site-note {
+  display: none !important;
+}
