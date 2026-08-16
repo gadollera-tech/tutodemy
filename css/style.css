@@ -3775,3 +3775,62 @@ body[data-page="dashboard"] .section{padding:34px 0 54px}
     min-height: 72px;
   }
 }
+
+
+
+/* TutoDemy Booking Notifications Phase 1 */
+.notification-preferences-panel p {
+  color: var(--muted);
+}
+.notification-pref-list {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0;
+}
+.notification-pref-row,
+.notification-device-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(12, 4, 109, 0.09);
+}
+.notification-pref-row span b,
+.notification-device-row b {
+  display: block;
+  color: var(--navy);
+  margin-bottom: 3px;
+}
+.notification-pref-row span small,
+.notification-device-row small {
+  display: block;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.notification-pref-row input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--navy);
+}
+.notification-device-row .button {
+  white-space: nowrap;
+}
+.notification-pref-note {
+  display: block;
+  color: var(--muted);
+  line-height: 1.45;
+  margin-top: 10px;
+}
+@media (max-width: 560px) {
+  .notification-pref-row,
+  .notification-device-row {
+    grid-template-columns: 1fr;
+  }
+  .notification-pref-row input[type="checkbox"] {
+    justify-self: start;
+  }
+  .notification-device-row .button {
+    justify-self: start;
+  }
+}
