@@ -2378,3 +2378,35 @@ code{background:rgba(116,132,194,.12);color:#0C046D}
     max-width:122px !important;
   }
 }
+
+
+/* =========================================================
+   TutoDemy UI12 — shorter, less templated homepage
+   2026-08-16
+   ========================================================= */
+
+.lp4-feature.lp4-compact-feature{
+  padding:clamp(46px,6vw,72px) 0;
+}
+
+.lp4-feature-simple{
+  display:block;
+}
+
+.lp4-feature-simple .lp4-feature-copy{
+  max-width:780px;
+}
+
+.lp4-feature-simple .lp4-feature-copy h2{
+  max-width:720px;
+}
+
+.lp4-feature-simple .lp4-feature-copy p{
+  max-width:720px;
+}
+
+@media(max-width:560px){
+  .lp4-feature.lp4-compact-feature{
+    padding:40px 0;
+  }
+}
