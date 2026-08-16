@@ -3904,3 +3904,47 @@ body[data-page="dashboard"] .section{padding:34px 0 54px}
     margin-top:.65rem;
   }
 }
+
+
+
+/* TutoDemy Booking Expiry / Response Reliability */
+.status-pill.status-expired{
+  background:#fff3df;
+  color:#9b5b09;
+  border:1px solid rgba(229,146,46,.38);
+}
+.booking-item-expired{
+  border-color:rgba(229,146,46,.34);
+  background:linear-gradient(180deg,rgba(229,146,46,.045),#fff);
+}
+.booking-expired-note{
+  margin:.85rem 0 0;
+  padding:.8rem .9rem;
+  border-left:4px solid #E5922E;
+  border-radius:10px;
+  background:#fff8ea;
+  color:#5f4a2b;
+  line-height:1.45;
+}
+.booking-action-feedback{
+  margin:.75rem 0 0;
+  padding:.65rem .75rem;
+  border-radius:10px;
+}
+.booking-action-feedback.success{
+  background:#f0faf5;
+  color:#1d7048;
+}
+.booking-action-feedback.error{
+  background:#fff2f1;
+  color:#a13831;
+}
+@media (max-width:640px){
+  .booking-item .booking-actions{
+    align-items:stretch;
+  }
+  .booking-item .booking-actions .button{
+    width:100%;
+    justify-content:center;
+  }
+}
