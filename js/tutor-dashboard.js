@@ -29,6 +29,25 @@ document.addEventListener("DOMContentLoaded", () => {
     disputed: "Under review"
   };
 
+  function requestedStartTime(booking) {
+    const value = new Date(booking?.requested_start || "").getTime();
+    return Number.isFinite(value) ? value : null;
+  }
+
+  function isExpiredRequest(booking) {
+    const time = requestedStartTime(booking);
+    return booking?.status === "requested" && time !== null && time <= Date.now();
+  }
+
+  function bookingFeedback(card, message, isError = false) {
+    const feedback = card?.querySelector(".booking-action-feedback");
+    if (!feedback) return;
+    feedback.hidden = !message;
+    feedback.textContent = message || "";
+    feedback.classList.toggle("error", Boolean(isError));
+    feedback.classList.toggle("success", Boolean(message) && !isError);
+  }
+
   function maskMobile(value) {
     const digits = String(value || "").replace(/\D/g, "");
     if (digits.length !== 11) return digits || "Not provided";
@@ -97,22 +116,38 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function currentBookings() {
-    if (filter === "action") return bookings.filter(booking => booking.status === "requested" || booking.status === "paid");
+    if (filter === "action") {
+      return bookings.filter(booking =>
+        booking.status === "paid" ||
+        (booking.status === "requested" && !isExpiredRequest(booking))
+      );
+    }
     if (filter === "upcoming") return bookings.filter(booking => ["accepted", "paid", "session_delivered"].includes(booking.status));
     if (filter === "completed") return bookings.filter(booking => booking.status === "completed");
     return bookings;
   }
 
   function bookingCard(booking) {
-    const canRespond = booking.status === "requested";
+    const expired = isExpiredRequest(booking);
+    const canRespond = booking.status === "requested" && !expired;
+    const canCloseExpired = booking.status === "requested" && expired;
     const canDeliver = booking.status === "paid";
     const canMessage = ["accepted", "paid", "session_delivered", "completed", "disputed"].includes(booking.status);
+    const statusClass = expired ? "expired" : booking.status;
+    const statusLabel = expired ? "Expired request" : (labels[booking.status] || booking.status);
 
-    return `<article class="booking-item" data-id="${esc(booking.id)}">
-      <div class="booking-item-head"><div><span class="status-pill status-${esc(booking.status)}">${esc(labels[booking.status] || booking.status)}</span><h2>${esc(booking.learner_name_snapshot || "Learner booking")}</h2><p>${esc(booking.subject)} • ${esc(booking.mode)}</p></div><b>${money(booking.gross_amount)}</b></div>
+    return `<article class="booking-item${expired ? " booking-item-expired" : ""}" data-id="${esc(booking.id)}">
+      <div class="booking-item-head"><div><span class="status-pill status-${esc(statusClass)}">${esc(statusLabel)}</span><h2>${esc(booking.learner_name_snapshot || "Learner booking")}</h2><p>${esc(booking.subject)} • ${esc(booking.mode)}</p></div><b>${money(booking.gross_amount)}</b></div>
       <dl class="booking-details"><div><dt>Schedule</dt><dd>${new Date(booking.requested_start).toLocaleString()}</dd></div><div><dt>Duration</dt><dd>${booking.duration_minutes} minutes</dd></div><div><dt>Payment</dt><dd>${esc(booking.payment_status)}</dd></div>${booking.status === "completed" ? `<div><dt>Your net</dt><dd>${money(booking.tutor_net_amount)}</dd></div><div><dt>Commission</dt><dd>${booking.commission_rate}%</dd></div>` : ""}</dl>
       ${booking.learning_goal ? `<p class="booking-goal"><b>Learning goal:</b> ${esc(booking.learning_goal)}</p>` : ""}
-      <div class="booking-actions">${canMessage ? `<a class="button" href="messages.html?booking=${encodeURIComponent(booking.id)}">Open messages</a>` : ""}${canRespond ? `<button class="button accept-booking" type="button">Accept</button><button class="button button-outline decline-booking" type="button">Decline</button>` : ""}${canDeliver ? `<button class="button deliver-booking" type="button">Mark session delivered</button>` : ""}</div>
+      ${expired ? `<p class="booking-expired-note"><b>This schedule has already passed.</b> The request can no longer be accepted. Ask the learner to submit a new future schedule.</p>` : ""}
+      <div class="booking-actions">
+        ${canMessage ? `<a class="button" href="messages.html?booking=${encodeURIComponent(booking.id)}">Open messages</a>` : ""}
+        ${canRespond ? `<button class="button accept-booking" type="button">Accept</button><button class="button button-outline decline-booking" type="button">Decline</button>` : ""}
+        ${canCloseExpired ? `<button class="button button-outline decline-booking" data-expired="true" type="button">Close expired request</button>` : ""}
+        ${canDeliver ? `<button class="button deliver-booking" type="button">Mark session delivered</button>` : ""}
+      </div>
+      <p class="booking-action-feedback form-status" hidden aria-live="polite"></p>
     </article>`;
   }
 
@@ -121,28 +156,53 @@ document.addEventListener("DOMContentLoaded", () => {
     bookingList.innerHTML = rows.map(bookingCard).join("") || `<div class="empty-state"><h3>No bookings in this category.</h3></div>`;
 
     bookingList.querySelectorAll(".accept-booking,.decline-booking").forEach(button => button.addEventListener("click", async () => {
+      const card = button.closest(".booking-item");
+      const bookingId = card?.dataset.id;
+      const booking = bookings.find(row => String(row.id) === String(bookingId));
       const accept = button.classList.contains("accept-booking");
-      const note = prompt(accept ? "Optional note for the learner:" : "Reason for declining (recommended):", "") || "";
-      try {
+
+      if (accept && isExpiredRequest(booking)) {
+        bookingFeedback(card, "This schedule has already passed. Ask the learner to submit a new future schedule.", true);
         button.disabled = true;
-        await api.tutorRespond(button.closest(".booking-item").dataset.id, accept, note);
+        return;
+      }
+
+      const note = prompt(
+        accept
+          ? "Optional note for the learner:"
+          : (button.dataset.expired === "true"
+              ? "Optional note when closing this expired request:"
+              : "Reason for declining (recommended):"),
+        ""
+      ) || "";
+
+      try {
+        card?.querySelectorAll("button").forEach(item => item.disabled = true);
+        bookingFeedback(card, accept ? "Accepting booking…" : "Saving response…");
+        await api.tutorRespond(bookingId, accept, note);
+        window.Tuto?.toast?.(accept ? "Booking accepted." : "Booking request closed.");
         await load();
       } catch (error) {
-        alertBox.hidden = false;
-        alertBox.textContent = error.message;
-        button.disabled = false;
+        bookingFeedback(
+          card,
+          error?.message || "This booking response could not be saved.",
+          true
+        );
+        card?.querySelectorAll("button").forEach(item => item.disabled = false);
       }
     }));
 
     bookingList.querySelectorAll(".deliver-booking").forEach(button => button.addEventListener("click", async () => {
       if (!confirm("Confirm that the paid tutoring session was delivered?")) return;
+      const card = button.closest(".booking-item");
       try {
         button.disabled = true;
-        await api.markDelivered(button.closest(".booking-item").dataset.id);
+        bookingFeedback(card, "Saving delivered-session status…");
+        await api.markDelivered(card.dataset.id);
+        window.Tuto?.toast?.("Session marked delivered.");
         await load();
       } catch (error) {
-        alertBox.hidden = false;
-        alertBox.textContent = error.message;
+        bookingFeedback(card, error?.message || "The session status could not be updated.", true);
         button.disabled = false;
       }
     }));

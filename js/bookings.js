@@ -21,7 +21,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   const money = value => window.Tuto.money(value);
   const activeStatuses = new Set(["requested", "accepted", "paid", "session_delivered", "disputed"]);
 
+  function isExpiredRequest(booking) {
+    const time = new Date(booking?.requested_start || "").getTime();
+    return booking?.status === "requested" && Number.isFinite(time) && time <= Date.now();
+  }
+
   function statusText(booking) {
+    if (isExpiredRequest(booking)) {
+      return "Expired — choose a new schedule";
+    }
     if (booking.status === "accepted" && booking.payment_status === "pending") {
       return "Payment submitted — awaiting admin verification";
     }
@@ -56,6 +64,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   function bookingCard(booking) {
     const tutor = tutorMap.get(booking.tutor_id);
     const tutorName = tutor?.display_name || booking.tutor_name_snapshot || "Tutor profile";
+    const expired = isExpiredRequest(booking);
     const canCancel = ["requested", "accepted"].includes(booking.status) && booking.payment_status === "unpaid";
     const canReview = booking.status === "completed" && !reviewed.has(booking.id);
     const canMessage = ["accepted", "paid", "session_delivered", "completed", "disputed"].includes(booking.status);
@@ -77,10 +86,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       </dl>
       ${booking.learning_goal ? `<p class="booking-goal"><b>Learning goal:</b> ${esc(booking.learning_goal)}</p>` : ""}
       ${booking.tutor_response_note ? `<p class="booking-note-inline"><b>Tutor note:</b> ${esc(booking.tutor_response_note)}</p>` : ""}
+      ${expired ? `<p class="booking-expired-note"><b>This requested schedule has passed.</b> Cancel this request, then open the tutor profile and submit a new future schedule.</p>` : ""}
       ${paymentPanelShell(booking)}
       <div class="booking-actions">
         ${canMessage ? `<a class="button" href="messages.html?booking=${encodeURIComponent(booking.id)}">Open messages</a>` : ""}
-        ${canCancel ? `<button class="button button-outline cancel-booking" type="button">Cancel request</button>` : ""}
+        ${canCancel ? `<button class="button button-outline cancel-booking" type="button">${expired ? "Cancel expired request" : "Cancel request"}</button>` : ""}
         ${canReview ? `<button class="button review-booking" type="button">Leave verified review</button>` : ""}
       </div>
       ${canReview ? `<form class="inline-review-form" hidden>

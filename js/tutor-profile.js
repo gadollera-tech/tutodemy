@@ -12,6 +12,26 @@ document.addEventListener("DOMContentLoaded", async () => {
   const money = value => window.Tuto.money(value);
   const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
+  const BOOKING_LEAD_MS = 60 * 60 * 1000;
+
+  function nextBookingMinimum() {
+    return new Date(Math.ceil((Date.now() + BOOKING_LEAD_MS) / 60000) * 60000);
+  }
+
+  function toLocalDateTimeInput(date) {
+    const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    return local.toISOString().slice(0, 16);
+  }
+
+  function refreshBookingMinimum() {
+    const minimum = nextBookingMinimum();
+    if (form?.elements?.requested_start) {
+      form.elements.requested_start.min = toLocalDateTimeInput(minimum);
+    }
+    return minimum;
+  }
+
+
   function formatTime(value) {
     if (!value) return "";
     const [h,m] = value.split(":");
@@ -60,13 +80,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     const modes = (tutor.teaching_modes||[]).flatMap(x=>x==="Either"?["Online","In-person"]:[x]);
     document.querySelector("#booking-mode").innerHTML = [...new Set(modes)].map(x=>`<option>${esc(x)}</option>`).join("");
     form.elements.duration_minutes.value = String(tutor.session_duration_minutes || 60);
-    const minimum = new Date(Date.now()+60*60*1000); minimum.setMinutes(minimum.getMinutes()-minimum.getTimezoneOffset());
-    form.elements.requested_start.min = minimum.toISOString().slice(0,16);
+    refreshBookingMinimum();
     updateEstimate();
   }
 
   form.elements.duration_minutes.addEventListener("change", updateEstimate);
   form.elements.mode.addEventListener("change", () => document.querySelector("#location-field").hidden = form.elements.mode.value !== "In-person");
+  form.elements.requested_start.addEventListener("focus", refreshBookingMinimum);
+  form.elements.requested_start.addEventListener("click", refreshBookingMinimum);
   form.addEventListener("submit", async event => {
     event.preventDefault();
     if (!window.TutoAuth.getUser()) {
@@ -78,9 +99,27 @@ document.addEventListener("DOMContentLoaded", async () => {
       status.textContent = "Sending booking request…";
       status.classList.remove("error");
       const values = Object.fromEntries(new FormData(form).entries());
+      const minimum = refreshBookingMinimum();
       const local = new Date(values.requested_start);
+
+      if (!values.requested_start || Number.isNaN(local.getTime())) {
+        status.textContent = "Choose a valid session date and time.";
+        status.classList.add("error");
+        form.elements.requested_start.focus();
+        return;
+      }
+
+      if (local.getTime() < minimum.getTime()) {
+        status.textContent = "Please choose a future schedule at least 1 hour from now.";
+        status.classList.add("error");
+        form.elements.requested_start.value = "";
+        form.elements.requested_start.focus();
+        return;
+      }
+
       await api.createBooking({ ...values, tutor_id:tutorId, requested_start:local.toISOString() });
       form.reset();
+      refreshBookingMinimum();
       form.elements.duration_minutes.value = String(tutor.session_duration_minutes||60);
       updateEstimate();
       status.innerHTML = `Booking request sent. Track it in <a href="bookings.html">My Bookings</a>.`;
