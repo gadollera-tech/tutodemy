@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const signupForm = document.querySelector("#home-signup-form");
   const signinForm = document.querySelector("#home-signin-form");
   const signupButton = document.querySelector("#home-create-account-button");
+  const signupPassword = signupForm?.querySelector('input[name="password"]');
+  const signupConfirm = signupForm?.querySelector('input[name="confirm_password"]');
+  const passwordMatchHint = document.querySelector("#home-password-match");
   const loginButton = document.querySelector("#home-login-button");
   const success = document.querySelector("#home-signup-success");
   const successEmail = document.querySelector("#home-signup-success-email");
@@ -62,6 +65,30 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
+
+  await window.TutoCaptcha?.mount?.("home-signup", document.querySelector("#home-signup-captcha-shell"));
+  await window.TutoCaptcha?.mount?.("home-signin", document.querySelector("#home-signin-captcha-shell"));
+
+  const syncPasswordMatch = () => {
+    if (!signupPassword || !signupConfirm) return true;
+    const hasConfirm = Boolean(signupConfirm.value);
+    const matches = !hasConfirm || signupPassword.value === signupConfirm.value;
+    signupConfirm.setCustomValidity(matches ? "" : "Passwords do not match.");
+    if (passwordMatchHint) {
+      passwordMatchHint.textContent = !hasConfirm
+        ? "Type the same password again."
+        : matches
+          ? "Passwords match."
+          : "Passwords do not match.";
+      passwordMatchHint.classList.toggle("match", hasConfirm && matches);
+      passwordMatchHint.classList.toggle("mismatch", hasConfirm && !matches);
+    }
+    return hasConfirm && matches;
+  };
+
+  signupPassword?.addEventListener("input", syncPasswordMatch);
+  signupConfirm?.addEventListener("input", syncPasswordMatch);
+
   const currentUser = window.TutoAuth?.getUser?.();
   if (currentUser) {
     if (forms) forms.hidden = true;
@@ -77,6 +104,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!signupButton) return;
 
     const values = Object.fromEntries(new FormData(event.currentTarget).entries());
+    if (values.password !== values.confirm_password || !syncPasswordMatch()) {
+      setStatus("Passwords do not match. Please type the same password twice.", true);
+      signupConfirm?.focus();
+      return;
+    }
+    if (!window.TutoCaptcha?.requireToken?.("home-signup")) {
+      setStatus("Please complete the human verification first.", true);
+      return;
+    }
+    const captchaToken = window.TutoCaptcha?.getToken?.("home-signup") || "";
     signupButton.disabled = true;
     signupButton.textContent = "Creating account…";
     setStatus("Creating your account…");
@@ -86,6 +123,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       email: values.email,
       password: values.password,
       options: {
+        captchaToken,
         emailRedirectTo: redirectTo,
         data: {
           full_name: values.full_name,
@@ -99,6 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
+    window.TutoCaptcha?.reset?.("home-signup");
     signupButton.disabled = false;
     signupButton.textContent = "Create free account";
 
@@ -125,15 +164,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!loginButton) return;
 
     const values = Object.fromEntries(new FormData(event.currentTarget).entries());
+    if (!window.TutoCaptcha?.requireToken?.("home-signin")) {
+      setStatus("Please complete the human verification first.", true);
+      return;
+    }
+    const captchaToken = window.TutoCaptcha?.getToken?.("home-signin") || "";
     loginButton.disabled = true;
     loginButton.textContent = "Logging in…";
     setStatus("Logging in…");
 
     const { error } = await client.auth.signInWithPassword({
       email: values.email,
-      password: values.password
+      password: values.password,
+      options: { captchaToken }
     });
 
+    window.TutoCaptcha?.reset?.("home-signin");
     loginButton.disabled = false;
     loginButton.textContent = "Log in";
 

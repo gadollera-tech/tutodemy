@@ -8,6 +8,11 @@ window.TUTODEMY_CONFIG = {
   supabaseAnonKey: "sb_publishable_pZqbKlhJqyYnDEJ2V1xdHg_NUNQeEN3",
   googleOAuthEnabled: false,
 
+  // Optional Supabase Auth CAPTCHA protection.
+  // Paste ONLY the public hCaptcha Sitekey here. Never place the hCaptcha Secret key in this file.
+  // Leave blank until hCaptcha is configured in the Supabase Auth dashboard.
+  hcaptchaSiteKey: "",
+
   // Optional public integrations.
   googleFormEmbedUrl: "",
   googleAppsScriptEndpoint: "",

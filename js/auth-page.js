@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const signupSuccess = document.querySelector("#signup-success");
   const signupSuccessEmail = document.querySelector("#signup-success-email");
   const provinceSelect = document.querySelector("#signup-province");
+  const signupPassword = signupForm?.querySelector('input[name="password"]');
+  const signupConfirm = signupForm?.querySelector('input[name="confirm_password"]');
+  const signupPasswordHint = document.querySelector("#signup-password-match");
 
   const setStatus = (message, isError = false) => {
     status.textContent = message;
@@ -39,6 +42,30 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
   setup.hidden = true;
   forms.hidden = false;
+
+
+  await window.TutoCaptcha?.mount?.("signin", document.querySelector("#signin-captcha-shell"));
+  await window.TutoCaptcha?.mount?.("signup", document.querySelector("#signup-captcha-shell"));
+  await window.TutoCaptcha?.mount?.("forgot", document.querySelector("#forgot-captcha-shell"));
+
+  const syncSignupPasswordMatch = () => {
+    if (!signupPassword || !signupConfirm) return true;
+    const hasConfirm = Boolean(signupConfirm.value);
+    const matches = !hasConfirm || signupPassword.value === signupConfirm.value;
+    signupConfirm.setCustomValidity(matches ? "" : "Passwords do not match.");
+    if (signupPasswordHint) {
+      signupPasswordHint.textContent = !hasConfirm
+        ? "Type the same password again."
+        : matches
+          ? "Passwords match."
+          : "Passwords do not match.";
+      signupPasswordHint.classList.toggle("match", hasConfirm && matches);
+      signupPasswordHint.classList.toggle("mismatch", hasConfirm && !matches);
+    }
+    return hasConfirm && matches;
+  };
+  signupPassword?.addEventListener("input", syncSignupPasswordMatch);
+  signupConfirm?.addEventListener("input", syncSignupPasswordMatch);
 
   tabs.forEach(tab => tab.addEventListener("click", () => showPanel(tab.dataset.authTab)));
   document.querySelector("#show-forgot")?.addEventListener("click", () => showPanel("forgot"));
@@ -90,7 +117,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     event.preventDefault();
     setStatus("Logging in…");
     const values = Object.fromEntries(new FormData(event.currentTarget).entries());
-    const { error } = await client.auth.signInWithPassword({ email: values.email, password: values.password });
+    if (!window.TutoCaptcha?.requireToken?.("signin")) return setStatus("Please complete the human verification first.", true);
+    const captchaToken = window.TutoCaptcha?.getToken?.("signin") || "";
+    const { error } = await client.auth.signInWithPassword({
+      email: values.email,
+      password: values.password,
+      options: { captchaToken }
+    });
+    window.TutoCaptcha?.reset?.("signin");
     if (error) return setStatus(error.message, true);
     await window.TutoAuth.refresh();
     await window.TutoCloud?.syncAll?.({ silent: true });
@@ -100,6 +134,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   signupForm.addEventListener("submit", async event => {
     event.preventDefault();
     const values = Object.fromEntries(new FormData(event.currentTarget).entries());
+    if (values.password !== values.confirm_password || !syncSignupPasswordMatch()) {
+      setStatus("Passwords do not match. Please type the same password twice.", true);
+      signupConfirm?.focus();
+      return;
+    }
+    if (!window.TutoCaptcha?.requireToken?.("signup")) return setStatus("Please complete the human verification first.", true);
+    const captchaToken = window.TutoCaptcha?.getToken?.("signup") || "";
     const role = values.role === "tutor" ? "tutor" : "learner";
     const redirectPage = role === "tutor" ? "tutor-onboarding.html" : "profile.html";
     const redirectTo = new URL(redirectPage, location.href).href;
@@ -111,6 +152,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       email: values.email,
       password: values.password,
       options: {
+        captchaToken,
         emailRedirectTo: redirectTo,
         data: {
           full_name: values.full_name,
@@ -124,6 +166,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     });
 
+    window.TutoCaptcha?.reset?.("signup");
     createAccountButton.disabled = false;
     createAccountButton.textContent = "Create account";
     if (error) return setStatus(error.message, true);
@@ -146,7 +189,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     event.preventDefault();
     setStatus("Sending recovery email…");
     const values = Object.fromEntries(new FormData(event.currentTarget).entries());
-    const { error } = await client.auth.resetPasswordForEmail(values.email, { redirectTo: new URL("auth.html?mode=reset", location.href).href });
+    if (!window.TutoCaptcha?.requireToken?.("forgot")) return setStatus("Please complete the human verification first.", true);
+    const captchaToken = window.TutoCaptcha?.getToken?.("forgot") || "";
+    const { error } = await client.auth.resetPasswordForEmail(values.email, {
+      redirectTo: new URL("auth.html?mode=reset", location.href).href,
+      captchaToken
+    });
+    window.TutoCaptcha?.reset?.("forgot");
     if (error) return setStatus(error.message, true);
     setStatus("Recovery email sent. Open its link on this website to choose a new password.");
   });
