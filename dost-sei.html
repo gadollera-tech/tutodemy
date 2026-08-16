@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>DOST-SEI Preparation | TutoDemy Learning PH</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-brand1">
+  <link rel="stylesheet" href="css/style.css?v=20260816-ui11">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
@@ -35,32 +35,28 @@
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div id="site-header"></div>
   <main id="main-content">
-    <section class="page-hero dost-hero">
-      <div class="container page-hero-grid">
+    <section class="dost-direct-hero">
+      <div class="container dost-direct-hero-inner">
         <div>
-          <span class="eyebrow light">DOST-SEI-STYLE PREPARATION</span>
-          <h1>The complete 1,700-question preparation bank.</h1>
-          <p>Practice Verbal Reasoning, Non-Verbal Reasoning, English, Biology, Chemistry, Physics, Earth Science, Mathematics, and Mechanical-Technical ability through original reviewed questions and upgraded multi-rule visual sets.</p>
-          <div class="button-row">
-            <a class="button button-light" href="dost-sei/dost-practice.html">Open DOST practice builder</a>
-            <a class="button button-ghost" href="exams.html">Open CET practice hub</a>
-          </div>
+          <span class="eyebrow">DOST-SEI PREPARATION</span>
+          <h1>Know the components. Start practicing.</h1>
+          <p>Review the preparation areas below, then choose a practice test that fits your study session.</p>
         </div>
-        <div class="dost-bank-note">
-          <span>COMPLETE WAVES 1–4</span>
-          <strong>1,700 reviewed practice questions</strong>
-          <small>Nine preparation areas with upgraded visual reasoning sets.</small>
+        <div class="button-row">
+          <a class="button" href="#components">View components</a>
+          <a class="button button-secondary" href="dost-sei/dost-practice.html">Start a practice test</a>
         </div>
       </div>
     </section>
 
-    <section class="section dost-summary-section">
+    <section class="section dost-direct-section" id="components">
       <div class="container">
-        <div class="section-heading centered">
-          <span class="eyebrow">COMPLETE COVERAGE</span>
-          <h2>Nine preparation areas in one dedicated module.</h2>
-          <p>The strict mock creates 200 unique questions across separately timed sections. Practice and timed modes also allow subject, difficulty, bank, and item-count filters.</p>
+        <div class="section-heading dost-direct-heading">
+          <span class="eyebrow">COMPONENTS</span>
+          <h2>Nine preparation areas.</h2>
+          <p>1,700 original reviewed practice questions are organized across these areas.</p>
         </div>
+
         <div class="dost-subject-list-clean">
           <div><span>Verbal Reasoning</span><small>200 questions</small></div>
           <div><span>Non-Verbal Reasoning</span><small>250 questions</small></div>
@@ -75,37 +71,43 @@
       </div>
     </section>
 
-    <section class="section section-cream">
-      <div class="container dost-feature-grid">
-        <article class="panel">
-          <span class="eyebrow">PRACTICE MODES</span>
-          <h2>Practice, timed drills, and a strict mock.</h2>
-          <div class="feature-checks dark-checks">
-            <span>✓ 20, 50, 100, 200, or custom item sets</span>
-            <span>✓ Immediate explanations in Practice Mode</span>
-            <span>✓ Timed Practice with automatic submission</span>
-            <span>✓ Six-section strict 200-item mock</span>
-            <span>✓ Flags, navigator, and answer review</span>
-            <span>✓ Retry-incorrect workflow and local history</span>
-          </div>
-          <a class="button" href="dost-sei/dost-practice.html">Start DOST-SEI practice</a>
-        </article>
-        <article class="panel dost-status-panel">
-          <span class="eyebrow">YOUR PROGRESS</span>
-          <h2>Practice with reliable saving and clear access.</h2>
-          <p><b>Learner accounts:</b> Email login, profile management, and standard CET progress synchronization are available for registered users.</p>
-          <p><b>DOST module:</b> Active attempts and recent DOST history are saved on the learner's current device.</p>
-          <p><b>Question access:</b> All approved items in this module are currently available through the website.</p>
-        </article>
+    <section class="section section-cream dost-direct-section" id="practice-tests">
+      <div class="container">
+        <div class="section-heading dost-direct-heading">
+          <span class="eyebrow">PRACTICE TESTS</span>
+          <h2>Choose how you want to practice.</h2>
+        </div>
+
+        <div class="mode-list-clean dost-practice-modes">
+          <article>
+            <h3>Practice test</h3>
+            <p>Choose your subjects and item count, answer at your own pace, and review explanations as you go.</p>
+          </article>
+          <article>
+            <h3>Timed practice</h3>
+            <p>Use a countdown and automatic submission when you want a more exam-like study session.</p>
+          </article>
+          <article>
+            <h3>Strict mock</h3>
+            <p>Take the six-section 200-item mock with separate section timing and unique questions.</p>
+          </article>
+        </div>
+
+        <div class="dost-direct-action">
+          <a class="button" href="dost-sei/dost-practice.html">Open DOST-SEI practice tests</a>
+        </div>
       </div>
     </section>
 
-    <section class="section dost-notice-section">
+    <section class="section dost-notice-section dost-direct-notice">
       <div class="container disclaimer">
         <div class="container">
           <span>!</span>
-          <div><b>Original preparation material</b><p>This module is not an official DOST-SEI examination and is not affiliated with DOST-SEI. The educational items have completed content review and are approved for distribution.</p></div>
-          <a class="button button-light" href="resources.html">Read source policy</a>
+          <div>
+            <b>Original preparation material</b>
+            <p>This module is not an official DOST-SEI examination and is not affiliated with DOST-SEI.</p>
+          </div>
+          <a class="button button-light" href="resources.html">Source policy</a>
         </div>
       </div>
     </section>
