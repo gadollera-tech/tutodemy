@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260816-science2";
+const CACHE_VERSION = "tutodemy-20260816-math2";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -6,7 +6,7 @@ const CORE_ASSETS = [
   "./index.html",
   "./offline.html",
   "./manifest.webmanifest",
-  "./css/style.css?v=20260816-science2",
+  "./css/style.css?v=20260816-math2",
   "./js/marketplace-api.js?v=20260809-finance3",
   "./js/captcha.js?v=20260816-ui10",
   "./js/home-auth.js?v=20260816-ui10",
