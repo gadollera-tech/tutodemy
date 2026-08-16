@@ -1,0 +1,40 @@
+TutoDemy UI7 — Inline Create Account Form on Landing Page
+
+REQUESTED CHANGE
+- Replaced the landing-page "Create an account" link card with the actual account fields.
+- The hero now shows a real Create Account form immediately on first visit.
+
+LANDING FORM
+- Create account is the default active tab.
+- Fields:
+  * Full name
+  * Email
+  * Password
+  * Terms/Privacy consent
+- Submitting the form creates a real Supabase learner account.
+- Email confirmation flow is shown directly in the landing card.
+- Existing users can switch to the Log in tab and log in without leaving the homepage.
+- Google login appears only when Google OAuth is enabled in the existing TutoDemy config.
+- If the visitor is already signed in, the form is replaced with a Continue to dashboard action.
+- Tutor applicants are still routed through the existing Become a Tutor flow.
+
+PROGRESS MESSAGE
+The card clearly explains that an account keeps practice scores, attempts, streaks,
+saved reviewers, and progress insights connected to the learner profile.
+
+HOMEPAGE CTA CLEANUP
+- "Create Free Account" calls-to-action now jump to the embedded landing form instead of auth.html.
+- The dedicated auth.html page is preserved for full account management, password recovery,
+  tutor-role sign-up, and standalone login.
+
+FILES CHANGED
+- index.html
+- css/style.css
+- service-worker.js
+- NEW: js/home-auth.js
+
+CACHE
+- CSS: 20260816-ui7
+- Service worker: tutodemy-20260816-ui7
+
+No Supabase SQL changes are required.

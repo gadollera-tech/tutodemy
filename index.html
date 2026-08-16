@@ -20,13 +20,14 @@
   <meta name="twitter:card" content="summary_large_image">
   <title>TutoDemy Learning PH | Tutors, Exam Prep &amp; Learning Resources</title>
   <link rel="icon" href="assets/images/owl-mark.png">
-  <link rel="stylesheet" href="css/style.css?v=20260816-ui6">
+  <link rel="stylesheet" href="css/style.css?v=20260816-ui7">
   <script defer src="js/config.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="js/supabase-client.js"></script>
   <script defer src="js/auth-core.js"></script>
   <script defer src="js/cloud-sync.js"></script>
   <script defer src="js/marketplace-api.js?v=20260809-finance3"></script>
+  <script defer src="js/home-auth.js?v=20260816-ui7"></script>
   <script defer src="js/main.js?v=20260809-tutorfix1"></script>
   <script defer src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
@@ -53,21 +54,88 @@
           <p class="lp4-made-for">Made for Filipino learners. <span aria-hidden="true">🇵🇭</span></p>
         </div>
 
-        <aside class="lp4-hub" aria-label="Account and progress">
-          <div class="lp4-hub-head">
-            <img src="assets/images/owl-mark.png" alt="" aria-hidden="true">
-            <div><span>FREE ACCOUNT</span><b>Save your progress from the start.</b></div>
+        <aside class="lp4-auth-card" id="home-auth-card" aria-label="Create or access your TutoDemy account">
+          <div class="lp4-auth-intro">
+            <div class="lp4-auth-brand">
+              <img src="assets/images/owl-mark.png" alt="" aria-hidden="true">
+              <div>
+                <span class="eyebrow">FREE ACCOUNT</span>
+                <h2>Save your progress from the start.</h2>
+              </div>
+            </div>
+            <p>Practice scores, attempts, streaks, saved reviewers, and progress insights stay connected to your account.</p>
           </div>
-          <a class="lp4-hub-link" href="auth.html?tab=signup">
-            <span class="lp4-icon" aria-hidden="true">✓</span>
-            <span><b>Create an account</b><small>Save practice scores, attempts, study streaks, reviewers, and progress insights to your profile.</small></span>
-            <i aria-hidden="true">→</i>
-          </a>
-          <a class="lp4-hub-link" href="auth.html?tab=signin">
-            <span class="lp4-icon" aria-hidden="true">↳</span>
-            <span><b>Already have an account? Log in</b><small>Continue your saved learning progress.</small></span>
-            <i aria-hidden="true">→</i>
-          </a>
+
+          <div class="lp4-auth-unavailable" id="home-auth-unavailable" hidden>
+            <b>Account service is temporarily unavailable.</b>
+            <p>You can still browse tutors and learning materials.</p>
+          </div>
+
+          <div class="lp4-auth-forms" id="home-auth-forms">
+            <div class="lp4-auth-tabs" role="tablist" aria-label="Account actions">
+              <button class="active" type="button" data-home-auth-tab="signup" role="tab" aria-selected="true">Create account</button>
+              <button type="button" data-home-auth-tab="signin" role="tab" aria-selected="false">Log in</button>
+            </div>
+
+            <section class="lp4-auth-panel active" id="home-signup-panel" data-home-auth-panel="signup">
+              <form class="lp4-auth-form" id="home-signup-form">
+                <label>
+                  Full name
+                  <input name="full_name" autocomplete="name" maxlength="100" required>
+                </label>
+                <label>
+                  Email
+                  <input type="email" name="email" autocomplete="email" required>
+                </label>
+                <label>
+                  Password
+                  <input type="password" name="password" autocomplete="new-password" minlength="8" required>
+                </label>
+                <label class="lp4-auth-consent">
+                  <input type="checkbox" required>
+                  <span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms of Use</a> and have read the <a href="privacy.html" target="_blank" rel="noopener">Privacy Notice</a>.</span>
+                </label>
+                <button class="button full" type="submit" id="home-create-account-button">Create free account</button>
+              </form>
+
+              <div class="lp4-auth-success" id="home-signup-success" hidden>
+                <span class="lp4-auth-success-mark" aria-hidden="true">✓</span>
+                <h3>Check your email.</h3>
+                <p>We sent a confirmation link to <b id="home-signup-success-email"></b>. Confirm it to activate your account and keep your learning progress synced.</p>
+              </div>
+
+              <p class="lp4-auth-small">This quick sign-up creates a learner account. Want to teach? <a href="for-tutors.html">Become a tutor</a>.</p>
+            </section>
+
+            <section class="lp4-auth-panel" id="home-signin-panel" data-home-auth-panel="signin" hidden>
+              <form class="lp4-auth-form" id="home-signin-form">
+                <label>
+                  Email
+                  <input type="email" name="email" autocomplete="email" required>
+                </label>
+                <label>
+                  Password
+                  <input type="password" name="password" autocomplete="current-password" minlength="8" required>
+                </label>
+                <button class="button full" type="submit" id="home-login-button">Log in</button>
+              </form>
+              <a class="lp4-auth-forgot" href="auth.html?tab=signin">Forgot password?</a>
+            </section>
+
+            <div class="lp4-auth-google-wrap" id="home-google-wrap" hidden>
+              <div class="lp4-auth-divider"><span>or</span></div>
+              <button class="lp4-auth-google" type="button" id="home-google-login"><b>G</b> Continue with Google</button>
+            </div>
+
+            <p class="lp4-auth-status" id="home-auth-status" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="lp4-auth-signed-in" id="home-auth-signed-in" hidden>
+            <span class="lp4-auth-success-mark" aria-hidden="true">✓</span>
+            <h2>You’re already signed in.</h2>
+            <p>Continue to your workspace and pick up where you left off.</p>
+            <a class="button full" href="dashboard.html" id="home-dashboard-link">Continue to dashboard</a>
+          </div>
         </aside>
       </div>
     </section>
@@ -143,7 +211,7 @@
           <span class="lp4-flow-arrow" aria-hidden="true">→</span>
           <article><h3>Start learning</h3><p>Study, practice, connect with tutors, and keep track of your progress.</p></article>
         </div>
-        <div class="lp4-centered-action"><a class="button" href="auth.html?tab=signup">Get Started</a></div>
+        <div class="lp4-centered-action"><a class="button" href="#home-auth-card">Create Free Account</a></div>
       </div>
     </section>
 
@@ -171,7 +239,7 @@
           <p>Preparing for an exam? Need help with a subject? Ready to start tutoring? There's a place for you at TutoDemy.</p>
         </div>
         <div class="lp4-final-actions">
-          <a class="button button-light" href="auth.html?tab=signup">Create Free Account</a>
+          <a class="button button-light" href="#home-auth-card">Create Free Account</a>
           <a href="auth.html?tab=signin">Already have an account? <b>Log in</b></a>
         </div>
       </div>
