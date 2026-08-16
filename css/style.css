@@ -3324,3 +3324,170 @@ body[data-page="dashboard"] .section{padding:34px 0 54px}
 .site-note {
   display: none !important;
 }
+
+
+
+/* TutoDemy Dashboard V3 — weekly leaderboard podium */
+.leaderboard-podium {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: end;
+  margin: 14px 0 16px;
+}
+
+.leaderboard-podium-card {
+  border: 1px solid #e1e4ec;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfe 100%);
+  padding: 14px 14px 16px;
+  text-align: center;
+  display: grid;
+  gap: 8px;
+  min-height: 182px;
+  box-shadow: 0 10px 24px rgba(24, 17, 115, 0.06);
+}
+
+.leaderboard-podium-card.place-1 {
+  order: 2;
+  min-height: 216px;
+  border-color: rgba(227, 157, 45, 0.38);
+  background: linear-gradient(180deg, #fff9ee 0%, #ffffff 70%);
+}
+
+.leaderboard-podium-card.place-2 {
+  order: 1;
+}
+
+.leaderboard-podium-card.place-3 {
+  order: 3;
+}
+
+.leaderboard-podium-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--navy);
+  font-weight: 900;
+}
+
+.leaderboard-podium-medal {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  background: #eef1ff;
+  margin: 0 auto;
+}
+
+.leaderboard-podium-card.place-1 .leaderboard-podium-medal {
+  width: 62px;
+  height: 62px;
+  background: #fff1c8;
+}
+
+.leaderboard-podium-card.place-2 .leaderboard-podium-medal {
+  background: #eef1f5;
+}
+
+.leaderboard-podium-card.place-3 .leaderboard-podium-medal {
+  background: #f8ece4;
+}
+
+.leaderboard-podium-rank {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 900;
+  margin: 0 auto;
+}
+
+.leaderboard-podium-card.place-1 .leaderboard-podium-rank {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.leaderboard-podium-name {
+  color: var(--navy);
+  font-size: 1.02rem;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.leaderboard-podium-meta {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.leaderboard-podium-score {
+  display: grid;
+  gap: 2px;
+}
+
+.leaderboard-podium-score b {
+  color: var(--navy);
+  font-size: 1.32rem;
+  line-height: 1;
+}
+
+.leaderboard-podium-score span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.leaderboard-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 32px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: #eef1ff;
+  color: var(--navy);
+  font-weight: 900;
+  font-size: 0.8rem;
+}
+
+.leaderboard-rank-badge.top-1 {
+  background: #fff1c8;
+}
+
+.leaderboard-rank-badge.top-2 {
+  background: #edf0f5;
+}
+
+.leaderboard-rank-badge.top-3 {
+  background: #f8ece4;
+}
+
+.leaderboard-row.is-top-three {
+  border-left: 4px solid var(--gold);
+  padding-left: 10px;
+  background: #fffdf8;
+}
+
+.leaderboard-row.is-top-three .leaderboard-rank {
+  text-align: left;
+}
+
+@media (max-width: 860px) {
+  .leaderboard-podium {
+    grid-template-columns: 1fr;
+  }
+  .leaderboard-podium-card,
+  .leaderboard-podium-card.place-1 {
+    order: initial;
+    min-height: 0;
+  }
+}
