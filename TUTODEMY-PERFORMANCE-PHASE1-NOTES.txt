@@ -1,0 +1,45 @@
+TutoDemy Performance Phase 1
+Build: 20260819-performance1
+
+SAFE HIGH-IMPACT CHANGES
+
+1. TUTEE DASHBOARD
+- Removed data/question-bank.js from dashboard.html.
+- Removed unused data/taxonomy.js from dashboard.html.
+- The dashboard reads saved attempt summaries; it does not need to download
+  the entire CET question bank.
+- Approx. 2.3 MB less JavaScript on each uncached dashboard load.
+
+2. LANDING PAGE
+- Public header, hero, and page render before Supabase/account services.
+- Supabase/auth/cloud/marketplace/captcha/home-auth now load after first paint.
+- They load immediately if the user taps or focuses the login/create-account card.
+- Added js/home-runtime-loader.js.
+- Added jsDelivr preconnect without eagerly downloading Supabase.
+
+3. SERVICE WORKER
+- Reduced install precache to the actual offline shell.
+- Admin, tutor-dashboard, dashboard, payout and notification code are no longer
+  downloaded in the background just because someone opened the landing page.
+- Runtime caching still caches pages/assets naturally as the user visits them.
+
+4. PRODUCTION PACKAGE
+- Removed the unrelated Pictures/ folder from the optimized Full Website.
+- That folder contained screenshots / PhotoDirector desktop cache and was not
+  referenced by the website.
+- Removed approximately 8.1 MB from the
+  full production package.
+
+NO BACKEND CHANGE
+- No Supabase SQL required.
+- No Edge Function change.
+- PayMongo, bookings, notifications, messages, tutor payouts and admin backend
+  are unchanged.
+
+IMPORTANT IF USING THE PATCH
+The patch cannot delete an existing GitHub folder.
+If your repository still has a top-level Pictures/ folder, you may delete that
+folder from GitHub separately. It is not required for the website.
+
+CACHE
+tutodemy-20260819-performance1

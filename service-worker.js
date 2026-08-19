@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260816-landinghero1";
+const CACHE_VERSION = "tutodemy-20260819-performance1";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -7,22 +7,10 @@ const CORE_ASSETS = [
   "./offline.html",
   "./manifest.webmanifest",
   "./css/style.css?v=20260816-landinghero1",
-  "./js/marketplace-api.js?v=20260816-professional1",
-  "./js/captcha.js?v=20260816-ui10",
-  "./js/home-auth.js?v=20260816-ui10",
-  "./js/main.js?v=20260816-professional1",
-  "./tutor-dashboard.html",
-  "./tutor-onboarding.html",
-  "./js/tutor-dashboard.js?v=20260816-professional1",
-  "./js/tutor-onboarding.js?v=20260816-professional1",
-  "./admin.html",
-  "./dashboard.html",
-  "./js/dashboard.js?v=20260816-professional1",
-  "./js/admin.js?v=20260816-professional1",
-  "./js/notifications.js?v=20260816-webpush2",
+  "./js/main.js?v=20260819-performance1",
+  "./js/home-runtime-loader.js?v=20260819-performance1",
   "./js/pwa.js?v=20260809-pwa1",
   "./assets/images/icon-192.png",
-  "./assets/images/icon-512.png",
   "./assets/images/apple-touch-icon.png",
   "./assets/images/wordmark.png"
 ];
