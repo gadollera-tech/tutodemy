@@ -1,0 +1,26 @@
+TutoDemy Performance Phase 2 + Student Labels
+Build: 20260819-performance2
+
+VISIBLE LABELS
+- Student Dashboard
+- STUDENT account badge
+- Student View
+- Student workspace/account
+- Student / Parent account on Profile
+- No visible "Tutee" wording remains.
+
+Internal database role remains "learner"; no database migration is needed.
+
+TUTOR PERFORMANCE
+- Removed one redundant Supabase schema-probe request from normal page startup.
+- Concurrent account/admin/profile reads are deduplicated.
+- Account and admin lookup run in parallel.
+- Tutor Dashboard shows booking requests before finance/payout panels finish.
+- Finance/payout panels load in the background.
+- Tutor Profile availability and verification-document reads run in parallel.
+
+No SQL or Edge Function changes.
+PayMongo, notifications, bookings, messages, and payouts are unchanged.
+
+Cache:
+tutodemy-20260819-performance2
