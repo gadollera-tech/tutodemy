@@ -29,7 +29,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         <p class="tutor-headline">${esc(tutor.headline || "Academic tutor")}</p>
         <div class="tutor-tags">${subjects.map(x => `<span>${esc(x)}</span>`).join("")}</div>
         <dl class="tutor-facts"><div><dt>Mode</dt><dd>${esc(modes || "Contact tutor")}</dd></div><div><dt>Location</dt><dd>${esc(location)}</dd></div><div><dt>Rate</dt><dd>${money(tutor.hourly_rate)}/hour</dd></div></dl>
-        <a class="button full" href="tutor-profile.html?id=${encodeURIComponent(tutor.user_id)}">View tutor and request schedule</a>
+        <div class="tutor-card-actions">
+          <a class="button full" href="tutor-profile.html?id=${encodeURIComponent(tutor.user_id)}#inquiry">Send Inquiry</a>
+          <a class="text-button" href="tutor-profile.html?id=${encodeURIComponent(tutor.user_id)}">View profile</a>
+        </div>
       </div>
     </article>`;
   }

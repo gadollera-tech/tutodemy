@@ -1061,18 +1061,31 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div class="admin-card-head"><div><span class="status-pill status-${esc(report.status)}">${esc(report.status)}</span><h3>${esc(report.reason)}</h3><p>${esc(report.booking_label || "Booking conversation")} • Reported by ${esc(report.reporter_label || "Account")}</p></div><time>${new Date(report.created_at).toLocaleString()}</time></div>
       ${message}${report.details ? `<p><b>Details:</b> ${esc(report.details)}</p>` : ""}
       <label>Administrator note<textarea data-report-note rows="2" placeholder="Record the review outcome">${esc(report.admin_note || "")}</textarea></label>
-      <div class="admin-actions"><a class="button button-outline" href="messages.html?booking=${encodeURIComponent(report.booking_id)}">Review conversation</a>${report.status !== "resolved" ? `<button class="button report-resolve" type="button">Mark resolved</button>` : ""}${report.status !== "dismissed" ? `<button class="text-button report-dismiss" type="button">Dismiss</button>` : ""}</div>
+      <div class="admin-actions"><a class="button button-outline" href="${report.thread_type === "inquiry" ? `messages.html?inquiry=${encodeURIComponent(report.inquiry_id)}` : `messages.html?booking=${encodeURIComponent(report.booking_id)}`}">Review conversation</a>${report.status !== "resolved" ? `<button class="button report-resolve" type="button">Mark resolved</button>` : ""}${report.status !== "dismissed" ? `<button class="text-button report-dismiss" type="button">Dismiss</button>` : ""}</div>
     </article>`;
   }
 
   function renderReports() {
     const list = document.querySelector("#admin-report-list");
-    list.innerHTML = reports.map(reportCard).join("") || `<div class="empty-state"><h3>No conversation reports.</h3><p>Reported booking conversations will appear here for administrator review.</p></div>`;
+    list.innerHTML = reports.map(reportCard).join("") || `<div class="empty-state"><h3>No conversation reports.</h3><p>Reported inquiry and booking conversations will appear here.</p></div>`;
     const update = async (button, status) => {
       const card = button.closest(".message-report-card");
       try {
         button.disabled = true;
-        await api.adminResolveMessageReport(card.dataset.reportId, status, card.querySelector("[data-report-note]").value.trim());
+        const report = reports.find(item => String(item.id) === String(card.dataset.reportId));
+        if (report?.thread_type === "inquiry") {
+          await api.adminResolveInquiryReport(
+            card.dataset.reportId,
+            status,
+            card.querySelector("[data-report-note]").value.trim()
+          );
+        } else {
+          await api.adminResolveMessageReport(
+            card.dataset.reportId,
+            status,
+            card.querySelector("[data-report-note]").value.trim()
+          );
+        }
         await loadAll();
       } catch (error) {
         alertBox.hidden = false;
@@ -1099,7 +1112,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       ["Tutor applications", () => api.adminPendingTutors?.()],
       ["Bookings and payments", () => api.adminBookings?.()],
       ["PayMongo operational alerts", () => api.adminPayMongoAlerts?.()],
-      ["Message reports", () => api.adminMessageReports?.()],
+      ["Booking message reports", () => api.adminMessageReports?.()],
+      ["Inquiry reports", () => api.adminInquiryReports?.()],
       ["Weekly payouts", () => api.adminWeeklyPayoutSummary?.()]
     ];
 
@@ -1114,8 +1128,31 @@ document.addEventListener("DOMContentLoaded", async () => {
           failedWebhooks: [],
           counts: { duplicatePayments: 0, failedWebhooks: 0, total: 0 }
         };
-    reports = results[4].status === "fulfilled" && Array.isArray(results[4].value) ? results[4].value : [];
-    payouts = results[5].status === "fulfilled" && Array.isArray(results[5].value) ? results[5].value : [];
+    const bookingReports =
+      results[4].status === "fulfilled" &&
+      Array.isArray(results[4].value)
+        ? results[4].value.map(item => ({
+            ...item,
+            thread_type: item.thread_type || "booking"
+          }))
+        : [];
+
+    const inquiryReports =
+      results[5].status === "fulfilled" &&
+      Array.isArray(results[5].value)
+        ? results[5].value
+        : [];
+
+    reports = [
+      ...bookingReports,
+      ...inquiryReports
+    ].sort(
+      (a, b) =>
+        new Date(b.created_at || 0) -
+        new Date(a.created_at || 0)
+    );
+
+    payouts = results[6].status === "fulfilled" && Array.isArray(results[6].value) ? results[6].value : [];
     overviewLoadedAt = overview ? new Date(overview.generated_at || Date.now()) : null;
     overviewLoading = false;
 

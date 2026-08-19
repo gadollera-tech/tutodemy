@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const alert = document.querySelector("#profile-alert");
   const form = document.querySelector("#booking-form");
   const status = document.querySelector("#booking-status");
+  const inquiryForm = document.querySelector("#inquiry-form");
+  const inquiryStatus = document.querySelector("#inquiry-status");
+  const inquirySubject = document.querySelector("#inquiry-subject");
+  const inquiryIdFromUrl = new URLSearchParams(location.search).get("inquiry");
+  const inquirySubjectFromUrl = new URLSearchParams(location.search).get("subject");
   let tutor = null;
 
   const esc = value => window.Tuto.escape(value);
@@ -76,13 +81,68 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.querySelector("#review-list").innerHTML = result.reviews.map(review=>`<article><div><b>${"★".repeat(review.rating)}${"☆".repeat(5-review.rating)}</b><time>${new Date(review.created_at).toLocaleDateString()}</time></div><p>${esc(review.review_text||"Verified completed-session rating")}</p></article>`).join("") || `<p class="muted">No verified reviews yet.</p>`;
 
     const subjects = [...new Set([...(tutor.subjects||[]),...(tutor.exam_specializations||[])])];
-    document.querySelector("#booking-subject").innerHTML = subjects.map(x=>`<option>${esc(x)}</option>`).join("") || `<option>General Academic Support</option>`;
+    const subjectOptions = subjects.map(x=>`<option>${esc(x)}</option>`).join("") || `<option>General Academic Support</option>`;
+    document.querySelector("#booking-subject").innerHTML = subjectOptions;
+    if (inquirySubject) inquirySubject.innerHTML = subjectOptions;
+
+    if (inquirySubjectFromUrl) {
+      const bookingSubject = document.querySelector("#booking-subject");
+      const matching = [...bookingSubject.options].find(
+        option => option.value === inquirySubjectFromUrl
+      );
+      if (matching) bookingSubject.value = matching.value;
+    }
     const modes = (tutor.teaching_modes||[]).flatMap(x=>x==="Either"?["Online","In-person"]:[x]);
     document.querySelector("#booking-mode").innerHTML = [...new Set(modes)].map(x=>`<option>${esc(x)}</option>`).join("");
     form.elements.duration_minutes.value = String(tutor.session_duration_minutes || 60);
     refreshBookingMinimum();
     updateEstimate();
   }
+
+  inquiryForm?.addEventListener("submit", async event => {
+    event.preventDefault();
+
+    if (!window.TutoAuth.getUser()) {
+      sessionStorage.setItem("tutodemyPostLoginUrl", location.href);
+      location.href = "auth.html";
+      return;
+    }
+
+    try {
+      const values = Object.fromEntries(
+        new FormData(inquiryForm).entries()
+      );
+
+      inquiryStatus.textContent = "Sending inquiry…";
+      inquiryStatus.classList.remove("error");
+
+      const result = await api.createTutorInquiry(
+        tutorId,
+        values.subject,
+        values.message
+      );
+
+      const inquiryId =
+        result?.inquiry_id ||
+        result?.id ||
+        null;
+
+      if (!inquiryId) {
+        throw new Error("Inquiry was created but could not be opened.");
+      }
+
+      inquiryForm.reset();
+      inquiryStatus.textContent = "Inquiry sent. Opening messages…";
+      window.Tuto.toast("Inquiry sent to the tutor.");
+
+      location.href =
+        `messages.html?inquiry=${encodeURIComponent(inquiryId)}`;
+    } catch (error) {
+      inquiryStatus.textContent =
+        error.message || "Inquiry could not be sent.";
+      inquiryStatus.classList.add("error");
+    }
+  });
 
   form.elements.duration_minutes.addEventListener("change", updateEstimate);
   form.elements.mode.addEventListener("change", () => document.querySelector("#location-field").hidden = form.elements.mode.value !== "In-person");
@@ -117,12 +177,69 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
       }
 
-      await api.createBooking({ ...values, tutor_id:tutorId, requested_start:local.toISOString() });
+      const created = await api.createBooking({
+        ...values,
+        tutor_id: tutorId,
+        requested_start: local.toISOString()
+      });
+
+      let bookingId =
+        typeof created === "string"
+          ? created
+          : created?.id ||
+            created?.booking_id ||
+            (Array.isArray(created)
+              ? created[0]?.id || created[0]?.booking_id
+              : null);
+
+      if (!bookingId && inquiryIdFromUrl) {
+        try {
+          const learnerBookings =
+            await api.getMyBookings("learner");
+
+          const expectedStart = local.toISOString();
+
+          const match = learnerBookings
+            .filter(item =>
+              item.tutor_id === tutorId &&
+              item.status === "requested"
+            )
+            .sort((a, b) =>
+              new Date(b.created_at || b.requested_start) -
+              new Date(a.created_at || a.requested_start)
+            )
+            .find(item =>
+              Math.abs(
+                new Date(item.requested_start).getTime() -
+                new Date(expectedStart).getTime()
+              ) < 60000
+            );
+
+          bookingId = match?.id || null;
+        } catch {}
+      }
+
+      if (inquiryIdFromUrl && bookingId) {
+        try {
+          await api.linkInquiryToBooking(
+            inquiryIdFromUrl,
+            bookingId
+          );
+        } catch (linkError) {
+          console.warn(
+            "Inquiry could not be linked to the booking:",
+            linkError
+          );
+        }
+      }
+
       form.reset();
       refreshBookingMinimum();
       form.elements.duration_minutes.value = String(tutor.session_duration_minutes||60);
       updateEstimate();
-      status.innerHTML = `Booking request sent. Track it in <a href="bookings.html">My Bookings</a>.`;
+      status.innerHTML = inquiryIdFromUrl
+        ? `Booking requested. You can continue the discussion in <a href="messages.html?inquiry=${encodeURIComponent(inquiryIdFromUrl)}">Messages</a> or track it in <a href="bookings.html">My Bookings</a>.`
+        : `Booking requested. Track it in <a href="bookings.html">My Bookings</a>.`;
       window.Tuto.toast("Booking request sent to the tutor.");
     } catch (error) {
       status.textContent = error.message || "Booking request could not be sent.";

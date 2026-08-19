@@ -767,6 +767,126 @@
   }
 
 
+
+  async function createTutorInquiry(tutorId, subject, message) {
+    requireUser();
+    const { data, error } = await client().rpc("create_tutor_inquiry", {
+      p_tutor_id: tutorId,
+      p_subject: String(subject || "").trim(),
+      p_message: String(message || "").trim()
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
+  async function getInquiryThreads() {
+    requireUser();
+    const { data, error } = await client().rpc("get_my_inquiry_threads");
+    if (error) throw friendlyError(error);
+    return data || [];
+  }
+
+  async function getInquiryMessages(inquiryId) {
+    requireUser();
+    const { data, error } = await client().rpc("get_inquiry_messages", {
+      p_inquiry_id: inquiryId
+    });
+    if (error) throw friendlyError(error);
+    return data || [];
+  }
+
+  async function sendInquiryMessage(inquiryId, body) {
+    requireUser();
+    const { data, error } = await client().rpc("send_inquiry_message", {
+      p_inquiry_id: inquiryId,
+      p_body: String(body || "")
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
+  async function markInquiryMessagesRead(inquiryId) {
+    requireUser();
+    const { error } = await client().rpc("mark_inquiry_messages_read", {
+      p_inquiry_id: inquiryId
+    });
+    if (error) throw friendlyError(error);
+  }
+
+  async function closeTutorInquiry(inquiryId) {
+    requireUser();
+    const { data, error } = await client().rpc("close_tutor_inquiry", {
+      p_inquiry_id: inquiryId
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
+  async function linkInquiryToBooking(inquiryId, bookingId) {
+    requireUser();
+    const { data, error } = await client().rpc("link_inquiry_to_booking", {
+      p_inquiry_id: inquiryId,
+      p_booking_id: bookingId
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
+  async function markInquiryNotificationsRead(inquiryId) {
+    requireUser();
+    const { error } = await client().rpc("mark_inquiry_notifications_read", {
+      p_inquiry_id: inquiryId
+    });
+    if (error) throw optionalNotificationError(error);
+  }
+
+  function subscribeInquiryMessages(inquiryId, onChange, onStatus = null) {
+    if (!client() || !inquiryId) return null;
+    return client()
+      .channel(`inquiry-messages-${inquiryId}-${Date.now()}`)
+      .on("postgres_changes", {
+        event: "INSERT",
+        schema: "public",
+        table: "tutor_inquiry_messages",
+        filter: `inquiry_id=eq.${inquiryId}`
+      }, payload => onChange?.(payload))
+      .subscribe(status => onStatus?.(status));
+  }
+
+  async function reportInquiryConversation(inquiryId, messageId, reason, details = "") {
+    requireUser();
+    const { data, error } = await client().rpc("report_tutor_inquiry", {
+      p_inquiry_id: inquiryId,
+      p_message_id: messageId || null,
+      p_reason: String(reason || ""),
+      p_details: String(details || "")
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
+  async function adminInquiryReports() {
+    if (!await checkAdmin()) {
+      throw new Error("Administrator access required.");
+    }
+    const { data, error } = await client().rpc("admin_get_inquiry_reports");
+    if (error) throw friendlyError(error);
+    return data || [];
+  }
+
+  async function adminResolveInquiryReport(reportId, status, note = "") {
+    if (!state.admin && !await checkAdmin()) {
+      throw new Error("Administrator access required.");
+    }
+    const { data, error } = await client().rpc("admin_resolve_inquiry_report", {
+      p_report_id: reportId,
+      p_status: status,
+      p_admin_note: note
+    });
+    if (error) throw friendlyError(error);
+    return data;
+  }
+
   async function getMessageThreads() {
     requireUser();
     const { data, error } = await client().rpc("get_my_message_threads");
@@ -1050,6 +1170,18 @@
     getMyPayouts,
     adminWeeklyPayoutSummary,
     adminRecordWeeklyPayout,
+    createTutorInquiry,
+    getInquiryThreads,
+    getInquiryMessages,
+    sendInquiryMessage,
+    markInquiryMessagesRead,
+    closeTutorInquiry,
+    linkInquiryToBooking,
+    markInquiryNotificationsRead,
+    subscribeInquiryMessages,
+    reportInquiryConversation,
+    adminInquiryReports,
+    adminResolveInquiryReport,
     getMessageThreads,
     getBookingMessages,
     sendBookingMessage,
