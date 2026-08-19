@@ -1,0 +1,28 @@
+TutoDemy Authentication Hotfix
+Build: 20260819-authfix1
+
+CAUSE
+The Performance Phase 1 landing-page lazy loader loaded home-auth.js after
+DOMContentLoaded. home-auth.js registers its initialization on DOMContentLoaded,
+so its login/create-account handlers were never attached on the homepage.
+
+FIX
+- Removed home-runtime-loader.js from index.html.
+- Restored the known-working deferred script order:
+  config -> Supabase CDN -> Supabase client -> auth-core -> cloud-sync ->
+  marketplace-api -> captcha -> home-auth -> main.
+- Deferred scripts do not block HTML parsing, but they execute before
+  DOMContentLoaded so the homepage auth code initializes correctly.
+- Updated the service-worker cache to remove the broken loader.
+
+PRESERVED PERFORMANCE WORK
+- Dashboard still does NOT load the 2.3 MB question bank.
+- Tutor Dashboard Phase 2 request optimizations remain.
+- Student terminology remains.
+- PayMongo, notifications, messages, bookings, payouts unchanged.
+
+No SQL.
+No Edge Function change.
+
+Cache:
+tutodemy-20260819-authfix1
