@@ -213,7 +213,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (window.TUTODEMY_CONFIG.googleOAuthEnabled) {
     googleButton.disabled = false;
-    googleHelper.textContent = "Google login starts with a tutee account. Tutor applications are available after login.";
+    googleHelper.textContent = "Google login starts with a student account. Tutor applications are available after login.";
     googleButton.addEventListener("click", async () => {
       setStatus("Opening Google login…");
       const { error } = await client.auth.signInWithOAuth({ provider: "google", options: { redirectTo: new URL("dashboard.html", location.href).href } });

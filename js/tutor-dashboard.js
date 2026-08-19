@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let feePolicy = [];
   let filter = "action";
   let realtimeRefreshTimer = null;
+  let financeLoadPromise = null;
   let initialized = false;
 
   alertBox.hidden = false;
@@ -223,59 +224,125 @@ document.addEventListener("DOMContentLoaded", () => {
       : `<div class="empty-state"><p>No weekly payout records yet.</p></div>`;
   }
 
+  async function loadFinancialPanels({ quiet = true } = {}) {
+    if (financeLoadPromise) return financeLoadPromise;
+
+    financeLoadPromise = (async () => {
+      try {
+        [ledger, feePolicy, payouts] = await Promise.all([
+          api.getMyLedger(),
+          api.getMyTutorFeePolicy(),
+          api.getMyPayouts()
+        ]);
+        updateMetrics();
+        renderLedger();
+      } catch (error) {
+        if (!quiet) {
+          alertBox.hidden = false;
+          alertBox.textContent =
+            error?.message ||
+            "Earnings and payout details could not be loaded.";
+        } else {
+          console.warn("Tutor finance refresh failed:", error);
+        }
+      } finally {
+        financeLoadPromise = null;
+      }
+    })();
+
+    return financeLoadPromise;
+  }
+
   async function load({ quiet = false } = {}) {
     try {
-      if (!api.isReady()) throw new Error("The tutor dashboard is temporarily unavailable. Please try again later.");
+      if (!api.isReady()) {
+        throw new Error(
+          "The tutor dashboard is temporarily unavailable. Please try again later."
+        );
+      }
+
       profile = await api.getMyTutorProfile();
+
       if (!profile) {
         setApprovedWorkspace(false);
         setTextIfPresent("#tutor-dashboard-title", "Start your tutor application.");
-        setTextIfPresent("#tutor-dashboard-intro", "Create your tutor profile and submit it for review.");
+        setTextIfPresent(
+          "#tutor-dashboard-intro",
+          "Create your tutor profile and submit it for review."
+        );
         profileStatus();
         alertBox.hidden = false;
-        alertBox.innerHTML = `<b>Your tutor workspace is not active yet.</b> Complete your profile and submit your application to unlock booking, session, earnings, and payout tools. <a href="tutor-onboarding.html">Start application →</a>`;
+        alertBox.innerHTML =
+          `<b>Your tutor workspace is not active yet.</b> ` +
+          `Complete your profile and submit your application. ` +
+          `<a href="tutor-onboarding.html">Start application →</a>`;
         return;
       }
 
       profileStatus();
+
       if (profile.status !== "approved") {
         setApprovedWorkspace(false);
+
         const copy = {
-          draft: ["Complete your tutor application.", "Complete your tutor profile and submit it for review."],
-          pending: ["Your application is under review.", "You can update your profile while TutoDemy reviews your application. Booking and payout tools will open after approval."],
-          rejected: ["Your application needs revision.", profile.rejection_reason || "Review the administrator note, update your application, and submit it again."],
-          suspended: ["Your tutor access is currently suspended.", "Contact TutoDemy support before accepting or managing tutoring sessions."]
-        }[profile.status] || ["Your tutor workspace is not active yet.", "Complete the required application steps to continue."];
+          draft: [
+            "Complete your tutor application.",
+            "Complete your tutor profile and submit it for review."
+          ],
+          pending: [
+            "Your application is under review.",
+            "You can update your profile while it is being reviewed."
+          ],
+          rejected: [
+            "Your application needs revision.",
+            profile.rejection_reason ||
+              "Review the administrator note and update your application."
+          ],
+          suspended: [
+            "Your tutor access is currently suspended.",
+            "Contact TutoDemy support before managing sessions."
+          ]
+        }[profile.status] || [
+          "Your tutor workspace is not active yet.",
+          "Complete the required application steps to continue."
+        ];
+
         setTextIfPresent("#tutor-dashboard-title", copy[0]);
         setTextIfPresent("#tutor-dashboard-intro", copy[1]);
         alertBox.hidden = false;
-        alertBox.innerHTML = `<b>${esc(copy[0])}</b> ${esc(copy[1])} <a href="tutor-onboarding.html">Open tutor profile →</a>`;
+        alertBox.innerHTML =
+          `<b>${esc(copy[0])}</b> ${esc(copy[1])} ` +
+          `<a href="tutor-onboarding.html">Open tutor profile →</a>`;
         return;
       }
 
       setTextIfPresent("#tutor-dashboard-title", "Tutor Dashboard");
-      setTextIfPresent("#tutor-dashboard-intro", "Manage bookings, delivered sessions, and payouts.");
-      [bookings, ledger, feePolicy, payouts] = await Promise.all([
-        api.getMyBookings("tutor"),
-        api.getMyLedger(),
-        api.getMyTutorFeePolicy(),
-        api.getMyPayouts()
-      ]);
+      setTextIfPresent(
+        "#tutor-dashboard-intro",
+        "Manage bookings, sessions, and payouts."
+      );
+
+      // Primary task first.
+      bookings = await api.getMyBookings("tutor");
 
       alertBox.hidden = true;
-      updateMetrics();
       renderBookings();
-      renderLedger();
 
       const toggle = document.querySelector("#toggle-bookings");
       toggle.hidden = false;
-      toggle.textContent = profile.is_accepting_bookings ? "Pause new bookings" : "Accept new bookings";
+      toggle.textContent = profile.is_accepting_bookings
+        ? "Pause new bookings"
+        : "Accept new bookings";
+
+      // Secondary data no longer blocks the usable dashboard.
+      loadFinancialPanels({ quiet: true });
     } catch (error) {
       if (!quiet) {
         alertBox.hidden = false;
-        alertBox.textContent = error.message || "Tutor dashboard could not be loaded.";
+        alertBox.textContent =
+          error.message || "Tutor dashboard could not be loaded.";
       } else {
-        console.warn("Realtime tutor dashboard refresh failed:", error);
+        console.warn("Tutor dashboard refresh failed:", error);
       }
     }
   }

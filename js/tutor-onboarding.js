@@ -77,9 +77,21 @@ document.addEventListener("DOMContentLoaded", () => {
       form.elements.contact_email.value = user.email || "";
       form.elements.display_name.value = user.user_metadata?.full_name || "";
     }
-    const rows = await api.getMyAvailability().catch(() => []);
-    (rows.length ? rows : [{day_of_week:6,start_time:"09:00",end_time:"12:00",mode:"Online"}]).forEach(availabilityRow);
-    await renderDocuments();
+    const [rows] = await Promise.all([
+      api.getMyAvailability().catch(() => []),
+      renderDocuments()
+    ]);
+
+    (
+      rows.length
+        ? rows
+        : [{
+            day_of_week: 6,
+            start_time: "09:00",
+            end_time: "12:00",
+            mode: "Online"
+          }]
+    ).forEach(availabilityRow);
   }
 
   async function renderDocuments() {

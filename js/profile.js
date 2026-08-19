@@ -325,7 +325,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.querySelector("#account-email").textContent = user.email || "Authenticated learner";
     document.querySelector("#account-avatar").textContent = initials(values.full_name);
     const tutorRole = values.role === "tutor";
-    document.querySelector("#account-role-heading").textContent = tutorRole ? "Tutor account" : "Learner / Parent account";
+    document.querySelector("#account-role-heading").textContent = tutorRole ? "Tutor account" : "Student / Parent account";
     document.querySelector("#account-role-description").textContent = tutorRole ? "Manage your tutor application, bookings, commission tier, and earnings." : "Book approved tutors and save learning progress.";
     document.querySelector("#account-role-actions").innerHTML = tutorRole
       ? `<a class="button full" href="tutor-dashboard.html">Open tutor dashboard</a><a class="button button-outline full" href="tutor-onboarding.html">Edit tutor profile</a><a class="button button-outline full" href="bookings.html">Bookings as learner</a>`

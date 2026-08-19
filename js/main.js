@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function learnerNavigation() {
     return [
-      `<a href="dashboard.html" class="workspace-nav-home ${isActive("dashboard")}">Tutee Dashboard</a>`,
+      `<a href="dashboard.html" class="workspace-nav-home ${isActive("dashboard")}">Student Dashboard</a>`,
       practiceDropdown("Practice"),
       `<a href="tutoring.html" class="${isActive("tutoring", "tutor-profile")}">Tutors</a>`,
       `<a href="bookings.html?role=learner" class="${isActive("bookings")}">Bookings</a>`,
@@ -120,15 +120,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         note: approved ? "Tutor workspace" : "Tutor application",
         navigation: tutorNavigation(context),
         planVisible: false,
-        switchLabel: "Tutee View",
+        switchLabel: "Student View",
         switchKind: "learner"
       };
     }
     if (context.view === "learner") {
       return {
         bodyClass: context.isTutorAccount ? "role-learner role-dual-account" : "role-learner",
-        badge: "TUTEE",
-        note: "Tutee workspace",
+        badge: "STUDENT",
+        note: "Student workspace",
         navigation: learnerNavigation(),
         planVisible: true,
         switchLabel: context.isTutorAccount ? "Tutor View" : "",
@@ -180,10 +180,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         <footer class="site-footer role-footer learner-role-footer">
           <div class="container role-footer-grid">
             <div class="footer-brand"><img src="assets/images/wordmark.png" alt="TutoDemy Learning PH"><p>Practice, reviewers, tutors, and bookings.</p></div>
-            <div><h3>Tutee</h3><a href="dashboard.html">Dashboard</a><a href="practice.html">CET Practice</a><a href="dost-sei.html">DOST-SEI</a><a href="reviewers.html">Reviewers</a></div>
+            <div><h3>Student</h3><a href="dashboard.html">Dashboard</a><a href="practice.html">CET Practice</a><a href="dost-sei.html">DOST-SEI</a><a href="reviewers.html">Reviewers</a></div>
             <div><h3>Tutoring</h3><a href="tutoring.html">Tutors</a><a href="bookings.html?role=learner">Bookings</a><a href="messages.html">Messages</a><a href="profile.html">Profile</a></div>
           </div>
-          <div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Tutee account.</span></div>
+          <div class="container footer-bottom"><span>© <span data-year></span> TutoDemy Learning PH.</span><span>Student account.</span></div>
         </footer>`;
     }
     return `
@@ -427,13 +427,27 @@ document.addEventListener("DOMContentLoaded", async () => {
       return { ...roleContext, accountRole: user ? "learner" : "guest", view: user ? "learner" : "public" };
     }
 
-    const isAdmin = Boolean(window.TutoMarketplace.isAdmin?.() || await window.TutoMarketplace.checkAdmin?.());
     let profile = null;
+    let isAdmin = false;
     let tutorProfile = null;
-    try { profile = await window.TutoMarketplace.getMyAccountProfile?.(true); } catch {}
+
+    const [adminResult, profileResult] = await Promise.allSettled([
+      window.TutoMarketplace.checkAdmin?.(),
+      window.TutoMarketplace.getMyAccountProfile?.()
+    ]);
+
+    if (adminResult.status === "fulfilled") {
+      isAdmin = Boolean(adminResult.value);
+    }
+    if (profileResult.status === "fulfilled") {
+      profile = profileResult.value || null;
+    }
+
     const isTutorAccount = profile?.role === "tutor";
     if (isTutorAccount) {
-      try { tutorProfile = await window.TutoMarketplace.getMyTutorProfile?.(); } catch {}
+      try {
+        tutorProfile = await window.TutoMarketplace.getMyTutorProfile?.();
+      } catch {}
     }
 
     const publicPreview = isAdmin && params.get("public") === "1" && active !== "admin";

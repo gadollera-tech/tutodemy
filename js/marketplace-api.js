@@ -5,7 +5,12 @@
     schemaReady: null,
     schemaError: "",
     admin: false,
-    profile: null
+    adminChecked: false,
+    adminPromise: null,
+    profile: null,
+    profilePromise: null,
+    tutorProfile: null,
+    tutorProfilePromise: null
   };
 
   const client = () => window.TutoSupabase?.client || null;
@@ -60,35 +65,68 @@
     const current = user();
     if (!current || !client()) return null;
     if (state.profile && !force) return state.profile;
-    const { data, error } = await client().from("profiles").select("*").eq("id", current.id).maybeSingle();
-    if (error) throw friendlyError(error);
-    state.profile = data || null;
-    return state.profile;
+    if (state.profilePromise) return state.profilePromise;
+
+    state.profilePromise = (async () => {
+      const { data, error } = await client()
+        .from("profiles")
+        .select("*")
+        .eq("id", current.id)
+        .maybeSingle();
+      if (error) throw friendlyError(error);
+      state.profile = data || null;
+      return state.profile;
+    })();
+
+    try {
+      return await state.profilePromise;
+    } finally {
+      state.profilePromise = null;
+    }
   }
 
-  async function checkAdmin() {
+  async function checkAdmin(force = false) {
     const current = user();
     if (!current || !client()) {
       state.admin = false;
+      state.adminChecked = true;
       return false;
     }
-    const { data, error } = await client().rpc("is_tutodemy_admin");
-    if (error) {
-      const handled = friendlyError(error);
-      console.warn(handled.message);
-      state.admin = false;
-      return false;
+    if (state.adminChecked && !force) return state.admin;
+    if (state.adminPromise) return state.adminPromise;
+
+    state.adminPromise = (async () => {
+      const { data, error } = await client().rpc("is_tutodemy_admin");
+      state.adminChecked = true;
+      if (error) {
+        const handled = friendlyError(error);
+        console.warn(handled.message);
+        state.admin = false;
+        return false;
+      }
+      state.admin = Boolean(data);
+      window.dispatchEvent(new CustomEvent(
+        "tutodemy-admin-change",
+        { detail: { admin: state.admin } }
+      ));
+      return state.admin;
+    })();
+
+    try {
+      return await state.adminPromise;
+    } finally {
+      state.adminPromise = null;
     }
-    state.admin = Boolean(data);
-    window.dispatchEvent(new CustomEvent("tutodemy-admin-change", { detail: { admin: state.admin } }));
-    return state.admin;
   }
 
   const ready = (async () => {
     await window.TutoAuth?.ready;
-    await testSchema();
-    if (user() && state.schemaReady) {
-      await Promise.allSettled([getMyAccountProfile(true), checkAdmin()]);
+    if (!client()) {
+      state.schemaReady = false;
+      state.schemaError = "Supabase is not configured.";
+    } else {
+      state.schemaReady = true;
+      state.schemaError = "";
     }
     return state;
   })();
@@ -134,11 +172,29 @@
     return tutor ? { tutor, availability: availability || [], reviews: reviews || [] } : null;
   }
 
-  async function getMyTutorProfile() {
+  async function getMyTutorProfile(force = false) {
     const current = requireUser();
-    const { data, error } = await client().from("tutor_profiles").select("*").eq("user_id", current.id).maybeSingle();
-    if (error) throw friendlyError(error);
-    return data || null;
+
+    if (state.tutorProfile && !force) return state.tutorProfile;
+    if (state.tutorProfilePromise) return state.tutorProfilePromise;
+
+    state.tutorProfilePromise = (async () => {
+      const { data, error } = await client()
+        .from("tutor_profiles")
+        .select("*")
+        .eq("user_id", current.id)
+        .maybeSingle();
+
+      if (error) throw friendlyError(error);
+      state.tutorProfile = data || null;
+      return state.tutorProfile;
+    })();
+
+    try {
+      return await state.tutorProfilePromise;
+    } finally {
+      state.tutorProfilePromise = null;
+    }
   }
 
   async function saveTutorDraft(values) {
