@@ -5435,3 +5435,76 @@ textarea::placeholder{
     font-size:.82rem;
   }
 }
+
+
+
+/* =========================================================
+   TutoDemy Inquiry Messaging
+   ========================================================= */
+
+.inquiry-card{
+  border-color:rgba(116,132,194,.28);
+  background:#fbfbfe;
+}
+
+.inquiry-card h2{
+  margin:.1rem 0 .35rem;
+  color:var(--navy,#0C046D);
+}
+
+.inquiry-intro{
+  margin:0 0 .85rem;
+  color:#686a73;
+  font-size:.84rem;
+  line-height:1.5;
+}
+
+.booking-sidebar{
+  display:grid;
+  align-content:start;
+  gap:14px;
+}
+
+.tutor-card-actions{
+  display:grid;
+  gap:.55rem;
+  margin-top:auto;
+}
+
+.tutor-card-actions .text-button{
+  justify-self:center;
+}
+
+.conversation-head-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:.45rem;
+  flex-wrap:wrap;
+}
+
+.status-pill.inquiry-status-open{
+  background:#eef0ff;
+  color:#403497;
+}
+
+.status-pill.inquiry-status-closed{
+  background:#f1f1f3;
+  color:#666871;
+}
+
+.thread-item small{
+  text-transform:none;
+}
+
+@media(max-width:760px){
+  .conversation-head-actions{
+    width:100%;
+    justify-content:flex-start;
+  }
+
+  .conversation-head-actions .button,
+  .conversation-head-actions .text-button{
+    min-height:36px;
+  }
+}
