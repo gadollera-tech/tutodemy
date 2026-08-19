@@ -1,0 +1,51 @@
+TutoDemy Inquiry Messaging
+Build: 20260819-inquiry1
+
+NEW FLOW
+
+Student:
+Find Tutor
+-> Send Inquiry
+-> private conversation
+-> Request Booking when ready
+-> tutor accepts
+-> PayMongo payment
+-> session
+
+Inquiry:
+- No payment required.
+- One open inquiry per student/tutor pair.
+- Student and tutor can reply while the inquiry is open.
+- Either participant can close the inquiry.
+- Closed inquiries become read-only.
+- If a booking is requested from the inquiry, the inquiry stays open and the booking is linked to it.
+
+Tutor Profile:
+- "Send Inquiry" appears before the booking form.
+- Booking CTA is "Request Booking".
+- When opened from an inquiry, a new booking is linked back to that inquiry when possible.
+
+Messages:
+- Inquiry and booking conversations share one Messages inbox.
+- Inquiry threads are clearly labeled.
+- Student sees "Request Booking" inside an open inquiry.
+- Linked inquiries show "View Booking".
+- Realtime inquiry messages are supported.
+- Inquiry notifications use the existing TutoDemy notification/email/push pipeline.
+
+Admin:
+- Inquiry safety reports appear together with booking conversation reports.
+
+PAYMENT
+No PayMongo logic changed.
+A student cannot pay from an inquiry.
+PayMongo still appears only after an accepted booking.
+
+PRIVATE SETUP REQUIRED
+Run TUTODEMY-INQUIRY-MESSAGING.sql from the separate Private Setup ZIP before uploading this public patch.
+
+SECURITY
+No SQL or secret values are included in this public website package.
+
+CACHE
+tutodemy-20260819-inquiry1

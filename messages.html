@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
-<meta content="Private booking messages between TutoDemy learners, tutors, and authorized administrators." name="description"/>
+<meta content="Private tutor inquiries and booking messages." name="description"/>
 <meta content="#0C046D" name="theme-color"/>
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
@@ -19,17 +19,17 @@
 <meta content="https://tutodemy.net/messages.html" property="og:url"/>
 <meta content="https://tutodemy.net/assets/images/tutodemy-logo.png" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<title>Booking Messages | TutoDemy Learning PH</title>
+<title>Messages | TutoDemy Learning PH</title>
 <link href="assets/images/owl-mark.png" rel="icon"/>
-<link href="css/style.css?v=20260816-professional1" rel="stylesheet"/>
+<link href="css/style.css?v=20260819-inquiry1" rel="stylesheet"/>
 <script defer="" src="js/config.js"></script>
 <script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script defer="" src="js/supabase-client.js"></script>
 <script defer="" src="js/auth-core.js"></script>
 <script defer="" src="js/cloud-sync.js"></script>
-<script defer="" src="js/marketplace-api.js?v=20260819-performance2"></script>
-<script defer="" src="js/main.js?v=20260819-performance2"></script>
-<script defer="" src="js/messages.js?v=20260816-professional1"></script>
+<script defer="" src="js/marketplace-api.js?v=20260819-inquiry1"></script>
+<script defer="" src="js/main.js?v=20260819-inquiry1"></script>
+<script defer="" src="js/messages.js?v=20260819-inquiry1"></script>
 <script defer="" src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="messages">
@@ -47,7 +47,7 @@
 </div>
 <div class="marketplace-alert" hidden="" id="messages-alert"></div>
 <div class="message-layout" hidden="" id="message-app">
-<aside aria-label="Booking conversations" class="thread-sidebar">
+<aside aria-label="Tutor conversations" class="thread-sidebar">
 <div class="thread-sidebar-head">
 <div><span class="eyebrow">CONVERSATIONS</span><h2>My messages</h2></div>
 <button aria-label="Refresh conversations" class="icon-button" id="refresh-threads" type="button">↻</button>
@@ -57,8 +57,8 @@
 <section aria-live="polite" class="conversation-shell">
 <div class="conversation-empty" id="conversation-empty">
 <img alt="" aria-hidden="true" src="assets/images/owl-mark.png"/>
-<h2>Select a booking conversation</h2>
-<p>Active booking conversations appear on the left.</p>
+<h2>Select a conversation</h2>
+<p>Inquiries and booking conversations appear on the left.</p>
 </div>
 <div class="conversation-panel" hidden="" id="conversation-panel">
 <header class="conversation-head">
@@ -67,11 +67,16 @@
 <h2 id="conversation-name">Booking conversation</h2>
 <p id="conversation-meta"></p>
 </div>
-<button class="button button-outline" id="report-conversation" type="button">Report conversation</button>
+<div class="conversation-head-actions">
+<a class="button button-small" hidden="" id="request-booking-from-inquiry" href="#">Request Booking</a>
+<a class="button button-outline button-small" hidden="" id="view-linked-booking" href="bookings.html">View Booking</a>
+<button class="text-button" hidden="" id="close-inquiry" type="button">Close inquiry</button>
+<button class="button button-outline button-small" id="report-conversation" type="button">Report</button>
+</div>
 </header>
-<div class="conversation-notice">
-<b>Official coordination thread</b>
-<span>Keep booking decisions and meeting links here so both parties have a clear record. Learners should use <a href="bookings.html">My Bookings</a> for official payment instructions and receipt submission.</span>
+<div class="conversation-notice" id="conversation-notice">
+<b>Private conversation</b>
+<span id="conversation-notice-text">Keep tutoring details here. Payments should only be completed through the booking's PayMongo checkout.</span>
 </div>
 <div aria-live="polite" aria-relevant="additions" class="message-stream" id="message-stream" role="log"></div>
 <form class="message-composer" id="message-form">

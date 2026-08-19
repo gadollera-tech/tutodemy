@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
-<meta content="View an approved TutoDemy tutor profile and request a schedule." name="description"/>
+<meta content="View an approved tutor, send an inquiry, or request a session." name="description"/>
 <meta content="#0C046D" name="theme-color"/>
 <meta content="yes" name="mobile-web-app-capable"/>
 <meta content="yes" name="apple-mobile-web-app-capable"/>
@@ -21,15 +21,15 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <title>Tutor Profile | TutoDemy Learning PH</title>
 <link href="assets/images/owl-mark.png" rel="icon"/>
-<link href="css/style.css?v=20260816-professional1" rel="stylesheet"/>
+<link href="css/style.css?v=20260819-inquiry1" rel="stylesheet"/>
 <script defer="" src="js/config.js"></script>
 <script defer="" src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script defer="" src="js/supabase-client.js"></script>
 <script defer="" src="js/auth-core.js"></script>
 <script defer="" src="js/cloud-sync.js"></script>
-<script defer="" src="js/marketplace-api.js?v=20260819-performance2"></script>
-<script defer="" src="js/main.js?v=20260819-performance2"></script>
-<script defer="" src="js/tutor-profile.js?v=20260816-bookexpiry1"></script>
+<script defer="" src="js/marketplace-api.js?v=20260819-inquiry1"></script>
+<script defer="" src="js/main.js?v=20260819-inquiry1"></script>
+<script defer="" src="js/tutor-profile.js?v=20260819-inquiry1"></script>
 <script defer="" src="js/pwa.js?v=20260809-pwa1"></script>
 </head>
 <body data-page="tutor-profile">
@@ -51,8 +51,19 @@
 <section class="panel"><span class="eyebrow">VERIFIED REVIEWS</span><h2>Reviews</h2><div class="review-list" id="review-list"></div></section>
 </div>
 <aside class="booking-sidebar">
-<section class="panel booking-card">
-<span class="eyebrow">REQUEST A SESSION</span>
+<section class="panel inquiry-card" id="inquiry">
+<span class="eyebrow">ASK FIRST</span>
+<h2>Send Inquiry</h2>
+<p class="inquiry-intro">Ask about availability, subjects, or session details before booking.</p>
+<form id="inquiry-form">
+<label>Subject<select id="inquiry-subject" name="subject" required=""></select></label>
+<label>Message<textarea id="inquiry-message" name="message" maxlength="2000" placeholder="What would you like to ask?" required="" rows="4"></textarea></label>
+<button class="button full" type="submit">Send Inquiry</button>
+<p aria-live="polite" class="form-status" id="inquiry-status" role="status"></p>
+</form>
+</section>
+<section class="panel booking-card" id="booking-request">
+<span class="eyebrow">READY TO BOOK</span>
 <div class="booking-rate"><b id="profile-rate">—</b><span>per hour</span></div>
 <div class="rating-summary"><b id="profile-rating">New tutor</b><span id="profile-review-count">No reviews yet</span></div>
 <form id="booking-form">
@@ -63,10 +74,10 @@
 <label class="full">Topic / goal<textarea name="learning_goal" placeholder="Topic or skill" required="" rows="4"></textarea></label>
 <label class="full" hidden="" id="location-field">Meeting area<textarea name="location_details" placeholder="General meeting area only" rows="2"></textarea></label>
 <div class="booking-estimate"><span>Estimated session amount</span><b id="booking-estimate">—</b></div>
-<button class="button full" type="submit">Send booking request</button>
+<button class="button full" type="submit">Request Booking</button>
 <p aria-live="polite" class="form-status" id="booking-status" role="status"></p>
 </form>
-<p class="booking-note">Payment starts only after the tutor accepts. Pay through PayMongo; confirmation updates automatically.</p>
+<p class="booking-note">No payment yet. PayMongo appears only after the tutor accepts the booking.</p>
 </section>
 </aside>
 </div>
