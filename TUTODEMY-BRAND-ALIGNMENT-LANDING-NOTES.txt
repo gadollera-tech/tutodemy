@@ -1,0 +1,37 @@
+TutoDemy Landing Brand Alignment
+Build: 20260819-brandlanding1
+
+VISUAL DIRECTION
+Based on the supplied TutoDemy social branding:
+- warm cream background
+- soft curved periwinkle haze at the upper right
+- sky-blue glow toward the lower part of the hero
+- royal navy first headline line
+- lighter periwinkle/blue second headline line
+- orange primary CTA
+- subtle "Prepare. Practice. Progress." brand mantra
+
+PERFORMANCE
+The poster-style background is recreated with CSS gradients and shapes.
+No large social-media background image is loaded by the website.
+
+PRESERVED
+- Approved hero copy
+- Start Practicing Free / Find a Tutor CTAs
+- Landing login/create-account functionality
+- Student terminology
+- Tutor performance improvements
+- Inquiry -> chat -> booking feature
+- PayMongo
+- Notifications
+- Admin / tutor / student dashboards
+
+PUBLIC PATCH
+This package also includes the current Inquiry Messaging public files so it can
+supersede the earlier inquiry patch if that patch has not yet been uploaded.
+
+PRIVATE SQL
+Not included.
+
+CACHE
+tutodemy-20260819-brandlanding1
