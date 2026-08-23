@@ -1,0 +1,70 @@
+TutoDemy Science Reviewer Videos
+Build: 20260823-sciencevideos1
+
+ADDED
+27 recommended external YouTube lesson cards across S1-S4.
+
+S1 — General, Earth & Environmental Science (8)
+- Scientific Method & Experimental Design
+- Density & Measurement
+- Plate Tectonics & Geologic Hazards
+- Rock Cycle, Weathering & Erosion
+- Weather & the Atmosphere
+- Moon Phases
+- Solar & Lunar Eclipses
+- Tides
+
+S2 — Biology (7)
+- Cells & Organelles
+- Photosynthesis
+- Cellular Respiration
+- Genetics & Heredity
+- Human Body Systems
+- Ecology & Symbiosis
+- Evolution & Classification
+
+S3 — Chemistry (5)
+- Atomic Structure & the Periodic Table
+- Ionic & Covalent Bonding
+- The Mole, Equations & Stoichiometry
+- Gas Laws
+- Acids, Bases & Neutralization
+
+S4 — Physics (7)
+- Newton's Laws & Motion
+- Work, Energy & Power
+- Momentum
+- Pressure, Fluids & Buoyancy
+- Waves & Sound
+- Electric Circuits & Ohm's Law
+- Heat Transfer
+
+SOURCES
+- CrashCourse
+- Khan Academy
+- Amoeba Sisters
+- The Organic Chemistry Tutor
+
+BEHAVIOR
+- Each lesson is clearly labeled as external YouTube content.
+- Creator/channel is credited.
+- Video opens in a new tab.
+- No video is downloaded, copied, or re-hosted by TutoDemy.
+- Practice this topic uses the existing exact question-topic filter.
+- Question counts come from the current 220-question Science bank.
+
+PRESERVED
+- 18 Mathematics reviewer video lessons
+- 20 Language & Reading reviewer video lessons
+- Existing reviewer UI
+- Exact topic-practice filtering
+- Practice submit reliability fix
+- Public header/footer fallback
+- Logged-in sidebars
+
+NO SQL.
+NO BACKEND CHANGE.
+NO PRIVATE FILES.
+
+CACHE
+tutodemy-20260823-sciencevideos1
