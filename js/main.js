@@ -35,13 +35,50 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   function publicNavigation() {
-    const tutorActive = ["tutoring", "for-tutors", "tutor-profile", "tutor-terms"].includes(active);
+    const practiceActive =
+      ["exams", "practice", "dost", "reviewers", "reviewer"]
+        .includes(active);
+
+    const practiceDropdown = `
+      <div class="nav-dropdown public-nav-dropdown">
+        <button
+          class="nav-dropdown-toggle ${
+            practiceActive ? "active" : ""
+          }"
+          type="button"
+          aria-expanded="false">
+          Practice
+          <span aria-hidden="true">⌄</span>
+        </button>
+        <div class="nav-dropdown-menu public-nav-menu">
+          <a href="exams.html"
+             class="${active === "exams" ? "active" : ""}">
+            <b>Practice Hub</b>
+            <small>Create a practice set</small>
+          </a>
+          <a href="dost-sei.html"
+             class="${active === "dost" ? "active" : ""}">
+            <b>DOST-SEI</b>
+            <small>Scholarship exam prep</small>
+          </a>
+          <a href="reviewers.html"
+             class="${
+               ["reviewers", "reviewer"].includes(active)
+                 ? "active"
+                 : ""
+             }">
+            <b>Reviewers</b>
+            <small>Study materials</small>
+          </a>
+        </div>
+      </div>`;
+
     return [
-      `<a href="index.html" class="${isActive("home")}">Home</a>`,
-      practiceDropdown("Practice"),
-      `<a href="tutoring.html" class="${isActive("tutoring", "tutor-profile")}">Tutors</a>`,
-      `<a href="for-tutors.html" class="${isActive("for-tutors")}">For Tutors</a>`,
-      `<a href="about.html" class="${isActive("about")}">About</a>`
+      navItem("index.html", "Home", "home"),
+      practiceDropdown,
+      navItem("tutoring.html", "Find a Tutor", "tutoring"),
+      navItem("for-tutors.html", "Teach", "for-tutors"),
+      navItem("about.html", "About", "about")
     ].join("");
   }
 
@@ -542,6 +579,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <nav class="main-nav" aria-label="${presentation.badge || "Primary"} navigation">${presentation.navigation}</nav>
             <div class="nav-actions">
               ${presentation.switchLabel ? `<button class="role-view-switch" id="role-view-switch" type="button" data-switch-kind="${presentation.switchKind}">${presentation.switchLabel}</button>` : ""}
+              ${context.view === "public" && !context.publicPreview ? `<a class="button public-primary-cta" href="exams.html">Start Practicing</a>` : ""}
               ${presentation.planVisible ? `<a class="plan-chip" id="plan-chip" href="pricing.html"><i></i><span>Access</span></a>` : ""}
               <div class="notification-center" id="notification-center" hidden>
                 <button class="notification-bell" id="notification-bell" type="button" aria-label="Notifications" aria-haspopup="true" aria-expanded="false" aria-controls="notification-popover">
