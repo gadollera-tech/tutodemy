@@ -1,0 +1,59 @@
+TutoDemy Reasoning Reviewer Videos
+Build: 20260823-reasoningvideos1
+
+ADDED
+5 recommended external YouTube lesson cards.
+
+R1 — Number Sequences
+- Number Series Reasoning Tricks - The Easy Way!
+- The Organic Chemistry Tutor
+- 50 current TutoDemy questions
+
+R2 — Figure Rotation
+- Figure Rotation - Part 1
+- Lessonade
+- 50 current TutoDemy questions
+
+R3 — Shape Progression
+- Figure Series Test | Non Verbal Reasoning
+- Decode Subject
+- 50 current TutoDemy questions
+
+R4 — Odd One Out
+- NVR Type 2: Odd one out
+- 11PlusGenie
+- 40 current TutoDemy questions
+
+R5 — Position & Movement
+- Non Verbal Reasoning Test Tips and Tricks
+- CareerVidz
+- 30 current TutoDemy questions
+
+WHY ONLY 5
+The current TutoDemy Reasoning bank has exactly five topic families:
+Number sequence, Figure rotation, Shape progression,
+Odd one out, and Position movement.
+
+BEHAVIOR
+- Each video opens externally on YouTube.
+- Channel/creator is credited.
+- TutoDemy does not own or re-host the videos.
+- Practice this topic maps exactly to the corresponding current
+  Reasoning question family.
+
+PRESERVED
+- 18 Mathematics lessons
+- 20 Language & Reading lessons
+- 27 Science lessons
+- reviewer video-card UI
+- exact Practice this topic filtering
+- practice submit reliability
+- public header/footer fallback
+- logged-in sidebars
+
+NO SQL.
+NO BACKEND CHANGE.
+NO PRIVATE FILES.
+
+CACHE
+tutodemy-20260823-reasoningvideos1
