@@ -6295,3 +6295,62 @@ body.role-public .nav-account-anon {
     border-left: 0;
   }
 }
+
+
+/* =========================================================
+   Public Header/Footer Fallback Hardening
+   Build 20260823-homeheader3
+   ========================================================= */
+
+.public-static-practice {
+  position: relative;
+}
+
+.public-static-practice > summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.public-static-practice > summary::-webkit-details-marker {
+  display: none;
+}
+
+.public-static-submenu {
+  position: absolute;
+  top: calc(100% + 9px);
+  left: 0;
+  z-index: 180;
+  width: 300px;
+  padding: 8px;
+  border: 1px solid #e6e7ee;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 20px 46px rgba(12,4,109,.12);
+}
+
+.public-static-practice:not([open]) .public-static-submenu {
+  display: none;
+}
+
+.public-static-practice[open] > summary {
+  background: #eeedf8;
+  color: var(--navy);
+}
+
+@media (max-width: 900px) {
+  .public-static-header .public-static-nav {
+    display: none;
+  }
+
+  .public-static-header .menu-toggle {
+    display: inline-flex;
+  }
+
+  .public-static-header .public-static-actions {
+    margin-left: auto;
+  }
+
+  .public-static-header .plan-chip {
+    display: none;
+  }
+}
