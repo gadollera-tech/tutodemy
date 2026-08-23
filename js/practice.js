@@ -34,7 +34,16 @@ document.addEventListener("DOMContentLoaded", async ()=>{
 
   const params=new URLSearchParams(location.search);
   const requestedCategory=params.get("category");
-  if(requestedCategory&&[...categories,"Mixed"].includes(requestedCategory)) categoryEl.value=requestedCategory;
+  const requestedDomainParam=params.get("domain");
+  const requestedFocus=(params.get("focus")||"").trim();
+  const requestedTopicValues=(params.get("topics")||"")
+    .split("|")
+    .map(value=>value.trim())
+    .filter(Boolean);
+
+  if(requestedCategory&&[...categories,"Mixed"].includes(requestedCategory)){
+    categoryEl.value=requestedCategory;
+  }
 
   function updateDomains(){
     const category=categoryEl.value;
@@ -42,8 +51,12 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     if(category!=="Mixed"){
       (window.TUTODEMY_TAXONOMY[category]||[]).forEach(d=>domainEl.insertAdjacentHTML("beforeend",`<option value="${d.id}">${d.id} — ${d.title}</option>`));
     }
-    const requestedDomain=params.get("domain");
-    if(requestedDomain&&[...domainEl.options].some(o=>o.value===requestedDomain)) domainEl.value=requestedDomain;
+    if(
+      requestedDomainParam &&
+      [...domainEl.options].some(o=>o.value===requestedDomainParam)
+    ){
+      domainEl.value=requestedDomainParam;
+    }
     updateAvailability();
   }
 
@@ -51,12 +64,43 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     return countEl.value==="custom"?Math.max(1,Math.min(220,Number(customCount.value)||20)):Number(countEl.value);
   }
 
+  function topicFocusApplies(config){
+    return Boolean(
+      requestedTopicValues.length &&
+      requestedCategory &&
+      requestedDomainParam &&
+      config.category===requestedCategory &&
+      config.domain===requestedDomainParam
+    );
+  }
+
   function poolFor(config){
+    const focused=topicFocusApplies(config);
+
     return questions.filter(q=>{
-      const categoryMatch=config.category==="Mixed"||q.category===config.category;
-      const domainMatch=config.category==="Mixed"||config.domain==="all"||q.domain===config.domain;
-      const difficultyMatch=config.difficulty==="all"||q.difficulty===config.difficulty;
-      return categoryMatch&&domainMatch&&difficultyMatch;
+      const categoryMatch=
+        config.category==="Mixed"||
+        q.category===config.category;
+
+      const domainMatch=
+        config.category==="Mixed"||
+        config.domain==="all"||
+        q.domain===config.domain;
+
+      const difficultyMatch=
+        config.difficulty==="all"||
+        q.difficulty===config.difficulty;
+
+      const topicMatch=
+        !focused||
+        requestedTopicValues.includes(q.topic);
+
+      return (
+        categoryMatch &&
+        domainMatch &&
+        difficultyMatch &&
+        topicMatch
+      );
     });
   }
 
@@ -65,8 +109,16 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     const config={category:categoryEl.value,domain:domainEl.value,difficulty:difficultyEl.value};
     const available=poolFor(config).length;
     const request=requestedCount();
-    let message=`${available} questions are available for the current filters.`;
-    if(request>available) message+=` The generated set will be capped at ${available}.`;
+    const focused=topicFocusApplies(config);
+
+    let message=focused
+      ? `${requestedFocus||"Selected topic"} · ${available} questions available.`
+      : `${available} questions are available for the current filters.`;
+
+    if(request>available){
+      message+=` The generated set will be capped at ${available}.`;
+    }
+
     availability.textContent=message;
   }
 
@@ -197,6 +249,12 @@ document.addEventListener("DOMContentLoaded", async ()=>{
       mode:config.mode,
       modeLabel:modeLabels[config.mode],
       requestedCount:config.count,
+      topicFocus:topicFocusApplies(config)
+        ? (requestedFocus||null)
+        : null,
+      topicValues:topicFocusApplies(config)
+        ? [...requestedTopicValues]
+        : [],
       items:selected.map(q=>({
         id:q.id,
         choiceOrder:config.shuffle?window.Tuto.shuffle(q.choices.map(c=>c.id)):q.choices.map(c=>c.id)
@@ -228,7 +286,11 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   function showExam(){
     builderView.hidden=true;resultsView.hidden=true;examView.hidden=false;
     document.querySelector("#exam-mode-label").textContent=session.modeLabel;
-    document.querySelector("#exam-title").textContent=`${session.category}${session.domain!=="all"?" · "+session.domain:""} · ${session.items.length} items`;
+    document.querySelector("#exam-title").textContent=
+      `${session.category}`+
+      `${session.domain!=="all"?" · "+session.domain:""}`+
+      `${session.topicFocus?" · "+session.topicFocus:""}`+
+      ` · ${session.items.length} items`;
     buildNavigator();renderQuestion();updateTimerDisplay();
   }
 

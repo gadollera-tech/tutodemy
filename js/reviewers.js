@@ -20,6 +20,9 @@ document.addEventListener("DOMContentLoaded", async ()=>{
       return `<article class="reviewer-card">
         <div class="reviewer-code">${r.domain}</div><small>${r.category}</small>
         <h3>${r.title}</h3><p>${r.summary}</p>
+        ${Array.isArray(r.topics)&&r.topics.length
+          ? `<div class="reviewer-video-count"><span>▶</span>${r.topics.length} recommended video lesson${r.topics.length===1?"":"s"}</div>`
+          : ""}
         <div class="reviewer-actions"><a class="small-button" href="reviewer.html?id=${r.id}">Open reviewer</a><button class="bookmark" data-save="${r.id}" aria-label="Save reviewer">${saved.includes(r.id)?"★":"☆"}</button></div>
       </article>`;
     }).join("")||`<div class="empty-state">No reviewer matches the current search.</div>`;
