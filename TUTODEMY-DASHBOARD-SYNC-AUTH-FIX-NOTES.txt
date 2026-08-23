@@ -1,0 +1,25 @@
+TutoDemy Student Dashboard Sync/Auth Fix
+Build: 20260823-dashboardsync1
+
+FIXES
+
+1. LEADERBOARD FALSE "LOG IN"
+- Dashboard now waits for TutoAuth and TutoCloud.
+- If the first session check is empty, it refreshes Supabase session once.
+- Dashboard also listens for a late SIGNED_IN/auth-change event and reloads.
+- The header and Dashboard now use the same confirmed account session.
+
+2. STUDENT ACTIVITY SYNC
+- Dashboard triggers cloud sync before loading summary/leaderboard.
+- cloud-sync merges both:
+  * signed-in user-specific attempt history
+  * older browser-wide attempt history
+- saveAttempt updates the signed-in local cache before the network request.
+- Dashboard fallback reads the signed-in cache instead of incorrectly showing 0.
+- If the summary RPC is delayed/unavailable, synced attempts still render locally.
+
+NO SQL.
+NO BACKEND / PAYMONGO CHANGE.
+
+CACHE
+tutodemy-20260823-dashboardsync1
