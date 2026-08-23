@@ -1,0 +1,55 @@
+TutoDemy Mathematics Reviewer Video Lessons
+Build: 20260823-mathvideos1
+
+ADDED
+18 recommended external YouTube lessons across M1-M4.
+
+M1
+1. Order of Operations
+2. Fractions
+3. Percentages
+4. Ratio & Proportion
+
+M2
+5. Linear Equations
+6. Systems of Equations
+7. Exponents
+8. Quadratic Equations
+9. Distance, Rate & Time
+
+M3
+10. Triangle Angles
+11. Pythagorean Theorem
+12. Area & Perimeter
+13. Circles
+14. Basic Trigonometry
+
+M4
+15. Mean, Median & Range
+16. Arithmetic Sequences
+17. Functions
+18. Probability
+
+UI
+- Each topic has a Recommended video card.
+- Channel is credited.
+- Video opens on YouTube in a new tab.
+- No YouTube player is embedded, so reviewer pages remain light.
+- TutoDemy clearly labels these as external content.
+- Mathematics library cards show how many recommended video lessons are inside.
+
+PRACTICE THIS TOPIC
+- Each topic card links into the existing practice builder.
+- The builder receives an exact hidden topic filter.
+- Only matching current TutoDemy question-bank topics are selected.
+- If the learner changes category/domain, the hidden topic focus stops applying.
+- The practice availability line shows the selected topic and available question count.
+
+BACKEND
+No SQL.
+No Supabase change.
+No API key.
+No private file.
+
+CACHE
+tutodemy-20260823-mathvideos1
