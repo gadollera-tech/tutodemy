@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260823-practicesubmit1";
+const CACHE_VERSION = "tutodemy-20260823-leaderboard2";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
