@@ -1,0 +1,61 @@
+TutoDemy Language & Reading High-Yield Reviewer Modules
+Build: 20260823-languagemodules1
+
+UPGRADED
+L1 — Grammar & General Usage
+L2 — Syntax & Mechanics
+L3 — Vocabulary & Diction
+R1 — Reading Comprehension
+
+EACH MODULE NOW HAS
+- high-yield concepts
+- key rules / decision guides
+- worked examples
+- common traps
+- quick recall
+- mastery checklist
+- existing recommended videos
+- existing Practice this topic links
+
+L1
+- Subject–Verb Agreement
+- Pronouns: Case & Reference
+- Verb Tense, Conditionals & Mood
+- Ng vs Nang & Filipino Markers
+- Aspekto ng Pandiwa
+
+L2
+- Sentence Fragments
+- Run-ons & Comma Splices
+- Semicolons, Colons & Nonessential Elements
+- Parallel Structure & Logical Comparison
+- Modifiers, Ambiguity & Concision
+
+L3
+- Vocabulary in Context & Precision
+- Prefixes, Roots & Word Forms
+- Analogies, Synonyms & Antonyms
+- Filipino Vocabulary & Idyoma
+
+R1
+- Main Idea & Supporting Details
+- Inference
+- Tone & Word Choice
+- Author's Purpose
+- Text Structure & Organization
+- Vocabulary in Context
+
+PRESERVED
+- Mathematics high-yield modules
+- all 70 recommended video lessons across all subjects
+- exact Practice this topic filtering
+- practice submit reliability
+- public header/footer
+- logged-in sidebars
+- backend integrations
+
+NO SQL.
+NO BACKEND CHANGE.
+
+CACHE
+tutodemy-20260823-languagemodules1
