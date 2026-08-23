@@ -34,51 +34,105 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>`;
   }
 
+  function publicNavIcon(name) {
+    const common =
+      `viewBox="0 0 24 24" aria-hidden="true" fill="none" ` +
+      `stroke="currentColor" stroke-width="1.9" ` +
+      `stroke-linecap="round" stroke-linejoin="round"`;
+
+    const icons = {
+      home:
+        `<svg ${common}><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>`,
+      practice:
+        `<svg ${common}><path d="M4 19.5V6.8A2.8 2.8 0 0 1 6.8 4H11v15.5H6.8A2.8 2.8 0 0 0 4 22"/><path d="M20 19.5V6.8A2.8 2.8 0 0 0 17.2 4H13v15.5h4.2A2.8 2.8 0 0 1 20 22"/></svg>`,
+      tutors:
+        `<svg ${common}><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.6-3.1 2.5-5 5.5-5s4.9 1.9 5.5 5"/><path d="M16 5.5a3 3 0 0 1 0 5.8"/><path d="M16.5 14c2.2.4 3.6 2 4 4.2"/></svg>`,
+      teach:
+        `<svg ${common}><path d="M3 8.5 12 4l9 4.5-9 4.5z"/><path d="M7 11v5.5c3 2 7 2 10 0V11"/><path d="M21 9v6"/></svg>`,
+      about:
+        `<svg ${common}><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><path d="M12 7.5h.01"/></svg>`,
+      hub:
+        `<svg ${common}><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>`,
+      cet:
+        `<svg ${common}><path d="M7 3h10v18H7z"/><path d="M9.5 7h5M9.5 11h5M9.5 15h3"/></svg>`,
+      dost:
+        `<svg ${common}><path d="M9 3h6"/><path d="M10 3v5l-5 9a2 2 0 0 0 1.7 3h10.6A2 2 0 0 0 19 17l-5-9V3"/><path d="M8 15h8"/></svg>`,
+      reviewers:
+        `<svg ${common}><path d="M5 4h14v16H5z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>`
+    };
+
+    return icons[name] || icons.home;
+  }
+
   function publicNavigation() {
     const practiceActive =
       ["exams", "practice", "dost", "reviewers", "reviewer"]
         .includes(active);
 
-    const practiceDropdown = `
-      <div class="nav-dropdown public-nav-dropdown">
+    return [
+      `<a href="index.html"
+          class="public-nav-item ${isActive("home")}">
+        <span class="public-nav-icon">${publicNavIcon("home")}</span>
+        <span>Home</span>
+      </a>`,
+
+      `<div class="nav-dropdown public-nav-dropdown ${
+        practiceActive ? "active" : ""
+      }">
         <button
-          class="nav-dropdown-toggle ${
+          class="nav-dropdown-toggle public-nav-item ${
             practiceActive ? "active" : ""
           }"
           type="button"
-          aria-expanded="false">
-          Practice
-          <span aria-hidden="true">⌄</span>
+          aria-expanded="false"
+          aria-haspopup="true">
+          <span class="public-nav-icon">${publicNavIcon("practice")}</span>
+          <span>Practice</span>
+          <span class="public-nav-chevron" aria-hidden="true">⌄</span>
         </button>
-        <div class="nav-dropdown-menu public-nav-menu">
-          <a href="exams.html"
-             class="${active === "exams" ? "active" : ""}">
-            <b>Practice Hub</b>
-            <small>Create a practice set</small>
+
+        <div class="nav-submenu public-nav-submenu"
+             aria-label="Practice submenu">
+          <a href="exams.html" class="${isActive("exams")}">
+            <span class="public-submenu-icon">${publicNavIcon("hub")}</span>
+            <span><b>Practice Hub</b><small>Build a practice set</small></span>
           </a>
-          <a href="dost-sei.html"
-             class="${active === "dost" ? "active" : ""}">
-            <b>DOST-SEI</b>
-            <small>Scholarship exam prep</small>
+
+          <a href="practice.html" class="${isActive("practice")}">
+            <span class="public-submenu-icon">${publicNavIcon("cet")}</span>
+            <span><b>CET Practice</b><small>UPCAT and entrance exam practice</small></span>
           </a>
+
+          <a href="dost-sei.html" class="${isActive("dost")}">
+            <span class="public-submenu-icon">${publicNavIcon("dost")}</span>
+            <span><b>DOST-SEI</b><small>Scholarship exam preparation</small></span>
+          </a>
+
           <a href="reviewers.html"
-             class="${
-               ["reviewers", "reviewer"].includes(active)
-                 ? "active"
-                 : ""
-             }">
-            <b>Reviewers</b>
-            <small>Study materials</small>
+             class="${isActive("reviewers", "reviewer")}">
+            <span class="public-submenu-icon">${publicNavIcon("reviewers")}</span>
+            <span><b>Reviewers</b><small>Browse study materials</small></span>
           </a>
         </div>
-      </div>`;
+      </div>`,
 
-    return [
-      navItem("index.html", "Home", "home"),
-      practiceDropdown,
-      navItem("tutoring.html", "Find a Tutor", "tutoring"),
-      navItem("for-tutors.html", "Teach", "for-tutors"),
-      navItem("about.html", "About", "about")
+      `<a href="tutoring.html"
+          class="public-nav-item ${isActive("tutoring", "tutor-profile")}">
+        <span class="public-nav-icon">${publicNavIcon("tutors")}</span>
+        <span>Tutors</span>
+      </a>`,
+
+      `<a href="for-tutors.html"
+          class="public-nav-item ${isActive("for-tutors")}">
+        <span class="public-nav-icon">${publicNavIcon("teach")}</span>
+        <span>For Tutors</span>
+      </a>`,
+
+      `<a href="about.html"
+          class="public-nav-item ${isActive("about")}">
+        <span class="public-nav-icon">${publicNavIcon("about")}</span>
+        <span>About</span>
+      </a>`
     ].join("");
   }
 
@@ -579,7 +633,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             <nav class="main-nav" aria-label="${presentation.badge || "Primary"} navigation">${presentation.navigation}</nav>
             <div class="nav-actions">
               ${presentation.switchLabel ? `<button class="role-view-switch" id="role-view-switch" type="button" data-switch-kind="${presentation.switchKind}">${presentation.switchLabel}</button>` : ""}
-              ${context.view === "public" && !context.publicPreview ? `<a class="button public-primary-cta" href="exams.html">Start Practicing</a>` : ""}
               ${presentation.planVisible ? `<a class="plan-chip" id="plan-chip" href="pricing.html"><i></i><span>Access</span></a>` : ""}
               <div class="notification-center" id="notification-center" hidden>
                 <button class="notification-bell" id="notification-bell" type="button" aria-label="Notifications" aria-haspopup="true" aria-expanded="false" aria-controls="notification-popover">
