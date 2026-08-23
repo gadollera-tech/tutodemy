@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   let timerId=null;
   let lastTimerSave=0;
   let lastResult=null;
+  let submissionInProgress=false;
 
   categoryEl.innerHTML=`<option value="Mixed">Mixed — all four banks</option>`+categories.map(c=>`<option value="${c}">${c}</option>`).join("");
 
@@ -75,12 +76,68 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   window.addEventListener("tutodemy-plan-change",updateAvailability);
   updateDomains();
 
-  function getActive(){ return window.Tuto.storage.get("tutodemyActiveSession",null); }
+  function getActive(){
+    const active=window.Tuto.storage.get(
+      "tutodemyActiveSession",
+      null
+    );
+
+    // Older builds could re-save an already completed attempt
+    // during beforeunload. Remove that stale lock automatically.
+    if(active?.submitted){
+      try{
+        window.Tuto.storage.remove(
+          "tutodemyActiveSession"
+        );
+      }catch(error){
+        console.error(
+          "Stale active-session cleanup failed:",
+          error
+        );
+      }
+
+      window.TutoCloud
+        ?.clearActiveSession?.()
+        .catch(error=>
+          console.error(
+            "Cloud stale-session cleanup failed:",
+            error
+          )
+        );
+
+      return null;
+    }
+
+    return active;
+  }
+
   function saveActive(){
-    if(!session) return;
-    session.updatedAt=new Date().toISOString();
-    window.Tuto.storage.set("tutodemyActiveSession",session);
-    window.TutoCloud?.saveActiveSession?.(session).catch(error=>console.error("Active-session sync failed:",error));
+    // Never recreate a completed attempt as an active session.
+    if(!session||session.submitted) return;
+
+    session.updatedAt=
+      new Date().toISOString();
+
+    try{
+      window.Tuto.storage.set(
+        "tutodemyActiveSession",
+        session
+      );
+    }catch(error){
+      console.error(
+        "Active-session local save failed:",
+        error
+      );
+    }
+
+    window.TutoCloud
+      ?.saveActiveSession?.(session)
+      .catch(error=>
+        console.error(
+          "Active-session sync failed:",
+          error
+        )
+      );
   }
   function updateResume(){
     const active=getActive();
@@ -313,41 +370,309 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   }
 
   function calculateResult(){
-    const details=session.items.map(item=>{
-      const q=byId[item.id],chosen=session.answers[q.id]||null;
-      return {id:q.id,category:q.category,domain:q.domain,topic:q.topic,difficulty:q.difficulty,chosen,correctChoice:q.correct_choice,correct:chosen===q.correct_choice};
+    if(!session?.items?.length){
+      throw new Error(
+        "This attempt has no questions. Start a new practice set."
+      );
+    }
+
+    const missingIds=[];
+    const details=[];
+
+    session.items.forEach(item=>{
+      const q=byId[item?.id];
+
+      if(!q){
+        missingIds.push(item?.id||"unknown");
+        return;
+      }
+
+      const chosen=
+        session.answers?.[q.id]||null;
+
+      details.push({
+        id:q.id,
+        category:q.category,
+        domain:q.domain,
+        topic:q.topic,
+        difficulty:q.difficulty,
+        chosen,
+        correctChoice:q.correct_choice,
+        correct:chosen===q.correct_choice
+      });
     });
-    const correct=details.filter(x=>x.correct).length,total=details.length;
-    const elapsed=session.timeLimitSeconds?session.timeLimitSeconds-session.remainingSeconds:Math.floor((Date.now()-session.startedAt)/1000);
+
+    if(missingIds.length){
+      throw new Error(
+        "Some questions in this attempt are no longer available. " +
+        "Your answers are still saved. Refresh the page or start a new set."
+      );
+    }
+
+    const correct=
+      details.filter(x=>x.correct).length;
+    const total=details.length;
+
+    if(!total){
+      throw new Error(
+        "The result could not be calculated. Your answers are still saved."
+      );
+    }
+
+    const elapsed=session.timeLimitSeconds
+      ? Math.max(
+          0,
+          Number(session.timeLimitSeconds)-
+          Number(session.remainingSeconds||0)
+        )
+      : Math.max(
+          0,
+          Math.floor(
+            (
+              Date.now()-
+              Number(session.startedAt||Date.now())
+            )/1000
+          )
+        );
+
     const domains={};
     const categoryBreakdown={};
+
     details.forEach(d=>{
-      domains[d.domain]??={correct:0,total:0,category:d.category};
-      domains[d.domain].total++; if(d.correct) domains[d.domain].correct++;
-      categoryBreakdown[d.category]??={correct:0,total:0};
-      categoryBreakdown[d.category].total++; if(d.correct) categoryBreakdown[d.category].correct++;
+      domains[d.domain]??={
+        correct:0,
+        total:0,
+        category:d.category
+      };
+
+      domains[d.domain].total++;
+      if(d.correct){
+        domains[d.domain].correct++;
+      }
+
+      categoryBreakdown[d.category]??={
+        correct:0,
+        total:0
+      };
+
+      categoryBreakdown[d.category].total++;
+      if(d.correct){
+        categoryBreakdown[d.category].correct++;
+      }
     });
+
     return {
-      attemptId:session.id,category:session.category,domain:session.domain,mode:session.mode,modeLabel:session.modeLabel,
-      correct,total,accuracy:Math.round(correct/total*100),elapsedSeconds:elapsed,averageSeconds:Math.round(elapsed/total),
-      flagged:session.flagged.length,completedAt:new Date().toISOString(),details,domains,categoryBreakdown
+      attemptId:session.id,
+      category:session.category,
+      domain:session.domain,
+      mode:session.mode,
+      modeLabel:session.modeLabel,
+      correct,
+      total,
+      accuracy:Math.round(correct/total*100),
+      elapsedSeconds:elapsed,
+      averageSeconds:Math.round(elapsed/total),
+      flagged:Array.isArray(session.flagged)
+        ? session.flagged.length
+        : 0,
+      completedAt:new Date().toISOString(),
+      details,
+      domains,
+      categoryBreakdown
     };
   }
 
-  function submitSession(auto=false){
-    if(!session||session.submitted) return;
-    clearInterval(timerId);session.submitted=true;
-    lastResult=calculateResult();
-    const history=window.Tuto.storage.get("tutodemyHistory",[]);
-    history.unshift({...lastResult,details:undefined,domains:lastResult.domains});
-    window.Tuto.storage.set("tutodemyHistory",history.slice(0,100));
-    window.TutoCloud?.saveAttempt?.(lastResult).catch(error=>console.error("Attempt sync failed:",error));
-    window.Tuto.storage.remove("tutodemyActiveSession");
-    window.TutoCloud?.clearActiveSession?.().catch(error=>console.error("Cloud active-session deletion failed:",error));
-    examView.hidden=true;builderView.hidden=true;resultsView.hidden=false;
-    renderResults(auto);
-    window.scrollTo({top:0,behavior:"smooth"});
+
+  function setSubmitBusy(busy){
+    const toolbarButton=
+      document.querySelector("#exam-submit");
+    const nextButton=
+      document.querySelector("#check-or-next");
+
+    if(toolbarButton){
+      toolbarButton.disabled=busy;
+      toolbarButton.textContent=
+        busy ? "Finishing…" : "Submit";
+    }
+
+    if(nextButton){
+      nextButton.disabled=busy;
+
+      if(
+        !busy &&
+        session &&
+        !examView.hidden
+      ){
+        // Restore Check / Next / Finish label after a retry.
+        renderQuestion();
+      }
+    }
   }
+
+  function persistCompletedResult(result){
+    let localHistorySaved=true;
+
+    try{
+      const history=
+        window.Tuto.storage.get(
+          "tutodemyHistory",
+          []
+        );
+
+      const safeHistory=
+        Array.isArray(history)
+          ? history
+          : [];
+
+      safeHistory.unshift({
+        ...result,
+        details:undefined,
+        domains:result.domains
+      });
+
+      window.Tuto.storage.set(
+        "tutodemyHistory",
+        safeHistory.slice(0,100)
+      );
+    }catch(error){
+      localHistorySaved=false;
+      console.error(
+        "Attempt history save failed:",
+        error
+      );
+    }
+
+    // Cloud sync is best-effort and must never block Results.
+    window.TutoCloud
+      ?.saveAttempt?.(result)
+      .catch(error=>
+        console.error(
+          "Attempt sync failed:",
+          error
+        )
+      );
+
+    return localHistorySaved;
+  }
+
+  function clearCompletedActiveSession(){
+    try{
+      window.Tuto.storage.remove(
+        "tutodemyActiveSession"
+      );
+    }catch(error){
+      console.error(
+        "Active-session cleanup failed:",
+        error
+      );
+    }
+
+    window.TutoCloud
+      ?.clearActiveSession?.()
+      .catch(error=>
+        console.error(
+          "Cloud active-session deletion failed:",
+          error
+        )
+      );
+  }
+
+  function submitSession(auto=false){
+    if(!session||submissionInProgress){
+      return;
+    }
+
+    // Recover attempts locked by the older submit bug.
+    if(session.submitted&&!examView.hidden){
+      session.submitted=false;
+    }
+
+    if(session.submitted){
+      return;
+    }
+
+    submissionInProgress=true;
+    setSubmitBusy(true);
+
+    const timerWasRunning=
+      Boolean(timerId);
+
+    clearInterval(timerId);
+
+    try{
+      // Calculate + render BEFORE committing the submitted flag.
+      const result=calculateResult();
+
+      lastResult=result;
+      renderResults(auto);
+
+      examView.hidden=true;
+      builderView.hidden=true;
+      resultsView.hidden=false;
+
+      // Commit only after the result is successfully usable.
+      session.submitted=true;
+
+      const historySaved=
+        persistCompletedResult(result);
+
+      clearCompletedActiveSession();
+
+      if(!historySaved){
+        window.Tuto.toast(
+          "Attempt finished. Local history could not be saved on this device."
+        );
+      }
+
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+    }catch(error){
+      console.error(
+        "Attempt submission failed:",
+        error
+      );
+
+      // Never leave a failed submit permanently locked.
+      session.submitted=false;
+      lastResult=null;
+
+      try{
+        saveActive();
+      }catch(saveError){
+        console.error(
+          "Attempt recovery save failed:",
+          saveError
+        );
+      }
+
+      examView.hidden=false;
+      resultsView.hidden=true;
+
+      window.Tuto.toast(
+        error?.message||
+        "The attempt could not be finished. Your answers are still saved."
+      );
+
+      if(
+        auto &&
+        session.timeLimitSeconds &&
+        session.remainingSeconds<=0
+      ){
+        // Keep the attempt open for a manual retry instead of
+        // immediately auto-submitting in a loop.
+        session.remainingSeconds=1;
+        updateTimerDisplay();
+      }else if(timerWasRunning){
+        startTimer();
+      }
+    }finally{
+      submissionInProgress=false;
+      setSubmitBusy(false);
+    }
+  }
+
 
   function renderResults(auto){
     const r=lastResult;
@@ -398,5 +723,9 @@ document.addEventListener("DOMContentLoaded", async ()=>{
     session=null;lastResult=null;resultsView.hidden=true;builderView.hidden=false;updateResume();window.scrollTo({top:0,behavior:"smooth"});
   });
 
-  window.addEventListener("beforeunload",saveActive);
+  window.addEventListener("beforeunload",()=>{
+    if(session&&!session.submitted){
+      saveActive();
+    }
+  });
 });
