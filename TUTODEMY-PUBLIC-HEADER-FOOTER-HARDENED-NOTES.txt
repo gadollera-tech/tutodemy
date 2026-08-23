@@ -1,0 +1,24 @@
+TutoDemy Public Header/Footer Hardened
+Build: 20260823-homeheader3
+
+WHY
+Previously public HTML only contained empty #site-header and #site-footer
+containers. main.js generated the visible header/footer.
+
+This patch keeps the dynamic role-aware system BUT also places a complete
+public fallback header and footer directly in the HTML.
+
+RESULT
+- Header is visible even before main.js finishes.
+- Footer is visible even before main.js finishes.
+- Home / Practice / Tutors / For Tutors / About are present in fallback HTML.
+- Menu icons are present in fallback HTML.
+- Practice fallback contains Practice Hub, CET Practice, DOST-SEI, Reviewers.
+- When main.js loads, it replaces the fallback with the normal live header.
+
+NO MENU REMOVALS.
+NO SQL.
+NO BACKEND CHANGE.
+
+CACHE
+tutodemy-20260823-homeheader3
