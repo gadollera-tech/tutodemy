@@ -1,0 +1,56 @@
+TutoDemy Language & Reading Reviewer Videos
+Build: 20260823-languagevideos1
+
+ADDED
+20 recommended external YouTube lesson cards.
+
+L1 — Grammar & General Usage
+1. Subject–Verb Agreement
+2. Pronouns: Case & Reference
+3. English Verb Tenses
+4. Ng vs Nang & Filipino Markers
+5. Aspekto ng Pandiwa
+
+L2 — Syntax & Mechanics
+6. Sentence Fragments
+7. Run-ons & Comma Splices
+8. Semicolons & Clause Punctuation
+9. Parallel Structure
+10. Modifiers & Sentence Clarity
+
+L3 — Vocabulary & Diction
+11. Vocabulary in Context
+12. Prefixes, Roots & Word Forms
+13. Analogies & Word Relationships
+14. Filipino Vocabulary & Idyoma
+
+R1 — Reading Comprehension
+15. Main Idea & Supporting Details
+16. Making Inferences
+17. Tone & Word Choice
+18. Author's Purpose
+19. Text Structure & Organization
+20. Reading Vocabulary in Context
+
+SOURCES USED
+- Khan Academy
+- Talk to Me in Tagalog
+- ARALIN SA FILIPINO
+- English Units
+- Woodward English
+- Teacher Aiza
+
+BEHAVIOR
+- Videos open on YouTube in a new tab.
+- TutoDemy does not host or claim ownership of the videos.
+- Each topic shows its current matching TutoDemy practice-question count.
+- Practice this topic uses the existing exact hidden topic filter.
+- Mathematics video lessons are preserved.
+
+BACKEND
+No SQL.
+No Supabase change.
+No private files.
+
+CACHE
+tutodemy-20260823-languagevideos1
