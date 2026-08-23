@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260823-reasoningvideos1";
+const CACHE_VERSION = "tutodemy-20260823-mathmodules1";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [

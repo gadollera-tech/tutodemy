@@ -1,0 +1,62 @@
+TutoDemy Mathematics High-Yield Reviewer Modules
+Build: 20260823-mathmodules1
+
+PURPOSE
+Turns Mathematics reviewers M1-M4 into real reviewer/study-guide modules.
+
+EACH MODULE NOW HAS
+- High-yield concepts
+- Key rules / formulas
+- Worked examples with steps
+- Common traps
+- Quick recall questions
+- Mastery checklist
+- Existing recommended YouTube lessons
+- Existing Practice this topic links
+
+M1
+- Order of Operations & Integers
+- Fractions
+- Percentages
+- Ratio, Proportion & Unit Rate
+
+M2
+- Linear Equations
+- Systems of Equations
+- Exponents
+- Quadratic Equations
+- Distance, Rate & Time
+
+M3
+- Angles & Triangles
+- Pythagorean Theorem
+- Area & Perimeter
+- Circles
+- Basic Trigonometry
+
+M4
+- Functions
+- Arithmetic Sequences
+- Mean, Median & Weighted Average
+- Probability
+
+CONTENT BASIS
+The modules are organized around the concepts represented in the current
+220-question Mathematics bank. Existing topic/video mappings are preserved.
+
+PRESERVED
+- 18 Mathematics video lessons
+- 20 Language & Reading video lessons
+- 27 Science video lessons
+- 5 Reasoning video lessons
+- Practice this topic exact filtering
+- Practice submit reliability
+- Public header/footer
+- Logged-in sidebars
+- All backend integrations
+
+NO SQL.
+NO BACKEND CHANGE.
+
+CACHE
+tutodemy-20260823-mathmodules1
