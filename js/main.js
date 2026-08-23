@@ -146,6 +146,306 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
   }
 
+
+  const workspacePages = new Set([
+    "dashboard",
+    "exams",
+    "practice",
+    "dost",
+    "reviewers",
+    "reviewer",
+    "tutoring",
+    "tutor-profile",
+    "bookings",
+    "messages",
+    "profile",
+    "tutor-dashboard",
+    "tutor-onboarding",
+    "admin"
+  ]);
+
+  function workspaceSidebarEligible(context) {
+    return (
+      !context.publicPreview &&
+      ["learner", "tutor", "admin"].includes(context.view) &&
+      workspacePages.has(active)
+    );
+  }
+
+  function sidebarIcon(name) {
+    const common =
+      `viewBox="0 0 24 24" aria-hidden="true" fill="none" ` +
+      `stroke="currentColor" stroke-width="1.9" ` +
+      `stroke-linecap="round" stroke-linejoin="round"`;
+
+    const icons = {
+      dashboard:
+        `<svg ${common}><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>`,
+      practice:
+        `<svg ${common}><path d="M4 19.5V6.8A2.8 2.8 0 0 1 6.8 4H11v15.5H6.8A2.8 2.8 0 0 0 4 22"/><path d="M20 19.5V6.8A2.8 2.8 0 0 0 17.2 4H13v15.5h4.2A2.8 2.8 0 0 1 20 22"/></svg>`,
+      tutors:
+        `<svg ${common}><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.6-3.1 2.5-5 5.5-5s4.9 1.9 5.5 5"/><path d="M16 5.5a3 3 0 0 1 0 5.8"/><path d="M16.5 14c2.2.4 3.6 2 4 4.2"/></svg>`,
+      bookings:
+        `<svg ${common}><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/><path d="m8 15 2 2 5-5"/></svg>`,
+      messages:
+        `<svg ${common}><path d="M21 15a4 4 0 0 1-4 4H9l-5 3v-5.5A6.5 6.5 0 0 1 3 13V8a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>`,
+      profile:
+        `<svg ${common}><circle cx="12" cy="8" r="4"/><path d="M4.5 21c.8-4 3.3-6 7.5-6s6.7 2 7.5 6"/></svg>`,
+      payouts:
+        `<svg ${common}><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M7 15h4"/></svg>`,
+      users:
+        `<svg ${common}><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20c.5-3.4 2.4-5.2 5.5-5.2 3.2 0 5.1 1.8 5.5 5.2"/><path d="M14 15c3.5-.4 5.8 1.3 6.5 4.5"/></svg>`,
+      payments:
+        `<svg ${common}><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/><path d="M7 15h4"/></svg>`,
+      finance:
+        `<svg ${common}><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>`,
+      reports:
+        `<svg ${common}><path d="M5 3h10l4 4v14H5z"/><path d="M15 3v5h5"/><path d="M8 13h8M8 17h6"/></svg>`
+    };
+
+    return icons[name] || icons.dashboard;
+  }
+
+  function sidebarLink(href, label, icon, selected) {
+    return `
+      <a href="${href}"
+         class="workspace-side-link ${selected ? "active" : ""}">
+        <span class="workspace-side-icon">${sidebarIcon(icon)}</span>
+        <span>${label}</span>
+      </a>`;
+  }
+
+  function workspaceSidebarNavigation(context) {
+    const hash = location.hash || "";
+    const practiceActive =
+      ["exams", "practice", "dost", "reviewers", "reviewer"]
+        .includes(active);
+
+    if (context.view === "admin") {
+      const tab = currentAdminTab();
+
+      return [
+        sidebarLink(
+          "admin.html",
+          "Dashboard",
+          "dashboard",
+          active === "admin" && tab === "overview"
+        ),
+        sidebarLink(
+          "admin.html?tab=users",
+          "Users",
+          "users",
+          active === "admin" && tab === "users"
+        ),
+        sidebarLink(
+          "admin.html?tab=tutors",
+          "Tutors",
+          "tutors",
+          active === "admin" && tab === "tutors"
+        ),
+        sidebarLink(
+          "admin.html?tab=bookings",
+          "Payments",
+          "payments",
+          active === "admin" && tab === "bookings"
+        ),
+        sidebarLink(
+          "admin.html?tab=finance",
+          "Finance",
+          "finance",
+          active === "admin" && tab === "finance"
+        ),
+        sidebarLink(
+          "admin.html?tab=payouts",
+          "Payouts",
+          "payouts",
+          active === "admin" && tab === "payouts"
+        ),
+        sidebarLink(
+          "admin.html?tab=reports",
+          "Reports",
+          "reports",
+          active === "admin" && tab === "reports"
+        )
+      ].join("");
+    }
+
+    if (context.view === "tutor") {
+      const dashboardSelected =
+        active === "tutor-dashboard" &&
+        !["#booking-requests", "#private-ledger-section"]
+          .includes(hash);
+
+      return [
+        sidebarLink(
+          "tutor-dashboard.html",
+          "Dashboard",
+          "dashboard",
+          dashboardSelected
+        ),
+        sidebarLink(
+          "tutor-onboarding.html",
+          "Profile",
+          "profile",
+          active === "tutor-onboarding"
+        ),
+        sidebarLink(
+          "tutor-dashboard.html#booking-requests",
+          "Bookings",
+          "bookings",
+          active === "tutor-dashboard" &&
+          hash === "#booking-requests"
+        ),
+        sidebarLink(
+          "messages.html",
+          "Messages",
+          "messages",
+          active === "messages"
+        ),
+        sidebarLink(
+          "tutor-dashboard.html#private-ledger-section",
+          "Payouts",
+          "payouts",
+          active === "tutor-dashboard" &&
+          hash === "#private-ledger-section"
+        )
+      ].join("");
+    }
+
+    return [
+      sidebarLink(
+        "dashboard.html",
+        "Dashboard",
+        "dashboard",
+        active === "dashboard"
+      ),
+      sidebarLink(
+        "exams.html",
+        "Practice",
+        "practice",
+        practiceActive
+      ),
+      sidebarLink(
+        "tutoring.html",
+        "Tutors",
+        "tutors",
+        ["tutoring", "tutor-profile"].includes(active)
+      ),
+      sidebarLink(
+        "bookings.html?role=learner",
+        "Bookings",
+        "bookings",
+        active === "bookings"
+      ),
+      sidebarLink(
+        "messages.html",
+        "Messages",
+        "messages",
+        active === "messages"
+      ),
+      sidebarLink(
+        "profile.html",
+        "Profile",
+        "profile",
+        active === "profile"
+      )
+    ].join("");
+  }
+
+  function workspaceTopbarTitle(context) {
+    if (context.view === "admin") {
+      const labels = {
+        overview: "Admin Dashboard",
+        users: "Users",
+        tutors: "Tutors",
+        bookings: "Payments",
+        finance: "Finance",
+        payouts: "Payouts",
+        reports: "Reports"
+      };
+      return labels[currentAdminTab()] || "Admin";
+    }
+
+    if (context.view === "tutor") {
+      if (active === "tutor-onboarding") return "Tutor Profile";
+      if (active === "messages") return "Messages";
+      if (
+        active === "tutor-dashboard" &&
+        location.hash === "#booking-requests"
+      ) return "Bookings";
+      if (
+        active === "tutor-dashboard" &&
+        location.hash === "#private-ledger-section"
+      ) return "Payouts";
+      return "Tutor Dashboard";
+    }
+
+    const labels = {
+      dashboard: "Student Dashboard",
+      exams: "Practice",
+      practice: "Practice",
+      dost: "DOST-SEI",
+      reviewers: "Reviewers",
+      reviewer: "Reviewer",
+      tutoring: "Tutors",
+      "tutor-profile": "Tutor Profile",
+      bookings: "Bookings",
+      messages: "Messages",
+      profile: "Profile"
+    };
+
+    return labels[active] || "Student";
+  }
+
+  function workspaceSidebarMarkup(context, presentation) {
+    if (!workspaceSidebarEligible(context)) return "";
+
+    const home =
+      context.view === "admin"
+        ? "admin.html"
+        : context.view === "tutor"
+          ? "tutor-dashboard.html"
+          : "dashboard.html";
+
+    const label =
+      context.view === "admin"
+        ? "ADMIN"
+        : context.view === "tutor"
+          ? "TUTOR"
+          : "STUDENT";
+
+    return `
+      <aside class="workspace-sidebar"
+             aria-label="${label} workspace navigation">
+        <a class="workspace-sidebar-brand"
+           href="${home}"
+           aria-label="TutoDemy ${label.toLowerCase()} home">
+          <img src="assets/images/wordmark.png"
+               alt="TutoDemy Learning PH">
+          <span>${label}</span>
+        </a>
+
+        <nav class="workspace-side-nav">
+          ${workspaceSidebarNavigation(context)}
+        </nav>
+
+        <div class="workspace-sidebar-bottom">
+          ${
+            context.view === "learner"
+              ? `<p>Prepare. Practice. Progress.</p>`
+              : context.view === "tutor"
+                ? `<p>Tutor workspace</p>`
+                : `<p>Admin workspace</p>`
+          }
+          <a href="profile.html"
+             class="workspace-sidebar-account">
+            ${sidebarIcon("profile")}
+            <span>Account</span>
+          </a>
+        </div>
+      </aside>`;
+  }
+
   function notificationFooter(context) {
     if (context.view === "admin") return `<a href="admin.html?tab=bookings">Admin bookings</a><a href="admin.html?tab=reports">Reports</a>`;
     if (context.view === "tutor") return `<a href="tutor-dashboard.html#booking-requests">Booking requests</a><a href="messages.html">Messages</a>`;
@@ -205,12 +505,29 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function renderShell(context) {
     const presentation = rolePresentation(context);
-    document.body.classList.remove("role-public", "role-learner", "role-tutor", "role-admin", "role-dual-account", "role-admin-preview");
-    presentation.bodyClass.split(/\s+/).filter(Boolean).forEach(name => document.body.classList.add(name));
+    document.body.classList.remove(
+      "role-public",
+      "role-learner",
+      "role-tutor",
+      "role-admin",
+      "role-dual-account",
+      "role-admin-preview",
+      "workspace-sidebar-mode"
+    );
+
+    presentation.bodyClass
+      .split(/\s+/)
+      .filter(Boolean)
+      .forEach(name => document.body.classList.add(name));
+
+    if (workspaceSidebarEligible(context)) {
+      document.body.classList.add("workspace-sidebar-mode");
+    }
 
     const header = document.querySelector("#site-header");
     if (header) {
       header.innerHTML = `
+        ${workspaceSidebarMarkup(context, presentation)}
         ${context.publicPreview ? `<div class="admin-preview-bar"><span>Administrator previewing the public website</span><a href="admin.html">Return to Admin Console</a></div>` : ""}
         <header class="site-header">
           <div class="container nav-wrap">
@@ -218,6 +535,9 @@ document.addEventListener("DOMContentLoaded", async () => {
               <img src="assets/images/wordmark.png" alt="TutoDemy Learning PH">
               ${presentation.badge ? `<span class="workspace-badge">${presentation.badge}</span>` : ""}
             </a>
+            <div class="workspace-topbar-title">
+              ${workspaceTopbarTitle(context)}
+            </div>
             <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false"><span></span><span></span><span></span></button>
             <nav class="main-nav" aria-label="${presentation.badge || "Primary"} navigation">${presentation.navigation}</nav>
             <div class="nav-actions">
