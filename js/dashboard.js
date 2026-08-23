@@ -735,8 +735,6 @@
   }
 
   const leaderboardState = { weekOffset: 0, subject: "All subjects", loaded: false };
-  let dashboardHistory = [];
-  let dashboardLoadPromise = null;
 
   function normalizeLeaderboard(payload) {
     if (!payload || typeof payload !== "object") return null;
@@ -748,7 +746,8 @@
       subject: String(payload.subject || "All subjects"),
       subjectOptions: Array.isArray(payload.subjectOptions) && payload.subjectOptions.length ? payload.subjectOptions.map(String) : ["All subjects"],
       minimumQuestions: Math.max(1, Math.round(number(payload.minimumQuestions || 20))),
-      minimumParticipants: Math.max(1, Math.round(number(payload.minimumParticipants || 3))),
+      minimumParticipants: Math.max(3, Math.round(number(payload.minimumParticipants || 3))),
+      listMinimumParticipants: Math.max(2, Math.round(number(payload.listMinimumParticipants || 2))),
       participantCount: Math.max(0, Math.round(number(payload.participantCount))),
       leaderboardVisible: Boolean(payload.leaderboardVisible),
       topTen: Array.isArray(payload.topTen) ? payload.topTen.map(row => ({
@@ -865,7 +864,11 @@
 
     const podium = document.querySelector("#leaderboard-podium");
     if (podium) {
-      if (data.leaderboardVisible && data.topTen.length) {
+      if (
+        data.leaderboardVisible &&
+        data.participantCount >= data.minimumParticipants &&
+        data.topTen.length
+      ) {
         podium.hidden = false;
 
         const podiumRows = data.topTen
@@ -906,8 +909,25 @@
     const list = document.querySelector("#leaderboard-list");
     if (list) {
       if (!data.leaderboardVisible) {
-        const needed = Math.max(0, data.minimumParticipants - data.participantCount);
-        list.innerHTML = `<div class="leaderboard-cohort-building"><div><b>Public leaderboard is warming up</b><small>${needed > 0 ? `${needed} more eligible opted-in learner${needed === 1 ? "" : "s"} needed for the podium and rankings.` : "More eligible opt-in activity is needed."}</small></div></div>`;
+        const needed = Math.max(
+          0,
+          data.listMinimumParticipants -
+          data.participantCount
+        );
+
+        list.innerHTML =
+          `<div class="leaderboard-cohort-building">` +
+            `<div>` +
+              `<b>Public leaderboard is warming up</b>` +
+              `<small>${
+                needed > 0
+                  ? `${needed} more eligible opted-in learner${
+                      needed === 1 ? "" : "s"
+                    } needed to show rankings.`
+                  : "More eligible opt-in activity is needed."
+              }</small>` +
+            `</div>` +
+          `</div>`;
       } else {
         list.innerHTML = data.topTen.map(row => {
           const meta = leaderboardPlaceMeta(row.rank);
@@ -981,9 +1001,7 @@
   function renderHistory() {
     const historyBox = document.querySelector("#attempt-history");
     if (!historyBox) return;
-    const items = Array.isArray(dashboardHistory)
-      ? dashboardHistory
-      : [];
+    const items = window.Tuto.storage.get("tutodemyHistory", []);
     historyBox.innerHTML = items.length ? items.slice(0, 12).map(item => {
       const total = attemptQuestionCount(item);
       const correct = attemptCorrectCount(item, total);
@@ -1018,55 +1036,6 @@
   }
 
 
-  async function resolveDashboardAccount() {
-    await Promise.allSettled([
-      window.TutoAuth?.ready,
-      window.TutoCloud?.ready
-    ]);
-
-    let account = renderAccountState();
-
-    // Supabase can occasionally restore the session just after the first
-    // auth check. Refresh once before deciding the student is logged out.
-    if (
-      account.configured &&
-      !account.user &&
-      window.TutoAuth?.refresh
-    ) {
-      try {
-        await window.TutoAuth.refresh();
-      } catch (error) {
-        console.warn(
-          "Dashboard session refresh failed:",
-          error
-        );
-      }
-
-      account = renderAccountState();
-    }
-
-    return account;
-  }
-
-  function getDashboardHistory(account) {
-    if (
-      account?.user &&
-      window.TutoCloud?.getAttemptHistory
-    ) {
-      const synced =
-        window.TutoCloud.getAttemptHistory();
-
-      if (Array.isArray(synced)) {
-        return synced;
-      }
-    }
-
-    return window.Tuto.storage.get(
-      "tutodemyHistory",
-      []
-    );
-  }
-
   function showSourceNote(message, kind = "info") {
     const note = document.querySelector("#progress-source-note");
     if (!note) return;
@@ -1083,206 +1052,59 @@
     return data;
   }
 
-  async function loadDashboardData() {
-    if (dashboardLoadPromise) {
-      return dashboardLoadPromise;
-    }
+  document.addEventListener("DOMContentLoaded", async () => {
+    await window.TutoCloud?.ready;
 
-    dashboardLoadPromise = (async () => {
-      const account =
-        await resolveDashboardAccount();
+    const account = renderAccountState();
+    const history = window.Tuto.storage.get("tutodemyHistory", []);
+    const localSummary = buildLocalSummary(history);
+    let summary = localSummary;
+    const percentilePromise = account.configured && account.user ? loadCloudPercentiles() : null;
 
-      if (
-        account.configured &&
-        account.user &&
-        window.TutoCloud?.syncAll
-      ) {
-        // Upload any browser attempts, pull the account history, then
-        // calculate Dashboard/Leaderboard from the same signed-in account.
-        try {
-          await window.TutoCloud.syncAll({
-            silent: true
-          });
-        } catch (error) {
-          console.warn(
-            "Dashboard sync could not finish:",
-            error
-          );
-        }
-      }
-
-      dashboardHistory =
-        getDashboardHistory(account);
-
-      const localSummary =
-        buildLocalSummary(
-          dashboardHistory
-        );
-
-      let summary = localSummary;
-
-      const percentilePromise =
-        account.configured &&
-        account.user
-          ? loadCloudPercentiles()
-          : null;
-
-      if (
-        account.configured &&
-        account.user
-      ) {
-        try {
-          summary = normalizeSummary(
-            await loadCloudSummary(),
-            localSummary
-          );
-
-          showSourceNote("");
-        } catch (error) {
-          console.error(
-            "Student progress summary could not be loaded:",
-            error
-          );
-
-          // The synced signed-in cache is a valid fallback; do not reset
-          // the dashboard to zero just because the summary RPC is delayed.
-          summary = localSummary;
-
-          const missingFunction =
-            /get_my_student_progress_summary|does not exist|schema cache/i
-              .test(
-                String(
-                  error?.message || error
-                )
-              );
-
-          showSourceNote(
-            missingFunction
-              ? "Progress summary service is unavailable. Showing your synced attempts."
-              : "Showing your latest synced attempts.",
-            "warning"
-          );
-        }
-      } else if (!account.user) {
+    if (account.configured && account.user) {
+      try {
+        summary = normalizeSummary(await loadCloudSummary(), localSummary);
+        showSourceNote("");
+      } catch (error) {
+        console.error("Student progress summary could not be loaded:", error);
+        const missingFunction = /get_my_student_progress_summary|does not exist|schema cache/i.test(String(error?.message || error));
         showSourceNote(
-          "Account session could not be confirmed. Refresh once if you just signed in.",
-          "info"
+          missingFunction
+            ? "Phase 4A database setup has not been installed yet. Showing synchronized progress available on this device."
+            : "Could not refresh cloud progress. Showing the latest device data.",
+          "warning"
         );
       }
+    } else if (!account.user) {
+      showSourceNote("Log in to sync completed attempts across devices.", "info");
+    }
 
-      renderSummary(summary);
-      renderHistory();
-      renderSavedReviewers();
+    renderSummary(summary);
+    renderHistory();
+    renderSavedReviewers();
 
-      if (!percentilePromise) {
-        renderPercentileLocked();
-      } else {
-        try {
-          renderPercentiles(
-            await percentilePromise
-          );
-        } catch (error) {
-          console.error(
-            "Student percentiles could not be loaded:",
-            error
-          );
+    if (!percentilePromise) renderPercentileLocked();
+    else try { renderPercentiles(await percentilePromise); }
+    catch (error) {
+      console.error("Student percentiles could not be loaded:", error);
+      const missing = /get_my_student_percentiles|learner_comparison_snapshots|does not exist|schema cache|could not find the function/i.test(String(error?.message || error || ""));
+      renderPercentileUnavailable(missing ? "Phase 4B database setup is not installed yet" : "Private comparisons could not be refreshed", missing ? "Run the private Phase 4B SQL in Supabase. The Phase 4A progress summary remains usable." : "The comparison service is temporarily unavailable. No other learner data was exposed.");
+    }
 
-          const missing =
-            /get_my_student_percentiles|learner_comparison_snapshots|does not exist|schema cache|could not find the function/i
-              .test(
-                String(
-                  error?.message ||
-                  error ||
-                  ""
-                )
-              );
+    setupLeaderboardControls(account);
+    if (account.configured && account.user) await refreshLeaderboard();
+    else renderLeaderboardLocked();
 
-          renderPercentileUnavailable(
-            missing
-              ? "Percentile service unavailable"
-              : "Percentile could not be refreshed",
-            ""
-          );
-        }
+    document.querySelector("#clear-history")?.addEventListener("click", async () => {
+      if (!confirm("Clear all attempt history from this browser and, when logged in, from the learner account?")) return;
+      window.Tuto.storage.remove("tutodemyHistory");
+      try {
+        await window.TutoCloud?.clearAttemptHistory?.();
+      } catch (error) {
+        console.error(error);
+        window.Tuto.toast("Local history cleared, but cloud deletion needs attention.");
       }
-
-      setupLeaderboardControls(account);
-
-      if (
-        account.configured &&
-        account.user
-      ) {
-        await refreshLeaderboard();
-      } else {
-        renderLeaderboardLocked();
-      }
-
-      return account;
-    })();
-
-    try {
-      return await dashboardLoadPromise;
-    } finally {
-      dashboardLoadPromise = null;
-    }
-  }
-
-  document.addEventListener(
-    "DOMContentLoaded",
-    async () => {
-      await loadDashboardData();
-
-      document
-        .querySelector("#clear-history")
-        ?.addEventListener(
-          "click",
-          async () => {
-            if (
-              !confirm(
-                "Clear all attempt history from this browser and, when logged in, from the student account?"
-              )
-            ) return;
-
-            window.Tuto.storage.remove(
-              "tutodemyHistory"
-            );
-
-            try {
-              await window.TutoCloud
-                ?.clearAttemptHistory?.();
-            } catch (error) {
-              console.error(error);
-              window.Tuto.toast(
-                "Local history cleared, but cloud deletion needs attention."
-              );
-            }
-
-            location.reload();
-          }
-        );
-    }
-  );
-
-  // If Supabase restores a signed-in session a little later than the first
-  // page check, refresh the dashboard instead of leaving Leaderboard locked.
-  window.addEventListener(
-    "tutodemy-auth-change",
-    event => {
-      const user =
-        event.detail?.user || null;
-
-      if (!user) return;
-
-      clearTimeout(
-        window.__tutodemyDashboardAuthTimer
-      );
-
-      window.__tutodemyDashboardAuthTimer =
-        setTimeout(
-          () => loadDashboardData(),
-          120
-        );
-    }
-  );
-
+      location.reload();
+    });
+  });
 })();
