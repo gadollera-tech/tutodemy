@@ -6570,3 +6570,275 @@ body.role-public .nav-account-anon {
     margin-top: 10px;
   }
 }
+
+
+/* =========================================================
+   Mathematics High-Yield Reviewer Modules
+   Build 20260823-mathmodules1
+   ========================================================= */
+
+.high-yield-module {
+  margin-top: 34px;
+  padding-top: 30px;
+  border-top: 1px solid #e8e7eb;
+}
+
+.high-yield-module-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.high-yield-module-head h2 {
+  margin-bottom: 6px;
+}
+
+.high-yield-module-head p {
+  max-width: 720px;
+  margin: 0;
+  color: #62656f;
+  line-height: 1.6;
+}
+
+.module-chip {
+  flex: 0 0 auto;
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: #efeff9;
+  color: var(--navy);
+  font-size: .72rem;
+  font-weight: 800;
+}
+
+.high-yield-concepts {
+  display: grid;
+  gap: 16px;
+}
+
+.high-yield-concept {
+  padding: 20px;
+  border: 1px solid #e4e5eb;
+  border-radius: 17px;
+  background: #fff;
+  box-shadow: 0 7px 20px rgba(12,4,109,.03);
+}
+
+.high-yield-concept-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 13px;
+}
+
+.high-yield-concept-head > span {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  flex: 0 0 31px;
+  border-radius: 9px;
+  background: var(--navy);
+  color: #fff;
+  font-size: .74rem;
+  font-weight: 850;
+}
+
+.high-yield-concept-head h3 {
+  margin: 0;
+  font-size: 1.04rem;
+}
+
+.high-yield-point-list {
+  margin: 0;
+  padding-left: 20px;
+  color: #51545e;
+}
+
+.high-yield-point-list li {
+  margin: 7px 0;
+  line-height: 1.55;
+}
+
+.formula-strip {
+  display: grid;
+  gap: 4px;
+  margin-top: 15px;
+  padding: 12px 14px;
+  border-left: 4px solid var(--periwinkle);
+  border-radius: 10px;
+  background: #f5f6fb;
+}
+
+.formula-strip small {
+  color: #747783;
+  font-size: .64rem;
+  font-weight: 850;
+  letter-spacing: .06em;
+}
+
+.formula-strip b {
+  color: var(--navy);
+  font-size: .9rem;
+  line-height: 1.45;
+}
+
+.worked-example {
+  margin-top: 14px;
+  padding: 15px;
+  border: 1px solid #ece9e3;
+  border-radius: 12px;
+  background: #fffaf2;
+}
+
+.worked-example-question {
+  margin: 5px 0 10px;
+  color: #353640;
+  font-weight: 750;
+}
+
+.worked-example ol {
+  display: grid;
+  gap: 7px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.worked-example li {
+  display: grid;
+  grid-template-columns: 24px minmax(0,1fr);
+  align-items: start;
+  gap: 8px;
+}
+
+.worked-example li > span {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  background: rgba(229,146,46,.13);
+  color: #8c5718;
+  font-size: .68rem;
+  font-weight: 850;
+}
+
+.worked-example li p {
+  margin: 2px 0 0;
+  color: #565860;
+}
+
+.worked-example-answer {
+  margin: 11px 0 0;
+  color: #393a43;
+}
+
+.common-trap {
+  display: grid;
+  grid-template-columns: 30px minmax(0,1fr);
+  gap: 9px;
+  align-items: start;
+  margin-top: 13px;
+  padding: 11px 12px;
+  border-radius: 11px;
+  background: #fff2ef;
+}
+
+.common-trap > span {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 9px;
+  background: #f4d2ca;
+  color: #8a3424;
+  font-weight: 900;
+}
+
+.common-trap p {
+  margin: 1px 0 0;
+  color: #67473f;
+  line-height: 1.5;
+}
+
+.common-trap p b {
+  display: block;
+  margin-bottom: 2px;
+  color: #8a3424;
+}
+
+.module-recall-grid {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.module-recall-card {
+  padding: 18px;
+  border: 1px solid #e4e5eb;
+  border-radius: 15px;
+  background: #fafafd;
+}
+
+.module-recall-card h3 {
+  margin: 5px 0 10px;
+}
+
+.module-recall-card ol {
+  margin: 0;
+  padding-left: 21px;
+}
+
+.module-recall-card ol li {
+  margin: 8px 0;
+  color: #555862;
+  line-height: 1.5;
+}
+
+.mastery-checklist {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mastery-checklist li {
+  display: grid;
+  grid-template-columns: 20px minmax(0,1fr);
+  gap: 9px;
+  align-items: start;
+  color: #555862;
+  line-height: 1.45;
+}
+
+.check-box {
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  border: 2px solid #b9bdc8;
+  border-radius: 5px;
+  background: #fff;
+}
+
+@media (max-width: 800px) {
+  .high-yield-module-head {
+    display: block;
+  }
+
+  .module-chip {
+    display: inline-flex;
+    margin-top: 10px;
+  }
+
+  .module-recall-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .high-yield-concept {
+    padding: 16px;
+  }
+}
