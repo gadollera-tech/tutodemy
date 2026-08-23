@@ -1,0 +1,59 @@
+TutoDemy Desktop Workspace Sidebar
+Build: 20260823-sidebarshell1
+
+DESKTOP / LANDSCAPE TABLET
+Logged-in workspace pages now use an app-style left sidebar.
+
+Student:
+- Dashboard
+- Practice
+- Tutors
+- Bookings
+- Messages
+- Profile
+
+Tutor:
+- Dashboard
+- Profile
+- Bookings
+- Messages
+- Payouts
+
+Admin:
+- Dashboard
+- Users
+- Tutors
+- Payments
+- Finance
+- Payouts
+- Reports
+
+TOP BAR
+The desktop top bar is simplified to:
+- current workspace/page title
+- role switch when applicable
+- Access
+- Notifications
+- Account
+
+RESPONSIVE
+At 1100px and below, the sidebar disappears and the existing top/hamburger
+navigation remains. This protects mobile and portrait-tablet usability.
+
+PUBLIC SITE
+Landing, About, Pricing, Privacy, Terms, Resources, For Tutors, Auth and other
+marketing/legal pages keep the existing public header layout.
+
+PRESERVED
+- Student dashboard line graph
+- Inquiry Messaging
+- PayMongo
+- Notifications
+- Tutor/Admin functionality
+- Auth
+- Performance optimizations
+
+NO SQL OR BACKEND CHANGE.
+
+CACHE
+tutodemy-20260823-sidebarshell1
