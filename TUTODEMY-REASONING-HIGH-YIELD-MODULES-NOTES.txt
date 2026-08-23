@@ -1,0 +1,43 @@
+TutoDemy Reasoning High-Yield Reviewer Modules
+Build: 20260823-reasoningmodules1
+
+UPGRADED
+R1 — Number Sequences
+R2 — Figure Rotation
+R3 — Shape Progression
+R4 — Odd One Out
+R5 — Position & Movement
+
+EACH MODULE NOW HAS
+- high-yield solving strategy
+- decision rule / pattern framework
+- worked example
+- common trap
+- quick recall
+- mastery checklist
+- existing recommended YouTube lesson
+- existing Practice this topic link
+
+CURRENT REASONING BANK
+R1 — 50 Number Sequence questions
+R2 — 50 Figure Rotation questions
+R3 — 50 Shape Progression questions
+R4 — 40 Odd One Out questions
+R5 — 30 Position Movement questions
+
+PRESERVED
+- Mathematics high-yield modules
+- Language & Reading high-yield modules
+- Science high-yield modules
+- all existing 70 recommended video lessons
+- exact Practice this topic filtering
+- practice submit reliability
+- public header/footer
+- logged-in sidebars
+- backend integrations
+
+NO SQL.
+NO BACKEND CHANGE.
+
+CACHE
+tutodemy-20260823-reasoningmodules1
