@@ -1,0 +1,72 @@
+TutoDemy Science High-Yield Reviewer Modules
+Build: 20260823-sciencemodules1
+
+UPGRADED
+S1 — General, Earth & Environmental Science
+S2 — Biology
+S3 — Chemistry
+S4 — Physics
+
+TOTAL HIGH-YIELD CONCEPT SECTIONS
+27
+
+S1 — 8
+- Scientific Method & Experimental Design
+- Density & Measurement
+- Plate Tectonics & Geologic Hazards
+- Rock Cycle, Weathering & Erosion
+- Weather & the Atmosphere
+- Moon Phases
+- Solar & Lunar Eclipses
+- Tides
+
+S2 — 7
+- Cells & Organelles
+- Photosynthesis
+- Cellular Respiration
+- Genetics & Heredity
+- Human Body Systems & Homeostasis
+- Ecology & Symbiosis
+- Evolution & Classification
+
+S3 — 5
+- Atomic Structure & the Periodic Table
+- Ionic & Covalent Bonding
+- The Mole, Equations & Stoichiometry
+- Gas Laws
+- Acids, Bases & Neutralization
+
+S4 — 7
+- Newton's Laws & Motion
+- Work, Energy & Power
+- Momentum
+- Pressure, Fluids & Buoyancy
+- Waves & Sound
+- Electric Circuits & Ohm's Law
+- Heat Transfer
+
+EACH MODULE INCLUDES
+- high-yield concepts
+- rules / formulas
+- worked examples
+- common traps
+- quick recall
+- mastery checklist
+- existing recommended videos
+- existing Practice this topic links
+
+PRESERVED
+- Mathematics high-yield modules
+- Language & Reading high-yield modules
+- all existing 70 video lessons
+- exact Practice this topic filtering
+- practice submit reliability
+- public header/footer
+- logged-in sidebars
+- backend integrations
+
+NO SQL.
+NO BACKEND CHANGE.
+
+CACHE
+tutodemy-20260823-sciencemodules1
