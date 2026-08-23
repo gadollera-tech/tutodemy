@@ -1,0 +1,37 @@
+TutoDemy Homepage Menu Icons + Placement
+Build: 20260823-homeheader2
+
+RESTORED EXACT MENU SET
+- Home
+- Practice
+- Tutors
+- For Tutors
+- About
+
+PRACTICE DROPDOWN RESTORED
+- Practice Hub
+- CET Practice
+- DOST-SEI
+- Reviewers
+
+ONLY VISUAL CHANGES
+- small line icons added beside menu labels
+- consistent spacing
+- subtle active-menu pill
+- cleaner separation between navigation and Access / Log in
+- dropdown items also receive icons and clearer hierarchy
+- tighter tablets retain every menu item; icons hide first if space is limited
+
+NOT ADDED
+- no new Start Practicing top-menu CTA
+- no renamed Tutors / For Tutors items
+
+MOBILE
+Existing hamburger navigation remains.
+
+NO SQL.
+NO BACKEND CHANGE.
+Logged-in Student/Tutor/Admin sidebars remain unchanged.
+
+CACHE
+tutodemy-20260823-homeheader2
