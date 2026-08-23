@@ -12,6 +12,84 @@ document.addEventListener("DOMContentLoaded", async ()=>{
   const practice=document.querySelector("#practice-reviewer");
   practice.href=`practice.html?category=${encodeURIComponent(r.category)}&domain=${encodeURIComponent(r.domain)}`;
 
+  const guideSection=document.querySelector("#high-yield-guide");
+  const guideNav=document.querySelector("#high-yield-guide-nav");
+  const guideIntro=document.querySelector("#high-yield-intro");
+  const guideConcepts=document.querySelector("#high-yield-concepts");
+  const quickRecall=document.querySelector("#module-quick-recall");
+  const moduleChecklist=document.querySelector("#module-checklist");
+
+  const guide=r.studyGuide;
+
+  if(guide?.highYield?.length){
+    guideSection.hidden=false;
+    guideNav.hidden=false;
+    guideIntro.textContent=guide.intro||"";
+
+    guideConcepts.innerHTML=guide.highYield.map((concept,index)=>{
+      const points=(concept.points||[])
+        .map(point=>`<li>${window.Tuto.escape(point)}</li>`)
+        .join("");
+
+      const steps=(concept.example?.steps||[])
+        .map((step,stepIndex)=>`
+          <li>
+            <span>${stepIndex+1}</span>
+            <p>${window.Tuto.escape(step)}</p>
+          </li>`)
+        .join("");
+
+      return `<article class="high-yield-concept">
+        <header class="high-yield-concept-head">
+          <span>${index+1}</span>
+          <h3>${window.Tuto.escape(concept.title)}</h3>
+        </header>
+
+        <ul class="high-yield-point-list">${points}</ul>
+
+        ${concept.formula?`
+          <div class="formula-strip">
+            <small>KEY RULE / FORMULA</small>
+            <b>${window.Tuto.escape(concept.formula)}</b>
+          </div>`:""}
+
+        ${concept.example?`
+          <div class="worked-example">
+            <span class="eyebrow">WORKED EXAMPLE</span>
+            <p class="worked-example-question">
+              ${window.Tuto.escape(concept.example.question||"")}
+            </p>
+            <ol>${steps}</ol>
+            <p class="worked-example-answer">
+              <b>Answer:</b>
+              ${window.Tuto.escape(concept.example.answer||"")}
+            </p>
+          </div>`:""}
+
+        ${concept.trap?`
+          <div class="common-trap">
+            <span aria-hidden="true">!</span>
+            <p><b>Common trap</b>${window.Tuto.escape(concept.trap)}</p>
+          </div>`:""}
+      </article>`;
+    }).join("");
+
+    quickRecall.innerHTML=(guide.quickRecall||[])
+      .map(question=>`<li>${window.Tuto.escape(question)}</li>`)
+      .join("");
+
+    moduleChecklist.innerHTML=(guide.checklist||[])
+      .map(item=>`
+        <li>
+          <span class="check-box" aria-hidden="true"></span>
+          <span>${window.Tuto.escape(item)}</span>
+        </li>`)
+      .join("");
+  }else{
+    guideSection.hidden=true;
+    guideNav.hidden=true;
+  }
+
   const videoSection=document.querySelector("#video-lessons");
   const videoNav=document.querySelector("#video-lessons-nav");
   const topicGrid=document.querySelector("#reviewer-topic-grid");
