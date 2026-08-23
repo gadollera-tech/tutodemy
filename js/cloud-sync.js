@@ -62,15 +62,50 @@
   }
 
   async function uploadHistory(user) {
-    const history = localGet("tutodemyHistory", []);
+    // Practice pages historically wrote the browser-wide history key,
+    // while cloud-sync also keeps a signed-in user-specific cache.
+    // Merge both so no completed attempt is skipped.
+    const accountHistory = localGet("tutodemyHistory", []);
+    const browserHistory = rawGet("tutodemyHistory", []);
+
+    const history = mergeBy(
+      [...accountHistory, ...browserHistory],
+      item =>
+        item?.attemptId ||
+        item?.attempt_id ||
+        `${item?.completedAt || item?.completed_at || ""}:${item?.category || ""}`
+    )
+      .sort(
+        (a, b) =>
+          new Date(b?.completedAt || b?.completed_at || 0) -
+          new Date(a?.completedAt || a?.completed_at || 0)
+      )
+      .slice(0, 100);
+
     if (!history.length) return;
+
+    // Keep the signed-in local cache current even before the network finishes.
+    localSet("tutodemyHistory", history);
+
     const rows = history.map(item => ({
       user_id: user.id,
-      attempt_id: item.attemptId || item.attempt_id || `legacy-${Date.now()}-${Math.random().toString(36).slice(2)}`,
-      completed_at: item.completedAt || new Date().toISOString(),
+      attempt_id:
+        item.attemptId ||
+        item.attempt_id ||
+        `legacy-${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      completed_at:
+        item.completedAt ||
+        item.completed_at ||
+        new Date().toISOString(),
       payload: item
     }));
-    const { error } = await getClient().from("exam_attempts").upsert(rows, { onConflict: "user_id,attempt_id" });
+
+    const { error } = await getClient()
+      .from("exam_attempts")
+      .upsert(rows, {
+        onConflict: "user_id,attempt_id"
+      });
+
     if (error) throw error;
   }
 
@@ -88,9 +123,22 @@
       return { ...summary, attemptId: payload.attemptId || row.attempt_id, completedAt: payload.completedAt || row.completed_at };
     });
     const local = localGet("tutodemyHistory", []);
-    const merged = mergeBy([...cloud, ...local], item => item.attemptId || item.attempt_id)
-      .sort((a, b) => new Date(b.completedAt || 0) - new Date(a.completedAt || 0))
+    const browser = rawGet("tutodemyHistory", []);
+
+    const merged = mergeBy(
+      [...cloud, ...local, ...browser],
+      item =>
+        item?.attemptId ||
+        item?.attempt_id ||
+        `${item?.completedAt || item?.completed_at || ""}:${item?.category || ""}`
+    )
+      .sort(
+        (a, b) =>
+          new Date(b?.completedAt || b?.completed_at || 0) -
+          new Date(a?.completedAt || a?.completed_at || 0)
+      )
       .slice(0, 100);
+
     localSet("tutodemyHistory", merged);
   }
 
@@ -237,15 +285,94 @@
     },
     async saveAttempt(result) {
       const user = getUser();
-      if (!user || !getClient() || !result) return;
+      if (!user || !result) return;
+
+      // Save a compact signed-in cache first so Dashboard updates even if
+      // the network is briefly slow/offline.
+      const {
+        details,
+        ...summary
+      } = result;
+
+      const existing = localGet(
+        "tutodemyHistory",
+        []
+      );
+
+      const cached = mergeBy(
+        [summary, ...existing],
+        item =>
+          item?.attemptId ||
+          item?.attempt_id ||
+          `${item?.completedAt || item?.completed_at || ""}:${item?.category || ""}`
+      )
+        .sort(
+          (a, b) =>
+            new Date(b?.completedAt || b?.completed_at || 0) -
+            new Date(a?.completedAt || a?.completed_at || 0)
+        )
+        .slice(0, 100);
+
+      localSet("tutodemyHistory", cached);
+
+      if (!getClient()) return;
+
       const row = {
         user_id: user.id,
-        attempt_id: result.attemptId || result.attempt_id,
-        completed_at: result.completedAt || new Date().toISOString(),
+        attempt_id:
+          result.attemptId ||
+          result.attempt_id,
+        completed_at:
+          result.completedAt ||
+          result.completed_at ||
+          new Date().toISOString(),
         payload: result
       };
-      const { error } = await getClient().from("exam_attempts").upsert(row, { onConflict: "user_id,attempt_id" });
+
+      const { error } = await getClient()
+        .from("exam_attempts")
+        .upsert(row, {
+          onConflict: "user_id,attempt_id"
+        });
+
       if (error) throw error;
+    },
+
+    getAttemptHistory() {
+      const user = getUser();
+
+      if (!user) {
+        return rawGet(
+          "tutodemyHistory",
+          []
+        );
+      }
+
+      const accountHistory =
+        localGet(
+          "tutodemyHistory",
+          []
+        );
+
+      const browserHistory =
+        rawGet(
+          "tutodemyHistory",
+          []
+        );
+
+      return mergeBy(
+        [...accountHistory, ...browserHistory],
+        item =>
+          item?.attemptId ||
+          item?.attempt_id ||
+          `${item?.completedAt || item?.completed_at || ""}:${item?.category || ""}`
+      )
+        .sort(
+          (a, b) =>
+            new Date(b?.completedAt || b?.completed_at || 0) -
+            new Date(a?.completedAt || a?.completed_at || 0)
+        )
+        .slice(0, 100);
     },
     async saveActiveSession(session) {
       const user = getUser();

@@ -319,16 +319,30 @@
   function setDelta(selector, value, options = {}) {
     const element = document.querySelector(selector);
     if (!element) return;
-    const delta = Math.round(number(value) * 10) / 10;
+
+    const delta =
+      Math.round(number(value) * 10) / 10;
     const unit = options.unit || "";
-    let text;
-    if (options.noBaseline) text = "No previous-week data";
-    else if (delta > 0) text = `+${delta}${unit} vs last week`;
-    else if (delta < 0) text = `${delta}${unit} vs last week`;
-    else text = "No change from last week";
+
+    let text = "—";
+
+    if (!options.noBaseline && delta > 0) {
+      text = `+${delta}${unit}`;
+    } else if (!options.noBaseline && delta < 0) {
+      text = `${delta}${unit}`;
+    }
+
     element.textContent = text;
-    element.className = `progress-delta ${options.noBaseline || delta === 0 ? "neutral" : delta > 0 ? "positive" : "negative"}`;
+    element.className =
+      `progress-delta ${
+        options.noBaseline || delta === 0
+          ? "neutral"
+          : delta > 0
+            ? "positive"
+            : "negative"
+      }`;
   }
+
 
   function renderSummary(summary) {
     const current = summary.currentWeek;
@@ -336,7 +350,7 @@
     const noPreviousAccuracy = previous.questions === 0;
 
     setText("#progress-week-label", displayDateRange(summary.weekStart, summary.weekEnd));
-    setText("#progress-week-detail", `${current.activeDays} active study day${current.activeDays === 1 ? "" : "s"} · ${formatDuration(current.studySeconds)} reviewed`);
+    setText("#progress-week-detail", `${current.questions.toLocaleString("en-PH")} question${current.questions === 1 ? "" : "s"} · ${formatDuration(current.studySeconds)}`);
     setText("#comparison-period-label", displayDateRange(summary.previousWeekStart, summary.previousWeekEnd));
 
     setText("#dash-week-questions", current.questions.toLocaleString("en-PH"));
@@ -347,7 +361,7 @@
       const accuracyValue = current.questions > 0 ? clamp(current.accuracy, 0, 100) : 0;
       accuracyRing.style.setProperty("--ring-value", `${accuracyValue}%`);
     }
-    setText("#dash-week-accuracy-note", current.questions ? `${current.correct} of ${current.questions} answered correctly` : "No completed questions yet");
+    setText("#dash-week-accuracy-note", current.questions ? `${current.correct}/${current.questions} correct` : "No activity yet");
     setText("#dash-week-sessions", current.attempts.toLocaleString("en-PH"));
     setText("#dash-week-sessions-note", `${current.activeDays} active study day${current.activeDays === 1 ? "" : "s"}`);
     setText("#dash-current-streak", `${summary.currentStreak} day${summary.currentStreak === 1 ? "" : "s"}`);
@@ -365,6 +379,7 @@
     setText("#streak-ring-value", summary.currentStreak);
     setText("#streak-daily-goal", summary.streakDailyQuestionGoal);
     setText("#dash-longest-streak", `${summary.longestStreak} day${summary.longestStreak === 1 ? "" : "s"}`);
+    setText("#streak-best-value", `${summary.longestStreak} day${summary.longestStreak === 1 ? "" : "s"}`);
     setText("#dash-last-activity", summary.lastActivityDate ? displayDate(summary.lastActivityDate, { month: "short", day: "numeric", year: "numeric" }) : "No activity yet");
     setText("#streak-message", summary.currentStreak > 1
       ? `You have studied consistently for ${summary.currentStreak} days.`
@@ -386,54 +401,248 @@
   }
 
   function renderDailyActivity(rows) {
-    const container = document.querySelector("#daily-activity-chart");
+    const container =
+      document.querySelector("#daily-activity-chart");
+
     if (!container) return;
-    const activity = Array.isArray(rows) ? rows : [];
-    const maximum = Math.max(1, ...activity.map(row => number(row.questions)));
-    const total = activity.reduce((sum, row) => sum + number(row.questions), 0);
-    setText("#daily-total-label", `${total.toLocaleString("en-PH")} question${total === 1 ? "" : "s"}`);
-    container.innerHTML = activity.map(row => {
+
+    const activity =
+      Array.isArray(rows) ? rows.slice(0, 7) : [];
+
+    const total = activity.reduce(
+      (sum, row) => sum + number(row.questions),
+      0
+    );
+
+    setText(
+      "#daily-total-label",
+      `${total.toLocaleString("en-PH")} question${
+        total === 1 ? "" : "s"
+      }`
+    );
+
+    const width = 700;
+    const height = 220;
+    const left = 28;
+    const right = 24;
+    const top = 24;
+    const bottom = 44;
+
+    const plotWidth = width - left - right;
+    const plotHeight = height - top - bottom;
+    const maximum = Math.max(
+      1,
+      ...activity.map(row => number(row.questions))
+    );
+
+    const step =
+      activity.length > 1
+        ? plotWidth / (activity.length - 1)
+        : 0;
+
+    const points = activity.map((row, index) => {
       const questions = number(row.questions);
-      const height = questions ? Math.max(10, Math.round((questions / maximum) * 100)) : 3;
-      const day = displayDate(row.date, { weekday: "short" });
-      const date = displayDate(row.date, { month: "short", day: "numeric" });
-      return `<div class="daily-activity-column" title="${escapeHtml(date)}: ${questions} questions">
-        <span class="daily-activity-value">${questions}</span>
-        <div class="daily-activity-track"><i style="height:${height}%"></i></div>
-        <b>${escapeHtml(day)}</b>
-        <small>${escapeHtml(date)}</small>
-      </div>`;
-    }).join("");
+      const x = left + step * index;
+      const y =
+        top +
+        plotHeight -
+        (questions / maximum) * plotHeight;
+
+      return {
+        x,
+        y,
+        questions,
+        day: displayDate(row.date, {
+          weekday: "short"
+        }),
+        date: displayDate(row.date, {
+          month: "short",
+          day: "numeric"
+        })
+      };
+    });
+
+    const baseline = top + plotHeight;
+
+    const path = points.length
+      ? points
+          .map(
+            (point, index) =>
+              `${index ? "L" : "M"} ${point.x.toFixed(
+                1
+              )} ${point.y.toFixed(1)}`
+          )
+          .join(" ")
+      : "";
+
+    const areaPath = points.length
+      ? `${path} L ${points[
+          points.length - 1
+        ].x.toFixed(1)} ${baseline} L ${points[
+          0
+        ].x.toFixed(1)} ${baseline} Z`
+      : "";
+
+    const guides = [0, .5, 1]
+      .map(level => {
+        const y =
+          top + plotHeight - plotHeight * level;
+
+        return `<line
+          class="activity-line-guide"
+          x1="${left}"
+          y1="${y}"
+          x2="${width - right}"
+          y2="${y}"
+        />`;
+      })
+      .join("");
+
+    const pointMarkup = points
+      .map(point => `
+        <g class="activity-line-point">
+          <title>${escapeHtml(
+            `${point.date}: ${point.questions} question${
+              point.questions === 1 ? "" : "s"
+            }`
+          )}</title>
+
+          <circle
+            cx="${point.x}"
+            cy="${point.y}"
+            r="5"
+          />
+
+          ${
+            point.questions
+              ? `<text
+                   class="activity-line-value"
+                   x="${point.x}"
+                   y="${Math.max(
+                     15,
+                     point.y - 13
+                   )}">
+                   ${point.questions}
+                 </text>`
+              : ""
+          }
+
+          <text
+            class="activity-line-day"
+            x="${point.x}"
+            y="${height - 12}">
+            ${escapeHtml(point.day)}
+          </text>
+        </g>
+      `)
+      .join("");
+
+    container.innerHTML = `
+      <svg
+        viewBox="0 0 ${width} ${height}"
+        role="img"
+        aria-label="Questions reviewed during the last seven days"
+        preserveAspectRatio="none">
+
+        <defs>
+          <linearGradient
+            id="activity-line-fill"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="1">
+            <stop
+              offset="0%"
+              stop-color="currentColor"
+              stop-opacity=".16"
+            />
+            <stop
+              offset="100%"
+              stop-color="currentColor"
+              stop-opacity=".01"
+            />
+          </linearGradient>
+        </defs>
+
+        ${guides}
+
+        ${
+          areaPath
+            ? `<path
+                 class="activity-line-area"
+                 d="${areaPath}"
+               />`
+            : ""
+        }
+
+        ${
+          path
+            ? `<path
+                 class="activity-line-path"
+                 d="${path}"
+               />`
+            : ""
+        }
+
+        ${pointMarkup}
+      </svg>`;
   }
 
+
   function renderSubjects(rows) {
-    const container = document.querySelector("#subject-performance");
+    const container =
+      document.querySelector("#subject-performance");
+
     if (!container) return;
-    const subjects = Array.isArray(rows) ? rows : [];
-    container.innerHTML = subjects.map(row => {
-      const hasCurrent = row.currentQuestions > 0;
-      const hasPrevious = row.previousQuestions > 0;
-      const accuracy = hasCurrent ? clamp(row.currentAccuracy, 0, 100) : 0;
-      const delta = number(row.accuracyChange);
-      let deltaText = "No previous-week comparison";
-      let deltaClass = "neutral";
-      if (hasCurrent && hasPrevious) {
-        deltaText = delta > 0 ? `+${delta} pts` : delta < 0 ? `${delta} pts` : "No accuracy change";
-        deltaClass = delta > 0 ? "positive" : delta < 0 ? "negative" : "neutral";
-      } else if (!hasCurrent && row.totalQuestions > 0) {
-        deltaText = `${formatPercent(row.totalAccuracy, true)} all-time accuracy`;
-      } else if (hasCurrent) {
-        deltaText = "First data for this comparison";
-      }
-      return `<article class="subject-progress-row">
-        <div class="subject-progress-heading">
-          <div><b>${escapeHtml(row.subject)}</b><small>${row.currentQuestions} question${row.currentQuestions === 1 ? "" : "s"} this week · ${row.totalQuestions} all time</small></div>
-          <div class="subject-progress-score"><b>${formatPercent(row.currentAccuracy, hasCurrent)}</b><small class="progress-delta ${deltaClass}">${escapeHtml(deltaText)}</small></div>
-        </div>
-        <div class="performance-bar" aria-label="${escapeHtml(row.subject)} current-week accuracy ${hasCurrent ? accuracy : 0} percent"><i style="width:${accuracy}%"></i></div>
-      </article>`;
-    }).join("") || `<div class="empty-state">Complete a practice or mock set to see subject progress.</div>`;
+
+    const subjects =
+      Array.isArray(rows) ? rows : [];
+
+    container.innerHTML =
+      subjects.map(row => {
+        const hasCurrent =
+          row.currentQuestions > 0;
+
+        const accuracy = hasCurrent
+          ? clamp(row.currentAccuracy, 0, 100)
+          : 0;
+
+        return `
+          <article class="subject-progress-row">
+            <div class="subject-progress-heading">
+              <div>
+                <b>${escapeHtml(row.subject)}</b>
+                <small>
+                  ${row.currentQuestions} question${
+                    row.currentQuestions === 1
+                      ? ""
+                      : "s"
+                  }
+                </small>
+              </div>
+
+              <div class="subject-progress-score">
+                <b>${formatPercent(
+                  row.currentAccuracy,
+                  hasCurrent
+                )}</b>
+              </div>
+            </div>
+
+            <div
+              class="performance-bar"
+              aria-label="${escapeHtml(
+                row.subject
+              )} accuracy ${accuracy} percent">
+              <i style="width:${accuracy}%"></i>
+            </div>
+          </article>`;
+      }).join("") ||
+      `<div class="empty-state">
+         No subject data yet.
+       </div>`;
   }
+
 
   function percentileOrdinal(value) {
     const n = Math.max(1, Math.min(99, Math.round(number(value))));
@@ -493,7 +702,7 @@
   }
 
   function renderPercentiles(payload) {
-    const data = normalizePercentiles(payload); if (!data) return renderPercentileUnavailable("Comparison data could not be read", "Your weekly progress remains available above.");
+    const data = normalizePercentiles(payload); if (!data) return renderPercentileUnavailable("Percentile unavailable", "");
     setText("#percentile-track-label", data.trackLabel);
     const status = document.querySelector("#percentile-status"); if (status) status.hidden = true;
     const cards = document.querySelector("#percentile-cards");
@@ -526,6 +735,8 @@
   }
 
   const leaderboardState = { weekOffset: 0, subject: "All subjects", loaded: false };
+  let dashboardHistory = [];
+  let dashboardLoadPromise = null;
 
   function normalizeLeaderboard(payload) {
     if (!payload || typeof payload !== "object") return null;
@@ -569,7 +780,7 @@
     const content = document.querySelector("#leaderboard-content"); if (content) content.hidden = true;
     const method = document.querySelector("#leaderboard-methodology"); if (method) method.hidden = true;
     setText("#leaderboard-track-label", "Account required");
-    leaderboardStatus("Log in to view or join weekly leaderboards", "Leaderboard participation is optional.", "locked");
+    leaderboardStatus("Log in to view leaderboard", "", "locked");
   }
 
   function renderLeaderboardUnavailable(title, description) {
@@ -770,7 +981,9 @@
   function renderHistory() {
     const historyBox = document.querySelector("#attempt-history");
     if (!historyBox) return;
-    const items = window.Tuto.storage.get("tutodemyHistory", []);
+    const items = Array.isArray(dashboardHistory)
+      ? dashboardHistory
+      : [];
     historyBox.innerHTML = items.length ? items.slice(0, 12).map(item => {
       const total = attemptQuestionCount(item);
       const correct = attemptCorrectCount(item, total);
@@ -798,31 +1011,60 @@
   }
 
   function renderAccountState() {
-    const accountTitle = document.querySelector("#dashboard-account-title");
-    const accountDescription = document.querySelector("#dashboard-account-description");
-    const accountLink = document.querySelector("#dashboard-account-link");
-    const configured = window.TutoAuth?.isConfigured?.();
-    const user = window.TutoAuth?.getUser?.();
+    return {
+      configured: Boolean(window.TutoAuth?.isConfigured?.()),
+      user: window.TutoAuth?.getUser?.() || null
+    };
+  }
 
-    if (!configured) {
-      accountTitle.textContent = "Account sync is temporarily unavailable";
-      accountDescription.textContent = "Your learning summary is calculated from progress stored on this device.";
-      accountLink.href = "auth.html";
-      accountLink.textContent = "Account";
-    } else if (user) {
-      accountTitle.textContent = "This progress summary is private to your account";
-      accountDescription.textContent = window.TutoCloud?.getStatus?.().lastError
-        ? "A local copy is available, but cloud synchronization needs attention."
-        : "Completed attempts synchronize with your account and are summarized securely in Supabase.";
-      accountLink.href = "profile.html";
-      accountLink.textContent = "My profile";
-    } else {
-      accountTitle.textContent = "Log in to keep this progress across devices";
-      accountDescription.textContent = "The summary below uses only progress stored in this browser until you connect an account.";
-      accountLink.href = "auth.html";
-      accountLink.textContent = "Log in";
+
+  async function resolveDashboardAccount() {
+    await Promise.allSettled([
+      window.TutoAuth?.ready,
+      window.TutoCloud?.ready
+    ]);
+
+    let account = renderAccountState();
+
+    // Supabase can occasionally restore the session just after the first
+    // auth check. Refresh once before deciding the student is logged out.
+    if (
+      account.configured &&
+      !account.user &&
+      window.TutoAuth?.refresh
+    ) {
+      try {
+        await window.TutoAuth.refresh();
+      } catch (error) {
+        console.warn(
+          "Dashboard session refresh failed:",
+          error
+        );
+      }
+
+      account = renderAccountState();
     }
-    return { configured, user };
+
+    return account;
+  }
+
+  function getDashboardHistory(account) {
+    if (
+      account?.user &&
+      window.TutoCloud?.getAttemptHistory
+    ) {
+      const synced =
+        window.TutoCloud.getAttemptHistory();
+
+      if (Array.isArray(synced)) {
+        return synced;
+      }
+    }
+
+    return window.Tuto.storage.get(
+      "tutodemyHistory",
+      []
+    );
   }
 
   function showSourceNote(message, kind = "info") {
@@ -841,59 +1083,206 @@
     return data;
   }
 
-  document.addEventListener("DOMContentLoaded", async () => {
-    await window.TutoCloud?.ready;
+  async function loadDashboardData() {
+    if (dashboardLoadPromise) {
+      return dashboardLoadPromise;
+    }
 
-    const account = renderAccountState();
-    const history = window.Tuto.storage.get("tutodemyHistory", []);
-    const localSummary = buildLocalSummary(history);
-    let summary = localSummary;
-    const percentilePromise = account.configured && account.user ? loadCloudPercentiles() : null;
+    dashboardLoadPromise = (async () => {
+      const account =
+        await resolveDashboardAccount();
 
-    if (account.configured && account.user) {
-      try {
-        summary = normalizeSummary(await loadCloudSummary(), localSummary);
-        showSourceNote("");
-      } catch (error) {
-        console.error("Student progress summary could not be loaded:", error);
-        const missingFunction = /get_my_student_progress_summary|does not exist|schema cache/i.test(String(error?.message || error));
+      if (
+        account.configured &&
+        account.user &&
+        window.TutoCloud?.syncAll
+      ) {
+        // Upload any browser attempts, pull the account history, then
+        // calculate Dashboard/Leaderboard from the same signed-in account.
+        try {
+          await window.TutoCloud.syncAll({
+            silent: true
+          });
+        } catch (error) {
+          console.warn(
+            "Dashboard sync could not finish:",
+            error
+          );
+        }
+      }
+
+      dashboardHistory =
+        getDashboardHistory(account);
+
+      const localSummary =
+        buildLocalSummary(
+          dashboardHistory
+        );
+
+      let summary = localSummary;
+
+      const percentilePromise =
+        account.configured &&
+        account.user
+          ? loadCloudPercentiles()
+          : null;
+
+      if (
+        account.configured &&
+        account.user
+      ) {
+        try {
+          summary = normalizeSummary(
+            await loadCloudSummary(),
+            localSummary
+          );
+
+          showSourceNote("");
+        } catch (error) {
+          console.error(
+            "Student progress summary could not be loaded:",
+            error
+          );
+
+          // The synced signed-in cache is a valid fallback; do not reset
+          // the dashboard to zero just because the summary RPC is delayed.
+          summary = localSummary;
+
+          const missingFunction =
+            /get_my_student_progress_summary|does not exist|schema cache/i
+              .test(
+                String(
+                  error?.message || error
+                )
+              );
+
+          showSourceNote(
+            missingFunction
+              ? "Progress summary service is unavailable. Showing your synced attempts."
+              : "Showing your latest synced attempts.",
+            "warning"
+          );
+        }
+      } else if (!account.user) {
         showSourceNote(
-          missingFunction
-            ? "Phase 4A database setup has not been installed yet. Showing synchronized progress available on this device."
-            : "Could not refresh cloud progress. Showing the latest device data.",
-          "warning"
+          "Account session could not be confirmed. Refresh once if you just signed in.",
+          "info"
         );
       }
-    } else if (!account.user) {
-      showSourceNote("Log in to sync completed attempts across devices.", "info");
-    }
 
-    renderSummary(summary);
-    renderHistory();
-    renderSavedReviewers();
+      renderSummary(summary);
+      renderHistory();
+      renderSavedReviewers();
 
-    if (!percentilePromise) renderPercentileLocked();
-    else try { renderPercentiles(await percentilePromise); }
-    catch (error) {
-      console.error("Student percentiles could not be loaded:", error);
-      const missing = /get_my_student_percentiles|learner_comparison_snapshots|does not exist|schema cache|could not find the function/i.test(String(error?.message || error || ""));
-      renderPercentileUnavailable(missing ? "Phase 4B database setup is not installed yet" : "Private comparisons could not be refreshed", missing ? "Run the private Phase 4B SQL in Supabase. The Phase 4A progress summary remains usable." : "The comparison service is temporarily unavailable. No other learner data was exposed.");
-    }
+      if (!percentilePromise) {
+        renderPercentileLocked();
+      } else {
+        try {
+          renderPercentiles(
+            await percentilePromise
+          );
+        } catch (error) {
+          console.error(
+            "Student percentiles could not be loaded:",
+            error
+          );
 
-    setupLeaderboardControls(account);
-    if (account.configured && account.user) await refreshLeaderboard();
-    else renderLeaderboardLocked();
+          const missing =
+            /get_my_student_percentiles|learner_comparison_snapshots|does not exist|schema cache|could not find the function/i
+              .test(
+                String(
+                  error?.message ||
+                  error ||
+                  ""
+                )
+              );
 
-    document.querySelector("#clear-history")?.addEventListener("click", async () => {
-      if (!confirm("Clear all attempt history from this browser and, when logged in, from the learner account?")) return;
-      window.Tuto.storage.remove("tutodemyHistory");
-      try {
-        await window.TutoCloud?.clearAttemptHistory?.();
-      } catch (error) {
-        console.error(error);
-        window.Tuto.toast("Local history cleared, but cloud deletion needs attention.");
+          renderPercentileUnavailable(
+            missing
+              ? "Percentile service unavailable"
+              : "Percentile could not be refreshed",
+            ""
+          );
+        }
       }
-      location.reload();
-    });
-  });
+
+      setupLeaderboardControls(account);
+
+      if (
+        account.configured &&
+        account.user
+      ) {
+        await refreshLeaderboard();
+      } else {
+        renderLeaderboardLocked();
+      }
+
+      return account;
+    })();
+
+    try {
+      return await dashboardLoadPromise;
+    } finally {
+      dashboardLoadPromise = null;
+    }
+  }
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    async () => {
+      await loadDashboardData();
+
+      document
+        .querySelector("#clear-history")
+        ?.addEventListener(
+          "click",
+          async () => {
+            if (
+              !confirm(
+                "Clear all attempt history from this browser and, when logged in, from the student account?"
+              )
+            ) return;
+
+            window.Tuto.storage.remove(
+              "tutodemyHistory"
+            );
+
+            try {
+              await window.TutoCloud
+                ?.clearAttemptHistory?.();
+            } catch (error) {
+              console.error(error);
+              window.Tuto.toast(
+                "Local history cleared, but cloud deletion needs attention."
+              );
+            }
+
+            location.reload();
+          }
+        );
+    }
+  );
+
+  // If Supabase restores a signed-in session a little later than the first
+  // page check, refresh the dashboard instead of leaving Leaderboard locked.
+  window.addEventListener(
+    "tutodemy-auth-change",
+    event => {
+      const user =
+        event.detail?.user || null;
+
+      if (!user) return;
+
+      clearTimeout(
+        window.__tutodemyDashboardAuthTimer
+      );
+
+      window.__tutodemyDashboardAuthTimer =
+        setTimeout(
+          () => loadDashboardData(),
+          120
+        );
+    }
+  );
+
 })();
