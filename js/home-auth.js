@@ -6,6 +6,80 @@ document.addEventListener("DOMContentLoaded", async () => {
   await window.TutoMarketplace?.ready;
 
   const client = window.TutoSupabase?.client;
+
+  // PERF1: load non-critical homepage scripts only when they are actually needed.
+  const loadScriptOnce = (src, marker) => new Promise((resolve, reject) => {
+    const existing =
+      document.querySelector(`script[data-tutodemy-lazy="${marker}"]`) ||
+      [...document.scripts].find(script => script.src && script.src.includes(src.split("?")[0]));
+
+    if (existing) {
+      if (existing.dataset.tutodemyLoaded === "true") {
+        resolve();
+        return;
+      }
+      // A normal static script may already have completed before this listener is added.
+      if (
+        (marker === "captcha" && window.TutoCaptcha) ||
+        (marker === "cloud-sync" && window.TutoCloud)
+      ) {
+        resolve();
+        return;
+      }
+      existing.addEventListener("load", resolve, { once: true });
+      existing.addEventListener("error", reject, { once: true });
+      setTimeout(() => {
+        if (
+          (marker === "captcha" && window.TutoCaptcha) ||
+          (marker === "cloud-sync" && window.TutoCloud)
+        ) resolve();
+      }, 0);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = src;
+    script.defer = true;
+    script.dataset.tutodemyLazy = marker;
+    script.addEventListener("load", () => {
+      script.dataset.tutodemyLoaded = "true";
+      resolve();
+    }, { once: true });
+    script.addEventListener("error", reject, { once: true });
+    document.head.appendChild(script);
+  });
+
+  let captchaReadyPromise = null;
+  const ensureCaptcha = async () => {
+    if (window.TutoCaptcha) return window.TutoCaptcha;
+    if (!captchaReadyPromise) {
+      captchaReadyPromise = loadScriptOnce(
+        "js/captcha.js?v=20260824-perf1",
+        "captcha"
+      ).catch(error => {
+        captchaReadyPromise = null;
+        throw error;
+      });
+    }
+    await captchaReadyPromise;
+    return window.TutoCaptcha;
+  };
+
+  let cloudReadyPromise = null;
+  const ensureCloud = async () => {
+    if (window.TutoCloud) return window.TutoCloud;
+    if (!cloudReadyPromise) {
+      cloudReadyPromise = loadScriptOnce(
+        "js/cloud-sync.js?v=20260824-perf1",
+        "cloud-sync"
+      ).catch(error => {
+        cloudReadyPromise = null;
+        throw error;
+      });
+    }
+    await cloudReadyPromise;
+    return window.TutoCloud;
+  };
   const forms = document.querySelector("#home-auth-forms");
   const unavailable = document.querySelector("#home-auth-unavailable");
   const signedIn = document.querySelector("#home-auth-signed-in");
@@ -36,6 +110,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const style = document.createElement("style");
     style.id = ROLE_STYLE_ID;
     style.textContent = `
+      /* PERF1: below-the-fold homepage sections do not need full layout/paint
+         until the user approaches them. */
+      .home-v4 main > section:not(.lp4-hero) {
+        content-visibility: auto;
+        contain-intrinsic-size: 700px;
+      }
+
       .home-role-choice {
         display: grid;
         gap: 8px;
@@ -242,6 +323,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       panel.hidden = !active;
     });
     setStatus("");
+    if (name === "signin" || name === "signup") {
+      // Do not block first paint; mount verification after the user opens a form.
+      requestAnimationFrame(() => {
+        mountCaptchaFor(name).catch(() => {});
+      });
+    }
   };
 
   async function destinationAfterLogin() {
@@ -269,14 +356,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  await window.TutoCaptcha?.mount?.(
-    "home-signup",
-    document.querySelector("#home-signup-captcha-shell")
-  );
-  await window.TutoCaptcha?.mount?.(
-    "home-signin",
-    document.querySelector("#home-signin-captcha-shell")
-  );
+  const mountedCaptcha = new Set();
+  const mountCaptchaFor = async name => {
+    if (mountedCaptcha.has(name)) return;
+    try {
+      const captcha = await ensureCaptcha();
+      const shell = document.querySelector(`#home-${name}-captcha-shell`);
+      await captcha?.mount?.(`home-${name}`, shell);
+      mountedCaptcha.add(name);
+    } catch (error) {
+      console.warn("CAPTCHA could not be loaded:", error);
+      setStatus("Human verification could not be loaded. Please try again.", true);
+    }
+  };
 
   const syncPasswordMatch = () => {
     if (!signupPassword || !signupConfirm) return true;
@@ -355,6 +447,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
+    await mountCaptchaFor("signup");
     if (!window.TutoCaptcha?.requireToken?.("home-signup")) {
       setStatus(
         "Please complete the human verification first.",
@@ -414,7 +507,17 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     if (data?.session) {
       await window.TutoAuth?.refresh?.();
+      try {
+        await ensureCloud();
+        try {
+      await ensureCloud();
       await window.TutoCloud?.syncAll?.({ silent: true });
+    } catch (error) {
+      console.warn("Cloud sync deferred:", error);
+    }
+      } catch (error) {
+        console.warn("Cloud sync deferred:", error);
+      }
 
       if (role === "tutor" && data?.user?.id) {
         localStorage.setItem(
@@ -466,6 +569,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       new FormData(event.currentTarget).entries()
     );
 
+    await mountCaptchaFor("signin");
     if (!window.TutoCaptcha?.requireToken?.("home-signin")) {
       setStatus(
         "Please complete the human verification first.",
@@ -497,7 +601,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     await window.TutoAuth?.refresh?.();
-    await window.TutoCloud?.syncAll?.({ silent: true });
+    try {
+      await ensureCloud();
+      await window.TutoCloud?.syncAll?.({ silent: true });
+    } catch (error) {
+      console.warn("Cloud sync deferred:", error);
+    }
     location.assign(await destinationAfterLogin());
   });
 
