@@ -1,0 +1,36 @@
+TutoDemy Homepage Account-Type Patch — HOMEROLE1
+Date: 2026-08-24
+
+WHAT CHANGED
+Homepage Create Account now asks:
+- Student
+- Tutor
+
+STUDENT
+- role metadata = learner
+- confirmation redirects to profile.html
+- normal student workspace behavior remains unchanged
+
+TUTOR
+- role metadata = tutor
+- confirmation redirects to tutor-onboarding.html
+- if email confirmation is disabled and a session is returned immediately,
+  the user is sent directly to tutor-onboarding.html
+- preferred workspace is set to tutor when possible
+- selecting Tutor does NOT approve the tutor automatically
+- tutor still completes the existing onboarding / verification / approval flow
+
+UI
+- Two responsive selectable cards
+- Student is selected by default
+- Submit button changes between:
+  Create Student Account
+  Create Tutor Account
+- Tutor note explains that public listing requires profile setup / verification
+
+FILES TO REPLACE
+- js/home-auth.js
+- service-worker.js
+
+No Supabase SQL is required.
+The existing auth page already supports learner/tutor roles, so this patch mirrors that same role behavior on the homepage.
