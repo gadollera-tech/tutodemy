@@ -132,7 +132,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           class="public-nav-item ${isActive("about")}">
         <span class="public-nav-icon">${publicNavIcon("about")}</span>
         <span>About</span>
-      </a>`
+      </a>`,
+
+      `<div class="mobile-public-nav-actions" aria-label="Account and access">
+        <a class="mobile-nav-action mobile-nav-access" href="pricing.html">Access</a>
+        <a class="mobile-nav-action mobile-nav-login" href="auth.html">Log in</a>
+      </div>`
     ].join("");
   }
 
@@ -680,9 +685,39 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const toggle = document.querySelector(".menu-toggle");
     const nav = document.querySelector(".main-nav");
-    toggle?.addEventListener("click", () => {
-      const opened = nav.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", String(opened));
+
+    const setMobileNavOpen = open => {
+      if (!toggle || !nav) return;
+
+      const mobile = window.matchMedia("(max-width: 1100px)").matches;
+      const shouldOpen = Boolean(open && mobile);
+
+      nav.classList.toggle("open", shouldOpen);
+      toggle.setAttribute("aria-expanded", String(shouldOpen));
+      toggle.setAttribute(
+        "aria-label",
+        shouldOpen ? "Close navigation" : "Open navigation"
+      );
+      document.body.classList.toggle("mobile-nav-open", shouldOpen);
+
+      if (!shouldOpen) {
+        document.querySelectorAll(".nav-dropdown.open").forEach(dropdown => {
+          dropdown.classList.remove("open");
+          dropdown
+            .querySelector(".nav-dropdown-toggle")
+            ?.setAttribute("aria-expanded", "false");
+        });
+      }
+    };
+
+    toggle?.addEventListener("click", event => {
+      event.stopPropagation();
+      setMobileNavOpen(!nav?.classList.contains("open"));
+    }, { signal });
+
+    nav?.addEventListener("click", event => {
+      const link = event.target.closest("a[href]");
+      if (link) setMobileNavOpen(false);
     }, { signal });
 
     const closeMenus = (except = null) => {
@@ -706,9 +741,26 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     document.addEventListener("click", event => {
       if (!event.target.closest(".nav-dropdown")) closeMenus();
+
+      if (
+        nav?.classList.contains("open") &&
+        !event.target.closest(".site-header")
+      ) {
+        setMobileNavOpen(false);
+      }
     }, { signal });
+
     document.addEventListener("keydown", event => {
-      if (event.key === "Escape") closeMenus();
+      if (event.key === "Escape") {
+        closeMenus();
+        setMobileNavOpen(false);
+      }
+    }, { signal });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1100) {
+        setMobileNavOpen(false);
+      }
     }, { signal });
 
     document.querySelector("#role-view-switch")?.addEventListener("click", handleRoleSwitch, { signal });
