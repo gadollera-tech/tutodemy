@@ -6842,3 +6842,342 @@ body.role-public .nav-account-anon {
     padding: 16px;
   }
 }
+
+
+/* =========================================================
+   Phone Navigation Fix
+   Build 20260824-mobilemenu1
+   ========================================================= */
+
+.mobile-public-nav-actions {
+  display: none;
+}
+
+/* Public dropdown icons/text must never rotate with the chevron. */
+body.role-public .nav-dropdown:hover .nav-dropdown-toggle .public-nav-icon,
+body.role-public .nav-dropdown:focus-within .nav-dropdown-toggle .public-nav-icon,
+body.role-public .nav-dropdown.open .nav-dropdown-toggle .public-nav-icon,
+body.role-public .nav-dropdown:hover .nav-dropdown-toggle > span:nth-child(2),
+body.role-public .nav-dropdown:focus-within .nav-dropdown-toggle > span:nth-child(2),
+body.role-public .nav-dropdown.open .nav-dropdown-toggle > span:nth-child(2) {
+  transform: none !important;
+}
+
+body.role-public .public-nav-chevron {
+  margin-left: auto;
+  transition: transform .18s ease;
+}
+
+body.role-public .nav-dropdown.open .public-nav-chevron {
+  transform: rotate(180deg) !important;
+}
+
+.menu-toggle {
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  border-radius: 11px;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-toggle span {
+  width: 22px;
+  height: 2px;
+  margin: 0;
+  border-radius: 999px;
+  transition:
+    transform .18s ease,
+    opacity .18s ease;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 1100px) {
+  body.mobile-nav-open {
+    overflow: hidden;
+  }
+
+  body.mobile-nav-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 74;
+    background: rgba(20, 20, 34, .28);
+    backdrop-filter: blur(1.5px);
+  }
+
+  .site-header {
+    z-index: 90;
+  }
+
+  .site-header .nav-wrap {
+    position: relative;
+  }
+
+  .site-header .main-nav {
+    top: calc(100% + 8px);
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    z-index: 120;
+    grid-template-columns: 1fr;
+    gap: 3px;
+    width: auto;
+    max-height: calc(100dvh - 92px);
+    padding: 8px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(12,4,109,.16);
+  }
+
+  .site-header .main-nav > a,
+  .site-header .nav-dropdown-toggle {
+    width: 100%;
+    min-height: 48px;
+    margin: 0;
+    padding: 10px 12px;
+    border: 0 !important;
+    border-radius: 10px;
+    font-size: .86rem;
+    line-height: 1.25;
+  }
+
+  .site-header .main-nav > a.active {
+    background: var(--periwinkle-soft);
+  }
+
+  .site-header .nav-dropdown {
+    width: 100%;
+  }
+
+  .site-header .nav-submenu {
+    margin: 4px 4px 6px;
+    padding: 5px;
+    border: 0;
+    border-radius: 11px;
+    background: rgba(116,132,194,.07);
+  }
+
+  .site-header .main-nav .nav-submenu a {
+    min-height: 46px;
+    margin: 2px 0;
+    border-radius: 9px;
+  }
+}
+
+@media (max-width: 760px) {
+  .site-header .nav-wrap {
+    height: 64px;
+    min-height: 64px;
+    gap: 8px;
+  }
+
+  .site-header .brand {
+    width: 142px;
+    flex: 0 1 142px;
+    min-width: 0;
+  }
+
+  .site-header .brand img {
+    width: 100%;
+    max-width: 142px;
+    height: auto;
+  }
+
+  .site-header .menu-toggle {
+    display: inline-flex;
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 10px;
+    margin-left: auto;
+  }
+
+  .site-header .main-nav {
+    max-height: calc(100dvh - 80px);
+  }
+
+  /* Public header: keep the top bar uncluttered.
+     Access and Log in move into the phone drawer. */
+  body.role-public .site-header .nav-actions {
+    display: none;
+  }
+
+  body.role-public .site-header .menu-toggle {
+    margin-left: auto;
+  }
+
+  body.role-public .site-header .main-nav {
+    background: #fff;
+    border-color: #e4e5ec;
+  }
+
+  body.role-public .public-nav-item {
+    justify-content: flex-start;
+    gap: 11px;
+    min-height: 50px;
+    padding: 10px 12px;
+    font-size: .89rem;
+  }
+
+  body.role-public .public-nav-icon {
+    display: grid;
+    width: 19px;
+    height: 19px;
+    flex-basis: 19px;
+  }
+
+  body.role-public .public-nav-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  body.role-public .public-nav-submenu {
+    width: auto;
+    margin: 4px 4px 6px;
+    padding: 5px;
+    border: 0;
+    border-radius: 11px;
+    box-shadow: none;
+    background: #f7f8fc;
+  }
+
+  body.role-public .public-nav-submenu > a {
+    min-height: 52px;
+    padding: 9px 10px;
+  }
+
+  .mobile-public-nav-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 5px;
+    padding: 10px 4px 3px;
+    border-top: 1px solid #e9e9ef;
+  }
+
+  .main-nav .mobile-nav-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid var(--navy) !important;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: .82rem;
+    font-weight: 800;
+  }
+
+  .main-nav .mobile-nav-access {
+    background: #fff;
+    color: var(--navy);
+  }
+
+  .main-nav .mobile-nav-login {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  /* Logged-in phone headers keep compact account controls,
+     but never let them squeeze the hamburger. */
+  body:not(.role-public) .site-header .nav-actions {
+    flex: 0 0 auto;
+    gap: 4px;
+  }
+
+  body:not(.role-public) .site-header .auth-chip,
+  body:not(.role-public) .site-header .notification-bell,
+  body:not(.role-public) .site-header .role-view-switch {
+    flex: 0 0 40px;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    min-height: 40px;
+  }
+
+  /* Hardened fallback mobile header. */
+  .public-static-header .public-static-actions {
+    display: none !important;
+  }
+
+  .public-static-header .public-static-nav.open {
+    display: grid;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    z-index: 120;
+    gap: 3px;
+    width: auto;
+    max-height: calc(100dvh - 80px);
+    padding: 8px;
+    overflow-y: auto;
+    border: 1px solid #e4e5ec;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 20px 50px rgba(12,4,109,.16);
+  }
+
+  .public-static-header .public-static-nav > a,
+  .public-static-header .public-static-practice > summary {
+    min-height: 50px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: .89rem;
+  }
+
+  .public-static-header .public-static-practice {
+    width: 100%;
+  }
+
+  .public-static-header .public-static-practice > summary {
+    width: 100%;
+  }
+
+  .public-static-header .public-static-submenu {
+    position: static;
+    width: auto;
+    margin: 4px 4px 6px;
+    padding: 5px;
+    border: 0;
+    border-radius: 11px;
+    background: #f7f8fc;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .site-header .brand {
+    width: 128px;
+    flex-basis: 128px;
+  }
+
+  .site-header .brand img {
+    max-width: 128px;
+  }
+
+  .site-header .main-nav,
+  .public-static-header .public-static-nav.open {
+    left: 8px;
+    right: 8px;
+  }
+
+  .mobile-public-nav-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+}
