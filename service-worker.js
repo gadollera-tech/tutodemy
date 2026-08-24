@@ -1,6 +1,7 @@
-const CACHE_VERSION = "tutodemy-20260824-homerole1";
+const CACHE_VERSION = "tutodemy-20260824-perf1";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
+
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -9,6 +10,7 @@ const CORE_ASSETS = [
   "./css/style.css?v=20260824-mobilemenu1",
   "./js/main.js?v=20260824-mobilemenu1",
   "./js/mobile-nav-fallback.js?v=20260824-mobilemenu1",
+  "./js/home-auth.js?v=20260824-perf1",
   "./js/pwa.js?v=20260809-pwa1",
   "./assets/images/icon-192.png",
   "./assets/images/apple-touch-icon.png",
@@ -60,7 +62,20 @@ async function staleWhileRevalidate(request) {
     }
     return response;
   }).catch(() => null);
+
   return cached || (await network) || Response.error();
+}
+
+async function cacheFirst(request) {
+  const cached = await caches.match(request);
+  if (cached) return cached;
+
+  const response = await fetch(request);
+  if (response && response.ok) {
+    const cache = await caches.open(RUNTIME_CACHE);
+    cache.put(request, response.clone());
+  }
+  return response;
 }
 
 self.addEventListener("fetch", event => {
@@ -77,21 +92,27 @@ self.addEventListener("fetch", event => {
 
   const destination = request.destination;
 
-  // For CSS and JS, prefer network first so emergency UI fixes do not remain
-  // visually stuck behind a stale asset cache.
+  // PERF1: versioned JS/CSS can be served immediately from cache on repeat visits.
+  // When ?v= changes, the URL changes and the browser naturally fetches the new build.
   if (
     destination === "style" ||
     destination === "script" ||
     /\.(?:css|js)$/i.test(url.pathname)
   ) {
-    event.respondWith(networkFirst(request));
+    event.respondWith(staleWhileRevalidate(request));
     return;
   }
 
+  // Images/fonts are immutable enough for a fast cache-first path.
   if (
     ["image", "font"].includes(destination) ||
-    /\.(?:png|jpg|jpeg|webp|svg|ico|woff2?|json)$/i.test(url.pathname)
+    /\.(?:png|jpg|jpeg|webp|svg|ico|woff2?)$/i.test(url.pathname)
   ) {
+    event.respondWith(cacheFirst(request));
+    return;
+  }
+
+  if (/\.json$/i.test(url.pathname)) {
     event.respondWith(staleWhileRevalidate(request));
   }
 });

@@ -1,0 +1,42 @@
+TUTODEMY PERF1 — REQUIRED index.html edits
+
+This patch intentionally does NOT include a full replacement index.html because only
+three tiny script-line changes are needed. Apply these in the <head> of index.html.
+
+1) REMOVE these two eager scripts:
+------------------------------------------------------------
+<script defer="" src="js/cloud-sync.js"></script>
+<script defer="" src="js/captcha.js?v=20260816-ui12"></script>
+------------------------------------------------------------
+
+They are now loaded automatically by js/home-auth.js only when needed:
+- CAPTCHA: when Log in / Create account is opened
+- cloud-sync: after successful authentication
+
+2) CHANGE the home-auth version:
+FROM:
+<script defer="" src="js/home-auth.js?v=20260816-ui12"></script>
+
+TO:
+<script defer="" src="js/home-auth.js?v=20260824-perf1"></script>
+
+Keep these scripts unchanged:
+- js/config.js
+- Supabase CDN
+- js/supabase-client.js
+- js/auth-core.js
+- js/marketplace-api.js
+- js/mobile-nav-fallback.js
+- js/main.js
+- js/pwa.js
+
+WHY marketplace-api.js stays eager in PERF1:
+js/main.js uses it to resolve authenticated learner/tutor/admin navigation.
+Removing it safely requires a broader app-shell refactor, which is better handled in PERF2.
+
+EXPECTED EFFECT:
+- fewer initial homepage requests
+- no CAPTCHA widget work before the user opens an auth form
+- no cloud-sync JS parsing on a normal public visit
+- less below-the-fold layout/paint work
+- faster repeat visits from improved service-worker caching

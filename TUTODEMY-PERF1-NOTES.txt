@@ -1,0 +1,38 @@
+TutoDemy Performance Optimization — PERF1
+Date: 2026-08-24
+
+GOAL
+Speed up the homepage without changing the database schema or breaking the existing
+student/tutor/admin role system.
+
+FILES INCLUDED
+- js/home-auth.js
+- service-worker.js
+- PERF1-INDEX-CHANGES.txt
+
+WHAT PERF1 DOES
+1. Lazy CAPTCHA
+   CAPTCHA JS/widget is loaded only when the user opens Log in or Create account.
+
+2. Lazy cloud sync
+   cloud-sync.js is loaded only after successful authentication, immediately before
+   a sync is requested.
+
+3. Below-the-fold render deferral
+   Uses content-visibility:auto for homepage sections below the hero.
+
+4. Faster repeat visits
+   - navigation: network-first
+   - versioned CSS/JS: stale-while-revalidate
+   - images/fonts: cache-first
+
+5. Keeps the HOMEROLE1 Student/Tutor account selector.
+
+IMPORTANT
+Apply the three tiny index.html edits listed in PERF1-INDEX-CHANGES.txt.
+No Supabase SQL is required.
+
+WHY THIS IS CONSERVATIVE
+Supabase/auth-core and marketplace-api remain on the initial homepage because the
+shared main.js currently uses them to detect authenticated roles and render the correct
+navigation. A later PERF2 can refactor the public app shell so even those are deferred.
