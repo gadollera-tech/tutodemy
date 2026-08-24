@@ -1,0 +1,42 @@
+TutoDemy Mobile Navigation Patch — MOBILEMENU3
+Date: 2026-08-24
+
+WHY MOBILEMENU2 COULD STILL LOOK BROKEN
+The site already had a service worker using stale-while-revalidate for JavaScript and CSS.
+That means the browser could keep showing the OLD mobile navigation asset even after
+js/mobile-nav-fallback.js was replaced.
+
+THIS PATCH FIXES BOTH PROBLEMS
+1. js/mobile-nav-fallback.js
+   - proper vertical mobile dropdown
+   - no horizontal clipped menu
+   - expandable Practice section
+   - Access + Log in buttons
+   - hamburger changes to X
+   - closes on outside tap / Escape / link selection
+
+2. service-worker.js
+   - bumps cache namespace to tutodemy-20260824-mobilemenu3
+   - deletes older TutoDemy caches on activation
+   - changes CSS/JS fetching to NETWORK-FIRST so future UI fixes are less likely
+     to remain stuck behind a stale cached asset
+
+INSTALL
+Replace BOTH files in the repository:
+- js/mobile-nav-fallback.js
+- service-worker.js
+
+Then deploy.
+
+AFTER DEPLOY
+1. Open tutodemy.net.
+2. Refresh once.
+3. Wait ~2–5 seconds for the new service worker to activate.
+4. Refresh again.
+
+If the device still holds an old PWA shell, fully close the TutoDemy/browser window
+and reopen it once. You should NOT need to change Supabase or run SQL.
+
+IMPORTANT
+This patch is site-wide because reviewers.html and the other public pages already load
+the same shared js/mobile-nav-fallback.js.

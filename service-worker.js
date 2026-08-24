@@ -1,4 +1,4 @@
-const CACHE_VERSION = "tutodemy-20260824-mobilemenu1";
+const CACHE_VERSION = "tutodemy-20260824-mobilemenu3";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 const CORE_ASSETS = [
@@ -16,13 +16,24 @@ const CORE_ASSETS = [
 ];
 
 self.addEventListener("install", event => {
-  event.waitUntil(caches.open(CORE_CACHE).then(cache => cache.addAll(CORE_ASSETS)).then(() => self.skipWaiting()));
+  event.waitUntil(
+    caches.open(CORE_CACHE)
+      .then(cache => cache.addAll(CORE_ASSETS))
+      .then(() => self.skipWaiting())
+  );
 });
 
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(keys.filter(key => key.startsWith("tutodemy-") && ![CORE_CACHE, RUNTIME_CACHE].includes(key)).map(key => caches.delete(key))))
+      .then(keys => Promise.all(
+        keys
+          .filter(key =>
+            key.startsWith("tutodemy-") &&
+            ![CORE_CACHE, RUNTIME_CACHE].includes(key)
+          )
+          .map(key => caches.delete(key))
+      ))
       .then(() => self.clients.claim())
   );
 });
@@ -65,12 +76,25 @@ self.addEventListener("fetch", event => {
   }
 
   const destination = request.destination;
-  if (["style", "script", "image", "font"].includes(destination) || /\.(?:css|js|png|jpg|jpeg|webp|svg|ico|woff2?|json)$/i.test(url.pathname)) {
+
+  // For CSS and JS, prefer network first so emergency UI fixes do not remain
+  // visually stuck behind a stale asset cache.
+  if (
+    destination === "style" ||
+    destination === "script" ||
+    /\.(?:css|js)$/i.test(url.pathname)
+  ) {
+    event.respondWith(networkFirst(request));
+    return;
+  }
+
+  if (
+    ["image", "font"].includes(destination) ||
+    /\.(?:png|jpg|jpeg|webp|svg|ico|woff2?|json)$/i.test(url.pathname)
+  ) {
     event.respondWith(staleWhileRevalidate(request));
   }
 });
-
-
 
 self.addEventListener("push", event => {
   let item = {};
