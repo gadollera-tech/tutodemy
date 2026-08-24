@@ -1,0 +1,33 @@
+TutoDemy MOBILEMENU4 — Root-cause fix
+Date: 2026-08-24
+
+ROOT CAUSE FOUND
+The earlier patch was correctly uploaded to GitHub, but js/main.js replaces the
+original static header after page load.
+
+Initial HTML:
+  header.site-header.public-static-header
+  nav.main-nav.public-static-nav
+
+After js/main.js renders the shell:
+  header.site-header
+  nav.main-nav
+
+MOBILEMENU2/MOBILEMENU3 targeted .public-static-header/.public-static-nav, so those
+rules stopped matching as soon as main.js replaced the header. That is why the old
+horizontal mobile navigation still appeared.
+
+MOBILEMENU4
+- Targets BOTH the initial static header and the dynamic header produced by main.js.
+- Specifically styles body.role-public .site-header .main-nav.open as a vertical menu.
+- Supports main.js's .nav-dropdown / .nav-submenu structure for Practice.
+- Does not change learner/tutor/admin workspace navigation.
+- Keeps the existing main.js click handlers; no duplicate hamburger event handlers.
+- Bumps the service-worker cache to mobilemenu4.
+
+REPLACE BOTH FILES
+- js/mobile-nav-fallback.js
+- service-worker.js
+
+Then deploy, refresh once, wait a few seconds, and refresh again.
+No Supabase/SQL changes.
